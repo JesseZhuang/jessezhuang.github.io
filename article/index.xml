@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/article/</link>
+    <description>Recent content in Articles on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Jun 2016 01:20:46 -0700</lastBuildDate>
+    <atom:link href="http://jessezhuang.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Placeholder</title>
+      <link>http://jessezhuang.github.io/article/second/</link>
+      <pubDate>Sun, 19 Jun 2016 01:20:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/second/</guid>
+      <description>&lt;p&gt;Placeholder for transferring my old blog.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Tutoiral for using Hugo and Github Pages as a Blog Site</title>
+      <link>http://jessezhuang.github.io/article/first/</link>
+      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/first/</guid>
+      <description>&lt;p&gt;I will write a tutorial for Hugo static website generation, theme template engine writing/customization as the start of this blog.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

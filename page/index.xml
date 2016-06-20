@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/page/</link>
+    <description>Recent content in Pages on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Jun 2016 01:27:13 -0700</lastBuildDate>
+    <atom:link href="http://jessezhuang.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>test page</title>
+      <link>http://jessezhuang.github.io/page/test-page/</link>
+      <pubDate>Sun, 19 Jun 2016 01:27:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/page/test-page/</guid>
+      <description>
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;h3 id=&#34;installing-hugo&#34;&gt;Installing Hugo&lt;/h3&gt;
+
+&lt;p&gt;Hugo itself is just a single binary without dependencies on expensive runtimes like Ruby, Python or PHP and without dependencies on any databases. You just need to download the &lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;latest version&lt;/a&gt;. For more information read the official &lt;a href=&#34;http://gohugo.io/overview/installing/&#34;&gt;installation guides&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s make sure Hugo is set up as expected. You should see a similar version number in your terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;hugo version
+# Hugo Static Site Generator v0.15 BuildDate: 2016-01-03T12:47:47+01:00
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>http://jessezhuang.github.io/page/about-me/</link>
+      <pubDate>Sat, 18 Jun 2016 00:11:02 +0100</pubDate>
+      
+      <guid>http://jessezhuang.github.io/page/about-me/</guid>
+      <description>
+
+&lt;h3 id=&#34;hello-people-my-name-is&#34;&gt;Hello People, My Name is&lt;/h3&gt;
+
+&lt;h2 id=&#34;zexi-jesse-zhuang&#34;&gt;Zexi Jesse Zhuang,&lt;/h2&gt;
+
+&lt;h2 id=&#34;a-developer-and-learner&#34;&gt;a Developer and Learner.&lt;/h2&gt;
+
+&lt;p&gt;I currently live near Seattle, WA. I love web, mobile, and open source software development. I strive to find simple working solutions to complete tasks or goals and explain the algorithms and solutions concisely.&lt;/p&gt;
+
+&lt;p&gt;Outside of coding, I love lifting, hiking, and badminton.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-the-title-coding-automaton&#34;&gt;Why the title Coding Automaton?&lt;/h2&gt;
+
+&lt;p&gt;The first time I learned about Automaton was in &lt;a href=&#34;https://www.cs.princeton.edu/~rs/&#34;&gt;Robert Sedgewick&lt;/a&gt;&amp;rsquo;s Algorithms class. In &lt;a href=&#34;https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&#34;&gt;Knuth Morris Pratt&lt;/a&gt;&amp;rsquo;s&amp;rsquo; substring search algorithm, a crucial step was to build the &lt;a href=&#34;https://en.wikipedia.org/wiki/Deterministic_finite_automaton&#34;&gt;deterministic finite state automaton (DFA)&lt;/a&gt;, which automatically tells about the next skip in substring search as the algorithm walks along the text to search for the pattern. As a programmer, one&amp;rsquo;s primary goal might be to generate automatic tools/products to simplify complicated jobs for other people and himself/herself. In this sense, I would like to get more proficient in coding as I write articles/tutorials and I hope my readers could benefit from the content as well.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-dry-principle&#34;&gt;The DRY principle&lt;/h2&gt;
+
+&lt;p&gt;In software engineering, &lt;a href=&#34;https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself&#34;&gt;don&amp;rsquo;t repeat yourself (DRY)&lt;/a&gt; is a principle aimed at reducing repetition of information of all kinds. I aim to write original contents here that are not easily found by googling. One other comprehension of the word automaton is to let the machine do the boring repeating tasks and free us humans for challenging and creative accomplishments. Whatever brings you here, I hope this blog can make it easier for you and myself to achieve our goals.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
