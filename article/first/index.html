@@ -8,7 +8,7 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>A Tutoiral for using Hugo and Github Pages as a Blog Site - Coding Automaton</title>
+    <title>A Tutorial for using Hugo and Github Pages as a Blog Site - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
@@ -48,12 +48,13 @@
 
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
-    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/highlight.css">
+
+    
 
     
     
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
     <style>
       body, input {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -62,16 +63,21 @@
         font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
       }
     </style>
-    
+
     
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
 
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
   </head>
   <body class="palette-primary-deep orange palette-accent-light blue">
 
 
+
+	
+	
 
 
 <div class="backdrop">
@@ -92,7 +98,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        A Tutoiral for using Hugo and Github Pages as a Blog Site
+        A Tutorial for using Hugo and Github Pages as a Blog Site
       </div>
     </div>
 
@@ -107,8 +113,14 @@
       <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
     </div>
     
+
     
-        
+    <div class="button button-github" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
   </div>
   <div class="bar search">
     <div class="button button-close" role="button" aria-label="Close">
@@ -124,6 +136,7 @@
     </div>
   </div>
 </nav>
+
 </header>
 
 <main class="main">
@@ -150,6 +163,21 @@
   <div class="scrollable">
     <div class="wrapper">
       
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
 
       <div class="toc">
         
@@ -171,6 +199,7 @@
 </a>
 
 
+
   
 </li>
 
@@ -186,6 +215,7 @@
 	
 	About Me
 </a>
+
 
 
   
@@ -216,13 +246,13 @@
         <span class="section">Tags</span>
         <span class="tags">
             
-              <a href="http://jessezhuang.github.io/tags/algorithm">[algorithm]</a>
-            
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
         </span>
         
@@ -266,7 +296,7 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>A Tutoiral for using Hugo and Github Pages as a Blog Site </h1>
+			<h1>A Tutorial for using Hugo and Github Pages as a Blog Site </h1>
 			
 			<div>
 				Sun, Jun 19, 2016
@@ -283,17 +313,58 @@
 				
 					Tags:
 					
-					  <a href="http://jessezhuang.github.io/tags/golang">[GoLang]</a>
+					  <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
 				  
-					  <a href="http://jessezhuang.github.io/tags/hugo">[Hugo]</a>
+					  <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
 				  
-					  <a href="http://jessezhuang.github.io/tags/blog">[Blog]</a>
+					  <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
 				  
 				
 				
 			</div>
 
-			<p>I will write a tutorial for Hugo static website generation, theme template engine writing/customization as the start of this blog.</p>
+			
+
+<h2 id="hugo-a-static-site-generator">Hugo, a Static Site Generator</h2>
+
+<p><a href="https://www.gohugo.io">Hugo</a> is one of the static site generators. Currently it is ranked 4th by <a href="https://www.staticgen.com/">StaticGen</a>. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.</p>
+
+<p>Most of them were written in JavaScript. <a href="https://jekyllrb.com/">Jekyll</a> was the good old player in this field, which was used in Obama&rsquo;s campaigns to raise $250M. Healthcare.gov switched to CMS-free style with Jekyll in 2013.</p>
+
+<p><a href="https://hexo.io/">Hexo</a> uses node.js, which started in 2012. Hugo started in 2013. Both are getting quite popular within a short time. Hugo seems to have a nice growing community and fairly good documentations. It may be missing some features but let&rsquo;s hope it will catch up.</p>
+
+<h2 id="deployment-at-github-pages">Deployment at Github Pages</h2>
+
+<p>I won&rsquo;t be verbose about the benefits of static pages. Healthcare.gov and my blog here load blazing fast compared to dynamic sites where the server needs to pull data from different sources. The key reason for me is the flexibility of the content/design control. You are not limited by a small set of templates and widgets such as those found at <a href="http://www.blogger.com">Blogger</a>. You don&rsquo;t have the limitations at <a href="http://www.wordpress.com">Wordpress.com</a> in case if you want to put ads on your blog.</p>
+
+<p>The ability to deploy the site with github pages is special since it connects with your github account and your repositories. The entire site can be version controlled as well as the generated site as a <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodule</a>. You are basically making git commits in the meantime that you are updating your site.</p>
+
+<h2 id="themes-for-hugo">Themes for Hugo</h2>
+
+<p>There are a variety of templates available at Hugo&rsquo;s <a href="http://themes.gohugo.io/">official site</a>, covering different purposes from personal blog, documentation, project information, merchant, designer showcases, to many more. I really liked the <a href="http://themes.gohugo.io/material-docs/">material docs</a> design, which was intended to be used as a project documentation/information site. I customized the template for a blog site.</p>
+
+<h2 id="customize-the-hugo-material-docs-themes">Customize the hugo-material-docs Themes</h2>
+
+<p>Main changes for the customization are:</p>
+
+<ul>
+<li>Changed the index page to list most recent posts/articles.</li>
+<li>Added sections to list blog categories and tags.</li>
+<li>Integrate <a href="http://disqus.com">Disqus</a> comments at the bottom of each post.</li>
+</ul>
+
+<p>The customized template is available at my <a href="https://github.com/JesseZhuang/hugo-material-blog">github repo here</a>. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.</p>
+
+<p>To use the template,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
+hugo -t hugo-material-blog
+</pre></div>
+
+<p>or setup the theme in <code>config.yaml</code> or <code>config.toml</code>.</p>
+
+<p>I did notice some weird bugs while I was customizing the template. Sometimes the template engine report errors if you have commented out lines in the template.</p>
+
+<p>I plan to keep this template updated while writing more articles for the site. You are welcome to comment here or at my <a href="https://github.com/JesseZhuang/hugo-material-blog">github repo</a> for any issues or feature requests.</p>
 
 
 			<aside class="copyright" role="note">
@@ -336,7 +407,7 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/second/" title="Placeholder">
+      <a href="http://jessezhuang.github.io/article/second/" title="Using Java&#39;s Reflection for Testing">
         <span class="direction">
           Previous
         </span>
@@ -346,7 +417,7 @@
           </div>
           <div class="stretch">
             <div class="title">
-              Placeholder
+              Using Java&#39;s Reflection for Testing
             </div>
           </div>
         </div>
@@ -395,8 +466,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 
@@ -417,14 +488,14 @@
           a.setAttribute("href", "#" + headers[i].id);
           a.setAttribute("title", headers[i].innerHTML);
           a.innerHTML = headers[i].innerHTML;
-          
+
           li.appendChild(a)
           scrollspy.appendChild(li);
         }
       } else {
         scrollspy.parentElement.removeChild(scrollspy)
       }
-      
+
 
       /* Add permanent link next to the headers */
       var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -473,7 +544,6 @@
       </script>
     
 
-    <script src="//gohugo.io/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
+

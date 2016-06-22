@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Programming Languages on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/categories/programming-languages/</link>
-    <description>Recent content in Programming Languages on Coding Automaton</description>
+    <title>Java on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/tags/java/</link>
+    <description>Recent content in Java on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Jun 2016 01:20:46 -0700</lastBuildDate>
-    <atom:link href="http://jessezhuang.github.io/categories/programming-languages/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://jessezhuang.github.io/tags/java/feed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using Java&#39;s Reflection for Testing</title>

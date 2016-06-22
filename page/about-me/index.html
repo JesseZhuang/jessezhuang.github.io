@@ -48,12 +48,13 @@
 
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
-    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/highlight.css">
+
+    
 
     
     
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
     <style>
       body, input {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -62,16 +63,21 @@
         font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
       }
     </style>
-    
+
     
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
 
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
   </head>
   <body class="palette-primary-deep orange palette-accent-light blue">
 
 
+
+	
+	
 
 
 <div class="backdrop">
@@ -107,8 +113,14 @@
       <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
     </div>
     
+
     
-        
+    <div class="button button-github" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
   </div>
   <div class="bar search">
     <div class="button button-close" role="button" aria-label="Close">
@@ -124,6 +136,7 @@
     </div>
   </div>
 </nav>
+
 </header>
 
 <main class="main">
@@ -150,6 +163,21 @@
   <div class="scrollable">
     <div class="wrapper">
       
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
 
       <div class="toc">
         
@@ -171,6 +199,7 @@
 </a>
 
 
+
   
 </li>
 
@@ -186,6 +215,7 @@
 	
 	About Me
 </a>
+
 
 
   
@@ -216,13 +246,13 @@
         <span class="section">Tags</span>
         <span class="tags">
             
-              <a href="http://jessezhuang.github.io/tags/algorithm">[algorithm]</a>
-            
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
         </span>
         
@@ -288,11 +318,11 @@
 
 <p>Outside of coding, I love lifting, hiking, and badminton.</p>
 
-<h2 id="why-the-title-coding-automaton">Why the title Coding Automaton?</h2>
+<h2 id="why-coding-automaton">Why Coding Automaton?</h2>
 
 <p>The first time I learned about Automaton was in <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick</a>&rsquo;s Algorithms class. In <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth Morris Pratt</a>&rsquo;s&rsquo; substring search algorithm, a crucial step was to build the <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite state automaton (DFA)</a>, which automatically tells about the next skip in substring search as the algorithm walks along the text to search for the pattern. As a programmer, one&rsquo;s primary goal might be to generate automatic tools/products to simplify complicated jobs for other people and himself/herself. In this sense, I would like to get more proficient in coding as I write articles/tutorials and I hope my readers could benefit from the content as well.</p>
 
-<h2 id="the-dry-principle">The DRY principle</h2>
+<h2 id="the-dry-principle">The DRY Principle</h2>
 
 <p>In software engineering, <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">don&rsquo;t repeat yourself (DRY)</a> is a principle aimed at reducing repetition of information of all kinds. I aim to write original contents here that are not easily found by googling. One other comprehension of the word automaton is to let the machine do the boring repeating tasks and free us humans for challenging and creative accomplishments. Whatever brings you here, I hope this blog can make it easier for you and myself to achieve our goals.</p>
 
@@ -380,8 +410,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 
@@ -402,14 +432,14 @@
           a.setAttribute("href", "#" + headers[i].id);
           a.setAttribute("title", headers[i].innerHTML);
           a.innerHTML = headers[i].innerHTML;
-          
+
           li.appendChild(a)
           scrollspy.appendChild(li);
         }
       } else {
         scrollspy.parentElement.removeChild(scrollspy)
       }
-      
+
 
       /* Add permanent link next to the headers */
       var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -458,7 +488,6 @@
       </script>
     
 
-    <script src="//gohugo.io/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
+

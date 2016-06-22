@@ -48,12 +48,13 @@
 
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
-    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/highlight.css">
+
+    
 
     
     
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
     <style>
       body, input {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -62,7 +63,7 @@
         font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
       }
     </style>
-    
+
     
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
@@ -70,6 +71,8 @@
     <link href="http://jessezhuang.github.io/article/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
     <link href="http://jessezhuang.github.io/article/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
     
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
   </head>
   <body class="palette-primary-deep orange palette-accent-light blue">
@@ -108,8 +111,14 @@
       <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
     </div>
     
+
     
-        
+    <div class="button button-github" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
   </div>
   <div class="bar search">
     <div class="button button-close" role="button" aria-label="Close">
@@ -125,6 +134,7 @@
     </div>
   </div>
 </nav>
+
 </header>
 
 <main class="main">
@@ -151,6 +161,21 @@
   <div class="scrollable">
     <div class="wrapper">
       
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
 
       <div class="toc">
         
@@ -172,6 +197,7 @@
 </a>
 
 
+
   
 </li>
 
@@ -187,6 +213,7 @@
 	
 	About Me
 </a>
+
 
 
   
@@ -217,13 +244,13 @@
         <span class="section">Tags</span>
         <span class="tags">
             
-              <a href="http://jessezhuang.github.io/tags/algorithm">[algorithm]</a>
-            
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
         </span>
         
@@ -270,21 +297,21 @@
 			<h1>Pages in Article</h1>
 
 			
-			<a href="http://jessezhuang.github.io/article/second/" title="Placeholder">
-				<h2>Placeholder</h2>
+			<a href="http://jessezhuang.github.io/article/second/" title="Using Java&#39;s Reflection for Testing">
+				<h2>Using Java&#39;s Reflection for Testing</h2>
 			</a>
 
 			<br>
-			Placeholder for transferring my old blog.
+			Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like Junit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repo. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.
 
 			<hr>
 			
-			<a href="http://jessezhuang.github.io/article/first/" title="A Tutoiral for using Hugo and Github Pages as a Blog Site">
-				<h2>A Tutoiral for using Hugo and Github Pages as a Blog Site</h2>
+			<a href="http://jessezhuang.github.io/article/first/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
+				<h2>A Tutorial for using Hugo and Github Pages as a Blog Site</h2>
 			</a>
 
 			<br>
-			I will write a tutorial for Hugo static website generation, theme template engine writing/customization as the start of this blog.
+			Hugo, a Static Site Generator Hugo is one of the static site generators. Currently it is ranked 4th by StaticGen. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin. Most of them were written in JavaScript. Jekyll was the good old player in this field, which was used in Obama&rsquo;s campaigns to raise $250M.
 
 			<hr>
 			
@@ -338,14 +365,14 @@
           a.setAttribute("href", "#" + headers[i].id);
           a.setAttribute("title", headers[i].innerHTML);
           a.innerHTML = headers[i].innerHTML;
-          
+
           li.appendChild(a)
           scrollspy.appendChild(li);
         }
       } else {
         scrollspy.parentElement.removeChild(scrollspy)
       }
-      
+
 
       /* Add permanent link next to the headers */
       var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -394,7 +421,6 @@
       </script>
     
 
-    <script src="//gohugo.io/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
+

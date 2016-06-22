@@ -8,7 +8,7 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Placeholder - Coding Automaton</title>
+    <title>Using Java&#39;s Reflection for Testing - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
@@ -48,12 +48,13 @@
 
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
-    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/highlight.css">
+
+    
 
     
     
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
     <style>
       body, input {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -62,16 +63,21 @@
         font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
       }
     </style>
-    
+
     
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
 
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
   </head>
   <body class="palette-primary-deep orange palette-accent-light blue">
 
 
+
+	
+	
 
 
 <div class="backdrop">
@@ -92,7 +98,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Placeholder
+        Using Java&#39;s Reflection for Testing
       </div>
     </div>
 
@@ -107,8 +113,14 @@
       <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
     </div>
     
+
     
-        
+    <div class="button button-github" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
   </div>
   <div class="bar search">
     <div class="button button-close" role="button" aria-label="Close">
@@ -124,6 +136,7 @@
     </div>
   </div>
 </nav>
+
 </header>
 
 <main class="main">
@@ -150,6 +163,21 @@
   <div class="scrollable">
     <div class="wrapper">
       
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
 
       <div class="toc">
         
@@ -171,6 +199,7 @@
 </a>
 
 
+
   
 </li>
 
@@ -186,6 +215,7 @@
 	
 	About Me
 </a>
+
 
 
   
@@ -216,13 +246,13 @@
         <span class="section">Tags</span>
         <span class="tags">
             
-              <a href="http://jessezhuang.github.io/tags/algorithm">[algorithm]</a>
-            
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
         </span>
         
@@ -266,7 +296,7 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Placeholder </h1>
+			<h1>Using Java&#39;s Reflection for Testing </h1>
 			
 			<div>
 				Sun, Jun 19, 2016
@@ -283,13 +313,101 @@
 				
 					Tags:
 					
-					  <a href="http://jessezhuang.github.io/tags/algorithm">[Algorithm]</a>
+					  <a href="http://jessezhuang.github.io/tags/java">[java]</a>
 				  
 				
 				
 			</div>
 
-			<p>Placeholder for transferring my old blog.</p>
+			
+
+<h2 id="writing-boilerplate-test-code-is-boring">Writing Boilerplate Test Code is Boring</h2>
+
+<p>Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (<code>java.lang.reflect</code> package) to maximize code reuse and help testing.</p>
+
+<p>Frameworks like Junit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing.</p>
+
+<p>The code examples below are available at my <a href="https://github.com/JesseZhuang/SimpleJavaTools">github repo</a>.</p>
+
+<h2 id="get-an-instance-of-class-being-tested">Get an Instance of Class Being Tested</h2>
+
+<p>First we will declare a message to print out if all tests passed. Unfortunately you don&rsquo;t usually get to see this message till the end of debugging.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">private</span> <span style="color: #66d9ef">final</span> <span style="color: #66d9ef">static</span> <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">SUCCESS</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;Congrats! All tests passed.&quot;</span><span style="color: #f92672">;</span>
+</pre></div>
+
+<p>Next we will make sure the input array and the expected result array have same number of elements with <code>validateLengths</code> method which is trivial to implement.</p>
+
+<p>Then we will get a class type <code>Class&lt;?&gt;</code> from the <code>className</code> parameter, get the input class type with the first element of the input array <code>inputs[0]</code>, and get the method being tested with <code>class.getMethod</code>.</p>
+
+<p>Lastly, we will instantiate an object for the class for the cases where the tested method is an instance method. If the method is a static method, this object will be ignored.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">T</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">R</span><span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">assertEqual</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">className</span><span style="color: #f92672">,</span>
+  <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">methodName</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">T</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">inputs</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">R</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">expected</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+  <span style="color: #75715e">// make sure they have same length</span>
+  <span style="color: #f8f8f2">validateLengths</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">inputs</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">expected</span><span style="color: #f92672">);</span>
+
+  <span style="color: #66d9ef">try</span> <span style="color: #f92672">{</span>
+    <span style="color: #75715e">// use reflection to get type of class indicated by &quot;className&quot;</span>
+    <span style="color: #f8f8f2">Class</span><span style="color: #f92672">&lt;?&gt;</span> <span style="color: #f8f8f2">c</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Class</span><span style="color: #f92672">.</span><span style="color: #a6e22e">forName</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">className</span><span style="color: #f92672">);</span>
+    <span style="color: #f8f8f2">Class</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">T</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">inputType</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Class</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">T</span><span style="color: #f92672">&gt;)</span> <span style="color: #f8f8f2">inputs</span><span style="color: #f92672">[</span><span style="color: #ae81ff">0</span><span style="color: #f92672">].</span><span style="color: #a6e22e">getClass</span><span style="color: #f92672">();</span>
+    <span style="color: #f8f8f2">Method</span> <span style="color: #f8f8f2">m</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">c</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getMethod</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">methodName</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">inputType</span><span style="color: #f92672">);</span>
+
+    <span style="color: #75715e">// static methods will ignore this instance</span>
+    <span style="color: #f8f8f2">Object</span> <span style="color: #f8f8f2">o</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">c</span><span style="color: #f92672">.</span><span style="color: #a6e22e">newInstance</span><span style="color: #f92672">();</span>
+</pre></div>
+
+<h2 id="the-actual-testings">The Actual Testings</h2>
+
+<p>Next we will use for loops to iterate over the array for all test cases. We write these loops here once and then we can call this method from the class being tested.</p>
+
+<p>For nested array, we have to test for deep equality. The testing will quit on the first failed test and print out the information about the input, output, and expected result.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>    <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">inputs</span><span style="color: #f92672">.</span><span style="color: #a6e22e">length</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+      <span style="color: #f8f8f2">R</span> <span style="color: #f8f8f2">e</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">expected</span><span style="color: #f92672">[</span><span style="color: #f8f8f2">i</span><span style="color: #f92672">];</span>
+      <span style="color: #f8f8f2">R</span> <span style="color: #f8f8f2">output</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">R</span><span style="color: #f92672">)</span> <span style="color: #f8f8f2">m</span><span style="color: #f92672">.</span><span style="color: #a6e22e">invoke</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">o</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">inputs</span><span style="color: #f92672">[</span><span style="color: #f8f8f2">i</span><span style="color: #f92672">]);</span>
+
+      <span style="color: #75715e">// has to test deep equal for array type</span>
+      <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getClass</span><span style="color: #f92672">().</span><span style="color: #a6e22e">isArray</span><span style="color: #f92672">())</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Array</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getLength</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">);</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">j</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">j</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">n</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+          <span style="color: #66d9ef">if</span> <span style="color: #f92672">(!</span><span style="color: #f8f8f2">Array</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">).</span><span style="color: #a6e22e">equals</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Array</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">output</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">)))</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;test failed for &quot;</span>
+              <span style="color: #f92672">+</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">inputs</span><span style="color: #f92672">[</span><span style="color: #f8f8f2">i</span><span style="color: #f92672">])</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; expected &quot;</span>
+              <span style="color: #f92672">+</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">)</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;, output &quot;</span>
+              <span style="color: #f92672">+</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">output</span><span style="color: #f92672">));</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exit</span><span style="color: #f92672">(-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">);</span>
+          <span style="color: #f92672">}</span>
+        <span style="color: #f92672">}</span>
+      <span style="color: #f92672">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #f92672">(!</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">equals</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">output</span><span style="color: #f92672">))</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;test:\n &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">inputs</span><span style="color: #f92672">[</span><span style="color: #f8f8f2">i</span><span style="color: #f92672">]</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;failed, &quot;</span>
+          <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; expected &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">expected</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;, output &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">output</span><span style="color: #f92672">);</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exit</span><span style="color: #f92672">(-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">);</span>
+      <span style="color: #f92672">}</span>
+
+    <span style="color: #f92672">}</span>
+
+    <span style="color: #75715e">// all tests passed</span>
+    <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">SUCCESS</span><span style="color: #f92672">);</span>
+
+  <span style="color: #f92672">}</span> <span style="color: #66d9ef">catch</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">ClassNotFoundException</span> <span style="color: #f92672">|</span> <span style="color: #f8f8f2">IllegalAccessException</span>
+    <span style="color: #f92672">|</span> <span style="color: #f8f8f2">IllegalArgumentException</span> <span style="color: #f92672">|</span> <span style="color: #f8f8f2">InvocationTargetException</span>
+    <span style="color: #f92672">|</span> <span style="color: #f8f8f2">NoSuchMethodException</span> <span style="color: #f92672">|</span> <span style="color: #f8f8f2">SecurityException</span>
+    <span style="color: #f92672">|</span> <span style="color: #f8f8f2">InstantiationException</span> <span style="color: #f8f8f2">e</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+    <span style="color: #75715e">//handle your exceptions here</span>
+    <span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">printStackTrace</span><span style="color: #f92672">();</span>
+  <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+<h2 id="invoke-the-method-from-the-class-being-tested">Invoke the Method from the Class Being Tested</h2>
+
+<p>To use the test method, call:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">assertEqual</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;my.pkg.className&quot;</span><span style="color: #f92672">,</span><span style="color: #e6db74">&quot;methodName&quot;</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">inputArray</span><span style="color: #f92672">,</span>
+         <span style="color: #f8f8f2">expectedResultsArray</span><span style="color: #f92672">);</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Don&rsquo;t forget to include the package name in the first parameter as the class name. Please note that Class.getMethod() only searches for public methods.</p>
+</div>
 
 
 			<aside class="copyright" role="note">
@@ -332,34 +450,18 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/page/test-page/" title="test page">
-        <span class="direction">
-          Previous
-        </span>
-        <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
-          <div class="stretch">
-            <div class="title">
-              test page
-            </div>
-          </div>
-        </div>
-      </a>
-  
   </div>
 
   <div class="next">
   
-      <a href="http://jessezhuang.github.io/article/first/" title="A Tutoiral for using Hugo and Github Pages as a Blog Site">
+      <a href="http://jessezhuang.github.io/article/first/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              A Tutoiral for using Hugo and Github Pages as a Blog Site
+              A Tutorial for using Hugo and Github Pages as a Blog Site
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
@@ -391,8 +493,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 
@@ -413,14 +515,14 @@
           a.setAttribute("href", "#" + headers[i].id);
           a.setAttribute("title", headers[i].innerHTML);
           a.innerHTML = headers[i].innerHTML;
-          
+
           li.appendChild(a)
           scrollspy.appendChild(li);
         }
       } else {
         scrollspy.parentElement.removeChild(scrollspy)
       }
-      
+
 
       /* Add permanent link next to the headers */
       var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -469,7 +571,6 @@
       </script>
     
 
-    <script src="//gohugo.io/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
+
