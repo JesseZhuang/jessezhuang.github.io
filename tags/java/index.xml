@@ -19,6 +19,8 @@
 
 &lt;h2 id=&#34;writing-boilerplate-test-code-is-boring&#34;&gt;Writing Boilerplate Test Code is Boring&lt;/h2&gt;
 
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/java-reflection.png&#34; alt=&#34;Java Reflection&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (&lt;code&gt;java.lang.reflect&lt;/code&gt; package) to maximize code reuse and help testing.&lt;/p&gt;
 
 &lt;p&gt;Frameworks like Junit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing.&lt;/p&gt;
