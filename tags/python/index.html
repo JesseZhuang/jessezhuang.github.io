@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Python - Coding Automaton</title>
+    <meta name="generator" content="Hugo 0.16" />
+
+    
+    <meta name="description" content="Coding made simple and automatic.">
+    
+    <link rel="canonical" href="http://jessezhuang.github.io/tags/python/">
+    
+    <meta name="author" content="Jesse Zhuang">
+    
+
+    <meta property="og:url" content="http://jessezhuang.github.io/tags/python/">
+    <meta property="og:title" content="Coding Automaton">
+    <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
+    <meta name="apple-mobile-web-app-title" content="Coding Automaton">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+    <link rel="icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?52m981');
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('http://jessezhuang.github.io/fonts/icon.woff?52m981')
+               format('woff'),
+             url('http://jessezhuang.github.io/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('http://jessezhuang.github.io/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
+
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
+
+    
+    <link href="http://jessezhuang.github.io/tags/python/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
+    <link href="http://jessezhuang.github.io/tags/python/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
+    
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </head>
+  <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Python
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="http://jessezhuang.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/zhzexi" title="@zhzexi on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<main class="main">
+	
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="http://jessezhuang.github.io/" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://jessezhuang.github.io/images/logo.jpg">
+        </div>
+      
+      <div class="name">
+        <strong>Coding Automaton </strong>
+        
+          <br>
+          Coding made simple and automatic.
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Homepage" href="http://jessezhuang.github.io/">
+	
+	Homepage
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="About Me" href="http://jessezhuang.github.io/page/about-me">
+	
+	About Me
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="RSS feed" href="http://jessezhuang.github.io/index.xml">
+	
+	RSS feed
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">Categories</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/categories/programming-language"
+                title="programming-language">
+                programming-language<sup>1</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/tutorial"
+                title="tutorial">
+                tutorial<sup>2</sup></a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">Tags</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/zhzexi" target="_blank" title="@zhzexi on Twitter">
+              @zhzexi on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/jessezhuang" target="_blank" title="@jessezhuang on GitHub">
+              @jessezhuang on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.linkedin.com/in/zexizhuang" target="_blank" title="@zexizhuang on LinkedIn">
+              @zexizhuang on LinkedIn
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Pages in Python</h1>
+
+			
+			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
+				<h2>MongoDB Aggregation Framework Tutorial</h2>
+			</a>
+
+			<br>
+			Last updated: Jun 25, 2016 The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.
+
+			<hr>
+			
+
+			<aside class="copyright" role="note">
+  
+  &copy; 2016 Zexi Zhuang &ndash;
+  
+  built with
+  <a href="https://www.gohugo.io" target="_blank">Hugo</a>
+  using a customized
+  <a href="https://github.com/JesseZhuang/hugo-material-blog" target="_blank">
+    Material
+  </a> theme.
+</aside>
+
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = '';
+      var repo_id  = '';
+    
+    </script>
+
+    <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(headers.length > 0) {
+        for(var i = 0; i < headers.length; i++) {
+          var li = document.createElement("li");
+          li.setAttribute("class", "anchor");
+
+          var a  = document.createElement("a");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", headers[i].innerHTML);
+          a.innerHTML = headers[i].innerHTML;
+
+          li.appendChild(a)
+          scrollspy.appendChild(li);
+        }
+      } else {
+        scrollspy.parentElement.removeChild(scrollspy)
+      }
+
+
+      /* Add permanent link next to the headers */
+      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+      for(var i = 0; i < headers.length; i++) {
+          var a = document.createElement("a");
+          a.setAttribute("class", "headerlink");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", "Permanent link")
+          a.innerHTML = "#";
+          headers[i].appendChild(a);
+      }
+    </script>
+
+    
+      <script>
+        (function(i,s,o,g,r,a,m){
+          i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||
+          []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+          m.parentNode.insertBefore(a,m)
+        })(window, document,
+          'script', '//www.google-analytics.com/analytics.js', 'ga');
+         
+        ga('create', 'UA-79594714-1', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+         
+        var buttons = document.querySelectorAll('a');
+        Array.prototype.map.call(buttons, function(item) {
+          if (item.host != document.location.host) {
+            item.addEventListener('click', function() {
+              var action = item.getAttribute('data-action') || 'follow';
+              ga('send', 'event', 'outbound', action, item.href);
+            });
+          }
+        });
+         
+        var query = document.querySelector('.query');
+        query.addEventListener('blur', function() {
+          if (this.value) {
+            var path = document.location.pathname;
+            ga('send', 'pageview', path + '?q=' + this.value);
+          }
+        });
+      </script>
+    
+
+  </body>
+</html>
+

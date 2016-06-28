@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>MongoDB Aggregation Framework Tutorial - Coding Automaton</title>
+    <meta name="generator" content="Hugo 0.16" />
+
+    
+    <meta name="description" content="Coding made simple and automatic.">
+    
+    <link rel="canonical" href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/">
+    
+    <meta name="author" content="Jesse Zhuang">
+    
+
+    <meta property="og:url" content="http://jessezhuang.github.io/article/mongodb-aggregation-framework/">
+    <meta property="og:title" content="Coding Automaton">
+    <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
+    <meta name="apple-mobile-web-app-title" content="Coding Automaton">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+    <link rel="icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?52m981');
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('http://jessezhuang.github.io/fonts/icon.woff?52m981')
+               format('woff'),
+             url('http://jessezhuang.github.io/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('http://jessezhuang.github.io/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
+
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
+
+    
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </head>
+  <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        MongoDB Aggregation Framework Tutorial
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="http://jessezhuang.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/zhzexi" title="@zhzexi on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<main class="main">
+	
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="http://jessezhuang.github.io/" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://jessezhuang.github.io/images/logo.jpg">
+        </div>
+      
+      <div class="name">
+        <strong>Coding Automaton </strong>
+        
+          <br>
+          Coding made simple and automatic.
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Homepage" href="http://jessezhuang.github.io/">
+	
+	Homepage
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="About Me" href="http://jessezhuang.github.io/page/about-me">
+	
+	About Me
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="RSS feed" href="http://jessezhuang.github.io/index.xml">
+	
+	RSS feed
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">Categories</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/categories/programming-language"
+                title="programming-language">
+                programming-language<sup>1</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/tutorial"
+                title="tutorial">
+                tutorial<sup>2</sup></a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">Tags</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/zhzexi" target="_blank" title="@zhzexi on Twitter">
+              @zhzexi on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/jessezhuang" target="_blank" title="@jessezhuang on GitHub">
+              @jessezhuang on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.linkedin.com/in/zexizhuang" target="_blank" title="@zexizhuang on LinkedIn">
+              @zexizhuang on LinkedIn
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>MongoDB Aggregation Framework Tutorial </h1>
+			
+			<div>
+				Sat, Jun 25, 2016
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+				  
+				
+				
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#aggregation-pipeline">Aggregation Pipeline</a>
+<ul>
+<li><a href="#more-operators-with-examples">More Operators with Examples</a></li>
+<li><a href="#more-advanced-aggregation-examples">More Advanced Aggregation Examples</a>
+<ul>
+<li><a href="#double-grouping">Double Grouping</a></li>
+<li><a href="#double-unwind">Double <code>$unwind</code></a></li>
+<li><a href="#full-text-search-and-aggregation">Full Text Search and Aggregation</a></li>
+<li><a href="#aggregation-with-java-driver">Aggregation with Java driver</a></li>
+</ul></li>
+<li><a href="#aggregation-options">Aggregation Options</a></li>
+</ul></li>
+<li><a href="#limitations-of-aggregation-framework">Limitations of Aggregation framework</a></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+</nav>
+      </div>
+
+			
+
+<p>Last updated: 
+
+
+Jun 25, 2016
+
+</p>
+
+<p>The aggregation framework has its roots in SQL&rsquo;s world of <code>groupby</code> clause.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Example used: imagine a SQL table of products.</p>
+
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>category</th>
+<th>manufacture</th>
+<th>price</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ipad</td>
+<td>tablet</td>
+<td>Apple</td>
+<td>499</td>
+</tr>
+
+<tr>
+<td>nexus s</td>
+<td>cellphone</td>
+<td>Samsung</td>
+<td>350</td>
+</tr>
+</tbody>
+</table>
+
+<p>To get number of products from each manufacture with SQL,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">select</span> <span style="color: #f8f8f2">manufacture,</span> <span style="color: #66d9ef">count</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">from</span> <span style="color: #f8f8f2">products</span>
+  <span style="color: #66d9ef">group</span> <span style="color: #66d9ef">by</span> <span style="color: #f8f8f2">manufacture;</span>
+</pre></div>
+
+<p>with mongodb,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">use</span> <span style="color: #a6e22e">agg</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">num_products</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Sony&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>To do compound grouping with SQL,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">select</span> <span style="color: #f8f8f2">manufacturer,</span> <span style="color: #f8f8f2">category,</span> <span style="color: #66d9ef">count</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">from</span>
+  <span style="color: #f8f8f2">products</span> <span style="color: #66d9ef">group</span> <span style="color: #66d9ef">by</span> <span style="color: #f8f8f2">manufacturer,</span> <span style="color: #f8f8f2">category</span>
+</pre></div>
+
+<p>with mongodb,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #75715e">// _id can be a complex document, just have to be unique</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;manufacturer&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #a6e22e">num_products</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;manufacturer&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p><a href="https://docs.mongodb.com/manual/reference/sql-aggregation-comparison/">SQL to Aggregation Mapping Chart</a>.</p>
+
+<p>One can group on <code>_id:null</code> to aggregate every single document such as counting or summing.</p>
+
+<h1 id="aggregation-pipeline">Aggregation Pipeline</h1>
+
+<p><img src="http://jessezhuang.github.io/img/mongodb-aggregation-pipeline.png" alt="mongodb-aggregation-pipeline" /></p>
+
+<table>
+<thead>
+<tr>
+<th>pipeline stages</th>
+<th>job</th>
+<th>documents handling</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>$project</code></td>
+<td>reshape documents, select out fields potentially deep in hierarchy</td>
+<td>1:1</td>
+</tr>
+
+<tr>
+<td><code>$match</code></td>
+<td>filter out</td>
+<td>n:1</td>
+</tr>
+
+<tr>
+<td><code>$group</code></td>
+<td>aggregate</td>
+<td>n:1</td>
+</tr>
+
+<tr>
+<td><code>$sort</code></td>
+<td>sorting</td>
+<td>1:1</td>
+</tr>
+
+<tr>
+<td><code>$skip</code></td>
+<td>skips</td>
+<td>n:1</td>
+</tr>
+
+<tr>
+<td><code>$limit</code></td>
+<td>limit</td>
+<td>n:1</td>
+</tr>
+
+<tr>
+<td><code>$unwind</code></td>
+<td>normalize, flatten data before grouping</td>
+<td>1:n</td>
+</tr>
+
+<tr>
+<td><code>$out</code></td>
+<td>redirect output</td>
+<td>1:1</td>
+</tr>
+
+<tr>
+<td><code>$redact</code></td>
+<td>security related</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>$geonear</code></td>
+<td>location based searching</td>
+<td>n:1</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>$unwind</code> example: <code>tags:[red, blue]</code> unwinds to <code>tag:red</code> and <code>tag:blue</code>, expanding the number of documents. <a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+<h2 id="more-operators-with-examples">More Operators with Examples</h2>
+
+<p>The <code>$sum</code> operator:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">sum_prices</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;sum_prices&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">328</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The <code>$avg</code> operator:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">avg_prices</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$avg</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;avg_prices&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">396.42714</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The <code>$addToSet</code> operator without counterpart in SQL:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">categories</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;categories&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;Laptops&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">]}</span>
+</pre></div>
+
+<p>The <code>$push</code> operator:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">categories</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;categories&quot;</span> <span style="color: #f92672">:</span>
+  <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Laptops&quot;</span><span style="color: #f8f8f2">]}</span>
+</pre></div>
+
+<p>The <code>$max</code> and <code>$min</code> operators:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
+      <span style="color: #a6e22e">maxprice</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$max</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;maxprice&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">699</span> <span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The <code>$project</code> phase/stage: you can remove, add, reshape keys, use simple functions on keys such as <code>$toUpper</code>, <code>$toLower</code>, <code>$add</code>, <code>$multiply</code>.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&#39;maker&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$toLower</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;details&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;category&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;price&#39;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$multiply&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">]}</span>
+      <span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;item&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$name&#39;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;details&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;price&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1990</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #e6db74">&quot;item&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Kindle Fire&quot;</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The <code>$match</code> phase. One thing to note about $match (and $sort) is that <a href="http://docs.mongodb.org/manual/core/aggregation-pipeline/?_ga=1.241498631.463502008.1466893758">they can use indexes</a>, but only if done at the beginning of the aggregation pipeline. <a href="https://docs.mongodb.com/manual/tutorial/aggregation-zip-code-data-set/">Example zips collection.</a></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$match</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">state</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;NY&quot;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$city&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #a6e22e">zip_codes</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">zip_codes</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">population</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$skip</span><span style="color: #f92672">:</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$limit</span><span style="color: #f92672">:</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;population&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">9743</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;zip_codes&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">96162</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">96161</span><span style="color: #f8f8f2">],</span> <span style="color: #e6db74">&quot;city&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;TRUCKEE&quot;</span><span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">// order of fields not retained</span>
+</pre></div>
+
+<p><code>$sort</code> operator. The aggregation framework supports both memory (default, 100 MB limit for each pipeline stage unless allowing disk) and disk based sorting. Sorting can be done before or after the grouping stage.</p>
+
+<p><code>$skip</code> and <code>$limit</code> works similarly in <code>find()</code>.</p>
+
+<p><code>$unwind</code> operator: it&rsquo;s not easy to group on the array elements (prejoined data) so we need to flatten (unjoin, data explosion) the array.</p>
+
+<p>To count how many posts were attached to each tag in the blog,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">use</span> <span style="color: #a6e22e">blog</span><span style="color: #f8f8f2">;</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">posts</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+    <span style="color: #75715e">/* unwind by tags */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$unwind&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$tags&quot;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #75715e">/* now group by tags, counting each tag */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$group&quot;</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$tags&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;count&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* sort by popularity */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$sort&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;count&quot;</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}},</span>
+  <span style="color: #75715e">/* show me the top 10 */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$limit&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">10</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* change the name of _id to be tag */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$project&quot;</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&#39;tag&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$_id&#39;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&#39;count&#39;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p><a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+<p>{{ <note title="To reverse `$unwind`"> }}
+You can use <code>$push</code> to reverse the effects of an <code>$unwind</code>. If the array elements were unique, <code>$addToSet</code> will also do the job.
+{{ </note> }}</p>
+
+<h2 id="more-advanced-aggregation-examples">More Advanced Aggregation Examples</h2>
+
+<h3 id="double-grouping">Double Grouping</h3>
+
+<p>For a collection of student grades like below:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;$oid&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;50b59cd75bed76f46522c34e&quot;</span> <span style="color: #f8f8f2">},</span>
+  <span style="color: #f92672">&quot;student_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;class_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;scores&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span> <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;exam&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">57.92947112575566</span> <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;quiz&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">21.24542588206755</span> <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">68.19567810587429</span> <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">67.95019716560351</span> <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">18.81037253352722</span> <span style="color: #f8f8f2">}]</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>We want to figure out the average class grade for each class,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">grades</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$class_id&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$student_id&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;average&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$avg&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$score&quot;</span><span style="color: #f8f8f2">}}</span>
+    <span style="color: #f8f8f2">},</span> <span style="color: #75715e">// pipe to a secondary grouping stage</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.class_id&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;average&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$avg&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$average&quot;</span><span style="color: #f8f8f2">}}}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p><code>$first</code> and <code>$last</code>, example: find city with largest population in each state.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">b</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #75715e">/* get the population of every city in every state */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">state</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$city&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* sort by state, population */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id.state&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;population&quot;</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* group by state, get the first item in each group */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.state&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$first</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.city&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$first</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$population&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* now sort by state again */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
+   <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p><code>$out</code> redirects the output to a new collection, write over, no appending, considering a games collection with documents structured like,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">{</span>
+  <span style="color: #e6db74">&quot;_id&quot;</span>:ObjectId<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;53684890&quot;</span><span style="color: #f92672">)</span>,
+  first_name: <span style="color: #e6db74">&quot;Jerzy&quot;</span>,
+  last_name: <span style="color: #e6db74">&quot;Fischer&quot;</span>,
+  points: 3,
+  moves: <span style="color: #f92672">[</span>1,2,5<span style="color: #f92672">]</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+<p>To summarize each person&rsquo;s points,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">games</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">first_name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$first_name&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">last_name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$last_name&quot;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #a6e22e">points</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$points&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$out</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;summary_results&quot;</span><span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p>Note that the <code>_id</code> field of the redirected output must be unique, the operations below will not succeed and leave the <code>summary_results</code> collection untouched.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">games</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;moves&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$out</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;summary_results&quot;</span><span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<h3 id="double-unwind">Double <code>$unwind</code></h3>
+
+<p>Create a Cartesian product of the two or more arrays.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;size&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$sizes&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;color&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$colors&#39;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;count&#39;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p>To reverse with <code>$addToSet</code> in one stage since array elements were unique,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$name&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&#39;sizes&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;colors&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p>To reverse with <code>$push</code>,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* create the color array */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$name&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">size</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;colors&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* create the size array */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.name&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&#39;colors&#39;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
+      <span style="color: #e6db74">&#39;sizes&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.size&quot;</span><span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">},</span>
+  <span style="color: #75715e">/* reshape for beauty */</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&quot;name&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.name&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&quot;sizes&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #e6db74">&quot;colors&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.colors&quot;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<h3 id="full-text-search-and-aggregation">Full Text Search and Aggregation</h3>
+
+<p>&ldquo;Two great taste that go great together.&rdquo; - <a href="https://twitter.com/erlichson?lang=en">Andrew Erlichson</a>.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$match</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$text</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$search</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;tree rat&quot;</span><span style="color: #f8f8f2">}}},</span><span style="color: #75715e">// must appear first</span>
+  <span style="color: #75715e">// one full text search per collection, no need to specify</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">score</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$meta</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;textScore&quot;</span><span style="color: #f8f8f2">}}},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">words</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">}}</span>
+<span style="color: #f8f8f2">])</span>
+<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;words&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;rat shrub granite.&quot;</span><span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p><code>$text</code> is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline. <a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+<h3 id="aggregation-with-java-driver">Aggregation with Java driver</h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ZipCodeAggregationTest</span> <span style="color: #f92672">{</span>
+  <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Strng</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">MongoClient</span> <span style="color: #f8f8f2">client</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MongoClient</span><span style="color: #f92672">();</span>
+    <span style="color: #f8f8f2">MongoDatabase</span> <span style="color: #f8f8f2">database</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getDatabase</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;course&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f8f8f2">MongoCollection</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">collection</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">database</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getCollection</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;zipcodes&quot;</span><span style="color: #f92672">);</span>
+
+    <span style="color: #75715e">// verbose</span>
+    <span style="color: #75715e">// List&lt;Document&gt; pipeline = Arrays.asList(new Document(&quot;$group&quot;,</span>
+    <span style="color: #75715e">//   new Document(&quot;_id&quot;, &quot;$state&quot;).append(&quot;totalPop&quot;, new Document(</span>
+    <span style="color: #75715e">//     &quot;$sum&quot;, &quot;$pop&quot;))), new Document(&quot;$match&quot;, new Document(&quot;totalPop&quot;,</span>
+    <span style="color: #75715e">//       new Document(&quot;$gte&quot;, 10000000))));</span>
+
+    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Bson</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">pipeline</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Aggregates</span><span style="color: #f92672">.</span><span style="color: #a6e22e">group</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Accumulators</span><span style="color: #f92672">.</span><span style="color: #a6e22e">sum</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;totalPop&quot;</span><span style="color: #f92672">,</span>
+      <span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f92672">)),</span> <span style="color: #f8f8f2">Aggregates</span><span style="color: #f92672">.</span><span style="color: #a6e22e">match</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">gte</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;totalPop&quot;</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">10000000</span><span style="color: #f92672">)));</span>
+
+    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">pipeline2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">.</span><span style="color: #a6e22e">parse</span><span style="color: #f92672">(</span>
+      <span style="color: #e6db74">&quot;{ $group: { _id: \&quot;$state\&quot;, totalPop: { $sum: \&quot;$pop\&quot; } } }&quot;</span><span style="color: #f92672">),</span>
+      <span style="color: #f8f8f2">Document</span><span style="color: #f92672">.</span><span style="color: #a6e22e">parse</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;{ $match: { totalPop: { $gte: 1010001000 } } }&quot;</span><span style="color: #f92672">));</span>
+
+    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">results</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">collection</span><span style="color: #f92672">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">pipeline</span><span style="color: #f92672">).</span>
+      <span style="color: #f8f8f2">into</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;());</span>
+    <span style="color: #75715e">// List&lt;Document&gt; results = collection.find().into(new ArrayList&lt;Document&gt;());</span>
+
+    <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Document</span> <span style="color: #f8f8f2">cur</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">results</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+      <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">cur</span><span style="color: #f92672">.</span><span style="color: #a6e22e">toJson</span><span style="color: #f92672">());</span>
+    <span style="color: #f92672">}</span>
+  <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+<h2 id="aggregation-options">Aggregation Options</h2>
+
+<ul>
+<li><code>explain</code> gets the query plan if we ran it, useful in optimization.</li>
+<li><code>allowDiskUse</code> allows use of hard drive for intermediate stages. Any stage is limited to 100 MB of memory use and will fail if exceeded. Certain stages like projection run the documents through and don&rsquo;t use a lot of memory.</li>
+<li><code>cursor</code> allows cursor use and specify cursor size.</li>
+</ul>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">use</span> <span style="color: #a6e22e">agg</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">(</span>
+  <span style="color: #f8f8f2">[{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">}}}],</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">explain</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">},</span>
+  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">allowDiskUse</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>Two forms of aggregation:</p>
+
+<ul>
+<li><code>aggregate([stage1, stage2, ...])</code></li>
+<li><code>aggregate(stage1, stage2, ...)</code> cannot add options</li>
+</ul>
+
+<p>Prior to the release of the 3.0 pymongo driver, you would get a document for aggregation queries by default (the aggregation result is limited by the 16 Mb size), though you had the option of getting back a cursor if you were working with MongoDB 2.6.0+, and your pymongo version was 2.6.0+. Starting with the release of the 3.0 pymongo driver, however the aggregation pipeline queries using the driver will now return a cursor by default.</p>
+
+<p>The mongo shell returns a cursor by default starting 2.6.0.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">pymongo</span>
+<span style="color: #f8f8f2">connection</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pymongo</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">MongoClient()</span>
+<span style="color: #f8f8f2">db</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">connection</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">agg</span>
+
+<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zips</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">aggregate([{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;state&#39;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #e6db74">&#39;population&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;$pop&#39;</span><span style="color: #f8f8f2">}}}])</span>
+
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">result</span>
+<span style="color: #75715e"># &lt;pymongo.command_cursor.CommandCursor object at 0x7f62829f5210&gt; in 3.2.6</span>
+
+<span style="color: #75715e"># piror to 3.0</span>
+<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zips</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">aggregate([{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;state&#39;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&#39;population&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;$pop&#39;</span><span style="color: #f8f8f2">}}}],</span> <span style="color: #f8f8f2">cursor</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">{},</span> <span style="color: #f8f8f2">allowDiskUse</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">doc</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">result:</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">doc</span>
+</pre></div>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># prior to 3.0</span>
+<span style="color: #f92672">{</span>u<span style="color: #e6db74">&#39;ok&#39;</span>:1.0, u<span style="color: #e6db74">&#39;result&#39;</span> : <span style="color: #f92672">[</span>array of resulted documents<span style="color: #f92672">]}</span>
+</pre></div>
+
+<h1 id="limitations-of-aggregation-framework">Limitations of Aggregation framework</h1>
+
+<ul>
+<li>100 MB limit for pipeline stages, <code>allowDiskUse</code> to get around.</li>
+<li>16 MB limit if you decide to return the result as a single document, set <code>cursor</code>.</li>
+<li>In a sharded system, stages like <code>$group</code>, <code>$sort</code> will bring back the results to the first shard. Stages like <code>$match</code> and <code>$project</code> can go in parallel. Aggregation in mongodb is an interface to map/reduce jobs. Alternatively, get the data out of mongodb using the hadoop connector and use Hadoop map/reduce. There is a map/reduce functionality built into mongodb that is not recommended. <a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+</ul>
+
+<p><img src="http://jessezhuang.github.io/img/mongodb-limitation.png" alt="mongodb sharded system limitation" /></p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+<li><a href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a></li>
+<li><a href="https://docs.mongodb.com/">MongoDB Docs</a></li>
+</ol>
+
+<p><a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+
+			<aside class="copyright" role="note">
+  
+  &copy; 2016 Zexi Zhuang &ndash;
+  
+  built with
+  <a href="https://www.gohugo.io" target="_blank">Hugo</a>
+  using a customized
+  <a href="https://github.com/JesseZhuang/hugo-material-blog" target="_blank">
+    Material
+  </a> theme.
+</aside>
+
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/second/" title="Using Java&#39;s Reflection for Testing">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Using Java&#39;s Reflection for Testing
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
+    
+    </script>
+
+    <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(headers.length > 0) {
+        for(var i = 0; i < headers.length; i++) {
+          var li = document.createElement("li");
+          li.setAttribute("class", "anchor");
+
+          var a  = document.createElement("a");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", headers[i].innerHTML);
+          a.innerHTML = headers[i].innerHTML;
+
+          li.appendChild(a)
+          scrollspy.appendChild(li);
+        }
+      } else {
+        scrollspy.parentElement.removeChild(scrollspy)
+      }
+
+
+      /* Add permanent link next to the headers */
+      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+      for(var i = 0; i < headers.length; i++) {
+          var a = document.createElement("a");
+          a.setAttribute("class", "headerlink");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", "Permanent link")
+          a.innerHTML = "#";
+          headers[i].appendChild(a);
+      }
+    </script>
+
+    
+      <script>
+        (function(i,s,o,g,r,a,m){
+          i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||
+          []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+          m.parentNode.insertBefore(a,m)
+        })(window, document,
+          'script', '//www.google-analytics.com/analytics.js', 'ga');
+         
+        ga('create', 'UA-79594714-1', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+         
+        var buttons = document.querySelectorAll('a');
+        Array.prototype.map.call(buttons, function(item) {
+          if (item.host != document.location.host) {
+            item.addEventListener('click', function() {
+              var action = item.getAttribute('data-action') || 'follow';
+              ga('send', 'event', 'outbound', action, item.href);
+            });
+          }
+        });
+         
+        var query = document.querySelector('.query');
+        query.addEventListener('blur', function() {
+          if (this.value) {
+            var path = document.location.pathname;
+            ga('send', 'pageview', path + '?q=' + this.value);
+          }
+        });
+      </script>
+    
+
+  </body>
+</html>
+

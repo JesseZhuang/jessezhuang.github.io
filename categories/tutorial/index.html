@@ -254,13 +254,13 @@
         <span class="section">Categories</span>
         <span class="tags">
             
-              <a href="http://jessezhuang.github.io/categories/programming-languages"
-                title="programming-languages">
-                programming-languages<sup>1</sup></a>
+              <a href="http://jessezhuang.github.io/categories/programming-language"
+                title="programming-language">
+                programming-language<sup>1</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>1</sup></a>
+                tutorial<sup>2</sup></a>
             
         </span>
         
@@ -272,11 +272,17 @@
             
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
+              <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
             
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/python">[python]</a>
             
         </span>
         
@@ -322,6 +328,15 @@
 		<div class="wrapper">
 			<h1>Pages in Tutorial</h1>
 
+			
+			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
+				<h2>MongoDB Aggregation Framework Tutorial</h2>
+			</a>
+
+			<br>
+			Last updated: Jun 25, 2016 The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.
+
+			<hr>
 			
 			<a href="http://jessezhuang.github.io/article/first/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
 				<h2>A Tutorial for using Hugo and Github Pages as a Blog Site</h2>
