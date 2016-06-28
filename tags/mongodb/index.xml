@@ -6,13 +6,13 @@
     <description>Recent content in Mongodb on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jun 2016 14:55:57 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jun 2016 14:55:57 -0700</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>MongoDB Aggregation Framework Tutorial</title>
       <link>http://jessezhuang.github.io/article/mongodb-aggregation-framework/</link>
-      <pubDate>Sat, 25 Jun 2016 14:55:57 -0700</pubDate>
+      <pubDate>Sun, 26 Jun 2016 14:55:57 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/mongodb-aggregation-framework/</guid>
       <description>
@@ -20,7 +20,7 @@
 &lt;p&gt;Last updated: 
 
 
-Jun 25, 2016
+Jun 26, 2016
 
 &lt;/p&gt;
 
@@ -321,9 +321,10 @@ Jun 25, 2016
 
 &lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;{{ &lt;note title=&#34;To reverse `$unwind`&#34;&gt; }}
-You can use &lt;code&gt;$push&lt;/code&gt; to reverse the effects of an &lt;code&gt;$unwind&lt;/code&gt;. If the array elements were unique, &lt;code&gt;$addToSet&lt;/code&gt; will also do the job.
-{{ &lt;/note&gt; }}&lt;/p&gt;
+&lt;div class=&#34;admonition note&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;To reverse `$unwind`&lt;/p&gt;
+&lt;p&gt;You can use $push to reverse the effects of an $unwind. If the array elements were unique, $addToSet will also do the job.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&#34;more-advanced-aggregation-examples&#34;&gt;More Advanced Aggregation Examples&lt;/h2&gt;
 
