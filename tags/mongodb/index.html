@@ -260,7 +260,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>2</sup></a>
+                tutorial<sup>5</sup></a>
             
         </span>
         
@@ -280,9 +280,15 @@
             
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
+              <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
+              <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
+            
               <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
             
         </span>
         
@@ -329,12 +335,30 @@
 			<h1>Pages in Mongodb</h1>
 
 			
+			<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Application Engineering Tutorial">
+				<h2>Mongodb Application Engineering Tutorial</h2>
+			</a>
+
+			<br>
+			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
 				<h2>MongoDB Aggregation Framework Tutorial</h2>
 			</a>
 
 			<br>
-			Last updated: Jun 26, 2016 The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.
+			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.
+
+			<hr>
+			
+			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Performance Tutorial">
+				<h2>MongoDB Performance Tutorial</h2>
+			</a>
+
+			<br>
+			Last updated: Jun 24, 2016 Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
 
 			<hr>
 			

@@ -262,7 +262,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>3</sup></a>
+                tutorial<sup>5</sup></a>
             
         </span>
         
@@ -282,9 +282,15 @@
             
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
+              <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
+              <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
+            
               <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
             
         </span>
         
@@ -333,6 +339,8 @@
 			<div>
 				Fri, Jun 24, 2016
 				
+				<br>
+				
 				
 				
 				  
@@ -345,12 +353,16 @@
 				
 					Tags:
 					
-					  <a href="http://jessezhuang.github.io/tags/database">[database]</a>
-				  
 					  <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
 				  
+					  <a href="http://jessezhuang.github.io/tags/nosql">[NoSQL]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+				  
 				
 				
+
+
 			</div>
 
       
@@ -416,7 +428,7 @@ Jun 24, 2016
 
 <p>Built with btree or b+trees. With indexes writes are slower, reads are much faster. Without index, query on 10 million documents will be linear searching, too much disk io.</p>
 
-<p>(a,b,c) leftmost index order. a, (a,b), (a,b,c) would work, (a,c) partially work, others do not. <a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+<p>(a,b,c) leftmost index order. a, (a,b), (a,b,c) would work, (a,c) partially work, others do not.</p>
 
 <h2 id="indexes-size">Indexes Size</h2>
 
@@ -584,9 +596,9 @@ blog.sessions           0ms     0ms      0ms
 
 <p><code>mongostat</code> is a performance tuning command, similar to <a href="./linux.md">unix <code>iostat</code></a>, which samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. <code>getmore</code> is getting more from a cursor for a query with a large result. <code>qr|qw ar|aw</code> are queues and active reads and writes. <code>%dirty %used</code> refers to percentage of WiredTiger cache. <code>res</code> resident memory size smaller for WiredTiger. For MMAPv1 engine, <code>faults</code> number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for <a href="https://docs.mongodb.com/manual/reference/program/mongostat/">mongostat doc</a>.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongostat <span style="color: #f92672">[</span>--port 27017<span style="color: #f92672">]</span>
-insert query update delete getmore <span style="color: #f8f8f2">command</span> % dirty % used flushes  vsize   res qr<span style="color: #f8f8f2">|</span>qw ar<span style="color: #f8f8f2">|</span>aw netIn netOut conn                      <span style="color: #f8f8f2">time</span>
-    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0       <span style="color: #ae81ff">0</span> 250.0M 52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k    <span style="color: #ae81ff">1</span> 2016-06-25T23:47:30-07:00
-    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0       <span style="color: #ae81ff">0</span> 250.0M 52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k    <span style="color: #ae81ff">1</span> 2016-06-25T23:47:31-07:00
+insert query update delete getmore <span style="color: #f8f8f2">command</span> % dirty % used    res qr<span style="color: #f8f8f2">|</span>qw ar<span style="color: #f8f8f2">|</span>aw netIn netOut
+    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0  52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k
+    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0  52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k
 </pre></div>
 
 <h2 id="sharding-overview">Sharding Overview</h2>

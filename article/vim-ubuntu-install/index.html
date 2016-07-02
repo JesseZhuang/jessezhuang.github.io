@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Tutorial - Coding Automaton</title>
+    <title>How to Install Latest Version Vim in Ubuntu 14.04 LTS - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/categories/tutorial/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/vim-ubuntu-install/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/categories/tutorial/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/vim-ubuntu-install/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -69,15 +69,17 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/categories/tutorial/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/categories/tutorial/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
 
 
 <div class="backdrop">
@@ -98,7 +100,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Tutorial
+        How to Install Latest Version Vim in Ubuntu 14.04 LTS
       </div>
     </div>
 
@@ -332,54 +334,86 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Tutorial</h1>
+			<h1>How to Install Latest Version Vim in Ubuntu 14.04 LTS </h1>
+			
+			<div>
+				Thu, Jun 30, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#ubuntu-comes-with-vim-tiny">Ubuntu comes with Vim-Tiny</a></li>
+<li><a href="#install-vim-with-ppa">Install Vim with PPA</a></li>
+<li><a href="#install-from-source">Install From Source</a></li>
+<li><a href="#basic-configuration-to-enable-markdown-highlighting">Basic Configuration to Enable Markdown Highlighting</a></li>
+<li><a href="#why-vim">Why Vim?</a></li>
+</ul>
+</nav>
+      </div>
 
 			
-			<a href="http://jessezhuang.github.io/article/vim-ubuntu-install/" title="How to Install Latest Version Vim in Ubuntu 14.04 LTS">
-				<h2>How to Install Latest Version Vim in Ubuntu 14.04 LTS</h2>
-			</a>
 
-			<br>
-			Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install. Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.org but they did not come with the dependencies.
+<p><img src="https://vim.sexy/img/Vimlogo.svg" alt="Vim Icon svg" /></p>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Application Engineering Tutorial">
-				<h2>Mongodb Application Engineering Tutorial</h2>
-			</a>
+<h1 id="ubuntu-comes-with-vim-tiny">Ubuntu comes with Vim-Tiny</h1>
 
-			<br>
-			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
+<p>First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version <code>2:7.4.052-1ubuntu3</code> which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that <a href="http://stackoverflow.com/questions/10964681/enabling-markdown-highlighting-in-vim">starting from 7.4.480</a> vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.</p>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
-				<h2>MongoDB Aggregation Framework Tutorial</h2>
-			</a>
+<h1 id="install-vim-with-ppa">Install Vim with PPA</h1>
 
-			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.
+<p>I have tried to install Vim with debian packages listed on <a href="http://www.vim.org">Vim.org</a> but they did not come with the dependencies. So PPA was an easier way to go. <a href="https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily">ppa:pkg-vim/vim-daily</a> has version 7.4.826 which is good enough.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo add-apt-repository ppa:pkg-vim/vim-daily
+sudo apt-get update
+sudo apt-get install vim
+</pre></div>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Performance Tutorial">
-				<h2>MongoDB Performance Tutorial</h2>
-			</a>
+<p>You can use <code>apt-cache policy vim</code> to check the version of the vim in your repositories.</p>
 
-			<br>
-			Last updated: Jun 24, 2016 Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+<h1 id="install-from-source">Install From Source</h1>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/first/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
-				<h2>A Tutorial for using Hugo and Github Pages as a Blog Site</h2>
-			</a>
+<p>Vim.org has detailed instructions on how to <code>git clone</code> and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use <a href="http://asic-linux.com.mx/~izto/checkinstall/index.php"><code>checkinstall</code></a> just in case you ever want to cleanly remove the installation.</p>
 
-			<br>
-			Hugo, a Static Site Generator Hugo is one of the static site generators. Currently it is ranked 4th by StaticGen. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin. Most of them were written in JavaScript. Jekyll was the good old player in this field, which was used in Obama&rsquo;s campaigns to raise $250M.
+<h1 id="basic-configuration-to-enable-markdown-highlighting">Basic Configuration to Enable Markdown Highlighting</h1>
 
-			<hr>
-			
+<p>This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>syntax on
+colorscheme industry
+</pre></div>
+
+<p>then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.</p>
+
+<h1 id="why-vim">Why Vim?</h1>
+
+<p>A lot of people like Vim/Emacs. For me, Vim seems to be a very lightweight text editor which is very similar to Vi that comes with most server command line interfaces. It&rsquo;s good to get familiar with at least the basic usage of Vim. I have been using atom in my Ubuntu but atom has a <a href="https://github.com/atom/atom/issues/7883">memory leak issue</a> which sometimes causes Ubuntu to hang or even restart as an guest OS with Oracle VirtualBox in Windows 10 host. Going to light weight and more basic is also a good way to practice your programming language knowledges when you lose all the autocompletion, not that Vim cannot do autocompletion but you can pretend as if.</p>
+
+<p>Example memory usage: Vim with a few buffers open switching between editing those files uses &lt; 5 Mb and atom typically uses over 200 Mb memory with similar number of files open.</p>
+
 
 			<aside class="copyright" role="note">
   
@@ -393,6 +427,62 @@
   </a> theme.
 </aside>
 
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Application Engineering Tutorial">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Mongodb Application Engineering Tutorial
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
 		</div>
 	</article>
 
@@ -408,8 +498,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 

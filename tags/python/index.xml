@@ -17,13 +17,6 @@
       <guid>http://jessezhuang.github.io/article/mongodb-aggregation-framework/</guid>
       <description>
 
-&lt;p&gt;Last updated: 
-
-
-Jun 26, 2016
-
-&lt;/p&gt;
-
 &lt;p&gt;The aggregation framework has its roots in SQL&amp;rsquo;s world of &lt;code&gt;groupby&lt;/code&gt; clause.&lt;/p&gt;
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -174,9 +167,9 @@ Jun 26, 2016
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;&lt;code&gt;$unwind&lt;/code&gt; example: &lt;code&gt;tags:[red, blue]&lt;/code&gt; unwinds to &lt;code&gt;tag:red&lt;/code&gt; and &lt;code&gt;tag:blue&lt;/code&gt;, expanding the number of documents. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$unwind&lt;/code&gt; example: &lt;code&gt;tags:[red, blue]&lt;/code&gt; unwinds to &lt;code&gt;tag:red&lt;/code&gt; and &lt;code&gt;tag:blue&lt;/code&gt;, expanding the number of documents.&lt;/p&gt;
 
-&lt;h2 id=&#34;more-operators-with-examples&#34;&gt;More Operators with Examples&lt;/h2&gt;
+&lt;h2 id=&#34;more-operators-with-examples-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;More Operators with Examples &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;The &lt;code&gt;$sum&lt;/code&gt; operator:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;products&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;aggregate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;([&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// array&lt;/span&gt;
@@ -319,16 +312,14 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
-
 &lt;div class=&#34;admonition note&#34;&gt;
-&lt;p class=&#34;admonition-title&#34;&gt;To reverse `$unwind`&lt;/p&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;To reverse $unwind&lt;/p&gt;
 &lt;p&gt;You can use $push to reverse the effects of an $unwind. If the array elements were unique, $addToSet will also do the job.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&#34;more-advanced-aggregation-examples&#34;&gt;More Advanced Aggregation Examples&lt;/h2&gt;
 
-&lt;h3 id=&#34;double-grouping&#34;&gt;Double Grouping&lt;/h3&gt;
+&lt;h3 id=&#34;double-grouping-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Double Grouping &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;For a collection of student grades like below:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;quot;$oid&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;50b59cd75bed76f46522c34e&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
@@ -466,7 +457,7 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&#34;full-text-search-and-aggregation&#34;&gt;Full Text Search and Aggregation&lt;/h3&gt;
+&lt;h3 id=&#34;full-text-search-and-aggregation-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Full Text Search and Aggregation &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;&amp;ldquo;Two great taste that go great together.&amp;rdquo; - &lt;a href=&#34;https://twitter.com/erlichson?lang=en&#34;&gt;Andrew Erlichson&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sentences&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;aggregate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;([&lt;/span&gt;
@@ -478,7 +469,7 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;words&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;rat shrub granite.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;$text&lt;/code&gt; is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$text&lt;/code&gt; is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline.&lt;/p&gt;
 
 &lt;h3 id=&#34;aggregation-with-java-driver&#34;&gt;Aggregation with Java driver&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ZipCodeAggregationTest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
@@ -562,7 +553,7 @@ Jun 26, 2016
 &lt;ul&gt;
 &lt;li&gt;100 MB limit for pipeline stages, &lt;code&gt;allowDiskUse&lt;/code&gt; to get around.&lt;/li&gt;
 &lt;li&gt;16 MB limit if you decide to return the result as a single document, set &lt;code&gt;cursor&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;In a sharded system, stages like &lt;code&gt;$group&lt;/code&gt;, &lt;code&gt;$sort&lt;/code&gt; will bring back the results to the first shard. Stages like &lt;code&gt;$match&lt;/code&gt; and &lt;code&gt;$project&lt;/code&gt; can go in parallel. Aggregation in mongodb is an interface to map/reduce jobs. Alternatively, get the data out of mongodb using the hadoop connector and use Hadoop map/reduce. There is a map/reduce functionality built into mongodb that is not recommended. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;In a sharded system, stages like &lt;code&gt;$group&lt;/code&gt;, &lt;code&gt;$sort&lt;/code&gt; will bring back the results to the first shard. Stages like &lt;code&gt;$match&lt;/code&gt; and &lt;code&gt;$project&lt;/code&gt; can go in parallel. Aggregation in mongodb is an interface to map/reduce jobs. Alternatively, get the data out of mongodb using the hadoop connector and use Hadoop map/reduce. There is a map/reduce functionality built into mongodb that is not recommended.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-limitation.png&#34; alt=&#34;mongodb sharded system limitation&#34; /&gt;&lt;/p&gt;
@@ -574,7 +565,7 @@ Jun 26, 2016
 &lt;li&gt;&lt;a href=&#34;https://docs.mongodb.com/&#34;&gt;MongoDB Docs&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

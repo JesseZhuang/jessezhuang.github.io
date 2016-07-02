@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Mongodb Application Engineering Tutorial - Coding Automaton</title>
+    <meta name="generator" content="Hugo 0.16" />
+
+    
+    <meta name="description" content="Coding made simple and automatic.">
+    
+    <link rel="canonical" href="http://jessezhuang.github.io/article/mongodb-app-engineer/">
+    
+    <meta name="author" content="Jesse Zhuang">
+    
+
+    <meta property="og:url" content="http://jessezhuang.github.io/article/mongodb-app-engineer/">
+    <meta property="og:title" content="Coding Automaton">
+    <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
+    <meta name="apple-mobile-web-app-title" content="Coding Automaton">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+    <link rel="icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?52m981');
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('http://jessezhuang.github.io/fonts/icon.woff?52m981')
+               format('woff'),
+             url('http://jessezhuang.github.io/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('http://jessezhuang.github.io/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
+
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
+
+    
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </head>
+  <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Mongodb Application Engineering Tutorial
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="http://jessezhuang.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/zhzexi" title="@zhzexi on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<main class="main">
+	
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="http://jessezhuang.github.io/" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://jessezhuang.github.io/images/logo.jpg">
+        </div>
+      
+      <div class="name">
+        <strong>Coding Automaton </strong>
+        
+          <br>
+          Coding made simple and automatic.
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Homepage" href="http://jessezhuang.github.io/">
+	
+	Homepage
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="About Me" href="http://jessezhuang.github.io/page/about-me">
+	
+	About Me
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="RSS feed" href="http://jessezhuang.github.io/index.xml">
+	
+	RSS feed
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">Categories</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/categories/programming-language"
+                title="programming-language">
+                programming-language<sup>1</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/tutorial"
+                title="tutorial">
+                tutorial<sup>5</sup></a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">Tags</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/zhzexi" target="_blank" title="@zhzexi on Twitter">
+              @zhzexi on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/jessezhuang" target="_blank" title="@jessezhuang on GitHub">
+              @jessezhuang on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.linkedin.com/in/zexizhuang" target="_blank" title="@zexizhuang on LinkedIn">
+              @zexizhuang on LinkedIn
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Mongodb Application Engineering Tutorial </h1>
+			
+			<div>
+				Wed, Jun 29, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/nosql">[NoSQL]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#durability-of-writes">Durability of Writes</a>
+<ul>
+<li><a href="#write-concern">Write Concern</a></li>
+<li><a href="#network-errors">Network Errors</a></li>
+</ul></li>
+<li><a href="#replication-mongodb-s-approach-to-fault-tolerance-and-availability">Replication (MongoDB&rsquo;s Approach to Fault Tolerance and Availability)</a>
+<ul>
+<li><a href="#replica-set-elections">Replica Set Elections</a></li>
+<li><a href="#write-consistency">Write Consistency</a></li>
+<li><a href="#create-a-replica-set">Create a Replica Set</a></li>
+<li><a href="#replica-set-internals-i-class-fa-fa-arrow-up-aria-hidden-true-i">Replica Set Internals <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></a></li>
+<li><a href="#connect-with-java-driver">Connect with Java Driver</a></li>
+<li><a href="#failover-and-rollback">Failover and Rollback</a></li>
+<li><a href="#read-preference">Read Preference</a></li>
+</ul></li>
+<li><a href="#sharding-distributed-mongodb">Sharding (Distributed MongoDB)</a>
+<ul>
+<li><a href="#building-a-sharded-environment">Building a Sharded Environment</a></li>
+<li><a href="#implications-of-sharding-on-development">Implications of Sharding on Development</a></li>
+<li><a href="#choosing-a-shard-key">Choosing a Shard Key</a></li>
+</ul></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+</nav>
+      </div>
+
+			
+
+<h1 id="durability-of-writes">Durability of Writes</h1>
+
+<h2 id="write-concern">Write Concern</h2>
+
+<p>How to make sure the writes persistent? Assume application talking to a database server in the scheme below.</p>
+
+<p><img src="http://jessezhuang.github.io/img/mongodb-write.png" alt="mongodb write concern" /></p>
+
+<p>The settings of two parameters affect the write concern:</p>
+
+<table>
+<thead>
+<tr>
+<th>w(wait for acknowledgement)</th>
+<th>j(journal)</th>
+<th>effect</th>
+<th>comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>false</td>
+<td>fast, small window of vulnerability</td>
+<td>default setting</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>true</td>
+<td>slow, no vulnerability</td>
+<td>can be done inside driver at collection, database, or client level</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>-</td>
+<td>unacknowledged write</td>
+<td>do not recommend</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-</td>
+<td>wait for 2 nodes in replica set to acknowledge write</td>
+<td>w can be 0-3 for a set with 3 nodes</td>
+</tr>
+
+<tr>
+<td>majority</td>
+<td>-</td>
+<td>wait for majority to acknowledge, avoid rollback on failover</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td>tag values</td>
+<td>-</td>
+<td>set tags on nodes</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<p>If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.</p>
+
+<p>Write concern revisited video notes: Write concern (w) value can be set at client, database or collection level within PyMongo. When you call MongoClient, you get a connection to the driver, but behind the scenes, PyMongo connects to multiple nodes of the replica set. The w value can be set at the client level. Andrew says that the w concern can be set at the connection level; he really means client level. It&rsquo;s also important to note that <code>wtimeout</code> is the amount of time that the database will wait for replication before returning an error on the driver, but that even if the database returns an error due to <code>wtimeout</code>, the write will not be unwound at the primary and may complete at the secondaries. Hence, writes that return errors to the client due to <code>wtimeout</code> may in fact succeed, but writes that return success, do in fact succeed. Finally, the video shows the use of an insert command in PyMongo. That call is deprecated and it should have been insert_one.</p>
+
+<p><code>w</code>, <code>j</code>, and <code>wtimeout</code> collectively are called write concern, they can be set:</p>
+
+<ul>
+<li>at the time of connection, client level</li>
+<li>at the collection level through the driver</li>
+<li>in the configuration of the replica set, safest from sys admin standpoint</li>
+</ul>
+
+<p>j, waiting for journal committed at the primary node only, not waiting for secondary nodes.</p>
+
+<p>If you set w=1 and j=1, is it possible to wind up rolling back a committed write to the primary on failover? Yes. If the primary goes down before the write propagates to secondaries, it will roll back when it recovers.</p>
+
+<h2 id="network-errors">Network Errors</h2>
+
+<p>Network errors can cause a failed affirmative response sent back but the write may have succeeded, e.g. a TCP reset. For an insert, it is possible to guard against this since multiple times inserts will cause no harm. Worst case scenario is you get a duplicate key error. The problem is for updates, e.g. a <code>$inc</code> operation, if you do not know the values, there is no possible way to check whether it succeeded with a network error.</p>
+
+<p>Generally, when the network is healthy, this type of error is rare. If you want to avoid it at all cost, you can turn all updates into inserts and deletes.</p>
+
+<h1 id="replication-mongodb-s-approach-to-fault-tolerance-and-availability">Replication (MongoDB&rsquo;s Approach to Fault Tolerance and Availability)</h1>
+
+<p>Replication helps to solve both availability and fault tolerance. A <strong>replica set</strong> is a set of mongo nodes (mongod) that act together and all mirror each other in terms of data. There is one primary node and the rest are dynamic secondary nodes. Data written to the primary will asynchronously replicate to the secondaries. Application connects to the primary only. If the primary goes down, there will be an election for a new primary all transparent to the application.</p>
+
+<p>The minimum number of nodes is three.</p>
+
+<h2 id="replica-set-elections">Replica Set Elections</h2>
+
+<p>Types of replica set nodes:
+- regular (primary/secondary)
+- arbiter, just for election/voting purposes, no data
+- delayed, often disaster recovering node(1h behind). Set priority=0 (p=0) and it cannot become a primary node.
+- hidden, never primary, p=0, often used for analytics, can vote.</p>
+
+<p>Typically each node has one vote.</p>
+
+<h2 id="write-consistency">Write Consistency</h2>
+
+<p>MongoDB has strong consistency, vs. some others have eventual consistency. In the default configuration, application reads from and writes to the primary node. You will not read stale data in strong consistency. The writes have to go to the primary. The reads can go to the secondaries for eventual consistency. The lag is not guaranteed since the replication is asynchronous. One reason to do it is to scale the reads to the replica set. When failover occurs (usually under 3 seconds), write cannot complete.</p>
+
+<p>Eventual consistency might be harder to reason about. Most application servers are stateless, write and read back out and get a different value, then have to reconcile.</p>
+
+<h2 id="create-a-replica-set">Create a Replica Set</h2>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># bash &lt; create_replica_set.sh</span>
+<span style="color: #75715e">#!/usr/bin/env bash</span>
+<span style="color: #75715e"># 3 on a single node so different ports</span>
+<span style="color: #75715e"># --fork so do not have to run each in its own shell</span>
+
+mkdir -p /data/rs1 /data/rs2 /data/rs3
+mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;1.log&quot;</span> --dbpath /data/rs1 --port <span style="color: #ae81ff">27017</span> --oplogSize <span style="color: #ae81ff">64</span> --fork --smallfiles
+mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;2.log&quot;</span> --dbpath /data/rs2 --port <span style="color: #ae81ff">27018</span> --oplogSize <span style="color: #ae81ff">64</span> --smallfiles --fork
+mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;3.log&quot;</span> --dbpath /data/rs3 --port <span style="color: #ae81ff">27019</span> --oplogSize <span style="color: #ae81ff">64</span> --smallfiles --fork
+</pre></div>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">$</span> <span style="color: #a6e22e">mongo</span> <span style="color: #f92672">--</span><span style="color: #a6e22e">port</span> <span style="color: #ae81ff">27018</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">init_replica</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">js</span>
+
+<span style="color: #a6e22e">config</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;m101&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">members</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span>
+          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27017&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">priority</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">slaveDelay</span><span style="color: #f92672">:</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">},</span>
+					<span style="color: #75715e">// delayed 5 seconds, not primary</span>
+          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27018&quot;</span><span style="color: #f8f8f2">},</span>
+          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27019&quot;</span><span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">]</span>
+<span style="color: #f8f8f2">};</span>
+
+<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">initiate</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">config</span><span style="color: #f8f8f2">);</span>
+<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">status</span><span style="color: #f8f8f2">();</span>
+<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">conf</span><span style="color: #f8f8f2">();</span> <span style="color: #75715e">// show the configuration</span>
+<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">help</span><span style="color: #f8f8f2">();</span> <span style="color: #75715e">// replica set commands help</span>
+</pre></div>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongo --port 27018
+MongoDB shell version 2.2.0
+connecting to: 127.0.0.1:27018/test
+m101:SECONDARY&gt; rs.status<span style="color: #f92672">()</span>
+<span style="color: #75715e"># will see 3 members two in RECOVERING stateStr, one in PRIMARY.</span>
+<span style="color: #75715e"># Momentarily, one in PRIMARY, two in SECONDARY. Prompt also changes to primary.</span>
+m101:PRIMARY&gt; db.people.insert<span style="color: #f92672">({</span><span style="color: #e6db74">&#39;name&#39;</span>:<span style="color: #e6db74">&#39;Andrew&#39;</span><span style="color: #f92672">})</span>
+$ mongo --port 27019
+m101:SECONDARY&gt; rs.slaveOk<span style="color: #f92672">()</span> <span style="color: #75715e"># allow to read from secondary</span>
+m101:SECONDARY&gt; db.people.find<span style="color: #f92672">()</span>
+</pre></div>
+
+<p>Normally when you create replicate sets, you would want the <code>mongod</code>s on different physical servers so there is real fault tolerance.</p>
+
+<h2 id="replica-set-internals-i-class-fa-fa-arrow-up-aria-hidden-true-i">Replica Set Internals <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h2>
+
+<p>oplog (operation log?) kept in sync by mongo. The secondaries are constantly reading the oplog of the primary. It&rsquo;s true that the oplog entries originally come from the primary, but secondaries can sync from another secondary, as long as at least there is a chain of oplog syncs that lead back to the primary.</p>
+
+<p>Use <code>$ ps -ef | grep mongod</code> to check the mongod processes that are running.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>m101:PRIMARY&gt; use <span style="color: #f8f8f2">local</span>
+m101:PRIMARY&gt; show collections
+oplog.rs
+startup_log
+m101:PRIMARY&gt; db.oplog.rs.find<span style="color: #f92672">()</span>.pretty<span style="color: #f92672">()</span>
+<span style="color: #e6db74">&quot;op&quot;</span> : <span style="color: #e6db74">&quot;i&quot;</span> <span style="color: #75715e"># insert</span>
+<span style="color: #e6db74">&quot;ns&quot;</span> : <span style="color: #e6db74">&quot;test.people&quot;</span> <span style="color: #75715e"># into test.people</span>
+<span style="color: #e6db74">&quot;o&quot;</span> : <span style="color: #f92672">{</span>_id: ..., name: <span style="color: #e6db74">&quot;Andrew&quot;</span> <span style="color: #f92672">}</span>
+<span style="color: #e6db74">&quot;op&quot;</span> : <span style="color: #e6db74">&quot;c&quot;</span> <span style="color: #75715e"># create collection</span>
+<span style="color: #e6db74">&quot;ns&quot;</span> : <span style="color: #e6db74">&quot;test.</span><span style="color: #f8f8f2">$cmd</span><span style="color: #e6db74">&quot;</span>
+<span style="color: #e6db74">&quot;o&quot;</span> : <span style="color: #f92672">{</span> create:people <span style="color: #f92672">}</span>
+m101:SECONDARY&gt; db.oplog.rs.find<span style="color: #f92672">()</span>.pretty<span style="color: #f92672">()</span>
+<span style="color: #75715e"># should see exactly the same log as in primary</span>
+optime and optimeDate <span style="color: #75715e"># whether this node is up to date</span>
+syncingTo <span style="color: #75715e"># where it gets its data from</span>
+</pre></div>
+
+<ul>
+<li>oplog is a capped collection, which rolls off at certain times. The oplog needs to be big enough to deal with periods where the secondary can&rsquo;t see the primary. The oplog&rsquo;s size depends on how long you expect there to be a bifurcation of the network and how much data you are writing, how fast the oplog is growing. If the oplog rolls over and the secondary can&rsquo;t get to the primary&rsquo;s oplog, you can still resync the secondary but he has to read the entire database (much slower).</li>
+<li>oplog uses a statement (MongoDB documents) based approach, which allows mixed mode replica sets (flexibility on storage engines or even mongodb versions). And this helps doing (rolling) upgrades in the system.</li>
+</ul>
+
+<p>Replica set election:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">kill</span> <span style="color: #ae81ff">60494</span> <span style="color: #75715e"># found by ps primary</span>
+<span style="color: #75715e"># the other shell window already changed prompt within 1s already primary</span>
+stateStr : <span style="color: #f92672">(</span>not reachable/health<span style="color: #f92672">)</span> <span style="color: #75715e"># the one killed</span>
+</pre></div>
+
+<h2 id="connect-with-java-driver">Connect with Java Driver</h2>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># after inserting some documents into the primary</span>
+replset:PRIMARY&gt; rs.stepdown<span style="color: #f92672">()</span> <span style="color: #75715e"># simulate a failover</span>
+replset:SECONDARY&gt;  
+</pre></div>
+
+<p>The older way to initiate a <code>MongoClient</code> will fail on a failover since it will wait until it connects to a primary before insertion. Instead, pass in <code>Arrays.asList(new ServerAddress(&quot;localhost&quot;, 27017))</code> will work because the driver can discover the primary through the secondary. This will not work if the process of 27017 was killed.</p>
+
+<p>The list of mongod servers here is refereed to as a seedlist.</p>
+
+<p>Bump up log level:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;root</span> <span style="color: #a6e22e">level=</span><span style="color: #e6db74">&quot;WARN&quot;</span><span style="color: #f92672">&gt;</span>
+	<span style="color: #f92672">&lt;appender-ref</span> <span style="color: #a6e22e">ref=</span><span style="color: #e6db74">&quot;STDOUT&quot;</span><span style="color: #f92672">/&gt;</span>
+<span style="color: #f92672">&lt;/root&gt;</span>
+
+<span style="color: #75715e">&lt;!-- change first line --&gt;</span>
+
+<span style="color: #f92672">&lt;root</span> <span style="color: #a6e22e">level=</span><span style="color: #e6db74">&quot;INFO&quot;</span><span style="color: #f92672">&gt;</span>
+</pre></div>
+
+<p>What to do in the <code>catch</code> clause when we catch a <code>MongoSocketException</code>? It depends on the application.</p>
+
+<ul>
+<li>try insertion again if it is idempotent (contains a specific _id and that the field has a unique index).</li>
+<li>put this message into another system.</li>
+<li>notify a system admin.</li>
+<li>return error to the user.</li>
+</ul>
+
+<p>A robust solution (in python) is to put inserts into a retry loop for 3 tries. If the insertion is successful, it will break out the retry loop. If a <code>AutoReconnect</code> error occurs, <code>time.sleep(5)</code> sleep for full 5 seconds and go back to the second try in the retry loop. We need to handle the <code>DuplicateKeyError</code> since the insert may have succeeded even we got the <code>AutoReconnect</code> error.</p>
+
+<p><code>$inc</code>, <code>$push</code> operators are not idempotent and may cause issues in scenarios of <code>AutoReconnect</code> error but the actual insert/update have succeeded. You can&rsquo;t just retry. <code>$set</code> is idempotent. We can turn <code>$inc</code> into a <code>find()</code> plus a <code>$set</code> and the operation is now idempotent but is no longer atomic (you can lose a vote if two threads try to update at the same time).</p>
+
+<h2 id="failover-and-rollback">Failover and Rollback</h2>
+
+<p>Even if you set w=1 j=1 on thew primary, if the node fails before the write gets synced to the secondaries, when it comes back up it will roll back the writes. One way to avoid it mostly is to set w=majority (wait until the majority of the nodes have the data then the vulnerability does not exist for the most part, small corner cases below).</p>
+
+<p>While it is true that a replica set will never rollback a write if it was performed with w=majority and that write successfully replicated to a majority of nodes, it is possible that a write performed with w=majority gets rolled back. Here is the scenario: you do write with w=majority and a failover occurs after the write has committed to the primary but before replication completes. You will likely see an exception at the client. An election occurs and a new primary is elected. When the original primary comes back up, it will rollback the committed write. However, from your application&rsquo;s standpoint, that write never completed, so that&rsquo;s ok.</p>
+
+<h2 id="read-preference">Read Preference</h2>
+
+<p>The driver connects to the primary node and maintains connections to the secondary nodes as well. By default, reads and writes go to the primary. Read preference settings:</p>
+
+<ul>
+<li>primary</li>
+<li>primary preferred</li>
+<li>secondary, eventually consistency</li>
+<li>secondary preferred</li>
+<li>nearest (in terms of pin time, &lt; 15ms considered nearest, can have a tag set, data center awareness idea)</li>
+</ul>
+
+<p>If read preference is set to secondary only, for the case of primary stepdown, the python code does not have to handle exception.</p>
+
+<p>One thing to remember is that the driver will check, upon attempting to write, whether or not its write concern is valid. It will error if, for example, w=4 but there are 3 data-bearing replica set members. This will happen quickly in both the Java and pymongo drivers. Reading with an invalid read preference will take longer, but will also result in an error. Be aware, though, that this behavior can vary a little between drivers and between versions.</p>
+
+<h1 id="sharding-distributed-mongodb">Sharding (Distributed MongoDB)</h1>
+
+<p><img src="http://jessezhuang.github.io/img/mongodb-sharding2.png" alt="mongodb sharding scheme" /></p>
+
+<p>Sharding introduces horizontal scalability. Shards split data up from a particular collection. Shards are typically replica sets themselves. Application sends commands through <code>mongos</code> routers to the shards. For example, an orders collection can be sharded range based with a shard key of order_id. The router will keep mapps of key ranges to chunks and mapping of chunks to the shards. If the query does not include a shard key, the query will be scattered to all the shard servers and gather back the answer and respond to the application. Shard key have to be included in inserts.</p>
+
+<p>Sharding is at a database/collection level. Collections not sharded will sit in the first shard (shard 0). The routers are pretty stateless and are handled similarly to a replica set.</p>
+
+<p>As of MongoDB 2.4, we also offer hash-based sharding, which offers a more even distribution of data as a function of shard key, at the expense of worse performance for range-based queries.</p>
+
+<h2 id="building-a-sharded-environment">Building a Sharded Environment</h2>
+
+<p>Probably more of a DBA task. The example will build 3 shards: s0, s1, and s2, each is a replica set with 3 nodes (<code>mongod --shardsvr</code>); 1 mongos at port 27017 (<code>mognos --configdb</code>); 3 config servers (<code>mongod --configsvr</code>) holding information about the way of how data are distributed across the shards (map chunks to shards). There are two ways to shard:</p>
+
+<ul>
+<li>ranged based O(lgN) assuming binary search based</li>
+<li>hash based O(1), O(lgN) worst case, under universal hashing assumption</li>
+</ul>
+
+<p>Every document must have a shard key that is indexed, but does not have to be unique.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongo <span style="color: #75715e"># mongos at 27017</span>
+mongos&gt; sh.status<span style="color: #f92672">()</span>
+<span style="color: #75715e"># see info about shards: {...}, chunks, .etc</span>
+mongos&gt; db.students.explain<span style="color: #f92672">()</span>.find<span style="color: #f92672">({})</span>.limit<span style="color: #f92672">(</span>10<span style="color: #f92672">)</span>
+<span style="color: #75715e"># stage: &quot;SHARD_MERGE&quot;, goes to all three shards</span>
+mongos&gt; db.students.explain<span style="color: #f92672">()</span>.find<span style="color: #f92672">({</span>student_id:1000<span style="color: #f92672">})</span>.limit<span style="color: #f92672">(</span>10<span style="color: #f92672">)</span>
+<span style="color: #75715e"># only goes to s0 shard, IXSCAN</span>
+</pre></div>
+
+<h2 id="implications-of-sharding-on-development">Implications of Sharding on Development</h2>
+
+<ul>
+<li>every document needs to include a shard key</li>
+<li>the shard key is immutable</li>
+<li>index that starts with the shard key, cannot be a multikey index</li>
+<li>when doing an update, specify shard key or multi is true</li>
+<li>no shard key means scatter gather operation</li>
+<li>no unique index unless starting with the shard key. There is no way of enforcing the uniqueness of an index if it doesn&rsquo;t include the shard key because it doesn&rsquo;t know whether or not copies exist on different shards. The indexes are on each shard.</li>
+</ul>
+
+<p>Sharding and replication are almost always done together. Usually <code>mongos</code> is replicated itself typically run on the same box as the application since they are pretty lightweight.</p>
+
+<h2 id="choosing-a-shard-key">Choosing a Shard Key</h2>
+
+<ol>
+<li>Sufficient cardinality, e.g., 3 possible values across 100 shards not good. You can put in a second part of the key with more cardinality.</li>
+<li>Avoid hotspotting in writes, which occurs for anything monotonically increasing (BSON ID, high part is time stamp). First chunk starts with <code>$minkey</code> and last chunk ends with <code>$maxkey</code>. It will always get assigned to the highest chunk.</li>
+</ol>
+
+<p>For example, we are sharding on billions of orders and the order_ids are monotonically increasing. So maybe shard on (vendor, order_date) considering the two aspects above. Think about how was the problem naturally parallel? Cannot redo since they are immutable. Needs careful design, testing before commit to one.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+<li><a href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a></li>
+<li><a href="https://docs.mongodb.com/">MongoDB Docs</a></li>
+</ol>
+
+<p><a href="#">back to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+
+			<aside class="copyright" role="note">
+  
+  &copy; 2016 Zexi Zhuang &ndash;
+  
+  built with
+  <a href="https://www.gohugo.io" target="_blank">Hugo</a>
+  using a customized
+  <a href="https://github.com/JesseZhuang/hugo-material-blog" target="_blank">
+    Material
+  </a> theme.
+</aside>
+
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/vim-ubuntu-install/" title="How to Install Latest Version Vim in Ubuntu 14.04 LTS">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              How to Install Latest Version Vim in Ubuntu 14.04 LTS
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              MongoDB Aggregation Framework Tutorial
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
+    
+    </script>
+
+    <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(headers.length > 0) {
+        for(var i = 0; i < headers.length; i++) {
+          var li = document.createElement("li");
+          li.setAttribute("class", "anchor");
+
+          var a  = document.createElement("a");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", headers[i].innerHTML);
+          a.innerHTML = headers[i].innerHTML;
+
+          li.appendChild(a)
+          scrollspy.appendChild(li);
+        }
+      } else {
+        scrollspy.parentElement.removeChild(scrollspy)
+      }
+
+
+      /* Add permanent link next to the headers */
+      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+      for(var i = 0; i < headers.length; i++) {
+          var a = document.createElement("a");
+          a.setAttribute("class", "headerlink");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", "Permanent link")
+          a.innerHTML = "#";
+          headers[i].appendChild(a);
+      }
+    </script>
+
+    
+      <script>
+        (function(i,s,o,g,r,a,m){
+          i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||
+          []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+          m.parentNode.insertBefore(a,m)
+        })(window, document,
+          'script', '//www.google-analytics.com/analytics.js', 'ga');
+         
+        ga('create', 'UA-79594714-1', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+         
+        var buttons = document.querySelectorAll('a');
+        Array.prototype.map.call(buttons, function(item) {
+          if (item.host != document.location.host) {
+            item.addEventListener('click', function() {
+              var action = item.getAttribute('data-action') || 'follow';
+              ga('send', 'event', 'outbound', action, item.href);
+            });
+          }
+        });
+         
+        var query = document.querySelector('.query');
+        query.addEventListener('blur', function() {
+          if (this.value) {
+            var path = document.location.pathname;
+            ga('send', 'pageview', path + '?q=' + this.value);
+          }
+        });
+      </script>
+    
+
+  </body>
+</html>
+

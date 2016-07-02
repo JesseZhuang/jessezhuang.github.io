@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jun 2016 00:36:25 -0700</lastBuildDate>
+    <atom:link href="http://jessezhuang.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to Install Latest Version Vim in Ubuntu 14.04 LTS</title>
+      <link>http://jessezhuang.github.io/article/vim-ubuntu-install/</link>
+      <pubDate>Thu, 30 Jun 2016 00:36:25 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/vim-ubuntu-install/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;https://vim.sexy/img/Vimlogo.svg&#34; alt=&#34;Vim Icon svg&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;ubuntu-comes-with-vim-tiny&#34;&gt;Ubuntu comes with Vim-Tiny&lt;/h1&gt;
+
+&lt;p&gt;First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version &lt;code&gt;2:7.4.052-1ubuntu3&lt;/code&gt; which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that &lt;a href=&#34;http://stackoverflow.com/questions/10964681/enabling-markdown-highlighting-in-vim&#34;&gt;starting from 7.4.480&lt;/a&gt; vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-vim-with-ppa&#34;&gt;Install Vim with PPA&lt;/h1&gt;
+
+&lt;p&gt;I have tried to install Vim with debian packages listed on &lt;a href=&#34;http://www.vim.org&#34;&gt;Vim.org&lt;/a&gt; but they did not come with the dependencies. So PPA was an easier way to go. &lt;a href=&#34;https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily&#34;&gt;ppa:pkg-vim/vim-daily&lt;/a&gt; has version 7.4.826 which is good enough.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:pkg-vim/vim-daily
+sudo apt-get update
+sudo apt-get install vim
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can use &lt;code&gt;apt-cache policy vim&lt;/code&gt; to check the version of the vim in your repositories.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-from-source&#34;&gt;Install From Source&lt;/h1&gt;
+
+&lt;p&gt;Vim.org has detailed instructions on how to &lt;code&gt;git clone&lt;/code&gt; and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use &lt;a href=&#34;http://asic-linux.com.mx/~izto/checkinstall/index.php&#34;&gt;&lt;code&gt;checkinstall&lt;/code&gt;&lt;/a&gt; just in case you ever want to cleanly remove the installation.&lt;/p&gt;
+
+&lt;h1 id=&#34;basic-configuration-to-enable-markdown-highlighting&#34;&gt;Basic Configuration to Enable Markdown Highlighting&lt;/h1&gt;
+
+&lt;p&gt;This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;syntax on
+colorscheme industry
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-vim&#34;&gt;Why Vim?&lt;/h1&gt;
+
+&lt;p&gt;A lot of people like Vim/Emacs. For me, Vim seems to be a very lightweight text editor which is very similar to Vi that comes with most server command line interfaces. It&amp;rsquo;s good to get familiar with at least the basic usage of Vim. I have been using atom in my Ubuntu but atom has a &lt;a href=&#34;https://github.com/atom/atom/issues/7883&#34;&gt;memory leak issue&lt;/a&gt; which sometimes causes Ubuntu to hang or even restart as an guest OS with Oracle VirtualBox in Windows 10 host. Going to light weight and more basic is also a good way to practice your programming language knowledges when you lose all the autocompletion, not that Vim cannot do autocompletion but you can pretend as if.&lt;/p&gt;
+
+&lt;p&gt;Example memory usage: Vim with a few buffers open switching between editing those files uses &amp;lt; 5 Mb and atom typically uses over 200 Mb memory with similar number of files open.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

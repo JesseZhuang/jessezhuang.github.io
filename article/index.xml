@@ -6,8 +6,359 @@
     <description>Recent content in Articles on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Jun 2016 14:55:57 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jun 2016 00:36:25 -0700</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to Install Latest Version Vim in Ubuntu 14.04 LTS</title>
+      <link>http://jessezhuang.github.io/article/vim-ubuntu-install/</link>
+      <pubDate>Thu, 30 Jun 2016 00:36:25 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/vim-ubuntu-install/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;https://vim.sexy/img/Vimlogo.svg&#34; alt=&#34;Vim Icon svg&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;ubuntu-comes-with-vim-tiny&#34;&gt;Ubuntu comes with Vim-Tiny&lt;/h1&gt;
+
+&lt;p&gt;First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version &lt;code&gt;2:7.4.052-1ubuntu3&lt;/code&gt; which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that &lt;a href=&#34;http://stackoverflow.com/questions/10964681/enabling-markdown-highlighting-in-vim&#34;&gt;starting from 7.4.480&lt;/a&gt; vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-vim-with-ppa&#34;&gt;Install Vim with PPA&lt;/h1&gt;
+
+&lt;p&gt;I have tried to install Vim with debian packages listed on &lt;a href=&#34;http://www.vim.org&#34;&gt;Vim.org&lt;/a&gt; but they did not come with the dependencies. So PPA was an easier way to go. &lt;a href=&#34;https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily&#34;&gt;ppa:pkg-vim/vim-daily&lt;/a&gt; has version 7.4.826 which is good enough.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:pkg-vim/vim-daily
+sudo apt-get update
+sudo apt-get install vim
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can use &lt;code&gt;apt-cache policy vim&lt;/code&gt; to check the version of the vim in your repositories.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-from-source&#34;&gt;Install From Source&lt;/h1&gt;
+
+&lt;p&gt;Vim.org has detailed instructions on how to &lt;code&gt;git clone&lt;/code&gt; and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use &lt;a href=&#34;http://asic-linux.com.mx/~izto/checkinstall/index.php&#34;&gt;&lt;code&gt;checkinstall&lt;/code&gt;&lt;/a&gt; just in case you ever want to cleanly remove the installation.&lt;/p&gt;
+
+&lt;h1 id=&#34;basic-configuration-to-enable-markdown-highlighting&#34;&gt;Basic Configuration to Enable Markdown Highlighting&lt;/h1&gt;
+
+&lt;p&gt;This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;syntax on
+colorscheme industry
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-vim&#34;&gt;Why Vim?&lt;/h1&gt;
+
+&lt;p&gt;A lot of people like Vim/Emacs. For me, Vim seems to be a very lightweight text editor which is very similar to Vi that comes with most server command line interfaces. It&amp;rsquo;s good to get familiar with at least the basic usage of Vim. I have been using atom in my Ubuntu but atom has a &lt;a href=&#34;https://github.com/atom/atom/issues/7883&#34;&gt;memory leak issue&lt;/a&gt; which sometimes causes Ubuntu to hang or even restart as an guest OS with Oracle VirtualBox in Windows 10 host. Going to light weight and more basic is also a good way to practice your programming language knowledges when you lose all the autocompletion, not that Vim cannot do autocompletion but you can pretend as if.&lt;/p&gt;
+
+&lt;p&gt;Example memory usage: Vim with a few buffers open switching between editing those files uses &amp;lt; 5 Mb and atom typically uses over 200 Mb memory with similar number of files open.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mongodb Application Engineering Tutorial</title>
+      <link>http://jessezhuang.github.io/article/mongodb-app-engineer/</link>
+      <pubDate>Wed, 29 Jun 2016 00:00:00 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/mongodb-app-engineer/</guid>
+      <description>
+
+&lt;h1 id=&#34;durability-of-writes&#34;&gt;Durability of Writes&lt;/h1&gt;
+
+&lt;h2 id=&#34;write-concern&#34;&gt;Write Concern&lt;/h2&gt;
+
+&lt;p&gt;How to make sure the writes persistent? Assume application talking to a database server in the scheme below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-write.png&#34; alt=&#34;mongodb write concern&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The settings of two parameters affect the write concern:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;w(wait for acknowledgement)&lt;/th&gt;
+&lt;th&gt;j(journal)&lt;/th&gt;
+&lt;th&gt;effect&lt;/th&gt;
+&lt;th&gt;comment&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;fast, small window of vulnerability&lt;/td&gt;
+&lt;td&gt;default setting&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;slow, no vulnerability&lt;/td&gt;
+&lt;td&gt;can be done inside driver at collection, database, or client level&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;unacknowledged write&lt;/td&gt;
+&lt;td&gt;do not recommend&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;wait for 2 nodes in replica set to acknowledge write&lt;/td&gt;
+&lt;td&gt;w can be 0-3 for a set with 3 nodes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;majority&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;wait for majority to acknowledge, avoid rollback on failover&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;tag values&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;set tags on nodes&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.&lt;/p&gt;
+
+&lt;p&gt;Write concern revisited video notes: Write concern (w) value can be set at client, database or collection level within PyMongo. When you call MongoClient, you get a connection to the driver, but behind the scenes, PyMongo connects to multiple nodes of the replica set. The w value can be set at the client level. Andrew says that the w concern can be set at the connection level; he really means client level. It&amp;rsquo;s also important to note that &lt;code&gt;wtimeout&lt;/code&gt; is the amount of time that the database will wait for replication before returning an error on the driver, but that even if the database returns an error due to &lt;code&gt;wtimeout&lt;/code&gt;, the write will not be unwound at the primary and may complete at the secondaries. Hence, writes that return errors to the client due to &lt;code&gt;wtimeout&lt;/code&gt; may in fact succeed, but writes that return success, do in fact succeed. Finally, the video shows the use of an insert command in PyMongo. That call is deprecated and it should have been insert_one.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;w&lt;/code&gt;, &lt;code&gt;j&lt;/code&gt;, and &lt;code&gt;wtimeout&lt;/code&gt; collectively are called write concern, they can be set:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;at the time of connection, client level&lt;/li&gt;
+&lt;li&gt;at the collection level through the driver&lt;/li&gt;
+&lt;li&gt;in the configuration of the replica set, safest from sys admin standpoint&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;j, waiting for journal committed at the primary node only, not waiting for secondary nodes.&lt;/p&gt;
+
+&lt;p&gt;If you set w=1 and j=1, is it possible to wind up rolling back a committed write to the primary on failover? Yes. If the primary goes down before the write propagates to secondaries, it will roll back when it recovers.&lt;/p&gt;
+
+&lt;h2 id=&#34;network-errors&#34;&gt;Network Errors&lt;/h2&gt;
+
+&lt;p&gt;Network errors can cause a failed affirmative response sent back but the write may have succeeded, e.g. a TCP reset. For an insert, it is possible to guard against this since multiple times inserts will cause no harm. Worst case scenario is you get a duplicate key error. The problem is for updates, e.g. a &lt;code&gt;$inc&lt;/code&gt; operation, if you do not know the values, there is no possible way to check whether it succeeded with a network error.&lt;/p&gt;
+
+&lt;p&gt;Generally, when the network is healthy, this type of error is rare. If you want to avoid it at all cost, you can turn all updates into inserts and deletes.&lt;/p&gt;
+
+&lt;h1 id=&#34;replication-mongodb-s-approach-to-fault-tolerance-and-availability&#34;&gt;Replication (MongoDB&amp;rsquo;s Approach to Fault Tolerance and Availability)&lt;/h1&gt;
+
+&lt;p&gt;Replication helps to solve both availability and fault tolerance. A &lt;strong&gt;replica set&lt;/strong&gt; is a set of mongo nodes (mongod) that act together and all mirror each other in terms of data. There is one primary node and the rest are dynamic secondary nodes. Data written to the primary will asynchronously replicate to the secondaries. Application connects to the primary only. If the primary goes down, there will be an election for a new primary all transparent to the application.&lt;/p&gt;
+
+&lt;p&gt;The minimum number of nodes is three.&lt;/p&gt;
+
+&lt;h2 id=&#34;replica-set-elections&#34;&gt;Replica Set Elections&lt;/h2&gt;
+
+&lt;p&gt;Types of replica set nodes:
+- regular (primary/secondary)
+- arbiter, just for election/voting purposes, no data
+- delayed, often disaster recovering node(1h behind). Set priority=0 (p=0) and it cannot become a primary node.
+- hidden, never primary, p=0, often used for analytics, can vote.&lt;/p&gt;
+
+&lt;p&gt;Typically each node has one vote.&lt;/p&gt;
+
+&lt;h2 id=&#34;write-consistency&#34;&gt;Write Consistency&lt;/h2&gt;
+
+&lt;p&gt;MongoDB has strong consistency, vs. some others have eventual consistency. In the default configuration, application reads from and writes to the primary node. You will not read stale data in strong consistency. The writes have to go to the primary. The reads can go to the secondaries for eventual consistency. The lag is not guaranteed since the replication is asynchronous. One reason to do it is to scale the reads to the replica set. When failover occurs (usually under 3 seconds), write cannot complete.&lt;/p&gt;
+
+&lt;p&gt;Eventual consistency might be harder to reason about. Most application servers are stateless, write and read back out and get a different value, then have to reconcile.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-a-replica-set&#34;&gt;Create a Replica Set&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# bash &amp;lt; create_replica_set.sh&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# 3 on a single node so different ports&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# --fork so do not have to run each in its own shell&lt;/span&gt;
+
+mkdir -p /data/rs1 /data/rs2 /data/rs3
+mongod --replSet m101 --logpath &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;1.log&amp;quot;&lt;/span&gt; --dbpath /data/rs1 --port &lt;span style=&#34;color: #ae81ff&#34;&gt;27017&lt;/span&gt; --oplogSize &lt;span style=&#34;color: #ae81ff&#34;&gt;64&lt;/span&gt; --fork --smallfiles
+mongod --replSet m101 --logpath &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;2.log&amp;quot;&lt;/span&gt; --dbpath /data/rs2 --port &lt;span style=&#34;color: #ae81ff&#34;&gt;27018&lt;/span&gt; --oplogSize &lt;span style=&#34;color: #ae81ff&#34;&gt;64&lt;/span&gt; --smallfiles --fork
+mongod --replSet m101 --logpath &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;3.log&amp;quot;&lt;/span&gt; --dbpath /data/rs3 --port &lt;span style=&#34;color: #ae81ff&#34;&gt;27019&lt;/span&gt; --oplogSize &lt;span style=&#34;color: #ae81ff&#34;&gt;64&lt;/span&gt; --smallfiles --fork
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;mongo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;port&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;27018&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;init_replica&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;js&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;config&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;m101&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;members&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_id&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;host&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost:27017&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;priority&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;slaveDelay&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
+					&lt;span style=&#34;color: #75715e&#34;&gt;// delayed 5 seconds, not primary&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_id&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;host&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost:27018&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
+          &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_id&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;host&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost:27019&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;};&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;rs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;initiate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;rs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;rs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;conf&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// show the configuration&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;rs&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;help&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// replica set commands help&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mongo --port 27018
+MongoDB shell version 2.2.0
+connecting to: 127.0.0.1:27018/test
+m101:SECONDARY&amp;gt; rs.status&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# will see 3 members two in RECOVERING stateStr, one in PRIMARY.&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# Momentarily, one in PRIMARY, two in SECONDARY. Prompt also changes to primary.&lt;/span&gt;
+m101:PRIMARY&amp;gt; db.people.insert&lt;span style=&#34;color: #f92672&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Andrew&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;})&lt;/span&gt;
+$ mongo --port 27019
+m101:SECONDARY&amp;gt; rs.slaveOk&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# allow to read from secondary&lt;/span&gt;
+m101:SECONDARY&amp;gt; db.people.find&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Normally when you create replicate sets, you would want the &lt;code&gt;mongod&lt;/code&gt;s on different physical servers so there is real fault tolerance.&lt;/p&gt;
+
+&lt;h2 id=&#34;replica-set-internals-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Replica Set Internals &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;oplog (operation log?) kept in sync by mongo. The secondaries are constantly reading the oplog of the primary. It&amp;rsquo;s true that the oplog entries originally come from the primary, but secondaries can sync from another secondary, as long as at least there is a chain of oplog syncs that lead back to the primary.&lt;/p&gt;
+
+&lt;p&gt;Use &lt;code&gt;$ ps -ef | grep mongod&lt;/code&gt; to check the mongod processes that are running.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;m101:PRIMARY&amp;gt; use &lt;span style=&#34;color: #f8f8f2&#34;&gt;local&lt;/span&gt;
+m101:PRIMARY&amp;gt; show collections
+oplog.rs
+startup_log
+m101:PRIMARY&amp;gt; db.oplog.rs.find&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;.pretty&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;op&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;i&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# insert&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ns&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;test.people&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# into test.people&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;o&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;_id: ..., name: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Andrew&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;op&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;c&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# create collection&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ns&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;test.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$cmd&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;o&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt; create:people &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+m101:SECONDARY&amp;gt; db.oplog.rs.find&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;.pretty&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# should see exactly the same log as in primary&lt;/span&gt;
+optime and optimeDate &lt;span style=&#34;color: #75715e&#34;&gt;# whether this node is up to date&lt;/span&gt;
+syncingTo &lt;span style=&#34;color: #75715e&#34;&gt;# where it gets its data from&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;oplog is a capped collection, which rolls off at certain times. The oplog needs to be big enough to deal with periods where the secondary can&amp;rsquo;t see the primary. The oplog&amp;rsquo;s size depends on how long you expect there to be a bifurcation of the network and how much data you are writing, how fast the oplog is growing. If the oplog rolls over and the secondary can&amp;rsquo;t get to the primary&amp;rsquo;s oplog, you can still resync the secondary but he has to read the entire database (much slower).&lt;/li&gt;
+&lt;li&gt;oplog uses a statement (MongoDB documents) based approach, which allows mixed mode replica sets (flexibility on storage engines or even mongodb versions). And this helps doing (rolling) upgrades in the system.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Replica set election:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;kill&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;60494&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# found by ps primary&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# the other shell window already changed prompt within 1s already primary&lt;/span&gt;
+stateStr : &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;not reachable/health&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# the one killed&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;connect-with-java-driver&#34;&gt;Connect with Java Driver&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# after inserting some documents into the primary&lt;/span&gt;
+replset:PRIMARY&amp;gt; rs.stepdown&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# simulate a failover&lt;/span&gt;
+replset:SECONDARY&amp;gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The older way to initiate a &lt;code&gt;MongoClient&lt;/code&gt; will fail on a failover since it will wait until it connects to a primary before insertion. Instead, pass in &lt;code&gt;Arrays.asList(new ServerAddress(&amp;quot;localhost&amp;quot;, 27017))&lt;/code&gt; will work because the driver can discover the primary through the secondary. This will not work if the process of 27017 was killed.&lt;/p&gt;
+
+&lt;p&gt;The list of mongod servers here is refereed to as a seedlist.&lt;/p&gt;
+
+&lt;p&gt;Bump up log level:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;root&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;level=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WARN&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;appender-ref&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ref=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;STDOUT&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/root&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;!-- change first line --&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;root&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;level=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;INFO&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;What to do in the &lt;code&gt;catch&lt;/code&gt; clause when we catch a &lt;code&gt;MongoSocketException&lt;/code&gt;? It depends on the application.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;try insertion again if it is idempotent (contains a specific _id and that the field has a unique index).&lt;/li&gt;
+&lt;li&gt;put this message into another system.&lt;/li&gt;
+&lt;li&gt;notify a system admin.&lt;/li&gt;
+&lt;li&gt;return error to the user.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A robust solution (in python) is to put inserts into a retry loop for 3 tries. If the insertion is successful, it will break out the retry loop. If a &lt;code&gt;AutoReconnect&lt;/code&gt; error occurs, &lt;code&gt;time.sleep(5)&lt;/code&gt; sleep for full 5 seconds and go back to the second try in the retry loop. We need to handle the &lt;code&gt;DuplicateKeyError&lt;/code&gt; since the insert may have succeeded even we got the &lt;code&gt;AutoReconnect&lt;/code&gt; error.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$inc&lt;/code&gt;, &lt;code&gt;$push&lt;/code&gt; operators are not idempotent and may cause issues in scenarios of &lt;code&gt;AutoReconnect&lt;/code&gt; error but the actual insert/update have succeeded. You can&amp;rsquo;t just retry. &lt;code&gt;$set&lt;/code&gt; is idempotent. We can turn &lt;code&gt;$inc&lt;/code&gt; into a &lt;code&gt;find()&lt;/code&gt; plus a &lt;code&gt;$set&lt;/code&gt; and the operation is now idempotent but is no longer atomic (you can lose a vote if two threads try to update at the same time).&lt;/p&gt;
+
+&lt;h2 id=&#34;failover-and-rollback&#34;&gt;Failover and Rollback&lt;/h2&gt;
+
+&lt;p&gt;Even if you set w=1 j=1 on thew primary, if the node fails before the write gets synced to the secondaries, when it comes back up it will roll back the writes. One way to avoid it mostly is to set w=majority (wait until the majority of the nodes have the data then the vulnerability does not exist for the most part, small corner cases below).&lt;/p&gt;
+
+&lt;p&gt;While it is true that a replica set will never rollback a write if it was performed with w=majority and that write successfully replicated to a majority of nodes, it is possible that a write performed with w=majority gets rolled back. Here is the scenario: you do write with w=majority and a failover occurs after the write has committed to the primary but before replication completes. You will likely see an exception at the client. An election occurs and a new primary is elected. When the original primary comes back up, it will rollback the committed write. However, from your application&amp;rsquo;s standpoint, that write never completed, so that&amp;rsquo;s ok.&lt;/p&gt;
+
+&lt;h2 id=&#34;read-preference&#34;&gt;Read Preference&lt;/h2&gt;
+
+&lt;p&gt;The driver connects to the primary node and maintains connections to the secondary nodes as well. By default, reads and writes go to the primary. Read preference settings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;primary&lt;/li&gt;
+&lt;li&gt;primary preferred&lt;/li&gt;
+&lt;li&gt;secondary, eventually consistency&lt;/li&gt;
+&lt;li&gt;secondary preferred&lt;/li&gt;
+&lt;li&gt;nearest (in terms of pin time, &amp;lt; 15ms considered nearest, can have a tag set, data center awareness idea)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If read preference is set to secondary only, for the case of primary stepdown, the python code does not have to handle exception.&lt;/p&gt;
+
+&lt;p&gt;One thing to remember is that the driver will check, upon attempting to write, whether or not its write concern is valid. It will error if, for example, w=4 but there are 3 data-bearing replica set members. This will happen quickly in both the Java and pymongo drivers. Reading with an invalid read preference will take longer, but will also result in an error. Be aware, though, that this behavior can vary a little between drivers and between versions.&lt;/p&gt;
+
+&lt;h1 id=&#34;sharding-distributed-mongodb&#34;&gt;Sharding (Distributed MongoDB)&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-sharding2.png&#34; alt=&#34;mongodb sharding scheme&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sharding introduces horizontal scalability. Shards split data up from a particular collection. Shards are typically replica sets themselves. Application sends commands through &lt;code&gt;mongos&lt;/code&gt; routers to the shards. For example, an orders collection can be sharded range based with a shard key of order_id. The router will keep mapps of key ranges to chunks and mapping of chunks to the shards. If the query does not include a shard key, the query will be scattered to all the shard servers and gather back the answer and respond to the application. Shard key have to be included in inserts.&lt;/p&gt;
+
+&lt;p&gt;Sharding is at a database/collection level. Collections not sharded will sit in the first shard (shard 0). The routers are pretty stateless and are handled similarly to a replica set.&lt;/p&gt;
+
+&lt;p&gt;As of MongoDB 2.4, we also offer hash-based sharding, which offers a more even distribution of data as a function of shard key, at the expense of worse performance for range-based queries.&lt;/p&gt;
+
+&lt;h2 id=&#34;building-a-sharded-environment&#34;&gt;Building a Sharded Environment&lt;/h2&gt;
+
+&lt;p&gt;Probably more of a DBA task. The example will build 3 shards: s0, s1, and s2, each is a replica set with 3 nodes (&lt;code&gt;mongod --shardsvr&lt;/code&gt;); 1 mongos at port 27017 (&lt;code&gt;mognos --configdb&lt;/code&gt;); 3 config servers (&lt;code&gt;mongod --configsvr&lt;/code&gt;) holding information about the way of how data are distributed across the shards (map chunks to shards). There are two ways to shard:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ranged based O(lgN) assuming binary search based&lt;/li&gt;
+&lt;li&gt;hash based O(1), O(lgN) worst case, under universal hashing assumption&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Every document must have a shard key that is indexed, but does not have to be unique.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mongo &lt;span style=&#34;color: #75715e&#34;&gt;# mongos at 27017&lt;/span&gt;
+mongos&amp;gt; sh.status&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# see info about shards: {...}, chunks, .etc&lt;/span&gt;
+mongos&amp;gt; db.students.explain&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;.find&lt;span style=&#34;color: #f92672&#34;&gt;({})&lt;/span&gt;.limit&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;10&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# stage: &amp;quot;SHARD_MERGE&amp;quot;, goes to all three shards&lt;/span&gt;
+mongos&amp;gt; db.students.explain&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;.find&lt;span style=&#34;color: #f92672&#34;&gt;({&lt;/span&gt;student_id:1000&lt;span style=&#34;color: #f92672&#34;&gt;})&lt;/span&gt;.limit&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;10&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# only goes to s0 shard, IXSCAN&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;implications-of-sharding-on-development&#34;&gt;Implications of Sharding on Development&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;every document needs to include a shard key&lt;/li&gt;
+&lt;li&gt;the shard key is immutable&lt;/li&gt;
+&lt;li&gt;index that starts with the shard key, cannot be a multikey index&lt;/li&gt;
+&lt;li&gt;when doing an update, specify shard key or multi is true&lt;/li&gt;
+&lt;li&gt;no shard key means scatter gather operation&lt;/li&gt;
+&lt;li&gt;no unique index unless starting with the shard key. There is no way of enforcing the uniqueness of an index if it doesn&amp;rsquo;t include the shard key because it doesn&amp;rsquo;t know whether or not copies exist on different shards. The indexes are on each shard.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sharding and replication are almost always done together. Usually &lt;code&gt;mongos&lt;/code&gt; is replicated itself typically run on the same box as the application since they are pretty lightweight.&lt;/p&gt;
+
+&lt;h2 id=&#34;choosing-a-shard-key&#34;&gt;Choosing a Shard Key&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Sufficient cardinality, e.g., 3 possible values across 100 shards not good. You can put in a second part of the key with more cardinality.&lt;/li&gt;
+&lt;li&gt;Avoid hotspotting in writes, which occurs for anything monotonically increasing (BSON ID, high part is time stamp). First chunk starts with &lt;code&gt;$minkey&lt;/code&gt; and last chunk ends with &lt;code&gt;$maxkey&lt;/code&gt;. It will always get assigned to the highest chunk.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For example, we are sharding on billions of orders and the order_ids are monotonically increasing. So maybe shard on (vendor, order_date) considering the two aspects above. Think about how was the problem naturally parallel? Cannot redo since they are immutable. Needs careful design, testing before commit to one.&lt;/p&gt;
+
+&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://university.mongodb.com/courses/M101P/about&#34;&gt;MongoDB University Classes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.mongodb.com/&#34;&gt;MongoDB Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MongoDB Aggregation Framework Tutorial</title>
@@ -16,13 +367,6 @@
       
       <guid>http://jessezhuang.github.io/article/mongodb-aggregation-framework/</guid>
       <description>
-
-&lt;p&gt;Last updated: 
-
-
-Jun 26, 2016
-
-&lt;/p&gt;
 
 &lt;p&gt;The aggregation framework has its roots in SQL&amp;rsquo;s world of &lt;code&gt;groupby&lt;/code&gt; clause.&lt;/p&gt;
 
@@ -174,9 +518,9 @@ Jun 26, 2016
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;&lt;code&gt;$unwind&lt;/code&gt; example: &lt;code&gt;tags:[red, blue]&lt;/code&gt; unwinds to &lt;code&gt;tag:red&lt;/code&gt; and &lt;code&gt;tag:blue&lt;/code&gt;, expanding the number of documents. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$unwind&lt;/code&gt; example: &lt;code&gt;tags:[red, blue]&lt;/code&gt; unwinds to &lt;code&gt;tag:red&lt;/code&gt; and &lt;code&gt;tag:blue&lt;/code&gt;, expanding the number of documents.&lt;/p&gt;
 
-&lt;h2 id=&#34;more-operators-with-examples&#34;&gt;More Operators with Examples&lt;/h2&gt;
+&lt;h2 id=&#34;more-operators-with-examples-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;More Operators with Examples &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;The &lt;code&gt;$sum&lt;/code&gt; operator:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;products&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;aggregate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;([&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// array&lt;/span&gt;
@@ -319,16 +663,14 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
-
 &lt;div class=&#34;admonition note&#34;&gt;
-&lt;p class=&#34;admonition-title&#34;&gt;To reverse `$unwind`&lt;/p&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;To reverse $unwind&lt;/p&gt;
 &lt;p&gt;You can use $push to reverse the effects of an $unwind. If the array elements were unique, $addToSet will also do the job.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&#34;more-advanced-aggregation-examples&#34;&gt;More Advanced Aggregation Examples&lt;/h2&gt;
 
-&lt;h3 id=&#34;double-grouping&#34;&gt;Double Grouping&lt;/h3&gt;
+&lt;h3 id=&#34;double-grouping-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Double Grouping &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;For a collection of student grades like below:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;quot;$oid&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;50b59cd75bed76f46522c34e&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
@@ -466,7 +808,7 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&#34;full-text-search-and-aggregation&#34;&gt;Full Text Search and Aggregation&lt;/h3&gt;
+&lt;h3 id=&#34;full-text-search-and-aggregation-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Full Text Search and Aggregation &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;&amp;ldquo;Two great taste that go great together.&amp;rdquo; - &lt;a href=&#34;https://twitter.com/erlichson?lang=en&#34;&gt;Andrew Erlichson&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sentences&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;aggregate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;([&lt;/span&gt;
@@ -478,7 +820,7 @@ Jun 26, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;words&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;rat shrub granite.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;$text&lt;/code&gt; is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$text&lt;/code&gt; is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline.&lt;/p&gt;
 
 &lt;h3 id=&#34;aggregation-with-java-driver&#34;&gt;Aggregation with Java driver&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ZipCodeAggregationTest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
@@ -562,10 +904,241 @@ Jun 26, 2016
 &lt;ul&gt;
 &lt;li&gt;100 MB limit for pipeline stages, &lt;code&gt;allowDiskUse&lt;/code&gt; to get around.&lt;/li&gt;
 &lt;li&gt;16 MB limit if you decide to return the result as a single document, set &lt;code&gt;cursor&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;In a sharded system, stages like &lt;code&gt;$group&lt;/code&gt;, &lt;code&gt;$sort&lt;/code&gt; will bring back the results to the first shard. Stages like &lt;code&gt;$match&lt;/code&gt; and &lt;code&gt;$project&lt;/code&gt; can go in parallel. Aggregation in mongodb is an interface to map/reduce jobs. Alternatively, get the data out of mongodb using the hadoop connector and use Hadoop map/reduce. There is a map/reduce functionality built into mongodb that is not recommended. &lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;In a sharded system, stages like &lt;code&gt;$group&lt;/code&gt;, &lt;code&gt;$sort&lt;/code&gt; will bring back the results to the first shard. Stages like &lt;code&gt;$match&lt;/code&gt; and &lt;code&gt;$project&lt;/code&gt; can go in parallel. Aggregation in mongodb is an interface to map/reduce jobs. Alternatively, get the data out of mongodb using the hadoop connector and use Hadoop map/reduce. There is a map/reduce functionality built into mongodb that is not recommended.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-limitation.png&#34; alt=&#34;mongodb sharded system limitation&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://university.mongodb.com/courses/M101P/about&#34;&gt;MongoDB University Classes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.mongodb.com/&#34;&gt;MongoDB Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MongoDB Performance Tutorial</title>
+      <link>http://jessezhuang.github.io/article/mongodb-performance/</link>
+      <pubDate>Fri, 24 Jun 2016 14:55:57 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/mongodb-performance/</guid>
+      <description>
+
+&lt;p&gt;Last updated: 
+
+
+Jun 24, 2016
+
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.technotesdesk.com/wp-content/uploads/2015/01/mongodb_logo.jpg&#34; alt=&#34;MongoDB Database&#34; title=&#34;MongoDB Logo&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;storage-engine&#34;&gt;Storage engine&lt;/h1&gt;
+
+&lt;p&gt;Storage engine sits between mongodb server and the file storage. Use &lt;code&gt;db.serverStatus().storageEngine;&lt;/code&gt; to check.&lt;/p&gt;
+
+&lt;h2 id=&#34;wiredtiger&#34;&gt;WiredTiger&lt;/h2&gt;
+
+&lt;p&gt;for many applications, this is faster
+- document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again.
+- compression of data and indexes. WiredTiger manages memory.
+- append only, no in place updates&lt;/p&gt;
+
+&lt;h2 id=&#34;mmap-v1&#34;&gt;MMAP V1&lt;/h2&gt;
+
+&lt;p&gt;Uses mmap system call undercovers. Allocating memory, or map files or devices into memory. Operation system manages memory/virtual memory.
+- collection level locking, multiple reader, single writer lock.
+- &lt;a href=&#34;http://blog.mongodb.org/post/248614779/fast-updates-with-mongodb-update-in-place&#34;&gt;in place update&lt;/a&gt; (database does not have to allocate and write a full new copy of the object).
+- power of 2 sizes when allocating initial storage with a minimum of 32 bytes.&lt;/p&gt;
+
+&lt;h1 id=&#34;indexes&#34;&gt;Indexes&lt;/h1&gt;
+
+&lt;p&gt;Built with btree or b+trees. With indexes writes are slower, reads are much faster. Without index, query on 10 million documents will be linear searching, too much disk io.&lt;/p&gt;
+
+&lt;p&gt;(a,b,c) leftmost index order. a, (a,b), (a,b,c) would work, (a,c) partially work, others do not.&lt;/p&gt;
+
+&lt;h2 id=&#34;indexes-size&#34;&gt;Indexes Size&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-index-size.png&#34; alt=&#34;Indexes should fit into memory&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s essential to fit working set (key component: Indexes) into memory. To check indexes sizes in mongo shell:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;collection&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;stats&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//detailed for each index&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;collection&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;totalIndexSize&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//just the total&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For a 10 million documents students collection, each index is about 300 Mb with &lt;a href=&#34;#mmap-v1&#34;&gt;MMAP V1 storage engine&lt;/a&gt;. Since 3.0, the &lt;a href=&#34;#wired-tiger&#34;&gt;wired tiger storage engine&lt;/a&gt; provides a few types of compression, one of which, i.e., prefix compression allows us to have smaller indexes. The same index is about 100 Mb instead of 300 Mb. The compression comes at the cost of CPU and whether the dataset can take advantage of something like prefix compression.&lt;/p&gt;
+
+&lt;h2 id=&#34;number-of-index-entries-cardinality&#34;&gt;Number of Index Entries (Cardinality)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Regular: 1:1 proportional to collection size (index point needed even for null)&lt;/li&gt;
+&lt;li&gt;Sparse: &amp;lt;= number of documents&lt;/li&gt;
+&lt;li&gt;Multikey: index point for every array element. Could be (significantly) greater than number of documents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If a document is updated and needs to be moved, the indexes need to be moved too. That cost only exists in the MMAPv1 storage engine. In the WiredTiger storage engine, index entries don&amp;rsquo;t contain pointers to actual disk locations. Instead, in WiredTiger, the index points to an internal document identifier (the &lt;a href=&#34;https://docs.mongodb.org/manual/reference/method/cursor.showRecordId/?_ga=1.110860677.1452504667.1464414259#cursor.showRecordId&#34;&gt;RecordId&lt;/a&gt;) that is immutable. Therefore, when a document is updated, its index does not need to be updated at all.&lt;/p&gt;
+
+&lt;h2 id=&#34;geospatial-indexes&#34;&gt;Geospatial Indexes&lt;/h2&gt;
+
+&lt;h3 id=&#34;2d-type&#34;&gt;2D Type&lt;/h3&gt;
+
+&lt;p&gt;Allows to find things based on location. Documents have &lt;code&gt;&#39;location&#39;:[x,y]&lt;/code&gt; stored in them representing establishments around a person such as restaurants or coffee shops. &lt;code&gt;createIndex({&#39;location&#39;:&#39;2d&#39;, type:1})&lt;/code&gt; (2d is reserved type for two dimensional geo indexes). Use&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$near&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;x0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;y0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]}}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;limit&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to find closest establishments where &lt;code&gt;$near&lt;/code&gt; is a query operator and &lt;code&gt;[x0,y0]&lt;/code&gt; is ther person&amp;rsquo;s standing point.&lt;/p&gt;
+
+&lt;h3 id=&#34;sperical-type&#34;&gt;Sperical Type&lt;/h3&gt;
+
+&lt;p&gt;MongoDB supports a subset of &lt;a href=&#34;http://geojson.org/geojson-spec.html&#34;&gt;GeoJSON location specification&lt;/a&gt;. A GeoJSON document is used for the value of key &lt;code&gt;location&lt;/code&gt;. Google maps shows &lt;code&gt;@latitude,longitude&lt;/code&gt; as part of the url for a particular location. MongoDB takes an opposite order &lt;code&gt;@longitude,latitude&lt;/code&gt;. Although it&amp;rsquo;s a spherical model, it&amp;rsquo;s only looking at points at the surface of the sphere other than points in the air.&lt;/p&gt;
+
+&lt;p&gt;First, create indexes,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;places&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;createIndex&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;location&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;2dsphere&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then, to find nearest point to hoover tower, in &lt;code&gt;geonear.js&lt;/code&gt;,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;places&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+  &lt;span style=&#34;color: #a6e22e&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #a6e22e&#34;&gt;$near&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+      &lt;span style=&#34;color: #a6e22e&#34;&gt;$geometry&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Point&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;coordinates&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;122&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;37&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// hoover tower&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
+      &lt;span style=&#34;color: #a6e22e&#34;&gt;$maxDistance&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2000&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// in meters&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pretty&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to run the above query,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mongo &amp;lt; geonear.js
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;text-indexes&#34;&gt;Text Indexes&lt;/h2&gt;
+
+&lt;p&gt;aka Full text search index. Typically, when searching strings, the entire string must match. Except that a regex search will search the index (rather than the full collection), and if you anchor it on the left by beginning with ^, you can often do better still. &lt;a href=&#34;http://docs.mongodb.org/manual/reference/operator/query/regex/?_ga=1.222763675.1452504667.1464414259#index-use&#34;&gt;Here&amp;rsquo;s a link to the documentation&lt;/a&gt;. Alternatively, put every word into an array and use set operators.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sentences&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;createIndex&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;words&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sentences&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$text&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$search&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;dog&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A regular search &lt;code&gt;db.sentences.find({&#39;words&#39;:&#39;dog&#39;})&lt;/code&gt; will return nothing.&lt;/p&gt;
+
+&lt;p&gt;We can rank the results by a score,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sentences&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$text&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$search&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;dog tree obsidian&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}},&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$score&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$meta&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;textScore&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$score&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$meta&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;textScore&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;index-design&#34;&gt;Index Design&lt;/h2&gt;
+
+&lt;p&gt;The goal is efficient read/write operations.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Selectivity - minimize number of records scanned for a given query pattern.&lt;/li&gt;
+&lt;li&gt;Other Ops - how sorts are handled?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example query for 1 million student records:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;students&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;student_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$gt&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;500000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;54&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;student_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hint&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;class_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// specify index shape&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;explain&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;executionstats&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note without &lt;code&gt;hint()&lt;/code&gt;, &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot; : 850433&lt;/code&gt; &amp;gt;&amp;gt; &lt;code&gt;&amp;quot;nReturned&amp;quot; : 10118&lt;/code&gt;, so index was not very selective. Check &lt;code&gt;queryPlanner&lt;/code&gt;,  &lt;code&gt;winningPlan&lt;/code&gt;, and &lt;code&gt;rejectedPlans&lt;/code&gt; section, the student id query examines half of the collection. A query using &lt;code&gt;class_id&lt;/code&gt; as an index would need a in memory sort (&lt;code&gt;&amp;quot;stage&amp;quot; : &amp;quot;SORT&amp;quot;&lt;/code&gt;) instead of one within the database so was rejected. With &lt;code&gt;hint()&lt;/code&gt; &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot; : 20071&lt;/code&gt;. &lt;code&gt;&amp;quot;executionTimeMillis&amp;quot;&lt;/code&gt; also dropped to 79 ms from 2600 ms.&lt;/p&gt;
+
+&lt;p&gt;With &lt;code&gt;db.students.createIndex({class_id:1, student_id:1})&lt;/code&gt; we will be using the most selective part of the query which is an equality/point query other than the range query on the  &lt;code&gt;student_id&lt;/code&gt;. Generally speaking, order equality queries first when building a compound index.&lt;/p&gt;
+
+&lt;p&gt;With the above compound index and query below,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;students&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;student_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$gt&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;500000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;54&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;final_grade&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;explain&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;executionstats&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;quot;totalKeysExamined&amp;quot;&lt;/code&gt; and &lt;code&gt;nReturned&lt;/code&gt; are 10118, &lt;code&gt;executionTimeMillis&lt;/code&gt; 138 ms with in memory sort on &lt;code&gt;final_grade&lt;/code&gt; done. It&amp;rsquo;s good to avoid in memory sort when you can, the trade off is to examine a few more keys. We can create another compound index, &lt;code&gt;db.students.createIndex({class_id:1, final_grade:1, student_id:1})&lt;/code&gt;, &lt;code&gt;final_grade&lt;/code&gt; has to be immediately after &lt;code&gt;class_id&lt;/code&gt; since we want to walk the index keys in order.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;students&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;student_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$gt&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;500000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class_id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;54&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;final_grade&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;explain&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;executionstats&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now the result show &lt;code&gt;executionTimeMillis : 27&lt;/code&gt; and &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot;: 10204&lt;/code&gt;. The &lt;code&gt;winningPlan&lt;/code&gt; now does not have a sort stage, only a &lt;code&gt;FETCH&lt;/code&gt; stage.&lt;/p&gt;
+
+&lt;p&gt;MongoDB can walk the index backward in order to sort on the final_grade field. While true given that we are sorting on only this field, if we want to sort on multiple fields, the direction of each field on which we want to sort in a query must be the same as the direction of each field specified in the index. So if we want to sort using something like &lt;code&gt;db.collection.find( { a: 75 } ).sort( { a: 1, b: -1 } )&lt;/code&gt;, we must specify the index using the same directions, e.g., &lt;code&gt;db.collection.createIndex( { a: 1, b: -1 } )&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In general, the rules of thumb is
+* Equality fields before range fields
+* Sort fields before range fields
+* Equality fields before sort fields&lt;/p&gt;
+
+&lt;h2 id=&#34;logging-slow-queries&#34;&gt;Logging Slow queries&lt;/h2&gt;
+
+&lt;p&gt;Slow queries longer than 100 ms are already automatically logged with the default logging facility. It takes about 4 s for &lt;code&gt;db.students.find({student_id:10000})&lt;/code&gt; without an index among 1 million student documents.&lt;/p&gt;
+
+&lt;p&gt;There is a profiler built in &lt;code&gt;mongod&lt;/code&gt;, which is a more sophisticated facility and writes documents entries to system.profile any query taking more than specified time.
+- level 0 off
+- level 1 log slow queries
+- level 2 log all queries, general debugging&lt;/p&gt;
+
+&lt;p&gt;To start the profiler,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mongod -dbpath /usr/local/var/mongodb --profile &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; --slowm 2
+&lt;span style=&#34;color: #75715e&#34;&gt;# logs queries above 2 ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Use &lt;code&gt;db.system.profile.find().pretty()&lt;/code&gt; to check for slow queries. For the same above query,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color: #f92672&#34;&gt;&amp;quot;student_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10000&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ntoreturn&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;nscanned&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10000000&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;...&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;nReturned&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;millis&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;4231&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is a cap (fixed size) collection, recycle after it get used up. Some example usages below,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;system&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;profile&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ns&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;/school.students/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ts&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pretty&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// namespace school database, students collection, sort by timestamp.&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;system&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;profile&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;millis&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$gt&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ts&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pretty&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// looks for queries longer than 1 ms.&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getProfilingLevel&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getProfilingStatus&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;was&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;slowms&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setProfilingLevel&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// slow queries above 4 ms&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;was&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;slowms&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ok&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setProfilingLevel&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;was&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;slowms&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ok&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;mongotop-and-mongostat&#34;&gt;&lt;code&gt;mongotop&lt;/code&gt; and &lt;code&gt;mongostat&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;mongotop&lt;/code&gt; is named after &lt;a href=&#34;./linux.md&#34;&gt;unix &lt;code&gt;top&lt;/code&gt;&lt;/a&gt;, which gives a high level view where mongo spends most of its time. Subsequently, one can follow up for more detailed examining and optimizing.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mongotop &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# default returns every second, this set to 3 seconds&lt;/span&gt;
+ns                    total    &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt;    write    2016-06-25T23:32:52-07:00
+admin.system.roles      0ms     0ms      0ms                             
+admin.system.version    0ms     0ms      0ms                             
+blog.posts              0ms     0ms      0ms                             
+blog.sessions           0ms     0ms      0ms
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;mongostat&lt;/code&gt; is a performance tuning command, similar to &lt;a href=&#34;./linux.md&#34;&gt;unix &lt;code&gt;iostat&lt;/code&gt;&lt;/a&gt;, which samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. &lt;code&gt;getmore&lt;/code&gt; is getting more from a cursor for a query with a large result. &lt;code&gt;qr|qw ar|aw&lt;/code&gt; are queues and active reads and writes. &lt;code&gt;%dirty %used&lt;/code&gt; refers to percentage of WiredTiger cache. &lt;code&gt;res&lt;/code&gt; resident memory size smaller for WiredTiger. For MMAPv1 engine, &lt;code&gt;faults&lt;/code&gt; number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for &lt;a href=&#34;https://docs.mongodb.com/manual/reference/program/mongostat/&#34;&gt;mongostat doc&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mongostat &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;--port 27017&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+insert query update delete getmore &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; % dirty % used    res qr&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;qw ar&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;aw netIn netOut
+    *0    *0     *0     *0       &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;     1&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;     0.0    0.0  52.0M   0&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;   0&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;   79b    18k
+    *0    *0     *0     *0       &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;     1&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;     0.0    0.0  52.0M   0&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;   0&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;   79b    18k
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;sharding-overview&#34;&gt;Sharding Overview&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-sharding.png&#34; alt=&#34;mongodb sharding scheme&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Splitting a large collection amongst multiple servers. The details can be transparent to the client. &lt;code&gt;mongos&lt;/code&gt; routes to multiple &lt;code&gt;mongod&lt;/code&gt; shards. Each shard can contain multiple servers as a replica set.&lt;/p&gt;
+
+&lt;p&gt;An insert must contain the shard key, e.g. &lt;code&gt;student_id&lt;/code&gt;. For update, remove, and find, if a shard key is not given, &lt;code&gt;mongos&lt;/code&gt; will have to broadcast the requests to all the shards.&lt;/p&gt;
 
 &lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
 
