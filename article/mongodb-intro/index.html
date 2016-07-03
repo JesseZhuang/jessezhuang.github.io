@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Mongodb Introduction Tutorial - Coding Automaton</title>
+    <meta name="generator" content="Hugo 0.16" />
+
+    
+    <meta name="description" content="Coding made simple and automatic.">
+    
+    <link rel="canonical" href="http://jessezhuang.github.io/article/mongodb-intro/">
+    
+    <meta name="author" content="Jesse Zhuang">
+    
+
+    <meta property="og:url" content="http://jessezhuang.github.io/article/mongodb-intro/">
+    <meta property="og:title" content="Coding Automaton">
+    <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
+    <meta name="apple-mobile-web-app-title" content="Coding Automaton">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+    <link rel="icon" type="image/x-icon" href="http://jessezhuang.github.io/images/automata.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?52m981');
+        src: url('http://jessezhuang.github.io/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('http://jessezhuang.github.io/fonts/icon.woff?52m981')
+               format('woff'),
+             url('http://jessezhuang.github.io/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('http://jessezhuang.github.io/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
+
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu%2bMono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
+
+    
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </head>
+  <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Mongodb Introduction Tutorial
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="http://jessezhuang.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/zhzexi" title="@zhzexi on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/jessezhuang" title="@jessezhuang on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+
+    
+    <div class="button button-twitter" role="button" aria-label="LinkeIn">
+      <a href="https://linkedin.com/in/zexizhuang" title="@zexizhuang on LinkedIn" target="_blank"><i class="fa fa-linkedin toggle-button icon" style="font-size:26px"></i></a>
+    </div>
+    
+
+    
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<main class="main">
+	
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="http://jessezhuang.github.io/" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://jessezhuang.github.io/images/logo.jpg">
+        </div>
+      
+      <div class="name">
+        <strong>Coding Automaton </strong>
+        
+          <br>
+          Coding made simple and automatic.
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/JesseZhuang/hugo-material-blog/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Homepage" href="http://jessezhuang.github.io/">
+	
+	Homepage
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="About Me" href="http://jessezhuang.github.io/page/about-me">
+	
+	About Me
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="RSS feed" href="http://jessezhuang.github.io/index.xml">
+	
+	RSS feed
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">Categories</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/categories/programming-language"
+                title="programming-language">
+                programming-language<sup>1</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/tutorial"
+                title="tutorial">
+                tutorial<sup>6</sup></a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">Tags</span>
+        <span class="tags">
+            
+              <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
+            
+        </span>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/zhzexi" target="_blank" title="@zhzexi on Twitter">
+              @zhzexi on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/jessezhuang" target="_blank" title="@jessezhuang on GitHub">
+              @jessezhuang on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.linkedin.com/in/zexizhuang" target="_blank" title="@zexizhuang on LinkedIn">
+              @zexizhuang on LinkedIn
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Mongodb Introduction Tutorial </h1>
+			
+			<div>
+				Sun, Jun 26, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/nosql">[NoSQL]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#what-is-mongodb">What is MongoDB?</a>
+<ul>
+<li><a href="#json-and-bson-documents">JSON and BSON Documents</a></li>
+<li><a href="#installing-mongodb">Installing MongoDB</a></li>
+</ul></li>
+<li><a href="#crud-operations-i-class-fa-fa-arrow-up-aria-hidden-true-i">CRUD Operations <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></a></li>
+<li><a href="#example-project-blog-site">Example Project Blog Site</a></li>
+<li><a href="#introduction-to-schema-design">Introduction to Schema Design</a></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+</nav>
+      </div>
+
+			
+
+<p>To run mongo commands from the source of a JavaScript file,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>cat source.js <span style="color: #f8f8f2">|</span> mongo <span style="color: #75715e"># or</span>
+mongo &lt; source.js
+</pre></div>
+
+<h1 id="what-is-mongodb">What is MongoDB?</h1>
+
+<p>A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).</p>
+
+<p><strong>Application Architecture</strong></p>
+
+<p>Mongo shell/driver connects to mongod server process through TCP. The course will build a blog website with MongoDB as the datastore. The java course uses <a href="http://sparkjava.com/">SparkJava</a> and <a href="http://freemarker.org/">Freemarker</a>. The python course uses <a href="http://bottlepy.org/">Bottle</a> and its simple template engine. The <a href="https://docs.mongodb.com/ecosystem/drivers/">drivers</a> will be mongo java and pymongo.</p>
+
+<h2 id="json-and-bson-documents">JSON and BSON Documents</h2>
+
+<p><a href="http://www.json.org/">For more detail on JSON standard</a>. General format: key value pairs in the form of { key : value}. Keys must be strings followed by colon (:) and the corresponding value. Fields are separated by comma (,). Value types include string, date, number, boolean, array, object, and nested fields (recursive).</p>
+
+<p><a href="http://bsonspec.org/spec.html">BSON specs.</a> MongoDB actually stores data in BSON, binary JSON format. MondoDB drivers sends/receives data as BSON. The drivers map BSON to language appropriate data types. BSON is lightweight, traversable (writing, reading, indexing), and efficient (encoding/decoding quickly).</p>
+
+<p>BSON supports more data types:</p>
+
+<ul>
+<li>number (byte, int32, int64, double)</li>
+<li>date</li>
+<li>binary</li>
+<li>supports images</li>
+</ul>
+
+<p>How json documents are encoded as bson:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">//JSON</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;hello&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;world&quot;</span> <span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">//BSON</span>
+<span style="color: #e6db74">&quot;\x16\x00\x00\x00\x02hello\x00</span>
+<span style="color: #e6db74">\x06\x00\x00\x00world\x00\x00&quot;</span>
+<span style="color: #75715e">//length of document, type of value, field length, null terminators .etc</span>
+</pre></div>
+
+<h2 id="installing-mongodb">Installing MongoDB</h2>
+
+<p>Downdload mongodb <a href="https://www.mongodb.com/download-center">here</a>. A tip for the linux versions: after extracting the tarballs, you could simply copy the executables from the bin folder into your virtualenv&rsquo;s bin <code>path/to/venv/bin</code> folder, assuming you are using pymonogo in a virtualenv with python 2. Alternatively you can copy to /usr/local/bin as suggested for a global use.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ tar xvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
+$ cp mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/* path/to/venv/bin/
+$ <span style="color: #f8f8f2">cd</span> path/to/venv/
+$ <span style="color: #f8f8f2">source</span> bin/activate
+$ mkdir -p /data/db
+$ sudo chmod <span style="color: #ae81ff">777</span> /data
+$ sudo chmod <span style="color: #ae81ff">777</span> /data/db
+<span style="color: #f92672">(</span>venv<span style="color: #f92672">)</span> $ mongod
+<span style="color: #75715e"># in another terminal window</span>
+<span style="color: #f92672">(</span>venv<span style="color: #f92672">)</span> $ mongo
+MongoDB shell version: 3.2.6
+connecting to: <span style="color: #f8f8f2">test</span>
+&gt; db.names.insert<span style="color: #f92672">({</span><span style="color: #e6db74">&#39;name&#39;</span>:<span style="color: #e6db74">&#39;Andrew Erlicson&#39;</span><span style="color: #f92672">})</span>
+WriteResult<span style="color: #f92672">({</span> <span style="color: #e6db74">&quot;nInserted&quot;</span> : <span style="color: #ae81ff">1</span> <span style="color: #f92672">})</span>
+&gt; db.names.find<span style="color: #f92672">()</span>
+<span style="color: #f92672">{</span> <span style="color: #e6db74">&quot;_id&quot;</span> : ObjectId<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;5778642550b9dd3f38d82b4e&quot;</span><span style="color: #f92672">)</span>, <span style="color: #e6db74">&quot;name&quot;</span> : <span style="color: #e6db74">&quot;Andrew Erlicson&quot;</span> <span style="color: #f92672">}</span>
+</pre></div>
+
+<p>On Windows, download the msi installer and install as directed. Add mongodb bin (C:\Program Files\MongoDB\Server\3.2\bin) folder to PATH.</p>
+
+<h1 id="crud-operations-i-class-fa-fa-arrow-up-aria-hidden-true-i">CRUD Operations <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h1>
+
+<p>In mongo shell,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">help</span> <span style="color: #75715e">//list of mongo commands</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">show</span> <span style="color: #a6e22e">dbs</span>
+<span style="color: #a6e22e">local</span> <span style="color: #ae81ff">0.070</span><span style="color: #a6e22e">GB</span>
+<span style="color: #a6e22e">test</span> <span style="color: #ae81ff">0.001</span><span style="color: #a6e22e">GB</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">show</span> <span style="color: #a6e22e">collections</span>
+<span style="color: #a6e22e">names</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #75715e">// video.movies refers to video database movies collection</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">names</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">// global variable db refers to current database</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">use</span> <span style="color: #a6e22e">video</span> <span style="color: #75715e">// mongodb creates database in lazy fashion when data inserted</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insertOne</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&quot;title&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;year&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;imdb&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span><span style="color: #f8f8f2">})</span>
+<span style="color: #f8f8f2">{</span>	<span style="color: #e6db74">&quot;acknowledged&quot;</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;insertId&quot;</span><span style="color: #f92672">:</span><span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">)}</span>
+<span style="color: #75715e">// mongodb will add _id field if not specified</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
+  <span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span> <span style="color: #f8f8f2">}</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({}).</span><span style="color: #a6e22e">pretty</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span>
+	<span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
+	<span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">c</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">// returns a cursor</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f8f8f2">()</span>
+<span style="color: #66d9ef">true</span>
+<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">next</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span>
+	<span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
+	<span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<h1 id="example-project-blog-site">Example Project Blog Site</h1>
+
+<p>Relational model for the blog. We will need six tables fully denormalized.</p>
+
+<table>
+<thead>
+<tr>
+<th>posts</th>
+<th>comments</th>
+<th>tags</th>
+<th>post-tags</th>
+<th>post-comments</th>
+<th>authors</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>post_id</td>
+<td>comment_id</td>
+<td>tag_id</td>
+<td>post_id</td>
+<td>post_id</td>
+<td>author_id</td>
+</tr>
+
+<tr>
+<td>author_id</td>
+<td>name</td>
+<td>name</td>
+<td>tag_id</td>
+<td>comment_id</td>
+<td>username</td>
+</tr>
+
+<tr>
+<td>title</td>
+<td>comment</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>password</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>email</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td>date</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<p>In order to show a blog post with comments and tags, we need to join all the six tables.</p>
+
+<p>As for the document model, for a post JSON document in posts collection:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">title</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;free online tutorial&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #a6e22e">body</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;......&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #a6e22e">author</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;erlicson&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #a6e22e">date</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(......),</span>
+	<span style="color: #a6e22e">comments</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;joe biden&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">email</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;joe@mongodb.org&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">comment</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;...&quot;</span> <span style="color: #f8f8f2">},</span>
+							<span style="color: #f8f8f2">{.....},</span> <span style="color: #f8f8f2">{.....}</span>
+						 <span style="color: #f8f8f2">],</span>
+	<span style="color: #a6e22e">tags</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;cycling&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;education&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;startups&quot;</span><span style="color: #f8f8f2">]</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>We will need a authors collection with username as primary key:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+	<span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;erlicosn&quot;</span><span style="color: #f8f8f2">,</span>
+	<span style="color: #a6e22e">password</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;...&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The data is hierarchical. If email is missing from any comment, it does not have to be there. You can leave it out. MongoDB is schemaless and flexible about that.We only need 1 collection, the post collection to display a blog post.</p>
+
+<h1 id="introduction-to-schema-design">Introduction to Schema Design</h1>
+
+<p>&ldquo;To embed or not embed, that is the question.&rdquo;</p>
+
+<p>With relational database, you consider normal forms (3rd, 4th, Boyce-Codd) and dependencies. Maybe start with 3rd normal form and combine a few things.</p>
+
+<p>With mongodb, how do you know when to embed? For example, to embed the tags and comments into the posts collection. The answer is that they are typically accessed at the same time. It&rsquo;s very rare to access a tag independently of accessing a post. The comment itself does not apply to more than one post.</p>
+
+<p>An operation like changing a tag named &ldquo;cycling&rdquo; to &ldquo;biking&rdquo; for the whole site would be easier in relational world but it is an unusual change to make, something you are not changing all the time.</p>
+
+<p>Another practical concern is the document size. In mongodb, documents cannot be more than 16 MB.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+<li><a href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a></li>
+<li><a href="https://docs.mongodb.com/">MongoDB Docs</a></li>
+</ol>
+
+<p><a href="#">back to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
+
+<p><a href="http://jessezhuang.github.io/
+tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
+
+
+			<aside class="copyright" role="note">
+  
+  &copy; 2016 Zexi Zhuang &ndash;
+  
+  built with
+  <a href="https://www.gohugo.io" target="_blank">Hugo</a>
+  using a customized
+  <a href="https://github.com/JesseZhuang/hugo-material-blog" target="_blank">
+    Material
+  </a> theme.
+</aside>
+
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Application Engineering Tutorial">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Mongodb Application Engineering Tutorial
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              MongoDB Aggregation Framework Tutorial
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
+    
+    </script>
+
+    <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(headers.length > 0) {
+        for(var i = 0; i < headers.length; i++) {
+          var li = document.createElement("li");
+          li.setAttribute("class", "anchor");
+
+          var a  = document.createElement("a");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", headers[i].innerHTML);
+          a.innerHTML = headers[i].innerHTML;
+
+          li.appendChild(a)
+          scrollspy.appendChild(li);
+        }
+      } else {
+        scrollspy.parentElement.removeChild(scrollspy)
+      }
+
+
+      /* Add permanent link next to the headers */
+      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+      for(var i = 0; i < headers.length; i++) {
+          var a = document.createElement("a");
+          a.setAttribute("class", "headerlink");
+          a.setAttribute("href", "#" + headers[i].id);
+          a.setAttribute("title", "Permanent link")
+          a.innerHTML = "#";
+          headers[i].appendChild(a);
+      }
+    </script>
+
+    
+      <script>
+        (function(i,s,o,g,r,a,m){
+          i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||
+          []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+          m.parentNode.insertBefore(a,m)
+        })(window, document,
+          'script', '//www.google-analytics.com/analytics.js', 'ga');
+         
+        ga('create', 'UA-79594714-1', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+         
+        var buttons = document.querySelectorAll('a');
+        Array.prototype.map.call(buttons, function(item) {
+          if (item.host != document.location.host) {
+            item.addEventListener('click', function() {
+              var action = item.getAttribute('data-action') || 'follow';
+              ga('send', 'event', 'outbound', action, item.href);
+            });
+          }
+        });
+         
+        var query = document.querySelector('.query');
+        query.addEventListener('blur', function() {
+          if (this.value) {
+            var path = document.location.pathname;
+            ga('send', 'pageview', path + '?q=' + this.value);
+          }
+        });
+      </script>
+    
+
+  </body>
+</html>
+

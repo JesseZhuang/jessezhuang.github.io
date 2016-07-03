@@ -312,6 +312,228 @@ mongos&amp;gt; db.students.explain&lt;span style=&#34;color: #f92672&#34;&gt;()&
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
+tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mongodb Introduction Tutorial</title>
+      <link>http://jessezhuang.github.io/article/mongodb-intro/</link>
+      <pubDate>Sun, 26 Jun 2016 19:27:36 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/mongodb-intro/</guid>
+      <description>
+
+&lt;p&gt;To run mongo commands from the source of a JavaScript file,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat source.js &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; mongo &lt;span style=&#34;color: #75715e&#34;&gt;# or&lt;/span&gt;
+mongo &amp;lt; source.js
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&#34;what-is-mongodb&#34;&gt;What is MongoDB?&lt;/h1&gt;
+
+&lt;p&gt;A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Application Architecture&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mongo shell/driver connects to mongod server process through TCP. The course will build a blog website with MongoDB as the datastore. The java course uses &lt;a href=&#34;http://sparkjava.com/&#34;&gt;SparkJava&lt;/a&gt; and &lt;a href=&#34;http://freemarker.org/&#34;&gt;Freemarker&lt;/a&gt;. The python course uses &lt;a href=&#34;http://bottlepy.org/&#34;&gt;Bottle&lt;/a&gt; and its simple template engine. The &lt;a href=&#34;https://docs.mongodb.com/ecosystem/drivers/&#34;&gt;drivers&lt;/a&gt; will be mongo java and pymongo.&lt;/p&gt;
+
+&lt;h2 id=&#34;json-and-bson-documents&#34;&gt;JSON and BSON Documents&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.json.org/&#34;&gt;For more detail on JSON standard&lt;/a&gt;. General format: key value pairs in the form of { key : value}. Keys must be strings followed by colon (:) and the corresponding value. Fields are separated by comma (,). Value types include string, date, number, boolean, array, object, and nested fields (recursive).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bsonspec.org/spec.html&#34;&gt;BSON specs.&lt;/a&gt; MongoDB actually stores data in BSON, binary JSON format. MondoDB drivers sends/receives data as BSON. The drivers map BSON to language appropriate data types. BSON is lightweight, traversable (writing, reading, indexing), and efficient (encoding/decoding quickly).&lt;/p&gt;
+
+&lt;p&gt;BSON supports more data types:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;number (byte, int32, int64, double)&lt;/li&gt;
+&lt;li&gt;date&lt;/li&gt;
+&lt;li&gt;binary&lt;/li&gt;
+&lt;li&gt;supports images&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;How json documents are encoded as bson:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;//JSON&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;world&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;//BSON&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;\x16\x00\x00\x00\x02hello\x00&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;\x06\x00\x00\x00world\x00\x00&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;//length of document, type of value, field length, null terminators .etc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;installing-mongodb&#34;&gt;Installing MongoDB&lt;/h2&gt;
+
+&lt;p&gt;Downdload mongodb &lt;a href=&#34;https://www.mongodb.com/download-center&#34;&gt;here&lt;/a&gt;. A tip for the linux versions: after extracting the tarballs, you could simply copy the executables from the bin folder into your virtualenv&amp;rsquo;s bin &lt;code&gt;path/to/venv/bin&lt;/code&gt; folder, assuming you are using pymonogo in a virtualenv with python 2. Alternatively you can copy to /usr/local/bin as suggested for a global use.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ tar xvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
+$ cp mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/* path/to/venv/bin/
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; path/to/venv/
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; bin/activate
+$ mkdir -p /data/db
+$ sudo chmod &lt;span style=&#34;color: #ae81ff&#34;&gt;777&lt;/span&gt; /data
+$ sudo chmod &lt;span style=&#34;color: #ae81ff&#34;&gt;777&lt;/span&gt; /data/db
+&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;venv&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; $ mongod
+&lt;span style=&#34;color: #75715e&#34;&gt;# in another terminal window&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;venv&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; $ mongo
+MongoDB shell version: 3.2.6
+connecting to: &lt;span style=&#34;color: #f8f8f2&#34;&gt;test&lt;/span&gt;
+&amp;gt; db.names.insert&lt;span style=&#34;color: #f92672&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Andrew Erlicson&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;})&lt;/span&gt;
+WriteResult&lt;span style=&#34;color: #f92672&#34;&gt;({&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;nInserted&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;})&lt;/span&gt;
+&amp;gt; db.names.find&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; : ObjectId&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5778642550b9dd3f38d82b4e&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt; : &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Andrew Erlicson&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On Windows, download the msi installer and install as directed. Add mongodb bin (C:\Program Files\MongoDB\Server\3.2\bin) folder to PATH.&lt;/p&gt;
+
+&lt;h1 id=&#34;crud-operations-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;CRUD Operations &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;In mongo shell,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;help&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//list of mongo commands&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dbs&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0.070&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;GB&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0.001&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;GB&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;collections&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;names&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// video.movies refers to video database movies collection&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;names&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// global variable db refers to current database&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;video&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// mongodb creates database in lazy fashion when data inserted&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;movies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;insertOne&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Jaws&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;year&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1975&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;imdb&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tt0073195&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;acknowledged&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;insertId&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ObjectId&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5778b5782430a299a54686b5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// mongodb will add _id field if not specified&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;movies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ObjectId&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5778b5782430a299a54686b5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Jaws&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;year&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1975&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;imdb&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tt0073195&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;movies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({}).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pretty&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ObjectId&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5778b5782430a299a54686b5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Jaws&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;year&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1975&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;imdb&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tt0073195&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;movies&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// returns a cursor&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hasNext&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;next&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ObjectId&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;5778b5782430a299a54686b5&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Jaws&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;year&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1975&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;imdb&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tt0073195&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&#34;example-project-blog-site&#34;&gt;Example Project Blog Site&lt;/h1&gt;
+
+&lt;p&gt;Relational model for the blog. We will need six tables fully denormalized.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;posts&lt;/th&gt;
+&lt;th&gt;comments&lt;/th&gt;
+&lt;th&gt;tags&lt;/th&gt;
+&lt;th&gt;post-tags&lt;/th&gt;
+&lt;th&gt;post-comments&lt;/th&gt;
+&lt;th&gt;authors&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;post_id&lt;/td&gt;
+&lt;td&gt;comment_id&lt;/td&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;post_id&lt;/td&gt;
+&lt;td&gt;post_id&lt;/td&gt;
+&lt;td&gt;author_id&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;author_id&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;comment_id&lt;/td&gt;
+&lt;td&gt;username&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;title&lt;/td&gt;
+&lt;td&gt;comment&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;password&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;post&lt;/td&gt;
+&lt;td&gt;email&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;date&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In order to show a blog post with comments and tags, we need to join all the six tables.&lt;/p&gt;
+
+&lt;p&gt;As for the document model, for a post JSON document in posts collection:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;title&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;free online tutorial&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;body&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;......&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;author&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;erlicson&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;date&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;ISODate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(......),&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;comments&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;joe biden&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;email&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;joe@mongodb.org&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;comment&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;...&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
+							&lt;span style=&#34;color: #f8f8f2&#34;&gt;{.....},&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{.....}&lt;/span&gt;
+						 &lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;tags&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;cycling&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;education&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;startups&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We will need a authors collection with username as primary key:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;_id&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;erlicosn&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+	&lt;span style=&#34;color: #a6e22e&#34;&gt;password&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;...&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The data is hierarchical. If email is missing from any comment, it does not have to be there. You can leave it out. MongoDB is schemaless and flexible about that.We only need 1 collection, the post collection to display a blog post.&lt;/p&gt;
+
+&lt;h1 id=&#34;introduction-to-schema-design&#34;&gt;Introduction to Schema Design&lt;/h1&gt;
+
+&lt;p&gt;&amp;ldquo;To embed or not embed, that is the question.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;With relational database, you consider normal forms (3rd, 4th, Boyce-Codd) and dependencies. Maybe start with 3rd normal form and combine a few things.&lt;/p&gt;
+
+&lt;p&gt;With mongodb, how do you know when to embed? For example, to embed the tags and comments into the posts collection. The answer is that they are typically accessed at the same time. It&amp;rsquo;s very rare to access a tag independently of accessing a post. The comment itself does not apply to more than one post.&lt;/p&gt;
+
+&lt;p&gt;An operation like changing a tag named &amp;ldquo;cycling&amp;rdquo; to &amp;ldquo;biking&amp;rdquo; for the whole site would be easier in relational world but it is an unusual change to make, something you are not changing all the time.&lt;/p&gt;
+
+&lt;p&gt;Another practical concern is the document size. In mongodb, documents cannot be more than 16 MB.&lt;/p&gt;
+
+&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://university.mongodb.com/courses/M101P/about&#34;&gt;MongoDB University Classes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.mongodb.com/&#34;&gt;MongoDB Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
+tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -872,6 +1094,9 @@ mongos&amp;gt; db.students.explain&lt;span style=&#34;color: #f92672&#34;&gt;()&
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;a href=&#34;#&#34;&gt;back to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
+tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -882,13 +1107,6 @@ mongos&amp;gt; db.students.explain&lt;span style=&#34;color: #f92672&#34;&gt;()&
       
       <guid>http://jessezhuang.github.io/article/mongodb-performance/</guid>
       <description>
-
-&lt;p&gt;Last updated: 
-
-
-Jun 24, 2016
-
-&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://blog.technotesdesk.com/wp-content/uploads/2015/01/mongodb_logo.jpg&#34; alt=&#34;MongoDB Database&#34; title=&#34;MongoDB Logo&#34; /&gt;&lt;/p&gt;
 
@@ -988,7 +1206,7 @@ Jun 24, 2016
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sort&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$score&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$meta&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;textScore&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}})&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&#34;index-design&#34;&gt;Index Design&lt;/h2&gt;
+&lt;h2 id=&#34;index-design-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Index Design &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;The goal is efficient read/write operations.&lt;/p&gt;
 
@@ -1103,6 +1321,9 @@ insert query update delete getmore &lt;span style=&#34;color: #f8f8f2&#34;&gt;co
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
+tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -260,7 +260,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>5</sup></a>
+                tutorial<sup>6</sup></a>
             
         </span>
         
@@ -344,6 +344,15 @@
 
 			<hr>
 			
+			<a href="http://jessezhuang.github.io/article/mongodb-intro/" title="Mongodb Introduction Tutorial">
+				<h2>Mongodb Introduction Tutorial</h2>
+			</a>
+
+			<br>
+			To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Aggregation Framework Tutorial">
 				<h2>MongoDB Aggregation Framework Tutorial</h2>
 			</a>
@@ -358,7 +367,7 @@
 			</a>
 
 			<br>
-			Last updated: Jun 24, 2016 Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
 
 			<hr>
 			

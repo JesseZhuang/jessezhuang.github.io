@@ -264,7 +264,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>5</sup></a>
+                tutorial<sup>6</sup></a>
             
         </span>
         
@@ -353,6 +353,13 @@
 				
 			
 				
+					<a href="http://jessezhuang.github.io/article/mongodb-intro/"><h1>Mongodb Introduction Tutorial</h1></a></span>
+					
+					<p>To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).</p>
+	        <hr>
+				
+			
+				
 					<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/"><h1>MongoDB Aggregation Framework Tutorial</h1></a></span>
 					
 					<p>The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.</p>
@@ -362,7 +369,7 @@
 				
 					<a href="http://jessezhuang.github.io/article/mongodb-performance/"><h1>MongoDB Performance Tutorial</h1></a></span>
 					<img src="http://blog.technotesdesk.com/wp-content/uploads/2015/01/mongodb_logo.jpg">
-					<p>Last updated: Jun 24, 2016 Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.</p>
+					<p>Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.</p>
 	        <hr>
 				
 			

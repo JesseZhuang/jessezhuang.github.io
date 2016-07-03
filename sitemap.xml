@@ -17,13 +17,18 @@
   </url>
   
   <url>
+    <loc>http://jessezhuang.github.io/article/mongodb-intro/</loc>
+    <lastmod>2016-06-26T19:27:36-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jessezhuang.github.io/article/mongodb-aggregation-framework/</loc>
     <lastmod>2016-06-29T14:55:57-07:00</lastmod>
   </url>
   
   <url>
     <loc>http://jessezhuang.github.io/article/mongodb-performance/</loc>
-    <lastmod>2016-06-24T14:55:57-07:00</lastmod>
+    <lastmod>2016-06-30T14:55:57-07:00</lastmod>
   </url>
   
   <url>
