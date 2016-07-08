@@ -264,7 +264,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>6</sup></a>
+                tutorial<sup>8</sup></a>
             
         </span>
         
@@ -291,6 +291,8 @@
               <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
             
               <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/ubuntu">[ubuntu]</a>
             
               <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
             
@@ -339,6 +341,13 @@
 
 			
 				
+					<a href="http://jessezhuang.github.io/article/virtualbox-tips/"><h1>Virtualbox Tips for Ubuntu Guest in Windows Host</h1></a></span>
+					
+					<p>For Ubuntu tips, see [<a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/ubuntu/]. How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username. # replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username After that, reboot the VM and you should have write access to the shared folder.</p>
+	        <hr>
+				
+			
+				
 					<a href="http://jessezhuang.github.io/article/vim-ubuntu-install/"><h1>How to Install Latest Version Vim in Ubuntu 14.04 LTS</h1></a></span>
 					
 					<p>Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install. Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.org but they did not come with the dependencies.</p>
@@ -346,28 +355,35 @@
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/"><h1>Mongodb Application Engineering Tutorial</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/"><h1>Mongodb Tutorial 6 - Application Engineering</h1></a></span>
 					
 					<p>Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.</p>
 	        <hr>
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/mongodb-intro/"><h1>Mongodb Introduction Tutorial</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/mongodb-intro/"><h1>Mongodb Tutorial 1 - Introduction</h1></a></span>
 					
 					<p>To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).</p>
 	        <hr>
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/"><h1>MongoDB Aggregation Framework Tutorial</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/"><h1>MongoDB Tutorial 5 - Aggregation Framework</h1></a></span>
 					
 					<p>The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.</p>
 	        <hr>
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/mongodb-performance/"><h1>MongoDB Performance Tutorial</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/ubuntu/"><h1>Ubuntu Tips and Tricks</h1></a></span>
+					
+					<p>Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see [<a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/]. Performance Monitoring top from command line System Monitor application installed by default. Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.</p>
+	        <hr>
+				
+			
+				
+					<a href="http://jessezhuang.github.io/article/mongodb-performance/"><h1>MongoDB Tutorial 4 - Performance</h1></a></span>
 					<img src="http://blog.technotesdesk.com/wp-content/uploads/2015/01/mongodb_logo.jpg">
 					<p>Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.</p>
 	        <hr>

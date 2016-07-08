@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>404 Page not found - Coding Automaton</title>
+    <title>Virtualbox Tips for Ubuntu Guest in Windows Host - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/404/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/virtualbox-tips/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/404/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/virtualbox-tips/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -69,19 +69,12 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
-
-
-<link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
-
 
 
 
@@ -107,7 +100,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        404 Page not found
+        Virtualbox Tips for Ubuntu Guest in Windows Host
       </div>
     </div>
 
@@ -155,6 +148,7 @@
 </header>
 
 <main class="main">
+	
 	<div class="drawer">
 		<nav aria-label="Navigation">
   <a href="http://jessezhuang.github.io/" class="project">
@@ -341,22 +335,86 @@
 	</div>
 
 	<article class="article">
-	<div class="wrapper">
-	  <div class="row">
-	    <div class="col s12 m10">
-	      <div class="card">
-	        <div class="card-content">
-	          <span class="card-title">Coding Automaton: oops 404</span>
-	          <p>What brings you here? Let me know by commenting below and you are welcome to click the button below to checkout this site.</p>
-	        </div>
-	        <div class="card-action">
-	          <a href="http://jessezhuang.github.io/">Homepage</a>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+		<div class="wrapper">
+			<h1>Virtualbox Tips for Ubuntu Guest in Windows Host </h1>
+			
+			<div>
+				Sat, Jul 2, 2016
+				
+					Last Modified: Jul 7, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
 
-		<aside class="copyright" role="note">
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/ubuntu">[ubuntu]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#how-to-get-shared-folder-write-access">How to Get Shared Folder Write Access</a></li>
+<li><a href="#how-to-create-virtualenv-in-shared-folder">How to Create Virtualenv in Shared Folder</a></li>
+</ul>
+</nav>
+      </div>
+
+			
+
+<p>For Ubuntu tips, see [http://jessezhuang.github.io/
+article/ubuntu/].</p>
+
+<h1 id="how-to-get-shared-folder-write-access">How to Get Shared Folder Write Access</h1>
+
+<p>When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace <code>username</code> with your ubuntu username.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># replace username with your actual ubuntu username</span>
+$ sudo usermod -a -G vboxsf username
+</pre></div>
+
+<p>After that, reboot the VM and you should have write access to the shared folder.</p>
+
+<h1 id="how-to-create-virtualenv-in-shared-folder">How to Create Virtualenv in Shared Folder</h1>
+
+<p>Creating symbolic links in a VirtualBox shared folder is disabled, which will forbid you to create a virtualenv in a shared folder from the host machine. Simple test in terminal: <code>$ ln -s test</code>, Either you&rsquo;ll get a <code>failed to create symbolic link './testfile': Read-only file system</code> or <code>Protocol error</code>. Shutdown VM and close Virtualbox Manager in Windows host. Open an admin command prompt,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:<span style="color: #ae81ff">\W</span>INDOWS<span style="color: #ae81ff">\s</span>ystem32&gt;VBoxManage setextradata VM_name VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder 1
+</pre></div>
+
+<p>If you have not added virtualbox commands to your path, either do so or run <code>VBoxManage</code> from the folder where it is located. Replace <code>VM_name</code> with the name of the virtual machine,</p>
+
+<p><img src="http://i.stack.imgur.com/NrMzq.jpg" alt="vmname in virtualbox manager" /></p>
+
+<p>and the name of <code>shared_folder</code> with the name of the shared folder in the settings of your virtual machine,</p>
+
+<p><img src="http://i.stack.imgur.com/yboaG.jpg" alt="shared folder name screenshot" />.</p>
+
+<p>You can check the settings with the command below and should find one key about your shared folder indicating that it was enabled as in the second line below.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:<span style="color: #ae81ff">\W</span>INDOWS<span style="color: #ae81ff">\s</span>ystem32&gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
+Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
+</pre></div>
+
+<p>Note that you still need to run the VirtualBox Manager as an administrator from Windows in order for the creation of virtualenv (symlinks) to work properly.</p>
+
+
+			<aside class="copyright" role="note">
   
   &copy; 2016 Zexi Zhuang &ndash;
   
@@ -369,7 +427,7 @@
 </aside>
 
 
-		<div id="disqus_thread"></div>
+		  <div id="disqus_thread"></div>
 <script type="text/javascript">
 
   (function() {
@@ -390,14 +448,41 @@
 <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-		<footer class="footer">
-			
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/vim-ubuntu-install/" title="How to Install Latest Version Vim in Ubuntu 14.04 LTS">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              How to Install Latest Version Vim in Ubuntu 14.04 LTS
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
 
 
 
-		</footer>
 
-	</div>
+
+			</footer>
+		</div>
 	</article>
 
 	<div class="results" role="status" aria-live="polite">
@@ -409,6 +494,7 @@
 		</div>
 	</div>
 </main>
+
     <script>
     
       var base_url = 'http:\/\/jessezhuang.github.io\/';

@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>404 Page not found - Coding Automaton</title>
+    <title>Ubuntu Tips and Tricks - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/404/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/ubuntu/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/404/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/ubuntu/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -69,19 +69,12 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
-
-
-<link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
-
 
 
 
@@ -107,7 +100,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        404 Page not found
+        Ubuntu Tips and Trick
       </div>
     </div>
 
@@ -155,6 +148,7 @@
 </header>
 
 <main class="main">
+	
 	<div class="drawer">
 		<nav aria-label="Navigation">
   <a href="http://jessezhuang.github.io/" class="project">
@@ -341,22 +335,86 @@
 	</div>
 
 	<article class="article">
-	<div class="wrapper">
-	  <div class="row">
-	    <div class="col s12 m10">
-	      <div class="card">
-	        <div class="card-content">
-	          <span class="card-title">Coding Automaton: oops 404</span>
-	          <p>What brings you here? Let me know by commenting below and you are welcome to click the button below to checkout this site.</p>
-	        </div>
-	        <div class="card-action">
-	          <a href="http://jessezhuang.github.io/">Homepage</a>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+		<div class="wrapper">
+			<h1>Ubuntu Tips and Tricks </h1>
+			
+			<div>
+				Fri, Jun 24, 2016
+				
+					Last Modified: Jul 7, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
 
-		<aside class="copyright" role="note">
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/ubuntu">[ubuntu]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#performance-monitoring">Performance Monitoring</a></li>
+<li><a href="#screen-capture">Screen Capture</a></li>
+<li><a href="#lxde-desktop-environment">LXDE Desktop Environment</a>
+<ul>
+<li><a href="#fix-lxde-pcmanfm-open-current-folder-in-terminal">Fix LXDE PCMANFM Open Current Folder in Terminal</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+			
+
+<p>Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see [http://jessezhuang.github.io/
+article/virtualbox-tips/].</p>
+
+<h2 id="performance-monitoring">Performance Monitoring</h2>
+
+<ul>
+<li><code>top</code> from command line</li>
+<li><code>System Monitor</code> application installed by default.</li>
+</ul>
+
+<h2 id="screen-capture">Screen Capture</h2>
+
+<p>Application <code>Screenshot</code> installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use <code>gnome-screeshot -i</code> for interactive window specified with mouse, <code>gnome-screenshot -help</code> for other options.</p>
+
+<h2 id="lxde-desktop-environment">LXDE Desktop Environment</h2>
+
+<p>LXDE is a much lighter desktop environment (DE) and uses much less memory versus unityand is the standard DE in Lubuntu.</p>
+
+<h3 id="fix-lxde-pcmanfm-open-current-folder-in-terminal">Fix LXDE PCMANFM Open Current Folder in Terminal</h3>
+
+<p>PCMANFM 1.2.0 is the default file manager used in LXDE which has a built in functionality to open a terminal window at the directory that you are currently browsing with a convenient shortcut of F4. It uses gnome terminal. The problem is the opened terminal window is totally black. The problem is the default profile is using black text on black background.</p>
+
+<p>In the opened gnome terminal, select from menu bar Edit - Profile Preferences, Colors tab, uncheck &ldquo;use colors from system theme&rdquo;, select a built-in theme or your customized theme. I used white on black built-in theme.</p>
+
+<p>With LXDE, the ubuntu 14.04LTS system is using about 240 Mb of ram at start up with pacmanfm using a little over 10 Mb. Comparing to unity, about 800 Mb of ram at start up with about 200 Mb for compiz. A lot of times compiz can ramp up to 500 Mb of ram. There is another option Openbox DE, the default is just a blank screen where you would have to right click to pop up the menu.The ram usage is a little less but you would have to customize the menu for it to be really user friendly.</p>
+
+
+			<aside class="copyright" role="note">
   
   &copy; 2016 Zexi Zhuang &ndash;
   
@@ -369,7 +427,7 @@
 </aside>
 
 
-		<div id="disqus_thread"></div>
+		  <div id="disqus_thread"></div>
 <script type="text/javascript">
 
   (function() {
@@ -390,14 +448,57 @@
 <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-		<footer class="footer">
-			
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Tutorial 5 - Aggregation Framework">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              MongoDB Tutorial 5 - Aggregation Framework
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              MongoDB Tutorial 4 - Performance
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
 
 
 
-		</footer>
 
-	</div>
+
+			</footer>
+		</div>
 	</article>
 
 	<div class="results" role="status" aria-live="polite">
@@ -409,6 +510,7 @@
 		</div>
 	</div>
 </main>
+
     <script>
     
       var base_url = 'http:\/\/jessezhuang.github.io\/';
