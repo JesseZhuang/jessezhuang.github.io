@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cheatsheet on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/categories/cheatsheet/</link>
+    <description>Recent content in Cheatsheet on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Jun 2016 14:56:13 -0700</lastBuildDate>
+    <atom:link href="http://jessezhuang.github.io/categories/cheatsheet/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Linux Cheatsheets</title>
+      <link>http://jessezhuang.github.io/article/linux-cheatsheet/</link>
+      <pubDate>Fri, 24 Jun 2016 14:56:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/linux-cheatsheet/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/linus-penguin.jpg&#34; alt=&#34;Linus Penguin Quote&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;linux-commands-cheatsheet&#34;&gt;Linux Commands Cheatsheet&lt;/h1&gt;
+
+&lt;h2 id=&#34;files-related&#34;&gt;Files Related&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;ls - list directory contents
+
+SYNOPSIS
+       ls &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+       -a, --all
+              &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt; not ignore entries starting with .    
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;examples&lt;/th&gt;
+&lt;th&gt;effects&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -la&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;list all file/directories including hidden in long list form&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -ld&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;list directory only in list form&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;du - estimate file space usage
+SYNOPSIS
+  du &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...  &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+  -c, --total
+              produce a grand total
+  -h, --human-readable
+              print sizes in human readable format &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;e.g., 1K 234M 2G&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+  -s, --summarize
+              display only a total &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; each argument
+  -a, --all
+                write counts &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; all files, not just directories
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;examples&lt;/th&gt;
+&lt;th&gt;effects&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;du -sch  folder/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;folder/&lt;/code&gt; size&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;du -sh *&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;sizes of all folders and files in current directory&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;du -ahd1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;sizes of all (including hidden) in current directory&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;note&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;pipe to &lt;code&gt;&amp;#124; sort -h[r]&lt;/code&gt; for result sorting&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;df - report file system disk space usage
+
+SYNOPSIS
+       df &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;examples&lt;/th&gt;
+&lt;th&gt;effects&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;df -h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;disk usage in human readable form&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;example output&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Filesystem      Size  Used Avail Use% Mounted on
+udev            990M  8.0K  990M   1% /dev
+tmpfs           201M  944K  200M   1% /run
+/dev/sda1        17G  6.3G  9.8G  40% /
+none            4.0K     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
+none            5.0M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+none           1001M   23M  978M   3% /run/shm
+none            100M   44K  100M   1% /run/user
+Dropbox         238G  116G  123G  49% /media/sf_Dropbox
+/dev/sr0         57M   57M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; 100% /media/user/VBOXADDITIONS_5.0.14_105127
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
+
+&lt;p&gt;To check memory usage&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;commands&lt;/th&gt;
+&lt;th&gt;effects&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;free -h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;short summary&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cat /proc/meminfo&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;show &lt;code&gt;meminfo&lt;/code&gt; file&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;top&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;show ram cpu usage per process, press e to scale units&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;To put a process (e.g., mongod) to background,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ^Z &lt;span style=&#34;color: #75715e&#34;&gt;# ctrl + z to stop mongod&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+  Stopped mongod
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;bg&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+ mongod &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;
+$ mongo
+&amp;gt; ^C &lt;span style=&#34;color: #75715e&#34;&gt;# can successfully connect&lt;/span&gt;
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;fg&lt;/span&gt;
+mongod
+^C
+$ &lt;span style=&#34;color: #75715e&#34;&gt;# back to bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;chmod - change file mode bits
+
+SYNOPSIS
+       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... MODE&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;,MODE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... FILE...
+       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... OCTAL-MODE FILE...
+       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... --reference&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;RFILE FILE...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;examples&lt;/th&gt;
+&lt;th&gt;effects&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;chmod +x file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;permit the file as executable&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;chmod 777 file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;make the file globally readable, writable, executable by all users, groups, owner&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

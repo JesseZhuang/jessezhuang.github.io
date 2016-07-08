@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Database - Coding Automaton</title>
+    <title>Cheatsheet - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/tags/database/">
+    <link rel="canonical" href="http://jessezhuang.github.io/categories/cheatsheet/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/tags/database/">
+    <meta property="og:url" content="http://jessezhuang.github.io/categories/cheatsheet/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -69,8 +69,8 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/tags/database/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/tags/database/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
+    <link href="http://jessezhuang.github.io/categories/cheatsheet/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
+    <link href="http://jessezhuang.github.io/categories/cheatsheet/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -98,7 +98,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Database
+        Cheatsheet
       </div>
     </div>
 
@@ -338,42 +338,15 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Database</h1>
+			<h1>Pages in Cheatsheet</h1>
 
 			
-			<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Tutorial 6 - Application Engineering">
-				<h2>Mongodb Tutorial 6 - Application Engineering</h2>
+			<a href="http://jessezhuang.github.io/article/linux-cheatsheet/" title="Linux Cheatsheets">
+				<h2>Linux Cheatsheets</h2>
 			</a>
 
 			<br>
-			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-intro/" title="Mongodb Tutorial 1 - Introduction">
-				<h2>Mongodb Tutorial 1 - Introduction</h2>
-			</a>
-
-			<br>
-			To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Tutorial 5 - Aggregation Framework">
-				<h2>MongoDB Tutorial 5 - Aggregation Framework</h2>
-			</a>
-
-			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
-				<h2>MongoDB Tutorial 4 - Performance</h2>
-			</a>
-
-			<br>
-			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+			Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with . examples effects ls -la list all file/directories including hidden in long list form ls -ld list directory only in list form du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.g., 1K 234M 2G) -s, &ndash;summarize display only a total for each argument -a, &ndash;all write counts for all files, not just directories examples effects du -sch folder/ folder/ size du -sh * sizes of all folders and files in current directory du -ahd1 sizes of all (including hidden) in current directory note pipe to &#124; sort -h[r] for result sorting df - report file system disk space usage SYNOPSIS df [OPTION]&hellip;
 
 			<hr>
 			

@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Database - Coding Automaton</title>
+    <title>Linux Cheatsheets - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/tags/database/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/linux-cheatsheet/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/tags/database/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/linux-cheatsheet/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -69,15 +69,17 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/tags/database/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/tags/database/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
 
 
 <div class="backdrop">
@@ -98,7 +100,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Database
+        Linux Cheatsheet
       </div>
     </div>
 
@@ -338,45 +340,233 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Database</h1>
+			<h1>Linux Cheatsheets </h1>
+			
+			<div>
+				Fri, Jun 24, 2016
+				
+					Last Modified: Jul 7, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/cheatsheet">cheatsheet</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#linux-commands-cheatsheet">Linux Commands Cheatsheet</a>
+<ul>
+<li><a href="#files-related">Files Related</a></li>
+<li><a href="#system-related">System Related</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
 
 			
-			<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Tutorial 6 - Application Engineering">
-				<h2>Mongodb Tutorial 6 - Application Engineering</h2>
-			</a>
 
-			<br>
-			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
+<p><img src="http://jessezhuang.github.io/img/linus-penguin.jpg" alt="Linus Penguin Quote" /></p>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-intro/" title="Mongodb Tutorial 1 - Introduction">
-				<h2>Mongodb Tutorial 1 - Introduction</h2>
-			</a>
+<h1 id="linux-commands-cheatsheet">Linux Commands Cheatsheet</h1>
 
-			<br>
-			To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).
+<h2 id="files-related">Files Related</h2>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>ls - list directory contents
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Tutorial 5 - Aggregation Framework">
-				<h2>MongoDB Tutorial 5 - Aggregation Framework</h2>
-			</a>
+SYNOPSIS
+       ls <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
+       -a, --all
+              <span style="color: #66d9ef">do</span> not ignore entries starting with .    
+</pre></div>
 
-			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .
+<table>
+<thead>
+<tr>
+<th>examples</th>
+<th>effects</th>
+</tr>
+</thead>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
-				<h2>MongoDB Tutorial 4 - Performance</h2>
-			</a>
+<tbody>
+<tr>
+<td><code>ls -la</code></td>
+<td>list all file/directories including hidden in long list form</td>
+</tr>
 
-			<br>
-			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+<tr>
+<td><code>ls -ld</code></td>
+<td>list directory only in list form</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>du - estimate file space usage
+SYNOPSIS
+  du <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>...  <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
+  -c, --total
+              produce a grand total
+  -h, --human-readable
+              print sizes in human readable format <span style="color: #f92672">(</span>e.g., 1K 234M 2G<span style="color: #f92672">)</span>
+  -s, --summarize
+              display only a total <span style="color: #66d9ef">for</span> each argument
+  -a, --all
+                write counts <span style="color: #66d9ef">for</span> all files, not just directories
+</pre></div>
 
-			<hr>
-			
+<table>
+<thead>
+<tr>
+<th>examples</th>
+<th>effects</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>du -sch  folder/</code></td>
+<td><code>folder/</code> size</td>
+</tr>
+
+<tr>
+<td><code>du -sh *</code></td>
+<td>sizes of all folders and files in current directory</td>
+</tr>
+
+<tr>
+<td><code>du -ahd1</code></td>
+<td>sizes of all (including hidden) in current directory</td>
+</tr>
+
+<tr>
+<td><em>note</em></td>
+<td>pipe to <code>&#124; sort -h[r]</code> for result sorting</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>df - report file system disk space usage
+
+SYNOPSIS
+       df <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
+</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>examples</th>
+<th>effects</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>df -h</code></td>
+<td>disk usage in human readable form</td>
+</tr>
+</tbody>
+</table>
+
+<p>example output</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>Filesystem      Size  Used Avail Use% Mounted on
+udev            990M  8.0K  990M   1% /dev
+tmpfs           201M  944K  200M   1% /run
+/dev/sda1        17G  6.3G  9.8G  40% /
+none            4.0K     <span style="color: #ae81ff">0</span>  4.0K   0% /sys/fs/cgroup
+none            5.0M     <span style="color: #ae81ff">0</span>  5.0M   0% /run/lock
+none           1001M   23M  978M   3% /run/shm
+none            100M   44K  100M   1% /run/user
+Dropbox         238G  116G  123G  49% /media/sf_Dropbox
+/dev/sr0         57M   57M     <span style="color: #ae81ff">0</span> 100% /media/user/VBOXADDITIONS_5.0.14_105127
+</pre></div>
+
+<h2 id="system-related">System Related</h2>
+
+<p>To check memory usage</p>
+
+<table>
+<thead>
+<tr>
+<th>commands</th>
+<th>effects</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>free -h</code></td>
+<td>short summary</td>
+</tr>
+
+<tr>
+<td><code>cat /proc/meminfo</code></td>
+<td>show <code>meminfo</code> file</td>
+</tr>
+
+<tr>
+<td><code>top</code></td>
+<td>show ram cpu usage per process, press e to scale units</td>
+</tr>
+</tbody>
+</table>
+
+<p>To put a process (e.g., mongod) to background,</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ ^Z <span style="color: #75715e"># ctrl + z to stop mongod</span>
+<span style="color: #f92672">[</span>1<span style="color: #f92672">]</span>+  Stopped mongod
+$ <span style="color: #f8f8f2">bg</span>
+<span style="color: #f92672">[</span>1<span style="color: #f92672">]</span>+ mongod <span style="color: #f8f8f2">&amp;</span>
+$ mongo
+&gt; ^C <span style="color: #75715e"># can successfully connect</span>
+$ <span style="color: #f8f8f2">fg</span>
+mongod
+^C
+$ <span style="color: #75715e"># back to bash</span>
+</pre></div>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>chmod - change file mode bits
+
+SYNOPSIS
+       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... MODE<span style="color: #f92672">[</span>,MODE<span style="color: #f92672">]</span>... FILE...
+       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... OCTAL-MODE FILE...
+       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... --reference<span style="color: #f92672">=</span>RFILE FILE...
+</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>examples</th>
+<th>effects</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>chmod +x file</code></td>
+<td>permit the file as executable</td>
+</tr>
+
+<tr>
+<td><code>chmod 777 file</code></td>
+<td>make the file globally readable, writable, executable by all users, groups, owner</td>
+</tr>
+</tbody>
+</table>
+
 
 			<aside class="copyright" role="note">
   
@@ -390,6 +580,78 @@
   </a> theme.
 </aside>
 
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/ubuntu/" title="Ubuntu Tips and Tricks">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Ubuntu Tips and Tricks
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              MongoDB Tutorial 4 - Performance
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
 		</div>
 	</article>
 
@@ -405,8 +667,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 

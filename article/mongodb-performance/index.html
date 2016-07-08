@@ -256,6 +256,10 @@
         <span class="section">Categories</span>
         <span class="tags">
             
+              <a href="http://jessezhuang.github.io/categories/cheatsheet"
+                title="cheatsheet">
+                cheatsheet<sup>1</sup></a>
+            
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
                 programming-language<sup>1</sup></a>
@@ -416,10 +420,15 @@
 
 <h2 id="mmap-v1">MMAP V1</h2>
 
-<p>Uses mmap system call undercovers. Allocating memory, or map files or devices into memory. Operation system manages memory/virtual memory.
-- collection level locking, multiple reader, single writer lock.
-- <a href="http://blog.mongodb.org/post/248614779/fast-updates-with-mongodb-update-in-place">in place update</a> (database does not have to allocate and write a full new copy of the object).
-- power of 2 sizes when allocating initial storage with a minimum of 32 bytes.</p>
+<p>Uses mmap system call undercovers. Allocating memory, or map files or devices into memory. Operation system manages memory/virtual memory.</p>
+
+<ul>
+<li>collection level locking, multiple reader, single writer lock.</li>
+<li>
+<a target="_blank" href="http://blog.mongodb.org/post/248614779/fast-updates-with-mongodb-update-in-place">in place update</a> <i class="fa fa-external-link"></i>
+ (database does not have to allocate and write a full new copy of the object).</li>
+<li>power of 2 sizes when allocating initial storage with a minimum of 32 bytes.</li>
+</ul>
 
 <h1 id="indexes">Indexes</h1>
 
@@ -446,7 +455,9 @@
 <li>Multikey: index point for every array element. Could be (significantly) greater than number of documents.</li>
 </ul>
 
-<p>If a document is updated and needs to be moved, the indexes need to be moved too. That cost only exists in the MMAPv1 storage engine. In the WiredTiger storage engine, index entries don&rsquo;t contain pointers to actual disk locations. Instead, in WiredTiger, the index points to an internal document identifier (the <a href="https://docs.mongodb.org/manual/reference/method/cursor.showRecordId/?_ga=1.110860677.1452504667.1464414259#cursor.showRecordId">RecordId</a>) that is immutable. Therefore, when a document is updated, its index does not need to be updated at all.</p>
+<p>If a document is updated and needs to be moved, the indexes need to be moved too. That cost only exists in the MMAPv1 storage engine. In the WiredTiger storage engine, index entries don&rsquo;t contain pointers to actual disk locations. Instead, in WiredTiger, the index points to an internal document identifier (the 
+<a target="_blank" href="https://docs.mongodb.org/manual/reference/method/cursor.showRecordId/?_ga=1.110860677.1452504667.1464414259#cursor.showRecordId">Record Id</a> <i class="fa fa-external-link"></i>
+ that is immutable. Therefore, when a document is updated, its index does not need to be updated at all.</p>
 
 <h2 id="geospatial-indexes">Geospatial Indexes</h2>
 
@@ -460,7 +471,9 @@
 
 <h3 id="sperical-type">Sperical Type</h3>
 
-<p>MongoDB supports a subset of <a href="http://geojson.org/geojson-spec.html">GeoJSON location specification</a>. A GeoJSON document is used for the value of key <code>location</code>. Google maps shows <code>@latitude,longitude</code> as part of the url for a particular location. MongoDB takes an opposite order <code>@longitude,latitude</code>. Although it&rsquo;s a spherical model, it&rsquo;s only looking at points at the surface of the sphere other than points in the air.</p>
+<p>MongoDB supports a subset of 
+<a target="_blank" href="http://geojson.org/geojson-spec.html">GeoJSON location specification</a> <i class="fa fa-external-link"></i>
+. A GeoJSON document is used for the value of key <code>location</code>. Google maps shows <code>@latitude,longitude</code> as part of the url for a particular location. MongoDB takes an opposite order <code>@longitude,latitude</code>. Although it&rsquo;s a spherical model, it&rsquo;s only looking at points at the surface of the sphere other than points in the air.</p>
 
 <p>First, create indexes,</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">places</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">createIndex</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;location&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;2dsphere&#39;</span><span style="color: #f8f8f2">})</span>
@@ -485,7 +498,9 @@
 
 <h2 id="text-indexes">Text Indexes</h2>
 
-<p>aka Full text search index. Typically, when searching strings, the entire string must match. Except that a regex search will search the index (rather than the full collection), and if you anchor it on the left by beginning with ^, you can often do better still. <a href="http://docs.mongodb.org/manual/reference/operator/query/regex/?_ga=1.222763675.1452504667.1464414259#index-use">Here&rsquo;s a link to the documentation</a>. Alternatively, put every word into an array and use set operators.</p>
+<p>aka Full text search index. Typically, when searching strings, the entire string must match. Except that a regex search will search the index (rather than the full collection), and if you anchor it on the left by beginning with ^, you can often do better still. 
+<a target="_blank" href="http://docs.mongodb.org/manual/reference/operator/query/regex/?_ga=1.222763675.1452504667.1464414259#index-use">Here&rsquo;s a link to the documentation</a> <i class="fa fa-external-link"></i>
+. Alternatively, put every word into an array and use set operators.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">createIndex</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;words&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;text&#39;</span><span style="color: #f8f8f2">})</span>
 <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">$text</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$search</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;dog&#39;</span><span style="color: #f8f8f2">}})</span>
 </pre></div>
@@ -582,7 +597,8 @@
 
 <h2 id="mongotop-and-mongostat"><code>mongotop</code> and <code>mongostat</code></h2>
 
-<p><code>mongotop</code> is named after <a href="./linux.md">unix <code>top</code></a>, which gives a high level view where mongo spends most of its time. Subsequently, one can follow up for more detailed examining and optimizing.</p>
+<p><code>mongotop</code> is named after <a href="http://jessezhuang.github.io/
+article/linux-cheatsheet/">unix <code>top</code></a>, which gives a high level view where mongo spends most of its time. Subsequently, one can follow up for more detailed examining and optimizing.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongotop <span style="color: #ae81ff">3</span> <span style="color: #75715e"># default returns every second, this set to 3 seconds</span>
 ns                    total    <span style="color: #f8f8f2">read</span>    write    2016-06-25T23:32:52-07:00
 admin.system.roles      0ms     0ms      0ms                             
@@ -591,7 +607,10 @@ blog.posts              0ms     0ms      0ms
 blog.sessions           0ms     0ms      0ms
 </pre></div>
 
-<p><code>mongostat</code> is a performance tuning command, similar to <a href="./linux.md">unix <code>iostat</code></a>, which samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. <code>getmore</code> is getting more from a cursor for a query with a large result. <code>qr|qw ar|aw</code> are queues and active reads and writes. <code>%dirty %used</code> refers to percentage of WiredTiger cache. <code>res</code> resident memory size smaller for WiredTiger. For MMAPv1 engine, <code>faults</code> number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for <a href="https://docs.mongodb.com/manual/reference/program/mongostat/">mongostat doc</a>.</p>
+<p><code>mongostat</code> is a performance tuning command, similar to <a href="http://jessezhuang.github.io/
+article/linux-cheatsheet/which">unix <code>iostat</code></a> samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. <code>getmore</code> is getting more from a cursor for a query with a large result. <code>qr|qw ar|aw</code> are queues and active reads and writes. <code>%dirty %used</code> refers to percentage of WiredTiger cache. <code>res</code> resident memory size smaller for WiredTiger. For MMAPv1 engine, <code>faults</code> number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for 
+<a target="_blank" href="https://docs.mongodb.com/manual/reference/program/mongostat/">mongostat doc</a> <i class="fa fa-external-link"></i>
+.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongostat <span style="color: #f92672">[</span>--port 27017<span style="color: #f92672">]</span>
 insert query update delete getmore <span style="color: #f8f8f2">command</span> % dirty % used    res qr<span style="color: #f8f8f2">|</span>qw ar<span style="color: #f8f8f2">|</span>aw netIn netOut
     *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0  52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k
@@ -609,8 +628,12 @@ insert query update delete getmore <span style="color: #f8f8f2">command</span> %
 <h1 id="resources">Resources</h1>
 
 <ol>
-<li><a href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a></li>
-<li><a href="https://docs.mongodb.com/">MongoDB Docs</a></li>
+<li>
+<a target="_blank" href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a> <i class="fa fa-external-link"></i>
+</li>
+<li>
+<a target="_blank" href="https://docs.mongodb.com/">MongoDB Docs</a> <i class="fa fa-external-link"></i>
+</li>
 </ol>
 
 <p><a href="#">go to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>
@@ -659,7 +682,7 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/ubuntu/" title="Ubuntu Tips and Tricks">
+      <a href="http://jessezhuang.github.io/article/linux-cheatsheet/" title="Linux Cheatsheets">
         <span class="direction">
           Previous
         </span>
@@ -669,7 +692,7 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
           </div>
           <div class="stretch">
             <div class="title">
-              Ubuntu Tips and Tricks
+              Linux Cheatsheets
             </div>
           </div>
         </div>

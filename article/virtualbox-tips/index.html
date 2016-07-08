@@ -256,6 +256,10 @@
         <span class="section">Categories</span>
         <span class="tags">
             
+              <a href="http://jessezhuang.github.io/categories/cheatsheet"
+                title="cheatsheet">
+                cheatsheet<sup>1</sup></a>
+            
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
                 programming-language<sup>1</sup></a>
@@ -380,8 +384,9 @@
 
 			
 
-<p>For Ubuntu tips, see [http://jessezhuang.github.io/
-article/ubuntu/].</p>
+<p>For Ubuntu tips, see <a href="http://jessezhuang.github.io/
+article/ubuntu/">http://jessezhuang.github.io/
+article/ubuntu/</a>.</p>
 
 <h1 id="how-to-get-shared-folder-write-access">How to Get Shared Folder Write Access</h1>
 
@@ -395,7 +400,8 @@ $ sudo usermod -a -G vboxsf username
 <h1 id="how-to-create-virtualenv-in-shared-folder">How to Create Virtualenv in Shared Folder</h1>
 
 <p>Creating symbolic links in a VirtualBox shared folder is disabled, which will forbid you to create a virtualenv in a shared folder from the host machine. Simple test in terminal: <code>$ ln -s test</code>, Either you&rsquo;ll get a <code>failed to create symbolic link './testfile': Read-only file system</code> or <code>Protocol error</code>. Shutdown VM and close Virtualbox Manager in Windows host. Open an admin command prompt,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:<span style="color: #ae81ff">\W</span>INDOWS<span style="color: #ae81ff">\s</span>ystem32&gt;VBoxManage setextradata VM_name VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder 1
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:\WINDOWS\system32&gt;VBoxManage setextradata VM_name 
+  VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder 1
 </pre></div>
 
 <p>If you have not added virtualbox commands to your path, either do so or run <code>VBoxManage</code> from the folder where it is located. Replace <code>VM_name</code> with the name of the virtual machine,</p>
@@ -407,7 +413,7 @@ $ sudo usermod -a -G vboxsf username
 <p><img src="http://i.stack.imgur.com/yboaG.jpg" alt="shared folder name screenshot" />.</p>
 
 <p>You can check the settings with the command below and should find one key about your shared folder indicating that it was enabled as in the second line below.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:<span style="color: #ae81ff">\W</span>INDOWS<span style="color: #ae81ff">\s</span>ystem32&gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>C:\WINDOWS\system32&gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
 Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 </pre></div>
 

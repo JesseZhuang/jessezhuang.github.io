@@ -256,6 +256,10 @@
         <span class="section">Categories</span>
         <span class="tags">
             
+              <a href="http://jessezhuang.github.io/categories/cheatsheet"
+                title="cheatsheet">
+                cheatsheet<sup>1</sup></a>
+            
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
                 programming-language<sup>1</sup></a>
@@ -400,13 +404,25 @@ mongo &lt; source.js
 
 <p><strong>Application Architecture</strong></p>
 
-<p>Mongo shell/driver connects to mongod server process through TCP. The course will build a blog website with MongoDB as the datastore. The java course uses <a href="http://sparkjava.com/">SparkJava</a> and <a href="http://freemarker.org/">Freemarker</a>. The python course uses <a href="http://bottlepy.org/">Bottle</a> and its simple template engine. The <a href="https://docs.mongodb.com/ecosystem/drivers/">drivers</a> will be mongo java and pymongo.</p>
+<p>Mongo shell/driver connects to mongod server process through TCP. The course will build a blog website with MongoDB as the datastore. The java course uses 
+<a target="_blank" href="http://sparkjava.com/">SparkJava</a> <i class="fa fa-external-link"></i>
+ and 
+<a target="_blank" href="http://freemarker.org/">Freemarker</a> <i class="fa fa-external-link"></i>
+. The python course uses 
+<a target="_blank" href="http://bottlepy.org/">Bottle</a> <i class="fa fa-external-link"></i>
+ and its simple template engine. The 
+<a target="_blank" href="https://docs.mongodb.com/ecosystem/drivers/">drivers</a> <i class="fa fa-external-link"></i>
+ will be mongo java and pymongo.</p>
 
 <h2 id="json-and-bson-documents">JSON and BSON Documents</h2>
 
-<p><a href="http://www.json.org/">For more detail on JSON standard</a>. General format: key value pairs in the form of { key : value}. Keys must be strings followed by colon (:) and the corresponding value. Fields are separated by comma (,). Value types include string, date, number, boolean, array, object, and nested fields (recursive).</p>
+<p>For more details on JSON standard, 
+<a target="_blank" href="http://www.json.org/">read here</a> <i class="fa fa-external-link"></i>
+. General format: key value pairs in the form of { key : value}. Keys must be strings followed by colon (:) and the corresponding value. Fields are separated by comma (,). Value types include string, date, number, boolean, array, object, and nested fields (recursive).</p>
 
-<p><a href="http://bsonspec.org/spec.html">BSON specs.</a> MongoDB actually stores data in BSON, binary JSON format. MondoDB drivers sends/receives data as BSON. The drivers map BSON to language appropriate data types. BSON is lightweight, traversable (writing, reading, indexing), and efficient (encoding/decoding quickly).</p>
+<p>You can find 
+<a target="_blank" href="http://bsonspec.org/spec.html">BSON specs here</a> <i class="fa fa-external-link"></i>
+. MongoDB actually stores data in BSON, binary JSON format. MondoDB drivers sends/receives data as BSON. The drivers map BSON to language appropriate data types. BSON is lightweight, traversable (writing, reading, indexing), and efficient (encoding/decoding quickly).</p>
 
 <p>BSON supports more data types:</p>
 
@@ -428,7 +444,9 @@ mongo &lt; source.js
 
 <h2 id="installing-mongodb">Installing MongoDB</h2>
 
-<p>Downdload mongodb <a href="https://www.mongodb.com/download-center">here</a>. A tip for the linux versions: after extracting the tarballs, you could simply copy the executables from the bin folder into your virtualenv&rsquo;s bin <code>path/to/venv/bin</code> folder, assuming you are using pymonogo in a virtualenv with python 2. Alternatively you can copy to /usr/local/bin as suggested for a global use.</p>
+<p>Downdload mongodb 
+<a target="_blank" href="https://www.mongodb.com/download-center">from here</a> <i class="fa fa-external-link"></i>
+. A tip for the linux versions: after extracting the tarballs, you could simply copy the executables from the bin folder into your virtualenv&rsquo;s bin <code>path/to/venv/bin</code> folder, assuming you are using pymonogo in a virtualenv with python 2. Alternatively you can copy to /usr/local/bin as suggested for a global use.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ tar xvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
 $ cp mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/* path/to/venv/bin/
 $ <span style="color: #f8f8f2">cd</span> path/to/venv/
@@ -589,8 +607,12 @@ WriteResult<span style="color: #f92672">({</span> <span style="color: #e6db74">&
 <h1 id="resources">Resources</h1>
 
 <ol>
-<li><a href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a></li>
-<li><a href="https://docs.mongodb.com/">MongoDB Docs</a></li>
+<li>
+<a target="_blank" href="https://university.mongodb.com/courses/M101P/about">MongoDB University Classes</a> <i class="fa fa-external-link"></i>
+</li>
+<li>
+<a target="_blank" href="https://docs.mongodb.com/">MongoDB Docs</a> <i class="fa fa-external-link"></i>
+</li>
 </ol>
 
 <p><a href="#">back to top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>

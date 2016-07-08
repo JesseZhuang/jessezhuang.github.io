@@ -258,6 +258,10 @@
         <span class="section">Categories</span>
         <span class="tags">
             
+              <a href="http://jessezhuang.github.io/categories/cheatsheet"
+                title="cheatsheet">
+                cheatsheet<sup>1</sup></a>
+            
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
                 programming-language<sup>1</sup></a>
@@ -343,7 +347,7 @@
 				
 					<a href="http://jessezhuang.github.io/article/virtualbox-tips/"><h1>Virtualbox Tips for Ubuntu Guest in Windows Host</h1></a></span>
 					
-					<p>For Ubuntu tips, see [<a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/ubuntu/]. How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username. # replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username After that, reboot the VM and you should have write access to the shared folder.</p>
+					<p>For Ubuntu tips, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/ubuntu/. How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username. # replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username After that, reboot the VM and you should have write access to the shared folder.</p>
 	        <hr>
 				
 			
@@ -371,14 +375,21 @@
 				
 					<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/"><h1>MongoDB Tutorial 5 - Aggregation Framework</h1></a></span>
 					
-					<p>The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart.</p>
+					<p>The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .</p>
 	        <hr>
 				
 			
 				
 					<a href="http://jessezhuang.github.io/article/ubuntu/"><h1>Ubuntu Tips and Tricks</h1></a></span>
 					
-					<p>Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see [<a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/]. Performance Monitoring top from command line System Monitor application installed by default. Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.</p>
+					<p>Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/. Performance Monitoring top from command line System Monitor application installed by default. Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.</p>
+	        <hr>
+				
+			
+				
+					<a href="http://jessezhuang.github.io/article/linux-cheatsheet/"><h1>Linux Cheatsheets</h1></a></span>
+					<img src="http://jessezhuang.github.io/img/linus-penguin.jpg">
+					<p>Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with . examples effects ls -la list all file/directories including hidden in long list form ls -ld list directory only in list form du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.g., 1K 234M 2G) -s, &ndash;summarize display only a total for each argument -a, &ndash;all write counts for all files, not just directories examples effects du -sch folder/ folder/ size du -sh * sizes of all folders and files in current directory du -ahd1 sizes of all (including hidden) in current directory note pipe to &#124; sort -h[r] for result sorting df - report file system disk space usage SYNOPSIS df [OPTION]&hellip;</p>
 	        <hr>
 				
 			
