@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -499,11 +505,14 @@
 
 <h2 id="replica-set-elections">Replica Set Elections</h2>
 
-<p>Types of replica set nodes:
-- regular (primary/secondary)
-- arbiter, just for election/voting purposes, no data
-- delayed, often disaster recovering node(1h behind). Set priority=0 (p=0) and it cannot become a primary node.
-- hidden, never primary, p=0, often used for analytics, can vote.</p>
+<p>Types of replica set nodes:</p>
+
+<ul>
+<li>regular (primary/secondary)</li>
+<li>arbiter, just for election/voting purposes, no data</li>
+<li>delayed, often disaster recovering node(1h behind). Set priority=0 (p=0) and it cannot become a primary node.</li>
+<li>hidden, never primary, p=0, often used for analytics, can vote.</li>
+</ul>
 
 <p>Typically each node has one vote.</p>
 
@@ -514,41 +523,44 @@
 <p>Eventual consistency might be harder to reason about. Most application servers are stateless, write and read back out and get a different value, then have to reconcile.</p>
 
 <h2 id="create-a-replica-set">Create a Replica Set</h2>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># bash &lt; create_replica_set.sh</span>
-<span style="color: #75715e">#!/usr/bin/env bash</span>
-<span style="color: #75715e"># 3 on a single node so different ports</span>
-<span style="color: #75715e"># --fork so do not have to run each in its own shell</span>
+
+<pre><code class="language-sh"># bash &lt; create_replica_set.sh
+#!/usr/bin/env bash
+# 3 on a single node so different ports
+# --fork so do not have to run each in its own shell
 
 mkdir -p /data/rs1 /data/rs2 /data/rs3
-mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;1.log&quot;</span> --dbpath /data/rs1 --port <span style="color: #ae81ff">27017</span> --oplogSize <span style="color: #ae81ff">64</span> --fork --smallfiles
-mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;2.log&quot;</span> --dbpath /data/rs2 --port <span style="color: #ae81ff">27018</span> --oplogSize <span style="color: #ae81ff">64</span> --smallfiles --fork
-mongod --replSet m101 --logpath <span style="color: #e6db74">&quot;3.log&quot;</span> --dbpath /data/rs3 --port <span style="color: #ae81ff">27019</span> --oplogSize <span style="color: #ae81ff">64</span> --smallfiles --fork
-</pre></div>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">$</span> <span style="color: #a6e22e">mongo</span> <span style="color: #f92672">--</span><span style="color: #a6e22e">port</span> <span style="color: #ae81ff">27018</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">init_replica</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">js</span>
+mongod --replSet m101 --logpath &quot;1.log&quot; --dbpath /data/rs1 --port 27017 --oplogSize 64 --fork --smallfiles
+mongod --replSet m101 --logpath &quot;2.log&quot; --dbpath /data/rs2 --port 27018 --oplogSize 64 --smallfiles --fork
+mongod --replSet m101 --logpath &quot;3.log&quot; --dbpath /data/rs3 --port 27019 --oplogSize 64 --smallfiles --fork
+</code></pre>
 
-<span style="color: #a6e22e">config</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;m101&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">members</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span>
-          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27017&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">priority</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">slaveDelay</span><span style="color: #f92672">:</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">},</span>
-					<span style="color: #75715e">// delayed 5 seconds, not primary</span>
-          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27018&quot;</span><span style="color: #f8f8f2">},</span>
-          <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">host</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;localhost:27019&quot;</span><span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">]</span>
-<span style="color: #f8f8f2">};</span>
+<pre><code class="language-javascript">$ mongo --port 27018 &lt; init_replica.js
 
-<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">initiate</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">config</span><span style="color: #f8f8f2">);</span>
-<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">status</span><span style="color: #f8f8f2">();</span>
-<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">conf</span><span style="color: #f8f8f2">();</span> <span style="color: #75715e">// show the configuration</span>
-<span style="color: #a6e22e">rs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">help</span><span style="color: #f8f8f2">();</span> <span style="color: #75715e">// replica set commands help</span>
-</pre></div>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongo --port 27018
+config = { _id: &quot;m101&quot;, members:[
+          { _id : 0, host : &quot;localhost:27017&quot;, priority:0, slaveDelay:5},
+					// delayed 5 seconds, not primary
+          { _id : 1, host : &quot;localhost:27018&quot;},
+          { _id : 2, host : &quot;localhost:27019&quot;} ]
+};
+
+rs.initiate(config);
+rs.status();
+rs.conf(); // show the configuration
+rs.help(); // replica set commands help
+</code></pre>
+
+<pre><code class="language-sh">$ mongo --port 27018
 MongoDB shell version 2.2.0
 connecting to: 127.0.0.1:27018/test
-m101:SECONDARY&gt; rs.status<span style="color: #f92672">()</span>
-<span style="color: #75715e"># will see 3 members two in RECOVERING stateStr, one in PRIMARY.</span>
-<span style="color: #75715e"># Momentarily, one in PRIMARY, two in SECONDARY. Prompt also changes to primary.</span>
-m101:PRIMARY&gt; db.people.insert<span style="color: #f92672">({</span><span style="color: #e6db74">&#39;name&#39;</span>:<span style="color: #e6db74">&#39;Andrew&#39;</span><span style="color: #f92672">})</span>
+m101:SECONDARY&gt; rs.status()
+# will see 3 members two in RECOVERING stateStr, one in PRIMARY.
+# Momentarily, one in PRIMARY, two in SECONDARY. Prompt also changes to primary.
+m101:PRIMARY&gt; db.people.insert({'name':'Andrew'})
 $ mongo --port 27019
-m101:SECONDARY&gt; rs.slaveOk<span style="color: #f92672">()</span> <span style="color: #75715e"># allow to read from secondary</span>
-m101:SECONDARY&gt; db.people.find<span style="color: #f92672">()</span>
-</pre></div>
+m101:SECONDARY&gt; rs.slaveOk() # allow to read from secondary
+m101:SECONDARY&gt; db.people.find()
+</code></pre>
 
 <p>Normally when you create replicate sets, you would want the <code>mongod</code>s on different physical servers so there is real fault tolerance.</p>
 
@@ -557,22 +569,23 @@ m101:SECONDARY&gt; db.people.find<span style="color: #f92672">()</span>
 <p>oplog (operation log?) kept in sync by mongo. The secondaries are constantly reading the oplog of the primary. It&rsquo;s true that the oplog entries originally come from the primary, but secondaries can sync from another secondary, as long as at least there is a chain of oplog syncs that lead back to the primary.</p>
 
 <p>Use <code>$ ps -ef | grep mongod</code> to check the mongod processes that are running.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>m101:PRIMARY&gt; use <span style="color: #f8f8f2">local</span>
+
+<pre><code class="language-sh">m101:PRIMARY&gt; use local
 m101:PRIMARY&gt; show collections
 oplog.rs
 startup_log
-m101:PRIMARY&gt; db.oplog.rs.find<span style="color: #f92672">()</span>.pretty<span style="color: #f92672">()</span>
-<span style="color: #e6db74">&quot;op&quot;</span> : <span style="color: #e6db74">&quot;i&quot;</span> <span style="color: #75715e"># insert</span>
-<span style="color: #e6db74">&quot;ns&quot;</span> : <span style="color: #e6db74">&quot;test.people&quot;</span> <span style="color: #75715e"># into test.people</span>
-<span style="color: #e6db74">&quot;o&quot;</span> : <span style="color: #f92672">{</span>_id: ..., name: <span style="color: #e6db74">&quot;Andrew&quot;</span> <span style="color: #f92672">}</span>
-<span style="color: #e6db74">&quot;op&quot;</span> : <span style="color: #e6db74">&quot;c&quot;</span> <span style="color: #75715e"># create collection</span>
-<span style="color: #e6db74">&quot;ns&quot;</span> : <span style="color: #e6db74">&quot;test.</span><span style="color: #f8f8f2">$cmd</span><span style="color: #e6db74">&quot;</span>
-<span style="color: #e6db74">&quot;o&quot;</span> : <span style="color: #f92672">{</span> create:people <span style="color: #f92672">}</span>
-m101:SECONDARY&gt; db.oplog.rs.find<span style="color: #f92672">()</span>.pretty<span style="color: #f92672">()</span>
-<span style="color: #75715e"># should see exactly the same log as in primary</span>
-optime and optimeDate <span style="color: #75715e"># whether this node is up to date</span>
-syncingTo <span style="color: #75715e"># where it gets its data from</span>
-</pre></div>
+m101:PRIMARY&gt; db.oplog.rs.find().pretty()
+&quot;op&quot; : &quot;i&quot; # insert
+&quot;ns&quot; : &quot;test.people&quot; # into test.people
+&quot;o&quot; : {_id: ..., name: &quot;Andrew&quot; }
+&quot;op&quot; : &quot;c&quot; # create collection
+&quot;ns&quot; : &quot;test.$cmd&quot;
+&quot;o&quot; : { create:people }
+m101:SECONDARY&gt; db.oplog.rs.find().pretty()
+# should see exactly the same log as in primary
+optime and optimeDate # whether this node is up to date
+syncingTo # where it gets its data from
+</code></pre>
 
 <ul>
 <li>oplog is a capped collection, which rolls off at certain times. The oplog needs to be big enough to deal with periods where the secondary can&rsquo;t see the primary. The oplog&rsquo;s size depends on how long you expect there to be a bifurcation of the network and how much data you are writing, how fast the oplog is growing. If the oplog rolls over and the secondary can&rsquo;t get to the primary&rsquo;s oplog, you can still resync the secondary but he has to read the entire database (much slower).</li>
@@ -580,30 +593,33 @@ syncingTo <span style="color: #75715e"># where it gets its data from</span>
 </ul>
 
 <p>Replica set election:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">kill</span> <span style="color: #ae81ff">60494</span> <span style="color: #75715e"># found by ps primary</span>
-<span style="color: #75715e"># the other shell window already changed prompt within 1s already primary</span>
-stateStr : <span style="color: #f92672">(</span>not reachable/health<span style="color: #f92672">)</span> <span style="color: #75715e"># the one killed</span>
-</pre></div>
+
+<pre><code class="language-sh">$ kill 60494 # found by ps primary
+# the other shell window already changed prompt within 1s already primary
+stateStr : (not reachable/health) # the one killed
+</code></pre>
 
 <h2 id="connect-with-java-driver">Connect with Java Driver</h2>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># after inserting some documents into the primary</span>
-replset:PRIMARY&gt; rs.stepdown<span style="color: #f92672">()</span> <span style="color: #75715e"># simulate a failover</span>
+
+<pre><code class="language-sh"># after inserting some documents into the primary
+replset:PRIMARY&gt; rs.stepdown() # simulate a failover
 replset:SECONDARY&gt;  
-</pre></div>
+</code></pre>
 
 <p>The older way to initiate a <code>MongoClient</code> will fail on a failover since it will wait until it connects to a primary before insertion. Instead, pass in <code>Arrays.asList(new ServerAddress(&quot;localhost&quot;, 27017))</code> will work because the driver can discover the primary through the secondary. This will not work if the process of 27017 was killed.</p>
 
 <p>The list of mongod servers here is refereed to as a seedlist.</p>
 
 <p>Bump up log level:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;root</span> <span style="color: #a6e22e">level=</span><span style="color: #e6db74">&quot;WARN&quot;</span><span style="color: #f92672">&gt;</span>
-	<span style="color: #f92672">&lt;appender-ref</span> <span style="color: #a6e22e">ref=</span><span style="color: #e6db74">&quot;STDOUT&quot;</span><span style="color: #f92672">/&gt;</span>
-<span style="color: #f92672">&lt;/root&gt;</span>
 
-<span style="color: #75715e">&lt;!-- change first line --&gt;</span>
+<pre><code class="language-xml">&lt;root level=&quot;WARN&quot;&gt;
+	&lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
+&lt;/root&gt;
 
-<span style="color: #f92672">&lt;root</span> <span style="color: #a6e22e">level=</span><span style="color: #e6db74">&quot;INFO&quot;</span><span style="color: #f92672">&gt;</span>
-</pre></div>
+&lt;!-- change first line --&gt;
+
+&lt;root level=&quot;INFO&quot;&gt;
+</code></pre>
 
 <p>What to do in the <code>catch</code> clause when we catch a <code>MongoSocketException</code>? It depends on the application.</p>
 
@@ -620,7 +636,7 @@ replset:SECONDARY&gt;
 
 <h2 id="failover-and-rollback">Failover and Rollback</h2>
 
-<p>Even if you set w=1 j=1 on thew primary, if the node fails before the write gets synced to the secondaries, when it comes back up it will roll back the writes. One way to avoid it mostly is to set w=majority (wait until the majority of the nodes have the data then the vulnerability does not exist for the most part, small corner cases below).</p>
+<p>Even if you set w=1 j=1 on the primary, if the node fails before the write gets synced to the secondaries, when it comes back up it will roll back the writes. One way to avoid it mostly is to set w=majority (wait until the majority of the nodes have the data then the vulnerability does not exist for the most part, small corner cases below).</p>
 
 <p>While it is true that a replica set will never rollback a write if it was performed with w=majority and that write successfully replicated to a majority of nodes, it is possible that a write performed with w=majority gets rolled back. Here is the scenario: you do write with w=majority and a failover occurs after the write has committed to the primary but before replication completes. You will likely see an exception at the client. An election occurs and a new primary is elected. When the original primary comes back up, it will rollback the committed write. However, from your application&rsquo;s standpoint, that write never completed, so that&rsquo;s ok.</p>
 
@@ -644,7 +660,7 @@ replset:SECONDARY&gt;
 
 <p><img src="http://jessezhuang.github.io/img/mongodb-sharding2.png" alt="mongodb sharding scheme" /></p>
 
-<p>Sharding introduces horizontal scalability. Shards split data up from a particular collection. Shards are typically replica sets themselves. Application sends commands through <code>mongos</code> routers to the shards. For example, an orders collection can be sharded range based with a shard key of order_id. The router will keep mapps of key ranges to chunks and mapping of chunks to the shards. If the query does not include a shard key, the query will be scattered to all the shard servers and gather back the answer and respond to the application. Shard key have to be included in inserts.</p>
+<p>Sharding introduces horizontal scalability. Shards split data up from a particular collection. Shards are typically replica sets themselves. Application sends commands through <code>mongos</code> routers to the shards. For example, an orders collection can be sharded range based with a shard key of order_id. The router will keep maps of key ranges to chunks and mapping of chunks to the shards. If the query does not include a shard key, the query will be scattered to all the shard servers and gather back the answer and respond to the application. Shard key have to be included in inserts.</p>
 
 <p>Sharding is at a database/collection level. Collections not sharded will sit in the first shard (shard 0). The routers are pretty stateless and are handled similarly to a replica set.</p>
 
@@ -660,14 +676,15 @@ replset:SECONDARY&gt;
 </ul>
 
 <p>Every document must have a shard key that is indexed, but does not have to be unique.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongo <span style="color: #75715e"># mongos at 27017</span>
-mongos&gt; sh.status<span style="color: #f92672">()</span>
-<span style="color: #75715e"># see info about shards: {...}, chunks, .etc</span>
-mongos&gt; db.students.explain<span style="color: #f92672">()</span>.find<span style="color: #f92672">({})</span>.limit<span style="color: #f92672">(</span>10<span style="color: #f92672">)</span>
-<span style="color: #75715e"># stage: &quot;SHARD_MERGE&quot;, goes to all three shards</span>
-mongos&gt; db.students.explain<span style="color: #f92672">()</span>.find<span style="color: #f92672">({</span>student_id:1000<span style="color: #f92672">})</span>.limit<span style="color: #f92672">(</span>10<span style="color: #f92672">)</span>
-<span style="color: #75715e"># only goes to s0 shard, IXSCAN</span>
-</pre></div>
+
+<pre><code class="language-sh">$ mongo # mongos at 27017
+mongos&gt; sh.status()
+# see info about shards: {...}, chunks, .etc
+mongos&gt; db.students.explain().find({}).limit(10)
+# stage: &quot;SHARD_MERGE&quot;, goes to all three shards
+mongos&gt; db.students.explain().find({student_id:1000}).limit(10)
+# only goes to s0 shard, IXSCAN
+</code></pre>
 
 <h2 id="implications-of-sharding-on-development">Implications of Sharding on Development</h2>
 
@@ -814,42 +831,10 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -884,6 +869,9 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

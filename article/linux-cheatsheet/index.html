@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -390,13 +396,14 @@
 <h1 id="linux-commands-cheatsheet">Linux Commands Cheatsheet</h1>
 
 <h2 id="files-related">Files Related</h2>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>ls - list directory contents
+
+<pre><code class="language-sh">ls - list directory contents
 
 SYNOPSIS
-       ls <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
+       ls [OPTION]... [FILE]...
        -a, --all
-              <span style="color: #66d9ef">do</span> not ignore entries starting with .    
-</pre></div>
+              do not ignore entries starting with .    
+</code></pre>
 
 <table>
 <thead>
@@ -418,18 +425,19 @@ SYNOPSIS
 </tr>
 </tbody>
 </table>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>du - estimate file space usage
+
+<pre><code class="language-sh">du - estimate file space usage
 SYNOPSIS
-  du <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>...  <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
+  du [OPTION]...  [FILE]...
   -c, --total
               produce a grand total
   -h, --human-readable
-              print sizes in human readable format <span style="color: #f92672">(</span>e.g., 1K 234M 2G<span style="color: #f92672">)</span>
+              print sizes in human readable format (e.g., 1K 234M 2G)
   -s, --summarize
-              display only a total <span style="color: #66d9ef">for</span> each argument
+              display only a total for each argument
   -a, --all
-                write counts <span style="color: #66d9ef">for</span> all files, not just directories
-</pre></div>
+                write counts for all files, not just directories
+</code></pre>
 
 <table>
 <thead>
@@ -461,11 +469,12 @@ SYNOPSIS
 </tr>
 </tbody>
 </table>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>df - report file system disk space usage
+
+<pre><code class="language-sh">df - report file system disk space usage
 
 SYNOPSIS
-       df <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... <span style="color: #f92672">[</span>FILE<span style="color: #f92672">]</span>...
-</pre></div>
+       df [OPTION]... [FILE]...
+</code></pre>
 
 <table>
 <thead>
@@ -484,17 +493,18 @@ SYNOPSIS
 </table>
 
 <p>example output</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>Filesystem      Size  Used Avail Use% Mounted on
+
+<pre><code class="language-sh">Filesystem      Size  Used Avail Use% Mounted on
 udev            990M  8.0K  990M   1% /dev
 tmpfs           201M  944K  200M   1% /run
 /dev/sda1        17G  6.3G  9.8G  40% /
-none            4.0K     <span style="color: #ae81ff">0</span>  4.0K   0% /sys/fs/cgroup
-none            5.0M     <span style="color: #ae81ff">0</span>  5.0M   0% /run/lock
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            5.0M     0  5.0M   0% /run/lock
 none           1001M   23M  978M   3% /run/shm
 none            100M   44K  100M   1% /run/user
 Dropbox         238G  116G  123G  49% /media/sf_Dropbox
-/dev/sr0         57M   57M     <span style="color: #ae81ff">0</span> 100% /media/user/VBOXADDITIONS_5.0.14_105127
-</pre></div>
+/dev/sr0         57M   57M     0 100% /media/user/VBOXADDITIONS_5.0.14_105127
+</code></pre>
 
 <h2 id="system-related">System Related</h2>
 
@@ -527,24 +537,26 @@ Dropbox         238G  116G  123G  49% /media/sf_Dropbox
 </table>
 
 <p>To put a process (e.g., mongod) to background,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ ^Z <span style="color: #75715e"># ctrl + z to stop mongod</span>
-<span style="color: #f92672">[</span>1<span style="color: #f92672">]</span>+  Stopped mongod
-$ <span style="color: #f8f8f2">bg</span>
-<span style="color: #f92672">[</span>1<span style="color: #f92672">]</span>+ mongod <span style="color: #f8f8f2">&amp;</span>
+
+<pre><code class="language-sh">$ ^Z # ctrl + z to stop mongod
+[1]+  Stopped mongod
+$ bg
+[1]+ mongod &amp;
 $ mongo
-&gt; ^C <span style="color: #75715e"># can successfully connect</span>
-$ <span style="color: #f8f8f2">fg</span>
+&gt; ^C # can successfully connect
+$ fg
 mongod
 ^C
-$ <span style="color: #75715e"># back to bash</span>
-</pre></div>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>chmod - change file mode bits
+$ # back to bash
+</code></pre>
+
+<pre><code class="language-sh">chmod - change file mode bits
 
 SYNOPSIS
-       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... MODE<span style="color: #f92672">[</span>,MODE<span style="color: #f92672">]</span>... FILE...
-       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... OCTAL-MODE FILE...
-       chmod <span style="color: #f92672">[</span>OPTION<span style="color: #f92672">]</span>... --reference<span style="color: #f92672">=</span>RFILE FILE...
-</pre></div>
+       chmod [OPTION]... MODE[,MODE]... FILE...
+       chmod [OPTION]... OCTAL-MODE FILE...
+       chmod [OPTION]... --reference=RFILE FILE...
+</code></pre>
 
 <table>
 <thead>
@@ -674,42 +686,10 @@ SYNOPSIS
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -744,6 +724,9 @@ SYNOPSIS
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

@@ -11,10 +11,10 @@
     
     <item>
       <title>A Tutorial for using Hugo and Github Pages as a Blog Site</title>
-      <link>http://jessezhuang.github.io/article/first/</link>
+      <link>http://jessezhuang.github.io/article/tutorial-hugoblog/</link>
       <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
       
-      <guid>http://jessezhuang.github.io/article/first/</guid>
+      <guid>http://jessezhuang.github.io/article/tutorial-hugoblog/</guid>
       <description>
 
 &lt;h2 id=&#34;hugo-a-static-site-generator&#34;&gt;Hugo, a Static Site Generator&lt;/h2&gt;
@@ -48,9 +48,10 @@
 &lt;p&gt;The customized template is available at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo here&lt;/a&gt;. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.&lt;/p&gt;
 
 &lt;p&gt;To use the template,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
 hugo -t hugo-material-blog
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;or setup the theme in &lt;code&gt;config.yaml&lt;/code&gt; or &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
 

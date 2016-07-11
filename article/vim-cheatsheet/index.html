@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Programming Language - Coding Automaton</title>
+    <title>Vim Cheatsheet - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/categories/programming-language/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/vim-cheatsheet/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/categories/programming-language/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/vim-cheatsheet/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -74,9 +74,6 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/categories/programming-language/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/categories/programming-language/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
@@ -84,6 +81,11 @@
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
 
 
 <div class="backdrop">
@@ -104,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Programming Language
+        Vim Cheatsheet
       </div>
     </div>
 
@@ -344,18 +346,215 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Programming Language</h1>
+			<h1>Vim Cheatsheet </h1>
+			
+			<div>
+				Thu, Jun 30, 2016
+				
+					Last Modified: Jul 7, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#copy-pasting">Copy/Pasting</a></li>
+<li><a href="#move-around">Move Around</a></li>
+<li><a href="#editing">Editing</a></li>
+</ul>
+</nav>
+      </div>
 
 			
-			<a href="http://jessezhuang.github.io/article/java-reflection-test/" title="Using Java&#39;s Reflection for Testing">
-				<h2>Using Java&#39;s Reflection for Testing</h2>
-			</a>
 
-			<br>
-			Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repository. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.
+<p>For Ubuntu Linux,</p>
 
-			<hr>
-			
+<p><strong>Terms:</strong></p>
+
+<p><code>C-x</code> stands for <code>ctrl-x</code>.</p>
+
+<h1 id="copy-pasting">Copy/Pasting</h1>
+
+<p>In normal mode:</p>
+
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>effect</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>3y, p</td>
+<td>copy 3 lines, paste after cursor</td>
+</tr>
+
+<tr>
+<td>&ldquo;ayy, &ldquo;ap</td>
+<td>copy current line to buffer a, paste from buffer a</td>
+</tr>
+
+<tr>
+<td>v/V</td>
+<td>start selecting character, whole line</td>
+</tr>
+
+<tr>
+<td>5ly</td>
+<td>yanks into default buffer 5 characters from cursor</td>
+</tr>
+
+<tr>
+<td>&ldquo;hy</td>
+<td>yanks into register h, use + register for system clipboard</td>
+</tr>
+</tbody>
+</table>
+
+<p>In insert mode:</p>
+
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>effect</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>`C-r{register}</td>
+<td>paste contents of the register</td>
+</tr>
+
+<tr>
+<td>C-r&rdquo;</td>
+<td>to paste from default register</td>
+</tr>
+
+<tr>
+<td>C-u</td>
+<td>to delete everything before the cursor on this line</td>
+</tr>
+
+<tr>
+<td>C-w</td>
+<td>to delete from cursor to the beginning of previous word</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="move-around">Move Around</h1>
+
+<p>In normal mode:</p>
+
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>effect</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>100l</td>
+<td>go right 100 positions, useful to navigate a long line.</td>
+</tr>
+
+<tr>
+<td>10w/10b/10e</td>
+<td>go forward/backward 10 words, e end of word</td>
+</tr>
+
+<tr>
+<td>fa, ta</td>
+<td>move to or just before the next letter a</td>
+</tr>
+
+<tr>
+<td>/pattern</td>
+<td>move to the next word matches, n/N to repeat search</td>
+</tr>
+
+<tr>
+<td>H,M,L # to go to top/mid/bottom of screen</td>
+<td></td>
+</tr>
+
+<tr>
+<td>1G(1gg), G</td>
+<td>go to beginning/end of file</td>
+</tr>
+
+<tr>
+<td>),}</td>
+<td>jump forward one sentence/paragraph</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="editing">Editing</h1>
+
+<p>In normal mode:</p>
+
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>effect</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dw/W</td>
+<td>delete word before/after cursor</td>
+</tr>
+
+<tr>
+<td>x,r</td>
+<td>delete,replace character at cursor</td>
+</tr>
+
+<tr>
+<td>.,u,ctrl-r</td>
+<td>repeat, undo, redo</td>
+</tr>
+
+<tr>
+<td>q<letter>, @<letter></td>
+<td>record operations and reapply, type q again to quit</td>
+</tr>
+</tbody>
+</table>
+
 
 			<aside class="copyright" role="note">
   
@@ -369,6 +568,78 @@
   </a> theme.
 </aside>
 
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Virtualbox Tips for Ubuntu Guest in Windows Host
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/vim-ubuntu-install/" title="How to Install Latest Version Vim in Ubuntu 14.04 LTS">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              How to Install Latest Version Vim in Ubuntu 14.04 LTS
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
 		</div>
 	</article>
 
@@ -384,8 +655,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 

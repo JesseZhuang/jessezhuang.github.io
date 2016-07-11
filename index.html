@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -74,7 +79,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -268,7 +274,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -352,6 +358,13 @@
 				
 			
 				
+					<a href="http://jessezhuang.github.io/article/vim-cheatsheet/"><h1>Vim Cheatsheet</h1></a></span>
+					
+					<p>For Ubuntu Linux, Terms: C-x stands for ctrl-x. Copy/Pasting In normal mode: command effect 3y, p copy 3 lines, paste after cursor &ldquo;ayy, &ldquo;ap copy current line to buffer a, paste from buffer a v/V start selecting character, whole line 5ly yanks into default buffer 5 characters from cursor &ldquo;hy yanks into register h, use + register for system clipboard In insert mode: command effect `C-r{register} paste contents of the register C-r&rdquo; to paste from default register C-u to delete everything before the cursor on this line C-w to delete from cursor to the beginning of previous word Move Around In normal mode: command effect 100l go right 100 positions, useful to navigate a long line.</p>
+	        <hr>
+				
+			
+				
 					<a href="http://jessezhuang.github.io/article/vim-ubuntu-install/"><h1>How to Install Latest Version Vim in Ubuntu 14.04 LTS</h1></a></span>
 					
 					<p>Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install. Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.org but they did not come with the dependencies.</p>
@@ -368,7 +381,7 @@
 				
 					<a href="http://jessezhuang.github.io/article/mongodb-intro/"><h1>Mongodb Tutorial 1 - Introduction</h1></a></span>
 					
-					<p>To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js What is MongoDB? A document based NoSQL database with JSON (javascript object notation) elements. One important advantage is to support common data access patterns with one single query without joins. Actually, MongoDB does not support join, which makes it easier to shard/scale out. Joins and multi-table transactions are difficult to do in parallel, which requires scaling up (expensive single server).</p>
+					<p>To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js # or just mongo source.js To import/export data, $ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt; $ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json $ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; &ndash;out file.json $ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson # by default writes BSON file to dump/ in current directory $ mongodump -d &lt;database&gt; -c &lt;collection [&ndash;out &lt;path&gt;] What is MongoDB?</p>
 	        <hr>
 				
 			
@@ -401,19 +414,17 @@
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/second/"><h1>Using Java&#39;s Reflection for Testing</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/java-reflection-test/"><h1>Using Java&#39;s Reflection for Testing</h1></a></span>
 					<img src="http://jessezhuang.github.io/img/java-reflection.png">
-					<p>Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like Junit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repo. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.</p>
+					<p>Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repository. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.</p>
 	        <hr>
 				
 			
 				
-					<a href="http://jessezhuang.github.io/article/first/"><h1>A Tutorial for using Hugo and Github Pages as a Blog Site</h1></a></span>
+					<a href="http://jessezhuang.github.io/article/tutorial-hugoblog/"><h1>A Tutorial for using Hugo and Github Pages as a Blog Site</h1></a></span>
 					
 					<p>Hugo, a Static Site Generator Hugo is one of the static site generators. Currently it is ranked 4th by StaticGen. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin. Most of them were written in JavaScript. Jekyll was the good old player in this field, which was used in Obama&rsquo;s campaigns to raise $250M.</p>
 	        <hr>
-				
-			
 				
 			
 				
@@ -448,14 +459,14 @@
   
   
   <div class="next">
-      <a href="http://jessezhuang.github.io/page/about-me/" title="About Me">
+      <a href="http://jessezhuang.github.io/article/tutorial-hugoblog/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              About Me
+              A Tutorial for using Hugo and Github Pages as a Blog Site
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
@@ -491,42 +502,10 @@
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -561,6 +540,9 @@
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

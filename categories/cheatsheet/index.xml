@@ -22,13 +22,14 @@
 &lt;h1 id=&#34;linux-commands-cheatsheet&#34;&gt;Linux Commands Cheatsheet&lt;/h1&gt;
 
 &lt;h2 id=&#34;files-related&#34;&gt;Files Related&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;ls - list directory contents
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ls - list directory contents
 
 SYNOPSIS
-       ls &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+       ls [OPTION]... [FILE]...
        -a, --all
-              &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt; not ignore entries starting with .    
-&lt;/pre&gt;&lt;/div&gt;
+              do not ignore entries starting with .    
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -50,18 +51,19 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;du - estimate file space usage
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;du - estimate file space usage
 SYNOPSIS
-  du &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...  &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+  du [OPTION]...  [FILE]...
   -c, --total
               produce a grand total
   -h, --human-readable
-              print sizes in human readable format &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;e.g., 1K 234M 2G&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              print sizes in human readable format (e.g., 1K 234M 2G)
   -s, --summarize
-              display only a total &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; each argument
+              display only a total for each argument
   -a, --all
-                write counts &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; all files, not just directories
-&lt;/pre&gt;&lt;/div&gt;
+                write counts for all files, not just directories
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -93,11 +95,12 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;df - report file system disk space usage
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;df - report file system disk space usage
 
 SYNOPSIS
-       df &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
-&lt;/pre&gt;&lt;/div&gt;
+       df [OPTION]... [FILE]...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -116,17 +119,18 @@ SYNOPSIS
 &lt;/table&gt;
 
 &lt;p&gt;example output&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Filesystem      Size  Used Avail Use% Mounted on
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
 udev            990M  8.0K  990M   1% /dev
 tmpfs           201M  944K  200M   1% /run
 /dev/sda1        17G  6.3G  9.8G  40% /
-none            4.0K     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none            5.0M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            5.0M     0  5.0M   0% /run/lock
 none           1001M   23M  978M   3% /run/shm
 none            100M   44K  100M   1% /run/user
 Dropbox         238G  116G  123G  49% /media/sf_Dropbox
-/dev/sr0         57M   57M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; 100% /media/user/VBOXADDITIONS_5.0.14_105127
-&lt;/pre&gt;&lt;/div&gt;
+/dev/sr0         57M   57M     0 100% /media/user/VBOXADDITIONS_5.0.14_105127
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
 
@@ -159,24 +163,26 @@ Dropbox         238G  116G  123G  49% /media/sf_Dropbox
 &lt;/table&gt;
 
 &lt;p&gt;To put a process (e.g., mongod) to background,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ^Z &lt;span style=&#34;color: #75715e&#34;&gt;# ctrl + z to stop mongod&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+  Stopped mongod
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;bg&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+ mongod &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ^Z # ctrl + z to stop mongod
+[1]+  Stopped mongod
+$ bg
+[1]+ mongod &amp;amp;
 $ mongo
-&amp;gt; ^C &lt;span style=&#34;color: #75715e&#34;&gt;# can successfully connect&lt;/span&gt;
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;fg&lt;/span&gt;
+&amp;gt; ^C # can successfully connect
+$ fg
 mongod
 ^C
-$ &lt;span style=&#34;color: #75715e&#34;&gt;# back to bash&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;chmod - change file mode bits
+$ # back to bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod - change file mode bits
 
 SYNOPSIS
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... MODE&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;,MODE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... FILE...
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... OCTAL-MODE FILE...
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... --reference&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;RFILE FILE...
-&lt;/pre&gt;&lt;/div&gt;
+       chmod [OPTION]... MODE[,MODE]... FILE...
+       chmod [OPTION]... OCTAL-MODE FILE...
+       chmod [OPTION]... --reference=RFILE FILE...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;

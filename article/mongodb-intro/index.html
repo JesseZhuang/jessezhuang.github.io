@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -345,7 +351,7 @@
 			<div>
 				Sun, Jun 26, 2016
 				
-					Last Modified: Jul 3, 2016
+					Last Modified: Jul 8, 2016
 				
 				<br>
 				
@@ -386,6 +392,7 @@
 <li><a href="#crud-operations-i-class-fa-fa-arrow-up-aria-hidden-true-i">CRUD Operations <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></a></li>
 <li><a href="#example-project-blog-site">Example Project Blog Site</a></li>
 <li><a href="#introduction-to-schema-design">Introduction to Schema Design</a></li>
+<li><a href="#mongodb-basics-cheatsheet">MongoDB Basics Cheatsheet</a></li>
 <li><a href="#resources">Resources</a></li>
 </ul>
 </nav>
@@ -394,9 +401,21 @@
 			
 
 <p>To run mongo commands from the source of a JavaScript file,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>cat source.js <span style="color: #f8f8f2">|</span> mongo <span style="color: #75715e"># or</span>
-mongo &lt; source.js
-</pre></div>
+
+<pre><code class="language-sh">cat source.js | mongo # or
+mongo &lt; source.js # or just
+mongo source.js
+</code></pre>
+
+<p>To import/export data,</p>
+
+<pre><code class="language-sh">$ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt;
+$ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json
+$ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; --out file.json
+$ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson
+# by default writes BSON file to dump/ in current directory
+$ mongodump -d &lt;database&gt; -c &lt;collection [--out &lt;path&gt;]
+</code></pre>
 
 <h1 id="what-is-mongodb">What is MongoDB?</h1>
 
@@ -434,75 +453,78 @@ mongo &lt; source.js
 </ul>
 
 <p>How json documents are encoded as bson:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">//JSON</span>
-<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;hello&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;world&quot;</span> <span style="color: #f8f8f2">}</span>
-<span style="color: #75715e">//BSON</span>
-<span style="color: #e6db74">&quot;\x16\x00\x00\x00\x02hello\x00</span>
-<span style="color: #e6db74">\x06\x00\x00\x00world\x00\x00&quot;</span>
-<span style="color: #75715e">//length of document, type of value, field length, null terminators .etc</span>
-</pre></div>
+
+<pre><code class="language-javascript">//JSON
+{ &quot;hello&quot; : &quot;world&quot; }
+//BSON
+&quot;\x16\x00\x00\x00\x02hello\x00
+\x06\x00\x00\x00world\x00\x00&quot;
+//length of document, type of value, field length, null terminators .etc
+</code></pre>
 
 <h2 id="installing-mongodb">Installing MongoDB</h2>
 
 <p>Downdload mongodb 
 <a target="_blank" href="https://www.mongodb.com/download-center">from here</a> <i class="fa fa-external-link"></i>
 . A tip for the linux versions: after extracting the tarballs, you could simply copy the executables from the bin folder into your virtualenv&rsquo;s bin <code>path/to/venv/bin</code> folder, assuming you are using pymonogo in a virtualenv with python 2. Alternatively you can copy to /usr/local/bin as suggested for a global use.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ tar xvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
+
+<pre><code class="language-sh">$ tar xvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
 $ cp mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/* path/to/venv/bin/
-$ <span style="color: #f8f8f2">cd</span> path/to/venv/
-$ <span style="color: #f8f8f2">source</span> bin/activate
+$ cd path/to/venv/
+$ source bin/activate
 $ mkdir -p /data/db
-$ sudo chmod <span style="color: #ae81ff">777</span> /data
-$ sudo chmod <span style="color: #ae81ff">777</span> /data/db
-<span style="color: #f92672">(</span>venv<span style="color: #f92672">)</span> $ mongod
-<span style="color: #75715e"># in another terminal window</span>
-<span style="color: #f92672">(</span>venv<span style="color: #f92672">)</span> $ mongo
+$ sudo chmod 777 /data
+$ sudo chmod 777 /data/db
+(venv) $ mongod
+# in another terminal window
+(venv) $ mongo
 MongoDB shell version: 3.2.6
-connecting to: <span style="color: #f8f8f2">test</span>
-&gt; db.names.insert<span style="color: #f92672">({</span><span style="color: #e6db74">&#39;name&#39;</span>:<span style="color: #e6db74">&#39;Andrew Erlicson&#39;</span><span style="color: #f92672">})</span>
-WriteResult<span style="color: #f92672">({</span> <span style="color: #e6db74">&quot;nInserted&quot;</span> : <span style="color: #ae81ff">1</span> <span style="color: #f92672">})</span>
-&gt; db.names.find<span style="color: #f92672">()</span>
-<span style="color: #f92672">{</span> <span style="color: #e6db74">&quot;_id&quot;</span> : ObjectId<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;5778642550b9dd3f38d82b4e&quot;</span><span style="color: #f92672">)</span>, <span style="color: #e6db74">&quot;name&quot;</span> : <span style="color: #e6db74">&quot;Andrew Erlicson&quot;</span> <span style="color: #f92672">}</span>
-</pre></div>
+connecting to: test
+&gt; db.names.insert({'name':'Andrew Erlicson'})
+WriteResult({ &quot;nInserted&quot; : 1 })
+&gt; db.names.find()
+{ &quot;_id&quot; : ObjectId(&quot;5778642550b9dd3f38d82b4e&quot;), &quot;name&quot; : &quot;Andrew Erlicson&quot; }
+</code></pre>
 
 <p>On Windows, download the msi installer and install as directed. Add mongodb bin (C:\Program Files\MongoDB\Server\3.2\bin) folder to PATH.</p>
 
 <h1 id="crud-operations-i-class-fa-fa-arrow-up-aria-hidden-true-i">CRUD Operations <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h1>
 
 <p>In mongo shell,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">help</span> <span style="color: #75715e">//list of mongo commands</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">show</span> <span style="color: #a6e22e">dbs</span>
-<span style="color: #a6e22e">local</span> <span style="color: #ae81ff">0.070</span><span style="color: #a6e22e">GB</span>
-<span style="color: #a6e22e">test</span> <span style="color: #ae81ff">0.001</span><span style="color: #a6e22e">GB</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">show</span> <span style="color: #a6e22e">collections</span>
-<span style="color: #a6e22e">names</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #75715e">// video.movies refers to video database movies collection</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">names</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">// global variable db refers to current database</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">use</span> <span style="color: #a6e22e">video</span> <span style="color: #75715e">// mongodb creates database in lazy fashion when data inserted</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insertOne</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&quot;title&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;year&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;imdb&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span><span style="color: #f8f8f2">})</span>
-<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;acknowledged&quot;</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;insertId&quot;</span><span style="color: #f92672">:</span><span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">)}</span>
-<span style="color: #75715e">// mongodb will add _id field if not specified</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span>
-<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
-  <span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span> <span style="color: #f8f8f2">}</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({}).</span><span style="color: #a6e22e">pretty</span><span style="color: #f8f8f2">()</span>
-<span style="color: #f8f8f2">{</span>
-  <span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
-  <span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span>
-<span style="color: #f8f8f2">}</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">c</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">movies</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">// returns a cursor</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f8f8f2">()</span>
-<span style="color: #66d9ef">true</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">next</span><span style="color: #f8f8f2">()</span>
-<span style="color: #f8f8f2">{</span>
-  <span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ObjectId</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;5778b5782430a299a54686b5&quot;</span><span style="color: #f8f8f2">),</span>
-  <span style="color: #e6db74">&quot;title&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Jaws&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #e6db74">&quot;year&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1975</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #e6db74">&quot;imdb&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;tt0073195&quot;</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; help //list of mongo commands
+&gt; show dbs
+local 0.070GB
+test 0.001GB
+&gt; show collections
+names
+&gt; // video.movies refers to video database movies collection
+&gt; db.names.find() // global variable db refers to current database
+&gt; use video // mongodb creates database in lazy fashion when data inserted
+&gt; db.movies.insertOne({&quot;title&quot;: &quot;Jaws&quot;, &quot;year&quot;: 1975, &quot;imdb&quot;: &quot;tt0073195&quot;})
+{ &quot;acknowledged&quot;:true, &quot;insertId&quot;:ObjectId(&quot;5778b5782430a299a54686b5&quot;)}
+// mongodb will add _id field if not specified
+&gt; db.movies.find()
+{ &quot;_id&quot; : ObjectId(&quot;5778b5782430a299a54686b5&quot;),
+  &quot;title&quot; : &quot;Jaws&quot;, &quot;year&quot; : 1975, &quot;imdb&quot; : &quot;tt0073195&quot; }
+&gt; db.movies.find({}).pretty()
+{
+  &quot;_id&quot; : ObjectId(&quot;5778b5782430a299a54686b5&quot;),
+  &quot;title&quot; : &quot;Jaws&quot;,
+  &quot;year&quot; : 1975,
+  &quot;imdb&quot; : &quot;tt0073195&quot;
+}
+&gt; var c = db.movies.find() // returns a cursor
+&gt; c.hasNext()
+true
+&gt; c.next()
+{
+  &quot;_id&quot; : ObjectId(&quot;5778b5782430a299a54686b5&quot;),
+  &quot;title&quot; : &quot;Jaws&quot;,
+  &quot;year&quot; : 1975,
+  &quot;imdb&quot; : &quot;tt0073195&quot;
+}
+</code></pre>
 
 <h1 id="example-project-blog-site">Example Project Blog Site</h1>
 
@@ -571,24 +593,26 @@ WriteResult<span style="color: #f92672">({</span> <span style="color: #e6db74">&
 <p>In order to show a blog post with comments and tags, we need to join all the six tables.</p>
 
 <p>As for the document model, for a post JSON document in posts collection:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
-  <span style="color: #a6e22e">title</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;free online tutorial&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #a6e22e">body</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;......&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #a6e22e">author</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;erlicson&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #a6e22e">date</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(......),</span>
-  <span style="color: #a6e22e">comments</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;joe biden&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">email</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;joe@mongodb.org&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">comment</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;...&quot;</span> <span style="color: #f8f8f2">},</span>
-              <span style="color: #f8f8f2">{.....},</span> <span style="color: #f8f8f2">{.....}</span>
-             <span style="color: #f8f8f2">],</span>
-  <span style="color: #a6e22e">tags</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;cycling&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;education&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;startups&quot;</span><span style="color: #f8f8f2">]</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">{
+  title : &quot;free online tutorial&quot;,
+  body : &quot;......&quot;,
+  author : &quot;erlicson&quot;,
+  date : ISODate(......),
+  comments : [ { name: &quot;joe biden&quot;, email : &quot;joe@mongodb.org&quot;, comment:&quot;...&quot; },
+              {.....}, {.....}
+             ],
+  tags: [&quot;cycling&quot;, &quot;education&quot;, &quot;startups&quot;]
+}
+</code></pre>
 
 <p>We will need a authors collection with username as primary key:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
-  <span style="color: #a6e22e">_id</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;erlicosn&quot;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #a6e22e">password</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;...&quot;</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">{
+  _id : &quot;erlicosn&quot;,
+  password : &quot;...&quot;
+}
+</code></pre>
 
 <p>The data is hierarchical. If email is missing from any comment, it does not have to be there. You can leave it out. MongoDB is schemaless and flexible about that.We only need 1 collection, the post collection to display a blog post.</p>
 
@@ -603,6 +627,54 @@ WriteResult<span style="color: #f92672">({</span> <span style="color: #e6db74">&
 <p>An operation like changing a tag named &ldquo;cycling&rdquo; to &ldquo;biking&rdquo; for the whole site would be easier in relational world but it is an unusual change to make, something you are not changing all the time.</p>
 
 <p>Another practical concern is the document size. In mongodb, documents cannot be more than 16 MB.</p>
+
+<h1 id="mongodb-basics-cheatsheet">MongoDB Basics Cheatsheet</h1>
+
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>effect</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>db.runCommand{dropDatabase:1}</td>
+<td>drop the current database, deleting associated files</td>
+</tr>
+
+<tr>
+<td>db.dropDatabase()</td>
+<td>same as above</td>
+</tr>
+
+<tr>
+<td>db.runCommand{drop:collname}</td>
+<td>delete <code>collname</code> collection from the current database and associated indexes</td>
+</tr>
+
+<tr>
+<td>db.collname.drop()</td>
+<td>same as above</td>
+</tr>
+
+<tr>
+<td>show dbs</td>
+<td>show all databases</td>
+</tr>
+
+<tr>
+<td>show collections</td>
+<td>show all collections in current database</td>
+</tr>
+
+<tr>
+<td>use dbname</td>
+<td>switch to <code>dbname</code> database</td>
+</tr>
+</tbody>
+</table>
 
 <h1 id="resources">Resources</h1>
 
@@ -727,42 +799,10 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -797,6 +837,9 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

@@ -24,18 +24,20 @@ article/ubuntu/&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;how-to-get-shared-folder-write-access&#34;&gt;How to Get Shared Folder Write Access&lt;/h1&gt;
 
 &lt;p&gt;When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace &lt;code&gt;username&lt;/code&gt; with your ubuntu username.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# replace username with your actual ubuntu username&lt;/span&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# replace username with your actual ubuntu username
 $ sudo usermod -a -G vboxsf username
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After that, reboot the VM and you should have write access to the shared folder.&lt;/p&gt;
 
 &lt;h1 id=&#34;how-to-create-virtualenv-in-shared-folder&#34;&gt;How to Create Virtualenv in Shared Folder&lt;/h1&gt;
 
 &lt;p&gt;Creating symbolic links in a VirtualBox shared folder is disabled, which will forbid you to create a virtualenv in a shared folder from the host machine. Simple test in terminal: &lt;code&gt;$ ln -s test&lt;/code&gt;, Either you&amp;rsquo;ll get a &lt;code&gt;failed to create symbolic link &#39;./testfile&#39;: Read-only file system&lt;/code&gt; or &lt;code&gt;Protocol error&lt;/code&gt;. Shutdown VM and close Virtualbox Manager in Windows host. Open an admin command prompt,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;C:\WINDOWS\system32&amp;gt;VBoxManage setextradata VM_name 
+
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;C:\WINDOWS\system32&amp;gt;VBoxManage setextradata VM_name 
   VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder 1
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you have not added virtualbox commands to your path, either do so or run &lt;code&gt;VBoxManage&lt;/code&gt; from the folder where it is located. Replace &lt;code&gt;VM_name&lt;/code&gt; with the name of the virtual machine,&lt;/p&gt;
 
@@ -46,11 +48,186 @@ $ sudo usermod -a -G vboxsf username
 &lt;p&gt;&lt;img src=&#34;http://i.stack.imgur.com/yboaG.jpg&#34; alt=&#34;shared folder name screenshot&#34; /&gt;.&lt;/p&gt;
 
 &lt;p&gt;You can check the settings with the command below and should find one key about your shared folder indicating that it was enabled as in the second line below.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;C:\WINDOWS\system32&amp;gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
+
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;C:\WINDOWS\system32&amp;gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
 Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note that you still need to run the VirtualBox Manager as an administrator from Windows in order for the creation of virtualenv (symlinks) to work properly.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vim Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/vim-cheatsheet/</link>
+      <pubDate>Thu, 30 Jun 2016 00:37:56 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/vim-cheatsheet/</guid>
+      <description>
+
+&lt;p&gt;For Ubuntu Linux,&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Terms:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
+
+&lt;p&gt;In normal mode:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;command&lt;/th&gt;
+&lt;th&gt;effect&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;3y, p&lt;/td&gt;
+&lt;td&gt;copy 3 lines, paste after cursor&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&amp;ldquo;ayy, &amp;ldquo;ap&lt;/td&gt;
+&lt;td&gt;copy current line to buffer a, paste from buffer a&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;v/V&lt;/td&gt;
+&lt;td&gt;start selecting character, whole line&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5ly&lt;/td&gt;
+&lt;td&gt;yanks into default buffer 5 characters from cursor&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&amp;ldquo;hy&lt;/td&gt;
+&lt;td&gt;yanks into register h, use + register for system clipboard&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In insert mode:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;command&lt;/th&gt;
+&lt;th&gt;effect&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;`C-r{register}&lt;/td&gt;
+&lt;td&gt;paste contents of the register&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;C-r&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;to paste from default register&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;C-u&lt;/td&gt;
+&lt;td&gt;to delete everything before the cursor on this line&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;C-w&lt;/td&gt;
+&lt;td&gt;to delete from cursor to the beginning of previous word&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;move-around&#34;&gt;Move Around&lt;/h1&gt;
+
+&lt;p&gt;In normal mode:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;command&lt;/th&gt;
+&lt;th&gt;effect&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;100l&lt;/td&gt;
+&lt;td&gt;go right 100 positions, useful to navigate a long line.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;10w/10b/10e&lt;/td&gt;
+&lt;td&gt;go forward/backward 10 words, e end of word&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;fa, ta&lt;/td&gt;
+&lt;td&gt;move to or just before the next letter a&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;/pattern&lt;/td&gt;
+&lt;td&gt;move to the next word matches, n/N to repeat search&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;H,M,L # to go to top/mid/bottom of screen&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;1G(1gg), G&lt;/td&gt;
+&lt;td&gt;go to beginning/end of file&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;),}&lt;/td&gt;
+&lt;td&gt;jump forward one sentence/paragraph&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;editing&#34;&gt;Editing&lt;/h1&gt;
+
+&lt;p&gt;In normal mode:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;command&lt;/th&gt;
+&lt;th&gt;effect&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;dw/W&lt;/td&gt;
+&lt;td&gt;delete word before/after cursor&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;x,r&lt;/td&gt;
+&lt;td&gt;delete,replace character at cursor&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;.,u,ctrl-r&lt;/td&gt;
+&lt;td&gt;repeat, undo, redo&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;q&lt;letter&gt;, @&lt;letter&gt;&lt;/td&gt;
+&lt;td&gt;record operations and reapply, type q again to quit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </description>
     </item>
     
@@ -71,10 +248,11 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 &lt;h1 id=&#34;install-vim-with-ppa&#34;&gt;Install Vim with PPA&lt;/h1&gt;
 
 &lt;p&gt;I have tried to install Vim with debian packages listed on &lt;a href=&#34;http://www.vim.org&#34;&gt;Vim.org&lt;/a&gt; but they did not come with the dependencies. So PPA was an easier way to go. &lt;a href=&#34;https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily&#34;&gt;ppa:pkg-vim/vim-daily&lt;/a&gt; has version 7.4.826 which is good enough.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:pkg-vim/vim-daily
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo add-apt-repository ppa:pkg-vim/vim-daily
 sudo apt-get update
 sudo apt-get install vim
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You can use &lt;code&gt;apt-cache policy vim&lt;/code&gt; to check the version of the vim in your repositories.&lt;/p&gt;
 
@@ -82,12 +260,15 @@ sudo apt-get install vim
 
 &lt;p&gt;Vim.org has detailed instructions on how to &lt;code&gt;git clone&lt;/code&gt; and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use &lt;a href=&#34;http://asic-linux.com.mx/~izto/checkinstall/index.php&#34;&gt;&lt;code&gt;checkinstall&lt;/code&gt;&lt;/a&gt; just in case you ever want to cleanly remove the installation.&lt;/p&gt;
 
+&lt;p&gt;The Vim 7.4.826 version from the PPA does not have system clipboard support by default. Use &lt;code&gt;vim --version | grep &#39;clipboard&#39;&lt;/code&gt; at shell to check. If you have &lt;code&gt;+clipboard&lt;/code&gt; and/or &lt;code&gt;+xterm_clipboard&lt;/code&gt; then you are good to go. Otherwise you can either install from source or &lt;code&gt;sudo apt-get install vim-gnome&lt;/code&gt; which already has the clipboard support.&lt;/p&gt;
+
 &lt;h1 id=&#34;basic-configuration-to-enable-markdown-highlighting&#34;&gt;Basic Configuration to Enable Markdown Highlighting&lt;/h1&gt;
 
 &lt;p&gt;This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;syntax on
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;syntax on
 colorscheme industry
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.&lt;/p&gt;
 
@@ -149,13 +330,14 @@ article/virtualbox-tips/&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;linux-commands-cheatsheet&#34;&gt;Linux Commands Cheatsheet&lt;/h1&gt;
 
 &lt;h2 id=&#34;files-related&#34;&gt;Files Related&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;ls - list directory contents
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ls - list directory contents
 
 SYNOPSIS
-       ls &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+       ls [OPTION]... [FILE]...
        -a, --all
-              &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt; not ignore entries starting with .    
-&lt;/pre&gt;&lt;/div&gt;
+              do not ignore entries starting with .    
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -177,18 +359,19 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;du - estimate file space usage
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;du - estimate file space usage
 SYNOPSIS
-  du &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...  &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
+  du [OPTION]...  [FILE]...
   -c, --total
               produce a grand total
   -h, --human-readable
-              print sizes in human readable format &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;e.g., 1K 234M 2G&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              print sizes in human readable format (e.g., 1K 234M 2G)
   -s, --summarize
-              display only a total &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; each argument
+              display only a total for each argument
   -a, --all
-                write counts &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; all files, not just directories
-&lt;/pre&gt;&lt;/div&gt;
+                write counts for all files, not just directories
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -220,11 +403,12 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;df - report file system disk space usage
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;df - report file system disk space usage
 
 SYNOPSIS
-       df &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;FILE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;...
-&lt;/pre&gt;&lt;/div&gt;
+       df [OPTION]... [FILE]...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -243,17 +427,18 @@ SYNOPSIS
 &lt;/table&gt;
 
 &lt;p&gt;example output&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Filesystem      Size  Used Avail Use% Mounted on
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
 udev            990M  8.0K  990M   1% /dev
 tmpfs           201M  944K  200M   1% /run
 /dev/sda1        17G  6.3G  9.8G  40% /
-none            4.0K     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none            5.0M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            5.0M     0  5.0M   0% /run/lock
 none           1001M   23M  978M   3% /run/shm
 none            100M   44K  100M   1% /run/user
 Dropbox         238G  116G  123G  49% /media/sf_Dropbox
-/dev/sr0         57M   57M     &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; 100% /media/user/VBOXADDITIONS_5.0.14_105127
-&lt;/pre&gt;&lt;/div&gt;
+/dev/sr0         57M   57M     0 100% /media/user/VBOXADDITIONS_5.0.14_105127
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
 
@@ -286,24 +471,26 @@ Dropbox         238G  116G  123G  49% /media/sf_Dropbox
 &lt;/table&gt;
 
 &lt;p&gt;To put a process (e.g., mongod) to background,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ^Z &lt;span style=&#34;color: #75715e&#34;&gt;# ctrl + z to stop mongod&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+  Stopped mongod
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;bg&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;+ mongod &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ^Z # ctrl + z to stop mongod
+[1]+  Stopped mongod
+$ bg
+[1]+ mongod &amp;amp;
 $ mongo
-&amp;gt; ^C &lt;span style=&#34;color: #75715e&#34;&gt;# can successfully connect&lt;/span&gt;
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;fg&lt;/span&gt;
+&amp;gt; ^C # can successfully connect
+$ fg
 mongod
 ^C
-$ &lt;span style=&#34;color: #75715e&#34;&gt;# back to bash&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;chmod - change file mode bits
+$ # back to bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod - change file mode bits
 
 SYNOPSIS
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... MODE&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;,MODE&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... FILE...
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... OCTAL-MODE FILE...
-       chmod &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;OPTION&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;... --reference&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;RFILE FILE...
-&lt;/pre&gt;&lt;/div&gt;
+       chmod [OPTION]... MODE[,MODE]... FILE...
+       chmod [OPTION]... OCTAL-MODE FILE...
+       chmod [OPTION]... --reference=RFILE FILE...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;table&gt;
 &lt;thead&gt;

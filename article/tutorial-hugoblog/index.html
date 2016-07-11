@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Programming Language - Coding Automaton</title>
+    <title>A Tutorial for using Hugo and Github Pages as a Blog Site - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/categories/programming-language/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/tutorial-hugoblog/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/categories/programming-language/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/tutorial-hugoblog/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -74,9 +74,6 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/categories/programming-language/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/categories/programming-language/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
@@ -84,6 +81,11 @@
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
 
 
 <div class="backdrop">
@@ -104,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Programming Language
+        A Tutorial for using Hugo and Github Pages as a Blog Site
       </div>
     </div>
 
@@ -344,18 +346,97 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Programming Language</h1>
+			<h1>A Tutorial for using Hugo and Github Pages as a Blog Site </h1>
+			
+			<div>
+				Sun, Jun 19, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  
+				
+				
+
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+				  
+				
+				
+
+
+			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#hugo-a-static-site-generator">Hugo, a Static Site Generator</a></li>
+<li><a href="#deployment-at-github-pages">Deployment at Github Pages</a></li>
+<li><a href="#themes-for-hugo">Themes for Hugo</a></li>
+<li><a href="#customize-the-hugo-material-docs-themes">Customize the hugo-material-docs Themes</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
 
 			
-			<a href="http://jessezhuang.github.io/article/java-reflection-test/" title="Using Java&#39;s Reflection for Testing">
-				<h2>Using Java&#39;s Reflection for Testing</h2>
-			</a>
 
-			<br>
-			Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repository. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.
+<h2 id="hugo-a-static-site-generator">Hugo, a Static Site Generator</h2>
 
-			<hr>
-			
+<p><a href="https://www.gohugo.io">Hugo</a> is one of the static site generators. Currently it is ranked 4th by <a href="https://www.staticgen.com/">StaticGen</a>. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.</p>
+
+<p>Most of them were written in JavaScript. <a href="https://jekyllrb.com/">Jekyll</a> was the good old player in this field, which was used in Obama&rsquo;s campaigns to raise $250M. Healthcare.gov switched to CMS-free style with Jekyll in 2013.</p>
+
+<p><a href="https://hexo.io/">Hexo</a> uses node.js, which started in 2012. Hugo started in 2013. Both are getting quite popular within a short time. Hugo seems to have a nice growing community and fairly good documentations. It may be missing some features but let&rsquo;s hope it will catch up.</p>
+
+<h2 id="deployment-at-github-pages">Deployment at Github Pages</h2>
+
+<p>I won&rsquo;t be verbose about the benefits of static pages. Healthcare.gov and my blog here load blazing fast compared to dynamic sites where the server needs to pull data from different sources. The key reason for me is the flexibility of the content/design control. You are not limited by a small set of templates and widgets such as those found at <a href="http://www.blogger.com">Blogger</a>. You don&rsquo;t have the limitations at <a href="http://www.wordpress.com">Wordpress.com</a> in case if you want to put ads on your blog.</p>
+
+<p>The ability to deploy the site with github pages is special since it connects with your github account and your repositories. The entire site can be version controlled as well as the generated site as a <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodule</a>. You are basically making git commits in the meantime that you are updating your site.</p>
+
+<h2 id="themes-for-hugo">Themes for Hugo</h2>
+
+<p>There are a variety of templates available at Hugo&rsquo;s <a href="http://themes.gohugo.io/">official site</a>, covering different purposes from personal blog, documentation, project information, merchant, designer showcases, to many more. I really liked the <a href="http://themes.gohugo.io/material-docs/">material docs</a> design, which was intended to be used as a project documentation/information site. I customized the template for a blog site.</p>
+
+<h2 id="customize-the-hugo-material-docs-themes">Customize the hugo-material-docs Themes</h2>
+
+<p>Main changes for the customization are:</p>
+
+<ul>
+<li>Changed the index page to list most recent posts/articles.</li>
+<li>Added sections to list blog categories and tags.</li>
+<li>Integrate <a href="http://disqus.com">Disqus</a> comments at the bottom of each post.</li>
+</ul>
+
+<p>The customized template is available at my <a href="https://github.com/JesseZhuang/hugo-material-blog">github repo here</a>. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.</p>
+
+<p>To use the template,</p>
+
+<pre><code class="language-sh">git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
+hugo -t hugo-material-blog
+</code></pre>
+
+<p>or setup the theme in <code>config.yaml</code> or <code>config.toml</code>.</p>
+
+<p>I did notice some weird bugs while I was customizing the template. Sometimes the template engine report errors if you have commented out lines in the template.</p>
+
+<p>I plan to keep this template updated while writing more articles for the site. You are welcome to comment here or at my <a href="https://github.com/JesseZhuang/hugo-material-blog">github repo</a> for any issues or feature requests.</p>
+
 
 			<aside class="copyright" role="note">
   
@@ -369,6 +450,78 @@
   </a> theme.
 </aside>
 
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://jessezhuang.github.io/article/java-reflection-test/" title="Using Java&#39;s Reflection for Testing">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Using Java&#39;s Reflection for Testing
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/page/about-me/" title="About Me">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              About Me
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
 		</div>
 	</article>
 
@@ -384,8 +537,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 

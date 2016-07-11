@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -437,41 +443,45 @@
 </table>
 
 <p>To get number of products from each manufacture with SQL,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">select</span> <span style="color: #f8f8f2">manufacture,</span> <span style="color: #66d9ef">count</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">from</span> <span style="color: #f8f8f2">products</span>
-  <span style="color: #66d9ef">group</span> <span style="color: #66d9ef">by</span> <span style="color: #f8f8f2">manufacture;</span>
-</pre></div>
+
+<pre><code class="language-sql">select manufacture, count(*) from products
+  group by manufacture;
+</code></pre>
 
 <p>with mongodb,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">use</span> <span style="color: #a6e22e">agg</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">num_products</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Sony&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; use agg
+&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:&quot;$manufacturer&quot;, // creating new collection
+      num_products:{$sum:1}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2}
+{&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1}
+</code></pre>
 
 <p>To do compound grouping with SQL,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">select</span> <span style="color: #f8f8f2">manufacturer,</span> <span style="color: #f8f8f2">category,</span> <span style="color: #66d9ef">count</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">from</span>
-  <span style="color: #f8f8f2">products</span> <span style="color: #66d9ef">group</span> <span style="color: #66d9ef">by</span> <span style="color: #f8f8f2">manufacturer,</span> <span style="color: #f8f8f2">category</span>
-</pre></div>
+
+<pre><code class="language-sql">select manufacturer, category, count(*) from
+  products group by manufacturer, category
+</code></pre>
 
 <p>with mongodb,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #75715e">// _id can be a complex document, just have to be unique</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;manufacturer&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #a6e22e">num_products</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;manufacturer&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;num_products&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([
+  {$group:
+    {
+      // _id can be a complex document, just have to be unique
+      _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;},
+      num_products:{$sum:1}
+    }
+  }
+])
+{&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2}
+</code></pre>
 
 <p>
 <a target="_blank" href="https://docs.mongodb.com/manual/reference/sql-aggregation-comparison/">SQL to Aggregation Mapping Chart</a> <i class="fa fa-external-link"></i>
@@ -560,118 +570,125 @@
 <h2 id="more-operators-with-examples-i-class-fa-fa-arrow-up-aria-hidden-true-i">More Operators with Examples <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h2>
 
 <p>The <code>$sum</code> operator:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">sum_prices</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Amazon&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;sum_prices&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">328</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:{&quot;maker&quot;:&quot;$manufacturer&quot;}, // creating new collection
+      sum_prices:{$sum:&quot;$price&quot;}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : {&quot;maker&quot;:&quot;Amazon&quot;}, &quot;sum_prices&quot; : 328}
+</code></pre>
 
 <p>The <code>$avg</code> operator:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">avg_prices</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$avg</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;avg_prices&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">396.42714</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:{&quot;category&quot;:&quot;$category&quot;}, // creating new collection
+      avg_prices:{$avg:&quot;$price&quot;}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : {&quot;category&quot;:&quot;Tablets&quot;}, &quot;avg_prices&quot; : 396.42714}
+</code></pre>
 
 <p>The <code>$addToSet</code> operator without counterpart in SQL:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">categories</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;categories&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;Laptops&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">]}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:{&quot;maker&quot;:&quot;$manufacturer&quot;}, // creating new collection
+      categories:{$addToSet:&quot;$category&quot;}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : {&quot;maker&quot;:&quot;Apple&quot;}, &quot;categories&quot; : [&quot;Laptops&quot;, &quot;Tablets&quot;]}
+</code></pre>
 
 <p>The <code>$push</code> operator:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">categories</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;categories&quot;</span> <span style="color: #f92672">:</span>
-  <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Laptops&quot;</span><span style="color: #f8f8f2">]}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:{&quot;maker&quot;:&quot;$manufacturer&quot;}, // creating new collection
+      categories:{$push:&quot;$category&quot;}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : {&quot;maker&quot;:&quot;Apple&quot;}, &quot;categories&quot; :
+  [&quot;Tablets&quot;, &quot;Tablets&quot;, &quot;Tablets&quot;, &quot;Laptops&quot;]}
+</code></pre>
 
 <p>The <code>$max</code> and <code>$min</code> operators:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span> <span style="color: #75715e">// array</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// creating new collection</span>
-      <span style="color: #a6e22e">maxprice</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$max</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #75715e">// a series of upserts</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Apple&quot;</span><span style="color: #f8f8f2">},</span> <span style="color: #e6db74">&quot;maxprice&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">699</span> <span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.products.aggregate([ // array
+  {$group:
+    {
+      _id:{&quot;maker&quot;:&quot;$manufacturer&quot;}, // creating new collection
+      maxprice:{$max:&quot;$price&quot;}
+    } // a series of upserts
+  }
+])
+{&quot;_id&quot; : {&quot;maker&quot;:&quot;Apple&quot;}, &quot;maxprice&quot; : 699 }
+</code></pre>
 
 <p>The <code>$project</code> phase/stage: you can remove, add, reshape keys, use simple functions on keys such as <code>$toUpper</code>, <code>$toLower</code>, <code>$add</code>, <code>$multiply</code>.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">products</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&#39;maker&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$toLower</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$manufacturer&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;details&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;category&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$category&quot;</span><span style="color: #f8f8f2">,</span>
-        <span style="color: #e6db74">&#39;price&#39;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$multiply&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #e6db74">&quot;$price&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">]}</span>
-      <span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;item&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$name&#39;</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;maker&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;amazon&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;details&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;category&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Tablets&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;price&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1990</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #e6db74">&quot;item&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Kindle Fire&quot;</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.products.aggregate([
+  {$project:
+    {
+      _id:0,
+      'maker': {$toLower:&quot;$manufacturer&quot;},
+      'details': {'category': &quot;$category&quot;,
+        'price' : {&quot;$multiply&quot;:[&quot;$price&quot;,10]}
+      },
+      'item':'$name'
+    }
+  }
+])
+{&quot;maker&quot;:&quot;amazon&quot;, &quot;details&quot;:{&quot;category&quot;:&quot;Tablets&quot;, &quot;price&quot;:1990},
+  &quot;item&quot;:&quot;Kindle Fire&quot;}
+</code></pre>
 
 <p>The <code>$match</code> phase. One thing to note about $match (and $sort) is that 
 <a target="_blank" href="http://docs.mongodb.org/manual/core/aggregation-pipeline/?_ga=1.241498631.463502008.1466893758">they can use indexes</a> <i class="fa fa-external-link"></i>
 , but only if done at the beginning of the aggregation pipeline. 
 <a target="_blank" href="https://docs.mongodb.com/manual/tutorial/aggregation-zip-code-data-set/">Example zips collection.</a> <i class="fa fa-external-link"></i>
 </p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$match</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">state</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;NY&quot;</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$city&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #a6e22e">zip_codes</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #a6e22e">zip_codes</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">population</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$skip</span><span style="color: #f92672">:</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$limit</span><span style="color: #f92672">:</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;population&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">9743</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;zip_codes&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">96162</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">96161</span><span style="color: #f8f8f2">],</span> <span style="color: #e6db74">&quot;city&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;TRUCKEE&quot;</span><span style="color: #f8f8f2">}</span>
-<span style="color: #75715e">// order of fields not retained</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.zips.aggregate([
+  {$match:
+    {
+      state:&quot;NY&quot;
+    }
+  },
+  {$group:
+    {
+      _id: &quot;$city&quot;,
+      population: {$sum:&quot;$pop&quot;},
+      zip_codes: {$addToSet: &quot;$_id&quot;}
+    }
+  },
+  {$project:
+    {
+      _id: 0,
+      city: &quot;$_id&quot;,
+      population: 1,
+      zip_codes:1
+    }
+  },
+  {$sort:
+    {population:-1}
+  },
+  {$skip:10},
+  {$limit:5}
+])
+{&quot;population&quot;:9743, &quot;zip_codes&quot;:[96162, 96161], &quot;city&quot;:&quot;TRUCKEE&quot;}
+// order of fields not retained
+</code></pre>
 
 <p><code>$sort</code> operator. The aggregation framework supports both memory (default, 100 MB limit for each pipeline stage unless allowing disk) and disk based sorting. Sorting can be done before or after the grouping stage.</p>
 
@@ -680,29 +697,30 @@
 <p><code>$unwind</code> operator: it&rsquo;s not easy to group on the array elements (prejoined data) so we need to flatten (unjoin, data explosion) the array.</p>
 
 <p>To count how many posts were attached to each tag in the blog,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">use</span> <span style="color: #a6e22e">blog</span><span style="color: #f8f8f2">;</span>
-<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">posts</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-    <span style="color: #75715e">/* unwind by tags */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$unwind&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$tags&quot;</span><span style="color: #f8f8f2">},</span>
-    <span style="color: #75715e">/* now group by tags, counting each tag */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$group&quot;</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$tags&quot;</span><span style="color: #f8f8f2">,</span>
-    <span style="color: #e6db74">&quot;count&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* sort by popularity */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$sort&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;count&quot;</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}},</span>
-  <span style="color: #75715e">/* show me the top 10 */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$limit&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">10</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* change the name of _id to be tag */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$project&quot;</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&#39;tag&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$_id&#39;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&#39;count&#39;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">use blog;
+db.posts.aggregate([
+    /* unwind by tags */
+  {&quot;$unwind&quot;:&quot;$tags&quot;},
+    /* now group by tags, counting each tag */
+  {&quot;$group&quot;:
+    {&quot;_id&quot;:&quot;$tags&quot;,
+    &quot;count&quot;:{$sum:1}
+    }
+  },
+  /* sort by popularity */
+  {&quot;$sort&quot;:{&quot;count&quot;:-1}},
+  /* show me the top 10 */
+  {&quot;$limit&quot;: 10},
+  /* change the name of _id to be tag */
+  {&quot;$project&quot;:
+    {_id:0,
+      'tag':'$_id',
+      'count' : 1
+    }
+  }
+])
+</code></pre>
 
 <div class="admonition note">
 <p class="admonition-title">To reverse $unwind</p>
@@ -714,185 +732,196 @@
 <h3 id="double-grouping-i-class-fa-fa-arrow-up-aria-hidden-true-i">Double Grouping <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h3>
 
 <p>For a collection of student grades like below:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;$oid&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;50b59cd75bed76f46522c34e&quot;</span> <span style="color: #f8f8f2">},</span>
-  <span style="color: #f92672">&quot;student_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;class_id&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #f92672">&quot;scores&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span> <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;exam&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">57.92947112575566</span> <span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;quiz&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">21.24542588206755</span> <span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">68.19567810587429</span> <span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">67.95019716560351</span> <span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">{</span> <span style="color: #f92672">&quot;type&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;homework&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">&quot;score&quot;</span> <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">18.81037253352722</span> <span style="color: #f8f8f2">}]</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-json">{ &quot;_id&quot; : { &quot;$oid&quot; : &quot;50b59cd75bed76f46522c34e&quot; },
+  &quot;student_id&quot; : 0, &quot;class_id&quot; : 2,
+  &quot;scores&quot; : [ { &quot;type&quot; : &quot;exam&quot;, &quot;score&quot; : 57.92947112575566 },
+    { &quot;type&quot; : &quot;quiz&quot;, &quot;score&quot; : 21.24542588206755 },
+    { &quot;type&quot; : &quot;homework&quot;, &quot;score&quot; : 68.19567810587429 },
+    { &quot;type&quot; : &quot;homework&quot;, &quot;score&quot; : 67.95019716560351 },
+    { &quot;type&quot; : &quot;homework&quot;, &quot;score&quot; : 18.81037253352722 }]
+}
+</code></pre>
 
 <p>We want to figure out the average class grade for each class,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">grades</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$class_id&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$student_id&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;average&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$avg&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$score&quot;</span><span style="color: #f8f8f2">}}</span>
-    <span style="color: #f8f8f2">},</span> <span style="color: #75715e">// pipe to a secondary grouping stage</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.class_id&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;average&#39;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;$avg&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$average&quot;</span><span style="color: #f8f8f2">}}}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.grades.aggregate([
+    {'$group':{_id:{class_id:&quot;$class_id&quot;, student_id:&quot;$student_id&quot;},
+      'average':{&quot;$avg&quot;:&quot;$score&quot;}}
+    }, // pipe to a secondary grouping stage
+    {'$group':{_id:&quot;$_id.class_id&quot;, 'average':{&quot;$avg&quot;:&quot;$average&quot;}}}
+])
+</code></pre>
 
 <p><code>$first</code> and <code>$last</code>, example: find city with largest population in each state.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">b</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #75715e">/* get the population of every city in every state */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">state</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$city&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* sort by state, population */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id.state&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;population&quot;</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* group by state, get the first item in each group */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.state&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #a6e22e">city</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$first</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.city&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$first</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$population&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* now sort by state again */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span>
-   <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;_id&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">b.zips.aggregate([
+  /* get the population of every city in every state */
+  {$group:
+    {
+      _id: {state:&quot;$state&quot;, city:&quot;$city&quot;},
+      population: {$sum:&quot;$pop&quot;},
+    }
+  },
+  /* sort by state, population */
+  {$sort:
+    {&quot;_id.state&quot;:1, &quot;population&quot;:-1}
+  },
+  /* group by state, get the first item in each group */
+  {$group:
+    {
+      _id:&quot;$_id.state&quot;,
+      city: {$first: &quot;$_id.city&quot;},
+      population: {$first:&quot;$population&quot;}
+    }
+  },
+  /* now sort by state again */
+  {$sort:
+   {&quot;_id&quot;:1}
+  }
+])
+</code></pre>
 
 <p><code>$out</code> redirects the output to a new collection, write over, no appending, considering a games collection with documents structured like,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">{</span>
-  <span style="color: #e6db74">&quot;_id&quot;</span>:ObjectId<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;53684890&quot;</span><span style="color: #f92672">)</span>,
-  first_name: <span style="color: #e6db74">&quot;Jerzy&quot;</span>,
-  last_name: <span style="color: #e6db74">&quot;Fischer&quot;</span>,
+
+<pre><code class="language-sh">{
+  &quot;_id&quot;:ObjectId(&quot;53684890&quot;),
+  first_name: &quot;Jerzy&quot;,
+  last_name: &quot;Fischer&quot;,
   points: 3,
-  moves: <span style="color: #f92672">[</span>1,2,5<span style="color: #f92672">]</span>
-<span style="color: #f92672">}</span>
-</pre></div>
+  moves: [1,2,5]
+}
+</code></pre>
 
 <p>To summarize each person&rsquo;s points,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">games</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">first_name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$first_name&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">last_name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$last_name&quot;</span><span style="color: #f8f8f2">},</span>
-    <span style="color: #a6e22e">points</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$points&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$out</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;summary_results&quot;</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.games.aggregate([
+  {$group:
+    {_id:{first_name:&quot;$first_name&quot;, last_name:&quot;$last_name&quot;},
+    points:{$sum:&quot;$points&quot;}
+    }
+  },
+  {$out:&quot;summary_results&quot;}
+])
+</code></pre>
 
 <p>Note that the <code>_id</code> field of the redirected output must be unique, the operations below will not succeed and leave the <code>summary_results</code> collection untouched.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">games</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;moves&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$out</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;summary_results&quot;</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.games.aggregate([
+  {$unwind:&quot;moves&quot;},
+  {$out:&quot;summary_results&quot;}
+])
+</code></pre>
 
 <h3 id="double-unwind">Double <code>$unwind</code></h3>
 
 <p>Create a Cartesian product of the two or more arrays.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;size&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$sizes&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;color&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;$colors&#39;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;count&#39;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.inventory.aggregate([
+  {$unwind: &quot;$sizes&quot;},
+  {$unwind: &quot;$colors&quot;},
+  {$group:
+    {
+      '_id': {'size':'$sizes', 'color':'$colors'},
+      'count' : {'$sum':1}
+    }
+  }
+])
+</code></pre>
 
 <p>To reverse with <code>$addToSet</code> in one stage since array elements were unique,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$name&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&#39;sizes&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;colors&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$addToSet</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.inventory.aggregate([
+  {$unwind: &quot;$sizes&quot;},
+  {$unwind: &quot;$colors&quot;},
+  {$group:
+    {
+      '_id': &quot;$name&quot;,
+      'sizes': {$addToSet: &quot;$sizes&quot;},
+      'colors': {$addToSet: &quot;$colors&quot;},
+    }
+  }
+])
+</code></pre>
 
 <p>To reverse with <code>$push</code>,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">inventory</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$unwind</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* create the color array */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">name</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$name&quot;</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">size</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$sizes&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;colors&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* create the size array */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.name&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&#39;colors&#39;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$colors&quot;</span><span style="color: #f8f8f2">},</span>
-      <span style="color: #e6db74">&#39;sizes&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$push</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.size&quot;</span><span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #75715e">/* reshape for beauty */</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&quot;name&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$_id.name&quot;</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&quot;sizes&quot;</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
-      <span style="color: #e6db74">&quot;colors&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;$_id.colors&quot;</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">])</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.inventory.aggregate([
+  {$unwind: &quot;$sizes&quot;},
+  {$unwind: &quot;$colors&quot;},
+  /* create the color array */
+  {$group:
+    {
+      '_id': {name:&quot;$name&quot;,size:&quot;$sizes&quot;},
+      'colors': {$push: &quot;$colors&quot;},
+    }
+  },
+  /* create the size array */
+  {$group:
+    {
+      '_id': {'name':&quot;$_id.name&quot;,
+      'colors' : &quot;$colors&quot;},
+      'sizes': {$push: &quot;$_id.size&quot;}
+    }
+  },
+  /* reshape for beauty */
+  {$project:
+    {
+      _id:0,
+      &quot;name&quot;:&quot;$_id.name&quot;,
+      &quot;sizes&quot;:1,
+      &quot;colors&quot;: &quot;$_id.colors&quot;
+    }
+  }
+])
+</code></pre>
 
 <h3 id="full-text-search-and-aggregation-i-class-fa-fa-arrow-up-aria-hidden-true-i">Full Text Search and Aggregation <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h3>
 
 <p>&ldquo;Two great taste that go great together.&rdquo; - <a href="https://twitter.com/erlichson?lang=en">Andrew Erlichson</a>.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">([</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$match</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$text</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$search</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;tree rat&quot;</span><span style="color: #f8f8f2">}}},</span><span style="color: #75715e">// must appear first</span>
-  <span style="color: #75715e">// one full text search per collection, no need to specify</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sort</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">score</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$meta</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;textScore&quot;</span><span style="color: #f8f8f2">}}},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$project</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">words</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">}}</span>
-<span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;words&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;rat shrub granite.&quot;</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.sentences.aggregate([
+  {$match:{$text:{$search:&quot;tree rat&quot;}}},// must appear first
+  // one full text search per collection, no need to specify
+  {$sort:{score:{$meta:&quot;textScore&quot;}}},
+  {$project:{words:1, _id:0}}
+])
+{&quot;words&quot;:&quot;rat shrub granite.&quot;}
+</code></pre>
 
 <p><code>$text</code> is only allowed in the $match stage of the aggregation pipeline and must be the first stage of the aggregation pipeline.</p>
 
 <h3 id="aggregation-with-java-driver">Aggregation with Java driver</h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ZipCodeAggregationTest</span> <span style="color: #f92672">{</span>
-  <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Strng</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">MongoClient</span> <span style="color: #f8f8f2">client</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MongoClient</span><span style="color: #f92672">();</span>
-    <span style="color: #f8f8f2">MongoDatabase</span> <span style="color: #f8f8f2">database</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getDatabase</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;course&quot;</span><span style="color: #f92672">);</span>
-    <span style="color: #f8f8f2">MongoCollection</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">collection</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">database</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getCollection</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;zipcodes&quot;</span><span style="color: #f92672">);</span>
 
-    <span style="color: #75715e">// verbose</span>
-    <span style="color: #75715e">// List&lt;Document&gt; pipeline = Arrays.asList(new Document(&quot;$group&quot;,</span>
-    <span style="color: #75715e">//   new Document(&quot;_id&quot;, &quot;$state&quot;).append(&quot;totalPop&quot;, new Document(</span>
-    <span style="color: #75715e">//     &quot;$sum&quot;, &quot;$pop&quot;))), new Document(&quot;$match&quot;, new Document(&quot;totalPop&quot;,</span>
-    <span style="color: #75715e">//       new Document(&quot;$gte&quot;, 10000000))));</span>
+<pre><code class="language-java">public class ZipCodeAggregationTest {
+  public static void main (Strng[] args) {
+    MongoClient client = new MongoClient();
+    MongoDatabase database = client.getDatabase(&quot;course&quot;);
+    MongoCollection&lt;Document&gt; collection = database.getCollection(&quot;zipcodes&quot;);
 
-    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Bson</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">pipeline</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Aggregates</span><span style="color: #f92672">.</span><span style="color: #a6e22e">group</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">Accumulators</span><span style="color: #f92672">.</span><span style="color: #a6e22e">sum</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;totalPop&quot;</span><span style="color: #f92672">,</span>
-      <span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f92672">)),</span> <span style="color: #f8f8f2">Aggregates</span><span style="color: #f92672">.</span><span style="color: #a6e22e">match</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">gte</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;totalPop&quot;</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">10000000</span><span style="color: #f92672">)));</span>
+    // verbose
+    // List&lt;Document&gt; pipeline = Arrays.asList(new Document(&quot;$group&quot;,
+    //   new Document(&quot;_id&quot;, &quot;$state&quot;).append(&quot;totalPop&quot;, new Document(
+    //     &quot;$sum&quot;, &quot;$pop&quot;))), new Document(&quot;$match&quot;, new Document(&quot;totalPop&quot;,
+    //       new Document(&quot;$gte&quot;, 10000000))));
 
-    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">pipeline2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Arrays</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asList</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">.</span><span style="color: #a6e22e">parse</span><span style="color: #f92672">(</span>
-      <span style="color: #e6db74">&quot;{ $group: { _id: \&quot;$state\&quot;, totalPop: { $sum: \&quot;$pop\&quot; } } }&quot;</span><span style="color: #f92672">),</span>
-      <span style="color: #f8f8f2">Document</span><span style="color: #f92672">.</span><span style="color: #a6e22e">parse</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;{ $match: { totalPop: { $gte: 1010001000 } } }&quot;</span><span style="color: #f92672">));</span>
+    List&lt;Bson&gt; pipeline = Arrays.asList(Aggregates.group(&quot;$state&quot;, Accumulators.sum(&quot;totalPop&quot;,
+      &quot;$pop&quot;)), Aggregates.match(gte(&quot;totalPop&quot;, 10000000)));
 
-    <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">results</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">collection</span><span style="color: #f92672">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">pipeline</span><span style="color: #f92672">).</span>
-      <span style="color: #f8f8f2">into</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Document</span><span style="color: #f92672">&gt;());</span>
-    <span style="color: #75715e">// List&lt;Document&gt; results = collection.find().into(new ArrayList&lt;Document&gt;());</span>
+    List&lt;Document&gt; pipeline2 = Arrays.asList(Document.parse(
+      &quot;{ $group: { _id: \&quot;$state\&quot;, totalPop: { $sum: \&quot;$pop\&quot; } } }&quot;),
+      Document.parse(&quot;{ $match: { totalPop: { $gte: 1010001000 } } }&quot;));
 
-    <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Document</span> <span style="color: #f8f8f2">cur</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">results</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-      <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">cur</span><span style="color: #f92672">.</span><span style="color: #a6e22e">toJson</span><span style="color: #f92672">());</span>
-    <span style="color: #f92672">}</span>
-  <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
-</pre></div>
+    List&lt;Document&gt; results = collection.aggregate(pipeline).
+      into(new ArrayList&lt;Document&gt;());
+    // List&lt;Document&gt; results = collection.find().into(new ArrayList&lt;Document&gt;());
+
+    for (Document cur : results) {
+      System.out.println(cur.toJson());
+    }
+  }
+}
+</code></pre>
 
 <h2 id="aggregation-options">Aggregation Options</h2>
 
@@ -901,13 +930,14 @@
 <li><code>allowDiskUse</code> allows use of hard drive for intermediate stages. Any stage is limited to 100 MB of memory use and will fail if exceeded. Certain stages like projection run the documents through and don&rsquo;t use a lot of memory.</li>
 <li><code>cursor</code> allows cursor use and specify cursor size.</li>
 </ul>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">use</span> <span style="color: #a6e22e">agg</span>
-<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">zips</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">aggregate</span><span style="color: #f8f8f2">(</span>
-  <span style="color: #f8f8f2">[{</span><span style="color: #a6e22e">$group</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$state&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">population</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$sum</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;$pop&quot;</span><span style="color: #f8f8f2">}}}],</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">explain</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">allowDiskUse</span><span style="color: #f92672">:</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">)</span>
-</pre></div>
+
+<pre><code class="language-javascript">use agg
+db.zips.aggregate(
+  [{$group:{_id:&quot;$state&quot;, population:{$sum:&quot;$pop&quot;}}}],
+  {explain:true},
+  {allowDiskUse:true}
+)
+</code></pre>
 
 <p>Two forms of aggregation:</p>
 
@@ -919,26 +949,28 @@
 <p>Prior to the release of the 3.0 pymongo driver, you would get a document for aggregation queries by default (the aggregation result is limited by the 16 Mb size), though you had the option of getting back a cursor if you were working with MongoDB 2.6.0+, and your pymongo version was 2.6.0+. Starting with the release of the 3.0 pymongo driver, however the aggregation pipeline queries using the driver will now return a cursor by default.</p>
 
 <p>The mongo shell returns a cursor by default starting 2.6.0.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">pymongo</span>
-<span style="color: #f8f8f2">connection</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pymongo</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">MongoClient()</span>
-<span style="color: #f8f8f2">db</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">connection</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">agg</span>
 
-<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zips</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">aggregate([{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;state&#39;</span><span style="color: #f8f8f2">,</span>
-  <span style="color: #e6db74">&#39;population&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;$pop&#39;</span><span style="color: #f8f8f2">}}}])</span>
+<pre><code class="language-python">import pymongo
+connection = pymongo.MongoClient()
+db = connection.agg
 
-<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">result</span>
-<span style="color: #75715e"># &lt;pymongo.command_cursor.CommandCursor object at 0x7f62829f5210&gt; in 3.2.6</span>
+result = db.zips.aggregate([{'$group':{'_id':'state',
+  'population':{'$sum':'$pop'}}}])
 
-<span style="color: #75715e"># piror to 3.0</span>
-<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zips</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">aggregate([{</span><span style="color: #e6db74">&#39;$group&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;_id&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;state&#39;</span><span style="color: #f8f8f2">,</span>
-    <span style="color: #e6db74">&#39;population&#39;</span><span style="color: #f8f8f2">:{</span><span style="color: #e6db74">&#39;$sum&#39;</span><span style="color: #f8f8f2">:</span><span style="color: #e6db74">&#39;$pop&#39;</span><span style="color: #f8f8f2">}}}],</span> <span style="color: #f8f8f2">cursor</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">{},</span> <span style="color: #f8f8f2">allowDiskUse</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+print result
+# &lt;pymongo.command_cursor.CommandCursor object at 0x7f62829f5210&gt; in 3.2.6
 
-<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">doc</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">result:</span>
-    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">doc</span>
-</pre></div>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># prior to 3.0</span>
-<span style="color: #f92672">{</span>u<span style="color: #e6db74">&#39;ok&#39;</span>:1.0, u<span style="color: #e6db74">&#39;result&#39;</span> : <span style="color: #f92672">[</span>array of resulted documents<span style="color: #f92672">]}</span>
-</pre></div>
+# piror to 3.0
+result = db.zips.aggregate([{'$group':{'_id':'state',
+    'population':{'$sum':'$pop'}}}], cursor={}, allowDiskUse=True)
+
+for doc in result:
+    print doc
+</code></pre>
+
+<pre><code class="language-sh"># prior to 3.0
+{u'ok':1.0, u'result' : [array of resulted documents]}
+</code></pre>
 
 <h1 id="limitations-of-aggregation-framework">Limitations of Aggregation framework</h1>
 
@@ -1073,42 +1105,10 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -1143,6 +1143,9 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

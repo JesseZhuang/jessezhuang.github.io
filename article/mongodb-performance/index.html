@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -441,9 +447,10 @@
 <p><img src="http://jessezhuang.github.io/img/mongodb-index-size.png" alt="Indexes should fit into memory" /></p>
 
 <p>It&rsquo;s essential to fit working set (key component: Indexes) into memory. To check indexes sizes in mongo shell:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">collection</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stats</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">//detailed for each index</span>
-<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">collection</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">totalIndexSize</span><span style="color: #f8f8f2">()</span> <span style="color: #75715e">//just the total</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.collection.stats() //detailed for each index
+db.collection.totalIndexSize() //just the total
+</code></pre>
 
 <p>For a 10 million documents students collection, each index is about 300 Mb with <a href="#mmap-v1">MMAP V1 storage engine</a>. Since 3.0, the <a href="#wired-tiger">wired tiger storage engine</a> provides a few types of compression, one of which, i.e., prefix compression allows us to have smaller indexes. The same index is about 100 Mb instead of 300 Mb. The compression comes at the cost of CPU and whether the dataset can take advantage of something like prefix compression.</p>
 
@@ -464,8 +471,9 @@
 <h3 id="2d-type">2D Type</h3>
 
 <p>Allows to find things based on location. Documents have <code>'location':[x,y]</code> stored in them representing establishments around a person such as restaurants or coffee shops. <code>createIndex({'location':'2d', type:1})</code> (2d is reserved type for two dimensional geo indexes). Use</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">location</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$near</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">x0</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">y0</span><span style="color: #f8f8f2">]}}).</span><span style="color: #a6e22e">limit</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span>
-</pre></div>
+
+<pre><code class="language-javascript">find({location:{$near:[x0,y0]}}).limit(20)
+</code></pre>
 
 <p>to find closest establishments where <code>$near</code> is a query operator and <code>[x0,y0]</code> is ther person&rsquo;s standing point.</p>
 
@@ -476,43 +484,48 @@
 . A GeoJSON document is used for the value of key <code>location</code>. Google maps shows <code>@latitude,longitude</code> as part of the url for a particular location. MongoDB takes an opposite order <code>@longitude,latitude</code>. Although it&rsquo;s a spherical model, it&rsquo;s only looking at points at the surface of the sphere other than points in the air.</p>
 
 <p>First, create indexes,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">places</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">createIndex</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;location&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;2dsphere&#39;</span><span style="color: #f8f8f2">})</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.places.createIndex({'location':'2dsphere'})
+</code></pre>
 
 <p>then, to find nearest point to hoover tower, in <code>geonear.js</code>,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">places</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span>
-  <span style="color: #a6e22e">location</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">$near</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">$geometry</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">type</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;Point&quot;</span><span style="color: #f8f8f2">,</span>
-        <span style="color: #a6e22e">coordinates</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">122</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">37</span><span style="color: #f8f8f2">]</span><span style="color: #75715e">// hoover tower</span>
-      <span style="color: #f8f8f2">},</span>
-      <span style="color: #a6e22e">$maxDistance</span><span style="color: #f92672">:</span><span style="color: #ae81ff">2000</span> <span style="color: #75715e">// in meters</span>
-    <span style="color: #f8f8f2">}</span>
-  <span style="color: #f8f8f2">}).</span><span style="color: #a6e22e">pretty</span><span style="color: #f8f8f2">()</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.places.find(
+  location:{
+    $near:{
+      $geometry:{
+        type:&quot;Point&quot;,
+        coordinates:[-122,37]// hoover tower
+      },
+      $maxDistance:2000 // in meters
+    }
+  }).pretty()
+</code></pre>
 
 <p>to run the above query,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mongo &lt; geonear.js
-</pre></div>
+
+<pre><code class="language-sh">mongo &lt; geonear.js
+</code></pre>
 
 <h2 id="text-indexes">Text Indexes</h2>
 
 <p>aka Full text search index. Typically, when searching strings, the entire string must match. Except that a regex search will search the index (rather than the full collection), and if you anchor it on the left by beginning with ^, you can often do better still. 
 <a target="_blank" href="http://docs.mongodb.org/manual/reference/operator/query/regex/?_ga=1.222763675.1452504667.1464414259#index-use">Here&rsquo;s a link to the documentation</a> <i class="fa fa-external-link"></i>
 . Alternatively, put every word into an array and use set operators.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">createIndex</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;words&#39;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;text&#39;</span><span style="color: #f8f8f2">})</span>
-<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">$text</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$search</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;dog&#39;</span><span style="color: #f8f8f2">}})</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.sentences.createIndex({'words':'text'})
+db.sentences.find({$text:{$search:'dog'}})
+</code></pre>
 
 <p>A regular search <code>db.sentences.find({'words':'dog'})</code> will return nothing.</p>
 
 <p>We can rank the results by a score,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sentences</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$text</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$search</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;dog tree obsidian&#39;</span><span style="color: #f8f8f2">}},</span>
-  <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$score</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$meta</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;textScore&#39;</span><span style="color: #f8f8f2">}}</span>
-<span style="color: #f8f8f2">).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">$score</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$meta</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;textScore&#39;</span><span style="color: #f8f8f2">}})</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.sentences.find(
+  {$text:{$search:'dog tree obsidian'}},
+  {$score:{$meta:'textScore'}}
+).sort({$score:{$meta:'textScore'}})
+</code></pre>
 
 <h2 id="index-design-i-class-fa-fa-arrow-up-aria-hidden-true-i">Index Design <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></h2>
 
@@ -524,27 +537,30 @@
 </ul>
 
 <p>Example query for 1 million student records:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">students</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$gt</span><span style="color: #f92672">:</span><span style="color: #ae81ff">500000</span><span style="color: #f8f8f2">},</span> <span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">54</span><span style="color: #f8f8f2">})</span>
-    <span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}).</span><span style="color: #a6e22e">hint</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span> <span style="color: #75715e">// specify index shape</span>
-  <span style="color: #f8f8f2">).</span><span style="color: #a6e22e">explain</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;executionstats&quot;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.students.find(
+    {student_id:{$gt:500000}, class_id:54})
+    .sort({student_id:1}).hint({class_id:1} // specify index shape
+  ).explain(&quot;executionstats&quot;)
+</code></pre>
 
 <p>Note without <code>hint()</code>, <code>&quot;totalKeysExamined&quot; : 850433</code> &gt;&gt; <code>&quot;nReturned&quot; : 10118</code>, so index was not very selective. Check <code>queryPlanner</code>,  <code>winningPlan</code>, and <code>rejectedPlans</code> section, the student id query examines half of the collection. A query using <code>class_id</code> as an index would need a in memory sort (<code>&quot;stage&quot; : &quot;SORT&quot;</code>) instead of one within the database so was rejected. With <code>hint()</code> <code>&quot;totalKeysExamined&quot; : 20071</code>. <code>&quot;executionTimeMillis&quot;</code> also dropped to 79 ms from 2600 ms.</p>
 
 <p>With <code>db.students.createIndex({class_id:1, student_id:1})</code> we will be using the most selective part of the query which is an equality/point query other than the range query on the  <code>student_id</code>. Generally speaking, order equality queries first when building a compound index.</p>
 
 <p>With the above compound index and query below,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">students</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$gt</span><span style="color: #f92672">:</span><span style="color: #ae81ff">500000</span><span style="color: #f8f8f2">},</span> <span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">54</span><span style="color: #f8f8f2">}).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">final_grade</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">})</span>
-  <span style="color: #f8f8f2">).</span><span style="color: #a6e22e">explain</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;executionstats&quot;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.students.find(
+    {student_id:{$gt:500000}, class_id:54}).sort({final_grade:1})
+  ).explain(&quot;executionstats&quot;)
+</code></pre>
 
 <p><code>&quot;totalKeysExamined&quot;</code> and <code>nReturned</code> are 10118, <code>executionTimeMillis</code> 138 ms with in memory sort on <code>final_grade</code> done. It&rsquo;s good to avoid in memory sort when you can, the trade off is to examine a few more keys. We can create another compound index, <code>db.students.createIndex({class_id:1, final_grade:1, student_id:1})</code>, <code>final_grade</code> has to be immediately after <code>class_id</code> since we want to walk the index keys in order.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">students</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span>
-    <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">student_id</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$gt</span><span style="color: #f92672">:</span><span style="color: #ae81ff">500000</span><span style="color: #f8f8f2">},</span> <span style="color: #a6e22e">class_id</span><span style="color: #f92672">:</span><span style="color: #ae81ff">54</span><span style="color: #f8f8f2">}).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">final_grade</span><span style="color: #f92672">:-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">})</span>
-  <span style="color: #f8f8f2">).</span><span style="color: #a6e22e">explain</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;executionstats&quot;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
+
+<pre><code class="language-javascript">db.students.find(
+    {student_id:{$gt:500000}, class_id:54}).sort({final_grade:-1})
+  ).explain(&quot;executionstats&quot;)
+</code></pre>
 
 <p>Now the result show <code>executionTimeMillis : 27</code> and <code>&quot;totalKeysExamined&quot;: 10204</code>. The <code>winningPlan</code> now does not have a sort stage, only a <code>FETCH</code> stage.</p>
 
@@ -565,57 +581,62 @@
 - level 2 log all queries, general debugging</p>
 
 <p>To start the profiler,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mongod -dbpath /usr/local/var/mongodb --profile <span style="color: #ae81ff">1</span> --slowm 2
-<span style="color: #75715e"># logs queries above 2 ms</span>
-</pre></div>
+
+<pre><code class="language-sh">mongod -dbpath /usr/local/var/mongodb --profile 1 --slowm 2
+# logs queries above 2 ms
+</code></pre>
 
 <p>Use <code>db.system.profile.find().pretty()</code> to check for slow queries. For the same above query,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #e6db74">&quot;query&quot;</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span>
-  <span style="color: #e6db74">&quot;student_id&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">10000</span>
-<span style="color: #f8f8f2">}</span>
-<span style="color: #e6db74">&quot;ntoreturn&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
-<span style="color: #e6db74">&quot;nscanned&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">10000000</span><span style="color: #f8f8f2">,</span>
-<span style="color: #f8f8f2">...</span>
-<span style="color: #e6db74">&quot;nReturned&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span>
-<span style="color: #e6db74">&quot;millis&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">4231</span>
-</pre></div>
+
+<pre><code class="language-javascript">&quot;query&quot;:{
+  &quot;student_id&quot; : 10000
+}
+&quot;ntoreturn&quot; : 0,
+&quot;nscanned&quot; : 10000000,
+...
+&quot;nReturned&quot; : 1
+&quot;millis&quot; : 4231
+</code></pre>
 
 <p>This is a cap (fixed size) collection, recycle after it get used up. Some example usages below,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">system</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">profile</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">ns</span><span style="color: #f92672">:</span><span style="color: #e6db74">/school.students/</span><span style="color: #f8f8f2">}).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ts</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">pretty</span><span style="color: #f8f8f2">()</span>
-<span style="color: #75715e">// namespace school database, students collection, sort by timestamp.</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">system</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">profile</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">millis</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$gt</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}}).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ts</span><span style="color: #f92672">:</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">pretty</span><span style="color: #f8f8f2">()</span>
-<span style="color: #75715e">// looks for queries longer than 1 ms.</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">getProfilingLevel</span><span style="color: #f8f8f2">()</span>
-<span style="color: #ae81ff">1</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">getProfilingStatus</span><span style="color: #f8f8f2">()</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;was&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;slowms&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">setProfilingLevel</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">// slow queries above 4 ms</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;was&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;slowms&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ok&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-<span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">setProfilingLevel</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">{</span><span style="color: #e6db74">&quot;was&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;slowms&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ok&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">}</span>
-</pre></div>
+
+<pre><code class="language-javascript">&gt; db.system.profile.find({ns:/school.students/}).sort(ts:1).pretty()
+// namespace school database, students collection, sort by timestamp.
+&gt; db.system.profile.find({millis:{$gt:1}}).sort(ts:1).pretty()
+// looks for queries longer than 1 ms.
+&gt; db.getProfilingLevel()
+1
+&gt; db.getProfilingStatus()
+{&quot;was&quot; : 1, &quot;slowms&quot; : 2}
+&gt; db.setProfilingLevel(1, 4) // slow queries above 4 ms
+{&quot;was&quot; : 1, &quot;slowms&quot; : 2, &quot;ok&quot; : 1}
+&gt; db.setProfilingLevel(0)
+{&quot;was&quot; : 1, &quot;slowms&quot; : 4, &quot;ok&quot; : 1}
+</code></pre>
 
 <h2 id="mongotop-and-mongostat"><code>mongotop</code> and <code>mongostat</code></h2>
 
 <p><code>mongotop</code> is named after <a href="http://jessezhuang.github.io/
 article/linux-cheatsheet/">unix <code>top</code></a>, which gives a high level view where mongo spends most of its time. Subsequently, one can follow up for more detailed examining and optimizing.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongotop <span style="color: #ae81ff">3</span> <span style="color: #75715e"># default returns every second, this set to 3 seconds</span>
-ns                    total    <span style="color: #f8f8f2">read</span>    write    2016-06-25T23:32:52-07:00
+
+<pre><code class="language-sh">$ mongotop 3 # default returns every second, this set to 3 seconds
+ns                    total    read    write    2016-06-25T23:32:52-07:00
 admin.system.roles      0ms     0ms      0ms                             
 admin.system.version    0ms     0ms      0ms                             
 blog.posts              0ms     0ms      0ms                             
 blog.sessions           0ms     0ms      0ms
-</pre></div>
+</code></pre>
 
 <p><code>mongostat</code> is a performance tuning command, similar to <a href="http://jessezhuang.github.io/
 article/linux-cheatsheet/which">unix <code>iostat</code></a> samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. <code>getmore</code> is getting more from a cursor for a query with a large result. <code>qr|qw ar|aw</code> are queues and active reads and writes. <code>%dirty %used</code> refers to percentage of WiredTiger cache. <code>res</code> resident memory size smaller for WiredTiger. For MMAPv1 engine, <code>faults</code> number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for 
 <a target="_blank" href="https://docs.mongodb.com/manual/reference/program/mongostat/">mongostat doc</a> <i class="fa fa-external-link"></i>
 .</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ mongostat <span style="color: #f92672">[</span>--port 27017<span style="color: #f92672">]</span>
-insert query update delete getmore <span style="color: #f8f8f2">command</span> % dirty % used    res qr<span style="color: #f8f8f2">|</span>qw ar<span style="color: #f8f8f2">|</span>aw netIn netOut
-    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0  52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k
-    *0    *0     *0     *0       <span style="color: #ae81ff">0</span>     1<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>     0.0    0.0  52.0M   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   0<span style="color: #f8f8f2">|</span><span style="color: #ae81ff">0</span>   79b    18k
-</pre></div>
+
+<pre><code class="language-sh">$ mongostat [--port 27017]
+insert query update delete getmore command % dirty % used    res qr|qw ar|aw netIn netOut
+    *0    *0     *0     *0       0     1|0     0.0    0.0  52.0M   0|0   0|0   79b    18k
+    *0    *0     *0     *0       0     1|0     0.0    0.0  52.0M   0|0   0|0   79b    18k
+</code></pre>
 
 <h2 id="sharding-overview">Sharding Overview</h2>
 
@@ -702,7 +723,7 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 
   <div class="next">
   
-      <a href="http://jessezhuang.github.io/article/second/" title="Using Java&#39;s Reflection for Testing">
+      <a href="http://jessezhuang.github.io/article/java-reflection-test/" title="Using Java&#39;s Reflection for Testing">
         <span class="direction">
           Next
         </span>
@@ -748,42 +769,10 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -818,6 +807,9 @@ tags/mongodb/">Link to the MongoDB tutorial series.</a></p>
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

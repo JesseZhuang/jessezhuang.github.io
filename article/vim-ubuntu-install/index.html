@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -71,7 +76,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -266,7 +272,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -345,6 +351,8 @@
 			<div>
 				Thu, Jun 30, 2016
 				
+					Last Modified: Jul 7, 2016
+				
 				<br>
 				
 				
@@ -394,10 +402,11 @@
 <h1 id="install-vim-with-ppa">Install Vim with PPA</h1>
 
 <p>I have tried to install Vim with debian packages listed on <a href="http://www.vim.org">Vim.org</a> but they did not come with the dependencies. So PPA was an easier way to go. <a href="https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily">ppa:pkg-vim/vim-daily</a> has version 7.4.826 which is good enough.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo add-apt-repository ppa:pkg-vim/vim-daily
+
+<pre><code class="language-sh">sudo add-apt-repository ppa:pkg-vim/vim-daily
 sudo apt-get update
 sudo apt-get install vim
-</pre></div>
+</code></pre>
 
 <p>You can use <code>apt-cache policy vim</code> to check the version of the vim in your repositories.</p>
 
@@ -405,12 +414,15 @@ sudo apt-get install vim
 
 <p>Vim.org has detailed instructions on how to <code>git clone</code> and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use <a href="http://asic-linux.com.mx/~izto/checkinstall/index.php"><code>checkinstall</code></a> just in case you ever want to cleanly remove the installation.</p>
 
+<p>The Vim 7.4.826 version from the PPA does not have system clipboard support by default. Use <code>vim --version | grep 'clipboard'</code> at shell to check. If you have <code>+clipboard</code> and/or <code>+xterm_clipboard</code> then you are good to go. Otherwise you can either install from source or <code>sudo apt-get install vim-gnome</code> which already has the clipboard support.</p>
+
 <h1 id="basic-configuration-to-enable-markdown-highlighting">Basic Configuration to Enable Markdown Highlighting</h1>
 
 <p>This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>syntax on
+
+<pre><code class="language-sh">syntax on
 colorscheme industry
-</pre></div>
+</code></pre>
 
 <p>then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.</p>
 
@@ -461,7 +473,7 @@ colorscheme industry
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
+      <a href="http://jessezhuang.github.io/article/vim-cheatsheet/" title="Vim Cheatsheet">
         <span class="direction">
           Previous
         </span>
@@ -471,7 +483,7 @@ colorscheme industry
           </div>
           <div class="stretch">
             <div class="title">
-              Virtualbox Tips for Ubuntu Guest in Windows Host
+              Vim Cheatsheet
             </div>
           </div>
         </div>
@@ -527,42 +539,10 @@ colorscheme industry
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -597,6 +577,9 @@ colorscheme industry
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>

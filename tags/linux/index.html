@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/palettes.css">
     <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/materialize.zz.css">
 
+    <link rel="stylesheet" href="http://jessezhuang.github.io/stylesheets/highlight/monokai-sublime.css">
+    
+    
+    
+    
     
 
     
@@ -74,7 +79,8 @@
     
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    
+    
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
@@ -264,7 +270,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>8</sup></a>
+                tutorial<sup>9</sup></a>
             
         </span>
         
@@ -350,6 +356,15 @@
 
 			<hr>
 			
+			<a href="http://jessezhuang.github.io/article/vim-cheatsheet/" title="Vim Cheatsheet">
+				<h2>Vim Cheatsheet</h2>
+			</a>
+
+			<br>
+			For Ubuntu Linux, Terms: C-x stands for ctrl-x. Copy/Pasting In normal mode: command effect 3y, p copy 3 lines, paste after cursor &ldquo;ayy, &ldquo;ap copy current line to buffer a, paste from buffer a v/V start selecting character, whole line 5ly yanks into default buffer 5 characters from cursor &ldquo;hy yanks into register h, use + register for system clipboard In insert mode: command effect `C-r{register} paste contents of the register C-r&rdquo; to paste from default register C-u to delete everything before the cursor on this line C-w to delete from cursor to the beginning of previous word Move Around In normal mode: command effect 100l go right 100 positions, useful to navigate a long line.
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/vim-ubuntu-install/" title="How to Install Latest Version Vim in Ubuntu 14.04 LTS">
 				<h2>How to Install Latest Version Vim in Ubuntu 14.04 LTS</h2>
 			</a>
@@ -412,42 +427,10 @@
 
     <script src="http://jessezhuang.github.io/javascripts/application.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    
 
-    <script>
-      /* Add headers to scrollspy */
-      var headers   = document.getElementsByTagName("h2");
-      var scrollspy = document.getElementById('scrollspy');
-
-      if(headers.length > 0) {
-        for(var i = 0; i < headers.length; i++) {
-          var li = document.createElement("li");
-          li.setAttribute("class", "anchor");
-
-          var a  = document.createElement("a");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", headers[i].innerHTML);
-          a.innerHTML = headers[i].innerHTML;
-
-          li.appendChild(a)
-          scrollspy.appendChild(li);
-        }
-      } else {
-        scrollspy.parentElement.removeChild(scrollspy)
-      }
-
-
-      /* Add permanent link next to the headers */
-      var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-      for(var i = 0; i < headers.length; i++) {
-          var a = document.createElement("a");
-          a.setAttribute("class", "headerlink");
-          a.setAttribute("href", "#" + headers[i].id);
-          a.setAttribute("title", "Permanent link")
-          a.innerHTML = "#";
-          headers[i].appendChild(a);
-      }
-    </script>
+    
 
     
       <script>
@@ -482,6 +465,9 @@
         });
       </script>
     
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>
