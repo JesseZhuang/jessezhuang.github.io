@@ -6,8 +6,144 @@
     <description>Recent content in Articles on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jul 2016 18:17:10 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jul 2016 00:52:13 -0700</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Sorting Algorithm Summary</title>
+      <link>http://jessezhuang.github.io/article/algorithm-sorting-summary/</link>
+      <pubDate>Mon, 18 Jul 2016 00:52:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/algorithm-sorting-summary/</guid>
+      <description>&lt;p&gt;The following table summarizes common characteristics of popular sorting algorithms, not including string sort algorithms (I may add those later here or write another separate post).&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;algorithm&lt;/th&gt;
+&lt;th&gt;In Place?&lt;/th&gt;
+&lt;th&gt;Stable?&lt;/th&gt;
+&lt;th&gt;parallel?&lt;/th&gt;
+&lt;th&gt;worst&lt;/th&gt;
+&lt;th&gt;average&lt;/th&gt;
+&lt;th&gt;best&lt;/th&gt;
+&lt;th&gt;remarks&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;selection&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;N exchanges&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;insertion&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/4&lt;/td&gt;
+&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;use for small N or partially ordered&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;shell&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;tight code, sub quadratic&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;merge&lt;/td&gt;
+&lt;td&gt;n&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;NlgN&lt;/td&gt;
+&lt;td&gt;NlgN&lt;/td&gt;
+&lt;td&gt;NlgN&lt;/td&gt;
+&lt;td&gt;NlgN guarantee, stable&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;quick&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;2NlnN&lt;/td&gt;
+&lt;td&gt;NlgN&lt;/td&gt;
+&lt;td&gt;probabilistic guarantee, fastest in practice&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;heap&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;2NlgN&lt;/td&gt;
+&lt;td&gt;2NlgN&lt;/td&gt;
+&lt;td&gt;NlgN&lt;/td&gt;
+&lt;td&gt;NlgN guarantee, in place&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;counting&lt;/td&gt;
+&lt;td&gt;n&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;N+R&lt;/td&gt;
+&lt;td&gt;N+R&lt;/td&gt;
+&lt;td&gt;N+R&lt;/td&gt;
+&lt;td&gt;integer keys, suitable where max-min (R) not &amp;gt;&amp;gt; N, often used as subroutine of radix sort. If sparse, can use hashmap to save space.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;bucket&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;N&lt;sup&gt;2&lt;/sup&gt;/2&lt;/td&gt;
+&lt;td&gt;N+k&lt;/td&gt;
+&lt;td&gt;N+k&lt;/td&gt;
+&lt;td&gt;k denotes number of buckets, needs linked lists, dynamic arrays to hold items in buckets&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Cartesian&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;Nlogk&lt;/td&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;k denotes average of number of consecutive pairs, can be viewed as a version of selection and heap sort maintaining a priority queue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Notes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are in place merge sort algorithms which are a little nontrivial to implement, one way is to do in place merge with bottom up approach. Merge sort on linked lists uses O(1) extra space.&lt;/li&gt;
+&lt;li&gt;3-way quick sort can improve best case running time to O(N) in presence of duplicate keys.&lt;/li&gt;
+&lt;li&gt;Counting sort with key indexed counting is stable, uses extra O(N) space for output array. If disregarding the count array, the input array can be used for returning although it is no longer stable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Implementations in Core Java as of JDK 1.8, &lt;code&gt;DualPivotQuickSort&lt;/code&gt; (cut off threshhold of 47 to insertion sort) is used for primitives and a variant of &lt;code&gt;TimSort&lt;/code&gt; (a stable, adaptive, iterative merge sort adapted from Tim Peter&amp;rsquo;s list sort for Python, uses binary insertion sort) is used for objects.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Virtualbox Tips for Ubuntu Guest in Windows Host</title>

@@ -260,6 +260,10 @@
         <span class="section">Categories</span>
         <span class="tags">
             
+              <a href="http://jessezhuang.github.io/categories/algorithm"
+                title="algorithm">
+                algorithm<sup>1</sup></a>
+            
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
                 cheatsheet<sup>1</sup></a>
@@ -347,6 +351,15 @@
 			<h1>Pages in Article</h1>
 
 			
+			<a href="http://jessezhuang.github.io/article/algorithm-sorting-summary/" title="Sorting Algorithm Summary">
+				<h2>Sorting Algorithm Summary</h2>
+			</a>
+
+			<br>
+			The following table summarizes common characteristics of popular sorting algorithms, not including string sort algorithms (I may add those later here or write another separate post). algorithm In Place? Stable? parallel? worst average best remarks selection y n n N2/2 N2/2 N2/2 N exchanges insertion y y n N2/2 N2/4 N use for small N or partially ordered shell y n n ? ? N tight code, sub quadratic merge n* y y NlgN NlgN NlgN NlgN guarantee, stable quick* y n y N2/2 2NlnN NlgN probabilistic guarantee, fastest in practice heap y n n 2NlgN 2NlgN NlgN NlgN guarantee, in place counting n* n y N+R N+R N+R integer keys, suitable where max-min &reg; not &gt;&gt; N, often used as subroutine of radix sort.
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
 				<h2>Virtualbox Tips for Ubuntu Guest in Windows Host</h2>
 			</a>
@@ -425,15 +438,6 @@
 
 			<br>
 			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/java-reflection-test/" title="Using Java&#39;s Reflection for Testing">
-				<h2>Using Java&#39;s Reflection for Testing</h2>
-			</a>
-
-			<br>
-			Writing Boilerplate Test Code is Boring Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (java.lang.reflect package) to maximize code reuse and help testing. Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing. The code examples below are available at my github repository. Get an Instance of Class Being Tested First we will declare a message to print out if all tests passed.
 
 			<hr>
 			

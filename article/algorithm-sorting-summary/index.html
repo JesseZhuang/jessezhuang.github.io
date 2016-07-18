@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Mongodb - Coding Automaton</title>
+    <title>Sorting Algorithm Summary - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/tags/mongodb/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/algorithm-sorting-summary/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/tags/mongodb/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/algorithm-sorting-summary/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -74,9 +74,6 @@
     <script src="http://jessezhuang.github.io/javascripts/modernizr.js"></script>
 
     
-    <link href="http://jessezhuang.github.io/tags/mongodb/index.xml" rel="alternate" type="application/rss+xml" title="Coding Automaton" />
-    <link href="http://jessezhuang.github.io/tags/mongodb/index.xml" rel="feed" type="application/rss+xml" title="Coding Automaton" />
-    
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
@@ -84,6 +81,11 @@
 
   </head>
   <body class="palette-primary-deep-orange palette-accent-light-blue">
+
+
+
+	
+	
 
 
 <div class="backdrop">
@@ -104,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Mongodb
+        Sorting Algorithm Summary
       </div>
     </div>
 
@@ -348,45 +350,167 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in Mongodb</h1>
-
+			<h1>Sorting Algorithm Summary </h1>
 			
-			<a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Tutorial 6 - Application Engineering">
-				<h2>Mongodb Tutorial 6 - Application Engineering</h2>
-			</a>
+			<div>
+				Mon, Jul 18, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/algorithm">algorithm</a>
+				  
+				
+				
 
-			<br>
-			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
+				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+				  
+				
+				
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-intro/" title="Mongodb Tutorial 1 - Introduction">
-				<h2>Mongodb Tutorial 1 - Introduction</h2>
-			</a>
 
-			<br>
-			To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js # or just mongo source.js To import/export data, $ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt; $ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json $ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; &ndash;out file.json $ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson # by default writes BSON file to dump/ in current directory $ mongodump -d &lt;database&gt; -c &lt;collection [&ndash;out &lt;path&gt;] What is MongoDB?
+			</div>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Tutorial 5 - Aggregation Framework">
-				<h2>MongoDB Tutorial 5 - Aggregation Framework</h2>
-			</a>
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        
+      </div>
 
-			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .
+			<p>The following table summarizes common characteristics of popular sorting algorithms, not including string sort algorithms (I may add those later here or write another separate post).</p>
 
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
-				<h2>MongoDB Tutorial 4 - Performance</h2>
-			</a>
+<table>
+<thead>
+<tr>
+<th>algorithm</th>
+<th>In Place?</th>
+<th>Stable?</th>
+<th>parallel?</th>
+<th>worst</th>
+<th>average</th>
+<th>best</th>
+<th>remarks</th>
+</tr>
+</thead>
 
-			<br>
-			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+<tbody>
+<tr>
+<td>selection</td>
+<td>y</td>
+<td>n</td>
+<td>n</td>
+<td>N<sup>2</sup>/2</td>
+<td>N<sup>2</sup>/2</td>
+<td>N<sup>2</sup>/2</td>
+<td>N exchanges</td>
+</tr>
 
-			<hr>
-			
+<tr>
+<td>insertion</td>
+<td>y</td>
+<td>y</td>
+<td>n</td>
+<td>N<sup>2</sup>/2</td>
+<td>N<sup>2</sup>/4</td>
+<td>N</td>
+<td>use for small N or partially ordered</td>
+</tr>
+
+<tr>
+<td>shell</td>
+<td>y</td>
+<td>n</td>
+<td>n</td>
+<td>?</td>
+<td>?</td>
+<td>N</td>
+<td>tight code, sub quadratic</td>
+</tr>
+
+<tr>
+<td>merge</td>
+<td>n<sup>*</sup></td>
+<td>y</td>
+<td>y</td>
+<td>NlgN</td>
+<td>NlgN</td>
+<td>NlgN</td>
+<td>NlgN guarantee, stable</td>
+</tr>
+
+<tr>
+<td>quick<sup>*</sup></td>
+<td>y</td>
+<td>n</td>
+<td>y</td>
+<td>N<sup>2</sup>/2</td>
+<td>2NlnN</td>
+<td>NlgN</td>
+<td>probabilistic guarantee, fastest in practice</td>
+</tr>
+
+<tr>
+<td>heap</td>
+<td>y</td>
+<td>n</td>
+<td>n</td>
+<td>2NlgN</td>
+<td>2NlgN</td>
+<td>NlgN</td>
+<td>NlgN guarantee, in place</td>
+</tr>
+
+<tr>
+<td>counting</td>
+<td>n<sup>*</sup></td>
+<td>n</td>
+<td>y</td>
+<td>N+R</td>
+<td>N+R</td>
+<td>N+R</td>
+<td>integer keys, suitable where max-min (R) not &gt;&gt; N, often used as subroutine of radix sort. If sparse, can use hashmap to save space.</td>
+</tr>
+
+<tr>
+<td>bucket</td>
+<td>n</td>
+<td>n</td>
+<td>y</td>
+<td>N<sup>2</sup>/2</td>
+<td>N+k</td>
+<td>N+k</td>
+<td>k denotes number of buckets, needs linked lists, dynamic arrays to hold items in buckets</td>
+</tr>
+
+<tr>
+<td>Cartesian</td>
+<td>y</td>
+<td>n</td>
+<td>n</td>
+<td>Nlogk</td>
+<td>?</td>
+<td>N</td>
+<td>k denotes average of number of consecutive pairs, can be viewed as a version of selection and heap sort maintaining a priority queue</td>
+</tr>
+</tbody>
+</table>
+
+<p>Notes:</p>
+
+<ul>
+<li>There are in place merge sort algorithms which are a little nontrivial to implement, one way is to do in place merge with bottom up approach. Merge sort on linked lists uses O(1) extra space.</li>
+<li>3-way quick sort can improve best case running time to O(N) in presence of duplicate keys.</li>
+<li>Counting sort with key indexed counting is stable, uses extra O(N) space for output array. If disregarding the count array, the input array can be used for returning although it is no longer stable.</li>
+</ul>
+
+<p>Implementations in Core Java as of JDK 1.8, <code>DualPivotQuickSort</code> (cut off threshhold of 47 to insertion sort) is used for primitives and a variant of <code>TimSort</code> (a stable, adaptive, iterative merge sort adapted from Tim Peter&rsquo;s list sort for Python, uses binary insertion sort) is used for objects.</p>
+
 
 			<aside class="copyright" role="note">
   
@@ -400,6 +524,62 @@
   </a> theme.
 </aside>
 
+
+		  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+  (function() {
+      
+      
+      
+      
+
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      var disqus_shortname = 'codingcombinotorics';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Virtualbox Tips for Ubuntu Guest in Windows Host
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
 		</div>
 	</article>
 
@@ -415,8 +595,8 @@
 
     <script>
     
-      var base_url = '';
-      var repo_id  = '';
+      var base_url = 'http:\/\/jessezhuang.github.io\/';
+      var repo_id  = 'JesseZhuang\/hugo-material-blog';
     
     </script>
 
