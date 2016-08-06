@@ -6,8 +6,118 @@
     <description>Recent content in Algorithm on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Jul 2016 00:52:13 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 05 Aug 2016 17:12:46 -0700</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Algorithm Question Substring Search KMP</title>
+      <link>http://jessezhuang.github.io/article/algorithm-string-KMP/</link>
+      <pubDate>Fri, 05 Aug 2016 17:12:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/algorithm-string-KMP/</guid>
+      <description>
+
+&lt;h1 id=&#34;question&#34;&gt;Question&lt;/h1&gt;
+
+&lt;p&gt;LeetCode has this question Implement strStr().&lt;/p&gt;
+
+&lt;p&gt;Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.&lt;/p&gt;
+
+&lt;p&gt;Tags: Two Pointers, String.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s denote haystack length &lt;code&gt;N&lt;/code&gt;, needle length &lt;code&gt;M&lt;/code&gt;, character table size &lt;code&gt;R&lt;/code&gt; (256 for extended ASCII).&lt;/p&gt;
+
+&lt;p&gt;Java&amp;rsquo;s &lt;code&gt;String&lt;/code&gt; class method &lt;code&gt;indexOf()&lt;/code&gt; uses brute force algorithm O(MN).&lt;/p&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;haystacsflksdjflkshhaystackneeneeneedle
+         needle
+naslkfjskjlhhhh
+needle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;method-1-2d-dfa&#34;&gt;Method 1 2D DFA&lt;/h2&gt;
+
+&lt;p&gt;KMP Knuth Morris Pratt O(N) time complexity.&lt;/p&gt;
+
+&lt;p&gt;2D array DFA[256][M] gives the next character index to match against i.&lt;/p&gt;
+
+&lt;p&gt;Example: needle &amp;ldquo;ABABAC&amp;rdquo;. DFA[r][j] where r &amp;lt; R, j &amp;lt; M.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;j    :  0 1 2 3 4 5 6
+state:  0 0 1 2 3 0
+r       A B A B A C
+A       1 1 3 1 5 1 
+B       0 2 0 4 0 4
+C       0 0 0 0 0 6
+D       0 0 0 0 0 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Steps to build DFA:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;copy mismatched cases (first column all 0).&lt;/li&gt;
+&lt;li&gt;set matched character to go to next state (first column DFA[needle.charAt(0)][0] = 1).&lt;/li&gt;
+&lt;li&gt;start state 0, update state for j in [1, M-1].&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;DFA[needle.charAt(0)][0] = 1;
+int state = 0;
+for (int j = 1; j &amp;lt; M; j++) {
+  for (int r = 0; r &amp;lt; 256; r++) DFA[r][j] = DFA[r][state];
+  DFA[needle.charAt(j)][j] = j + 1;    
+  state = DFA[needle.charAt(j)][state];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note DFA[\&amp;rsquo;D\&amp;lsquo;][5] = 0 but DFA[&amp;lsquo;B&amp;rsquo;][5] = 4.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;for (int i = 0, j = 0; i &amp;lt; N &amp;amp;&amp;amp; j &amp;lt; M; i++) {
+  //no backup, so can increment i
+  j = DFA[haystack.charAt(i)][j];
+}
+if (j == M) return i - M;
+else return -1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;method-2-1d-restart-table-array&#34;&gt;Method 2: 1D Restart Table Array&lt;/h2&gt;
+
+&lt;p&gt;restart[M]
+restart[j - 1] gives which character in needle to match against index i in haystack when a mismatch happens at index j of needle.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;          A B A B A C
+restart:  0 0 1 2 1 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compare suffix needle[j, M-1] with needle, longest common prefix&amp;rsquo;s length.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;int state = 0;
+for (int j = 1; j &amp;lt; M;) {
+  if (needle.charAt(j) == needle.charAt(state)) {
+    restart[j++] = ++state;
+  } else if (state == 0) j++;
+  else state = restart[state - 1];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To compare, now has to back up, cannot operate on stream like standard input without buffering.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;for (int i = 0, j = 0; i &amp;lt; N - M &amp;amp;&amp;amp; j &amp;lt; M;) {
+  if (needle.charAt(j) == haystack.charAt(j)) {
+    j++;
+    i++;
+  }
+  else if (j == 0) i++;
+  else j = restart[j - 1]; 
+}
+if (j == M) return i - j;
+else return -1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Question: worst case operations 2N, practical 1.1 N. Why 2N?&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Sorting Algorithm Summary</title>

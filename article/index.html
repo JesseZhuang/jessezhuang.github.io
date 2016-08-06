@@ -262,7 +262,7 @@
             
               <a href="http://jessezhuang.github.io/categories/algorithm"
                 title="algorithm">
-                algorithm<sup>1</sup></a>
+                algorithm<sup>2</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
@@ -301,6 +301,8 @@
               <a href="http://jessezhuang.github.io/tags/nosql">[nosql]</a>
             
               <a href="http://jessezhuang.github.io/tags/python">[python]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/string">[string]</a>
             
               <a href="http://jessezhuang.github.io/tags/ubuntu">[ubuntu]</a>
             
@@ -350,6 +352,15 @@
 		<div class="wrapper">
 			<h1>Pages in Article</h1>
 
+			
+			<a href="http://jessezhuang.github.io/article/algorithm-string-KMP/" title="Algorithm Question Substring Search KMP">
+				<h2>Algorithm Question Substring Search KMP</h2>
+			</a>
+
+			<br>
+			Question LeetCode has this question Implement strStr(). Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. Tags: Two Pointers, String. Let&rsquo;s denote haystack length N, needle length M, character table size R (256 for extended ASCII). Java&rsquo;s String class method indexOf() uses brute force algorithm O(MN). Examples: haystacsflksdjflkshhaystackneeneeneedle needle naslkfjskjlhhhh needle Method 1 2D DFA KMP Knuth Morris Pratt O(N) time complexity.
+
+			<hr>
 			
 			<a href="http://jessezhuang.github.io/article/algorithm-sorting-summary/" title="Sorting Algorithm Summary">
 				<h2>Sorting Algorithm Summary</h2>
@@ -429,15 +440,6 @@
 
 			<br>
 			Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with . examples effects ls -la list all file/directories including hidden in long list form ls -ld list directory only in list form du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.g., 1K 234M 2G) -s, &ndash;summarize display only a total for each argument -a, &ndash;all write counts for all files, not just directories examples effects du -sch folder/ folder/ size du -sh * sizes of all folders and files in current directory du -ahd1 sizes of all (including hidden) in current directory note pipe to &#124; sort -h[r] for result sorting df - report file system disk space usage SYNOPSIS df [OPTION]&hellip;
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-performance/" title="MongoDB Tutorial 4 - Performance">
-				<h2>MongoDB Tutorial 4 - Performance</h2>
-			</a>
-
-			<br>
-			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
 
 			<hr>
 			

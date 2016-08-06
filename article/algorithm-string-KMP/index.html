@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>About Me - Coding Automaton</title>
+    <title>Algorithm Question Substring Search KMP - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/page/about-me/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/algorithm-string-KMP/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/page/about-me/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/algorithm-string-KMP/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -106,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        About Me
+        Algorithm Question Substring Search KMP
       </div>
     </div>
 
@@ -352,35 +352,150 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>About Me </h1>
+			<h1>Algorithm Question Substring Search KMP </h1>
 			
 			<div>
-				Sat, Jun 18, 2016
+				Fri, Aug 5, 2016
+				
+				<br>
+				
+				
+				
+				  
+				  Category: <a href="http://jessezhuang.github.io/categories/algorithm">algorithm</a>
+				  
 				
 				
 
 				
+				
+					Tags:
+					
+					  <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/string">[string]</a>
+				  
+				
+				
+
+
 			</div>
+
+      
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#question">Question</a>
+<ul>
+<li><a href="#method-1-2d-dfa">Method 1 2D DFA</a></li>
+<li><a href="#method-2-1d-restart-table-array">Method 2: 1D Restart Table Array</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
 
 			
 
-<h3 id="hello-people-my-name-is">Hello People, My Name is</h3>
+<h1 id="question">Question</h1>
 
-<h2 id="zexi-jesse-zhuang">Zexi Jesse Zhuang,</h2>
+<p>LeetCode has this question Implement strStr().</p>
 
-<h2 id="a-developer-and-learner">a Developer and Learner.</h2>
+<p>Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
 
-<p>I currently live near Seattle, WA. I love web, mobile, and open source software development. I strive to find simple working solutions to complete tasks or goals and explain the algorithms and solutions concisely.</p>
+<p>Tags: Two Pointers, String.</p>
 
-<p>Outside of coding, I love lifting, hiking, and badminton.</p>
+<p>Let&rsquo;s denote haystack length <code>N</code>, needle length <code>M</code>, character table size <code>R</code> (256 for extended ASCII).</p>
 
-<h2 id="why-coding-automaton">Why Coding Automaton?</h2>
+<p>Java&rsquo;s <code>String</code> class method <code>indexOf()</code> uses brute force algorithm O(MN).</p>
 
-<p>The first time I learned about Automaton was in <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick</a>&rsquo;s Algorithms class. In <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth Morris Pratt</a>&rsquo;s&rsquo; substring search algorithm, a crucial step was to build the <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite state automaton (DFA)</a>, which automatically tells about the next skip in substring search as the algorithm walks along the text to search for the pattern. As a programmer, one&rsquo;s primary goal might be to generate automatic tools/products to simplify complicated jobs for other people and himself/herself. In this sense, I would like to get more proficient in coding as I write articles/tutorials and I hope my readers could benefit from the content as well.</p>
+<p>Examples:</p>
 
-<h2 id="the-dry-principle">The DRY Principle</h2>
+<pre><code class="language-bash">haystacsflksdjflkshhaystackneeneeneedle
+         needle
+naslkfjskjlhhhh
+needle
+</code></pre>
 
-<p>In software engineering, <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">don&rsquo;t repeat yourself (DRY)</a> is a principle aimed at reducing repetition of information of all kinds. I aim to write original contents here that are not easily found by googling. One other comprehension of the word automaton is to let the machine do the boring repeating tasks and free us humans for challenging and creative accomplishments. Whatever brings you here, I hope this blog can make it easier for you and myself to achieve our goals.</p>
+<h2 id="method-1-2d-dfa">Method 1 2D DFA</h2>
+
+<p>KMP Knuth Morris Pratt O(N) time complexity.</p>
+
+<p>2D array DFA[256][M] gives the next character index to match against i.</p>
+
+<p>Example: needle &ldquo;ABABAC&rdquo;. DFA[r][j] where r &lt; R, j &lt; M.</p>
+
+<pre><code class="language-bash">j    :  0 1 2 3 4 5 6
+state:  0 0 1 2 3 0
+r       A B A B A C
+A       1 1 3 1 5 1 
+B       0 2 0 4 0 4
+C       0 0 0 0 0 6
+D       0 0 0 0 0 0
+</code></pre>
+
+<p>Steps to build DFA:</p>
+
+<ol>
+<li>copy mismatched cases (first column all 0).</li>
+<li>set matched character to go to next state (first column DFA[needle.charAt(0)][0] = 1).</li>
+<li>start state 0, update state for j in [1, M-1].</li>
+</ol>
+
+<pre><code class="language-java">DFA[needle.charAt(0)][0] = 1;
+int state = 0;
+for (int j = 1; j &lt; M; j++) {
+  for (int r = 0; r &lt; 256; r++) DFA[r][j] = DFA[r][state];
+  DFA[needle.charAt(j)][j] = j + 1;    
+  state = DFA[needle.charAt(j)][state];
+}
+</code></pre>
+
+<p>Note DFA[\&rsquo;D\&lsquo;][5] = 0 but DFA[&lsquo;B&rsquo;][5] = 4.</p>
+
+<pre><code class="language-java">for (int i = 0, j = 0; i &lt; N &amp;&amp; j &lt; M; i++) {
+  //no backup, so can increment i
+  j = DFA[haystack.charAt(i)][j];
+}
+if (j == M) return i - M;
+else return -1;
+</code></pre>
+
+<h2 id="method-2-1d-restart-table-array">Method 2: 1D Restart Table Array</h2>
+
+<p>restart[M]
+restart[j - 1] gives which character in needle to match against index i in haystack when a mismatch happens at index j of needle.</p>
+
+<pre><code class="language-sh">          A B A B A C
+restart:  0 0 1 2 1 0
+</code></pre>
+
+<p>Compare suffix needle[j, M-1] with needle, longest common prefix&rsquo;s length.</p>
+
+<pre><code class="language-java">int state = 0;
+for (int j = 1; j &lt; M;) {
+  if (needle.charAt(j) == needle.charAt(state)) {
+    restart[j++] = ++state;
+  } else if (state == 0) j++;
+  else state = restart[state - 1];
+}
+</code></pre>
+
+<p>To compare, now has to back up, cannot operate on stream like standard input without buffering.</p>
+
+<pre><code class="language-java">for (int i = 0, j = 0; i &lt; N - M &amp;&amp; j &lt; M;) {
+  if (needle.charAt(j) == haystack.charAt(j)) {
+    j++;
+    i++;
+  }
+  else if (j == 0) i++;
+  else j = restart[j - 1]; 
+}
+if (j == M) return i - j;
+else return -1;
+</code></pre>
+
+<p>Question: worst case operations 2N, practical 1.1 N. Why 2N?</p>
 
 
 			<aside class="copyright" role="note">
@@ -423,25 +538,25 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/tutorial-hugoblog/" title="A Tutorial for using Hugo and Github Pages as a Blog Site">
-        <span class="direction">
-          Previous
-        </span>
-        <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
-          <div class="stretch">
-            <div class="title">
-              A Tutorial for using Hugo and Github Pages as a Blog Site
-            </div>
-          </div>
-        </div>
-      </a>
-  
   </div>
 
   <div class="next">
+  
+      <a href="http://jessezhuang.github.io/article/algorithm-sorting-summary/" title="Sorting Algorithm Summary">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Sorting Algorithm Summary
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
   
   </div>
 </nav>
