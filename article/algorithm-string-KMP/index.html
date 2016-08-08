@@ -268,7 +268,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>1</sup></a>
+                cheatsheet<sup>2</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -289,6 +289,8 @@
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/git">[git]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
@@ -467,7 +469,7 @@ else return -1;
 restart[j - 1] gives which character in needle to match against index i in haystack when a mismatch happens at index j of needle.</p>
 
 <pre><code class="language-sh">          A B A B A C
-restart:  0 0 1 2 1 0
+restart:  0 0 1 2 3 0
 </code></pre>
 
 <p>Compare suffix needle[j, M-1] with needle, longest common prefix&rsquo;s length.</p>
@@ -484,7 +486,7 @@ for (int j = 1; j &lt; M;) {
 <p>To compare, now has to back up, cannot operate on stream like standard input without buffering.</p>
 
 <pre><code class="language-java">for (int i = 0, j = 0; i &lt; N - M &amp;&amp; j &lt; M;) {
-  if (needle.charAt(j) == haystack.charAt(j)) {
+  if (needle.charAt(j) == haystack.charAt(i)) {
     j++;
     i++;
   }

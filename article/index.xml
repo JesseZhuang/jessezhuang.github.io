@@ -87,7 +87,7 @@ else return -1;
 restart[j - 1] gives which character in needle to match against index i in haystack when a mismatch happens at index j of needle.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;          A B A B A C
-restart:  0 0 1 2 1 0
+restart:  0 0 1 2 3 0
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Compare suffix needle[j, M-1] with needle, longest common prefix&amp;rsquo;s length.&lt;/p&gt;
@@ -104,7 +104,7 @@ for (int j = 1; j &amp;lt; M;) {
 &lt;p&gt;To compare, now has to back up, cannot operate on stream like standard input without buffering.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;for (int i = 0, j = 0; i &amp;lt; N - M &amp;amp;&amp;amp; j &amp;lt; M;) {
-  if (needle.charAt(j) == haystack.charAt(j)) {
+  if (needle.charAt(j) == haystack.charAt(i)) {
     j++;
     i++;
   }
@@ -252,6 +252,91 @@ else return -1;
 &lt;/ul&gt;
 
 &lt;p&gt;Implementations in Core Java as of JDK 1.8, &lt;code&gt;DualPivotQuickSort&lt;/code&gt; (cut off threshhold of 47 to insertion sort) is used for primitives and a variant of &lt;code&gt;TimSort&lt;/code&gt; (a stable, adaptive, iterative merge sort adapted from Tim Peter&amp;rsquo;s list sort for Python, uses binary insertion sort) is used for objects.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Git Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/git-cheatsheet/</link>
+      <pubDate>Wed, 06 Jul 2016 16:39:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/git-cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;basic-snapshotting&#34;&gt;Basic Snapshotting&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;git-mv&lt;/code&gt; - Move or rename a file, a directory, or a symlink&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt;&lt;/code&gt; rename&lt;br /&gt;
+&lt;code&gt;git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; ... &amp;lt;destination directory&amp;gt;&lt;/code&gt; move into existing directory&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git mv &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; # rename a directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;branch-related&#34;&gt;Branch Related&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;git branch [options] &amp;lt;branchname&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git branch # show all branches with current marked with *
+git branch -vv # show all local and tracked remote branches
+git checkout dev
+git branch jesse
+# creates branch named &amp;quot;jesse&amp;quot; off from &amp;quot;dev&amp;quot; branch
+git checkout -b jesse
+# creates and switch to branch &amp;quot;jesse&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;merge&#34;&gt;Merge&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;git merge [options] [&amp;lt;commit&amp;gt;...]&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;git merge --abort&lt;/code&gt; may not be able to fully recover&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git merge --no-ff
+# no fast forwarding creates merge commit for FF
+git merge jesse
+# merge commits on jesse into current branch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git merge --no-ff 
+# no fast forwarding creates merge commit for FF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;working-with-remotes&#34;&gt;Working with Remotes&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;git fetch [&amp;lt;options&amp;gt;] [&amp;lt;repository&amp;gt; [&amp;lt;refspec&amp;gt;]]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git fetch origin # fetch branches and/or tags from &amp;quot;origin&amp;quot; remote
+git fetch -a # fetches from all remotes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;git remote [-v | --verbose]&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;git remote add [-f] [--[no-]tags] &amp;lt;name&amp;gt; &amp;lt;url&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git remote # show all remote repositories
+git remote -v # show all remote repositories with urls
+
+# add remote repo and name it origin
+git remote add origin https://github.com/user/repo.git
+# runs git fetch origin immediately after
+git remote add -f origin https://github.com/user/repo.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;merge-a-pull-request-on-github&#34;&gt;Merge a Pull Request on Github&lt;/h3&gt;
+
+&lt;p&gt;Step 1: From your project repository, bring in the changes and test.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git fetch origin
+# not necessary if you just pushed local 
+git checkout -b lname origin/rname 
+git merge dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Step 2: Merge the changes and update on GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git checkout dev
+git merge --no-ff jesse # no fast fowarding, create a merge commit
+git push origin dev
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

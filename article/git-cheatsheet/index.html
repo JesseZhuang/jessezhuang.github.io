@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>How to Install Latest Version Vim in Ubuntu 14.04 LTS - Coding Automaton</title>
+    <title>Git Cheatsheet - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.16" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/article/vim-ubuntu-install/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/git-cheatsheet/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/article/vim-ubuntu-install/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/git-cheatsheet/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -106,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        How to Install Latest Version Vim in Ubuntu 14.04 LTS
+        Git Cheatsheet
       </div>
     </div>
 
@@ -354,19 +354,17 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>How to Install Latest Version Vim in Ubuntu 14.04 LTS </h1>
+			<h1>Git Cheatsheet </h1>
 			
 			<div>
-				Thu, Jun 30, 2016
-				
-					Last Modified: Jul 7, 2016
+				Wed, Jul 6, 2016
 				
 				<br>
 				
 				
 				
 				  
-				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  Category: <a href="http://jessezhuang.github.io/categories/cheatsheet">cheatsheet</a>
 				  
 				
 				
@@ -375,7 +373,7 @@
 				
 					Tags:
 					
-					  <a href="http://jessezhuang.github.io/tags/vim">[vim]</a>
+					  <a href="http://jessezhuang.github.io/tags/git">[git]</a>
 				  
 					  <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
 				  
@@ -390,55 +388,96 @@
         <h2>Table of Contents</h2>
         <nav id="TableOfContents">
 <ul>
-<li><a href="#ubuntu-comes-with-vim-tiny">Ubuntu comes with Vim-Tiny</a></li>
-<li><a href="#install-vim-with-ppa">Install Vim with PPA</a></li>
-<li><a href="#install-from-source">Install From Source</a></li>
-<li><a href="#basic-configuration-to-enable-markdown-highlighting">Basic Configuration to Enable Markdown Highlighting</a></li>
-<li><a href="#why-vim">Why Vim?</a></li>
+<li><a href="#basic-snapshotting">Basic Snapshotting</a></li>
+<li><a href="#branch-related">Branch Related</a></li>
+<li><a href="#merge">Merge</a></li>
+<li><a href="#working-with-remotes">Working with Remotes</a>
+<ul>
+<li>
+<ul>
+<li><a href="#merge-a-pull-request-on-github">Merge a Pull Request on Github</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
       </div>
 
 			
 
-<p><img src="https://vim.sexy/img/Vimlogo.svg" alt="Vim Icon svg" /></p>
+<h1 id="basic-snapshotting">Basic Snapshotting</h1>
 
-<h1 id="ubuntu-comes-with-vim-tiny">Ubuntu comes with Vim-Tiny</h1>
+<p><code>git-mv</code> - Move or rename a file, a directory, or a symlink</p>
 
-<p>First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version <code>2:7.4.052-1ubuntu3</code> which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that <a href="http://stackoverflow.com/questions/10964681/enabling-markdown-highlighting-in-vim">starting from 7.4.480</a> vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.</p>
+<p><code>git mv [-v] [-f] [-n] [-k] &lt;source&gt; &lt;destination&gt;</code> rename<br />
+<code>git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;</code> move into existing directory</p>
 
-<h1 id="install-vim-with-ppa">Install Vim with PPA</h1>
-
-<p>I have tried to install Vim with debian packages listed on <a href="http://www.vim.org">Vim.org</a> but they did not come with the dependencies. So PPA was an easier way to go. <a href="https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily">ppa:pkg-vim/vim-daily</a> has version 7.4.826 which is good enough.</p>
-
-<pre><code class="language-sh">sudo add-apt-repository ppa:pkg-vim/vim-daily
-sudo apt-get update
-sudo apt-get install vim
+<pre><code class="language-bash">git mv &lt;source&gt; &lt;destination&gt; # rename a directory
 </code></pre>
 
-<p>You can use <code>apt-cache policy vim</code> to check the version of the vim in your repositories.</p>
+<h1 id="branch-related">Branch Related</h1>
 
-<h1 id="install-from-source">Install From Source</h1>
+<p><code>git branch [options] &lt;branchname&gt;</code></p>
 
-<p>Vim.org has detailed instructions on how to <code>git clone</code> and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use <a href="http://asic-linux.com.mx/~izto/checkinstall/index.php"><code>checkinstall</code></a> just in case you ever want to cleanly remove the installation.</p>
-
-<p>The Vim 7.4.826 version from the PPA does not have system clipboard support by default. Use <code>vim --version | grep 'clipboard'</code> at shell to check. If you have <code>+clipboard</code> and/or <code>+xterm_clipboard</code> then you are good to go. Otherwise you can either install from source or <code>sudo apt-get install vim-gnome</code> which already has the clipboard support.</p>
-
-<h1 id="basic-configuration-to-enable-markdown-highlighting">Basic Configuration to Enable Markdown Highlighting</h1>
-
-<p>This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:</p>
-
-<pre><code class="language-sh">syntax on
-colorscheme industry
+<pre><code class="language-bash">git branch # show all branches with current marked with *
+git branch -vv # show all local and tracked remote branches
+git checkout dev
+git branch jesse
+# creates branch named &quot;jesse&quot; off from &quot;dev&quot; branch
+git checkout -b jesse
+# creates and switch to branch &quot;jesse&quot;
 </code></pre>
 
-<p>then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.</p>
+<h1 id="merge">Merge</h1>
 
-<h1 id="why-vim">Why Vim?</h1>
+<p><code>git merge [options] [&lt;commit&gt;...]</code><br />
+<code>git merge --abort</code> may not be able to fully recover</p>
 
-<p>A lot of people like Vim/Emacs. For me, Vim seems to be a very lightweight text editor which is very similar to Vi that comes with most server command line interfaces. It&rsquo;s good to get familiar with at least the basic usage of Vim. I have been using atom in my Ubuntu but atom has a <a href="https://github.com/atom/atom/issues/7883">memory leak issue</a> which sometimes causes Ubuntu to hang or even restart as an guest OS with Oracle VirtualBox in Windows 10 host. Going to light weight and more basic is also a good way to practice your programming language knowledges when you lose all the autocompletion, not that Vim cannot do autocompletion but you can pretend as if.</p>
+<pre><code class="language-bash">git merge --no-ff
+# no fast forwarding creates merge commit for FF
+git merge jesse
+# merge commits on jesse into current branch
+</code></pre>
 
-<p>Example memory usage: Vim with a few buffers open switching between editing those files uses &lt; 5 Mb and atom typically uses over 200 Mb memory with similar number of files open.</p>
+<pre><code class="language-bash">git merge --no-ff 
+# no fast forwarding creates merge commit for FF
+</code></pre>
+
+<h1 id="working-with-remotes">Working with Remotes</h1>
+
+<p><code>git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;]]</code></p>
+
+<pre><code class="language-bash">git fetch origin # fetch branches and/or tags from &quot;origin&quot; remote
+git fetch -a # fetches from all remotes
+</code></pre>
+
+<p><code>git remote [-v | --verbose]</code><br />
+<code>git remote add [-f] [--[no-]tags] &lt;name&gt; &lt;url&gt;</code></p>
+
+<pre><code class="language-bash">git remote # show all remote repositories
+git remote -v # show all remote repositories with urls
+
+# add remote repo and name it origin
+git remote add origin https://github.com/user/repo.git
+# runs git fetch origin immediately after
+git remote add -f origin https://github.com/user/repo.git
+</code></pre>
+
+<h3 id="merge-a-pull-request-on-github">Merge a Pull Request on Github</h3>
+
+<p>Step 1: From your project repository, bring in the changes and test.</p>
+
+<pre><code class="language-bash">git fetch origin
+# not necessary if you just pushed local 
+git checkout -b lname origin/rname 
+git merge dev
+</code></pre>
+
+<p>Step 2: Merge the changes and update on GitHub.</p>
+
+<pre><code class="language-bash">git checkout dev
+git merge --no-ff jesse # no fast fowarding, create a merge commit
+git push origin dev
+</code></pre>
 
 
 			<aside class="copyright" role="note">
@@ -481,7 +520,7 @@ colorscheme industry
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/vim-cheatsheet/" title="Vim Cheatsheet">
+      <a href="http://jessezhuang.github.io/article/algorithm-sorting-summary/" title="Sorting Algorithm Summary">
         <span class="direction">
           Previous
         </span>
@@ -491,7 +530,7 @@ colorscheme industry
           </div>
           <div class="stretch">
             <div class="title">
-              Vim Cheatsheet
+              Sorting Algorithm Summary
             </div>
           </div>
         </div>
@@ -501,14 +540,14 @@ colorscheme industry
 
   <div class="next">
   
-      <a href="http://jessezhuang.github.io/article/mongodb-app-engineer/" title="Mongodb Tutorial 6 - Application Engineering">
+      <a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Mongodb Tutorial 6 - Application Engineering
+              Virtualbox Tips for Ubuntu Guest in Windows Host
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

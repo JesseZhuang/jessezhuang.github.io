@@ -266,7 +266,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>1</sup></a>
+                cheatsheet<sup>2</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -287,6 +287,8 @@
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/git">[git]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
@@ -371,6 +373,15 @@
 
 			<hr>
 			
+			<a href="http://jessezhuang.github.io/article/git-cheatsheet/" title="Git Cheatsheet">
+				<h2>Git Cheatsheet</h2>
+			</a>
+
+			<br>
+			Basic Snapshotting git-mv - Move or rename a file, a directory, or a symlink git mv [-v] [-f] [-n] [-k] &lt;source&gt; &lt;destination&gt; rename git mv [-v] [-f] [-n] [-k] &lt;source&gt; &hellip; &lt;destination directory&gt; move into existing directory git mv &lt;source&gt; &lt;destination&gt; # rename a directory Branch Related git branch [options] &lt;branchname&gt; git branch # show all branches with current marked with * git branch -vv # show all local and tracked remote branches git checkout dev git branch jesse # creates branch named &quot;jesse&quot; off from &quot;dev&quot; branch git checkout -b jesse # creates and switch to branch &quot;jesse&quot; Merge git merge [options] [&lt;commit&gt;&hellip;] git merge &ndash;abort may not be able to fully recover git merge &ndash;no-ff # no fast forwarding creates merge commit for FF git merge jesse # merge commits on jesse into current branch git merge &ndash;no-ff # no fast forwarding creates merge commit for FF Working with Remotes git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;]] git fetch origin # fetch branches and/or tags from &quot;origin&quot; remote git fetch -a # fetches from all remotes git remote [-v | &ndash;verbose] git remote add [-f] [&ndash;[no-]tags] &lt;name&gt; &lt;url&gt; git remote # show all remote repositories git remote -v # show all remote repositories with urls # add remote repo and name it origin git remote add origin <a href="https://github.com/user/repo.git">https://github.com/user/repo.git</a> # runs git fetch origin immediately after git remote add -f origin <a href="https://github.com/user/repo.git">https://github.com/user/repo.git</a> Merge a Pull Request on Github Step 1: From your project repository, bring in the changes and test.
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/virtualbox-tips/" title="Virtualbox Tips for Ubuntu Guest in Windows Host">
 				<h2>Virtualbox Tips for Ubuntu Guest in Windows Host</h2>
 			</a>
@@ -431,15 +442,6 @@
 
 			<br>
 			Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/. Performance Monitoring top from command line System Monitor application installed by default. Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/linux-cheatsheet/" title="Linux Cheatsheets">
-				<h2>Linux Cheatsheets</h2>
-			</a>
-
-			<br>
-			Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with . examples effects ls -la list all file/directories including hidden in long list form ls -ld list directory only in list form du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.g., 1K 234M 2G) -s, &ndash;summarize display only a total for each argument -a, &ndash;all write counts for all files, not just directories examples effects du -sch folder/ folder/ size du -sh * sizes of all folders and files in current directory du -ahd1 sizes of all (including hidden) in current directory note pipe to &#124; sort -h[r] for result sorting df - report file system disk space usage SYNOPSIS df [OPTION]&hellip;
 
 			<hr>
 			
