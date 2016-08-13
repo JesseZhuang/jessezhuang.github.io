@@ -337,6 +337,19 @@ git merge dev
 git merge --no-ff jesse # no fast fowarding, create a merge commit
 git push origin dev
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pull-all-remote-branches&#34;&gt;Pull All Remote Branches&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# the first line creates local branch with same name tracking remote branch
+git branch -r | grep -v &#39;\-&amp;gt;&#39; | while read remote; do git branch --track &amp;quot;${remote#origin/}&amp;quot; &amp;quot;$remote&amp;quot;; done
+git fetch --all
+git pull --all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;delete-a-remote-branch&#34;&gt;Delete a Remote Branch&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git push origin --delete &amp;lt;branchName&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

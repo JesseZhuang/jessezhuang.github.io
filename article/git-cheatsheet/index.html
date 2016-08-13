@@ -396,6 +396,8 @@
 <li>
 <ul>
 <li><a href="#merge-a-pull-request-on-github">Merge a Pull Request on Github</a></li>
+<li><a href="#pull-all-remote-branches">Pull All Remote Branches</a></li>
+<li><a href="#delete-a-remote-branch">Delete a Remote Branch</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -477,6 +479,19 @@ git merge dev
 <pre><code class="language-bash">git checkout dev
 git merge --no-ff jesse # no fast fowarding, create a merge commit
 git push origin dev
+</code></pre>
+
+<h3 id="pull-all-remote-branches">Pull All Remote Branches</h3>
+
+<pre><code class="language-bash"># the first line creates local branch with same name tracking remote branch
+git branch -r | grep -v '\-&gt;' | while read remote; do git branch --track &quot;${remote#origin/}&quot; &quot;$remote&quot;; done
+git fetch --all
+git pull --all
+</code></pre>
+
+<h3 id="delete-a-remote-branch">Delete a Remote Branch</h3>
+
+<pre><code class="language-bash">git push origin --delete &lt;branchName&gt;
 </code></pre>
 
 
