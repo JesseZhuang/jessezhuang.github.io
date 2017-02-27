@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://jessezhuang.github.io/</loc>
-    <lastmod>2016-08-05T17:12:46-07:00</lastmod>
+    <loc>http://jessezhuang.github.io/page/about-me/</loc>
+    <lastmod>2016-06-18T00:11:02+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/article/mac_cheatsheet/</loc>
+    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
   </url>
   
   <url>
@@ -77,8 +82,145 @@
   </url>
   
   <url>
-    <loc>http://jessezhuang.github.io/page/about-me/</loc>
+    <loc>http://jessezhuang.github.io/categories/algorithm/</loc>
+    <lastmod>2016-08-05T17:12:46-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/article/</loc>
+    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/blog/</loc>
+    <lastmod>2016-06-19T01:19:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/cheatsheet/</loc>
+    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/categories/cheatsheet/</loc>
+    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/</loc>
     <lastmod>2016-06-18T00:11:02+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/database/</loc>
+    <lastmod>2016-06-29T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/git/</loc>
+    <lastmod>2016-07-06T16:39:13-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/golang/</loc>
+    <lastmod>2016-06-19T01:19:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/hugo/</loc>
+    <lastmod>2016-06-19T01:19:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/java/</loc>
+    <lastmod>2016-08-05T17:12:46-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/linux/</loc>
+    <lastmod>2016-07-06T16:39:13-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/mac/</loc>
+    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/mongodb/</loc>
+    <lastmod>2016-06-29T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/nosql/</loc>
+    <lastmod>2016-06-29T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/page/</loc>
+    <lastmod>2016-06-18T00:11:02+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/categories/programming-language/</loc>
+    <lastmod>2016-06-19T01:20:46-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/python/</loc>
+    <lastmod>2016-06-29T14:55:57-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/string/</loc>
+    <lastmod>2016-08-05T17:12:46-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/categories/tutorial/</loc>
+    <lastmod>2016-07-07T18:17:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/ubuntu/</loc>
+    <lastmod>2016-07-07T18:17:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/vim/</loc>
+    <lastmod>2016-07-07T00:37:56-07:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

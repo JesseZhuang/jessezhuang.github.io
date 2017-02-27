@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <title>Database - Coding Automaton</title>
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
@@ -266,7 +266,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>2</sup></a>
+                cheatsheet<sup>4</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -274,7 +274,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>9</sup></a>
+                tutorial<sup>8</sup></a>
             
         </span>
         
@@ -285,6 +285,8 @@
         <span class="tags">
             
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/cheatsheet">[cheatsheet]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
@@ -297,6 +299,8 @@
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
               <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mac">[mac]</a>
             
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
@@ -360,7 +364,9 @@
 			</a>
 
 			<br>
-			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below. The settings of two parameters affect the write concern: w(wait for acknowledgement) j(journal) effect comment 1 false fast, small window of vulnerability default setting 1 true slow, no vulnerability can be done inside driver at collection, database, or client level 0 - unacknowledged write do not recommend 2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes majority - wait for majority to acknowledge, avoid rollback on failover - tag values - set tags on nodes - If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
+			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below.
+The settings of two parameters affect the write concern:
+   w(wait for acknowledgement) j(journal) effect comment     1 false fast, small window of vulnerability default setting   1 true slow, no vulnerability can be done inside driver at collection, database, or client level   0 - unacknowledged write do not recommend   2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes   majority - wait for majority to acknowledge, avoid rollback on failover -   tag values - set tags on nodes -    If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
 
 			<hr>
 			
@@ -369,7 +375,9 @@
 			</a>
 
 			<br>
-			To run mongo commands from the source of a JavaScript file, cat source.js | mongo # or mongo &lt; source.js # or just mongo source.js To import/export data, $ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt; $ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json $ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; &ndash;out file.json $ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson # by default writes BSON file to dump/ in current directory $ mongodump -d &lt;database&gt; -c &lt;collection [&ndash;out &lt;path&gt;] What is MongoDB?
+			To run mongo commands from the source of a JavaScript file,
+cat source.js | mongo # or mongo &lt; source.js # or just mongo source.js  To import/export data,
+$ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt; $ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json $ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; &ndash;out file.json $ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson # by default writes BSON file to dump/ in current directory $ mongodump -d &lt;database&gt; -c &lt;collection [&ndash;out &lt;path&gt;]  What is MongoDB?
 
 			<hr>
 			
@@ -378,7 +386,11 @@
 			</a>
 
 			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .
+			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause.
+Introduction Example used: imagine a SQL table of products.
+   name category manufacture price     ipad tablet Apple 499   nexus s cellphone Samsung 350    To get number of products from each manufacture with SQL,
+select manufacture, count(*) from products group by manufacture;  with mongodb,
+&gt; use agg &gt; db.
 
 			<hr>
 			
@@ -387,14 +399,16 @@
 			</a>
 
 			<br>
-			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check. WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates MMAP V1 Uses mmap system call undercovers.
+			Storage engine Storage engine sits between mongodb server and the file storage. Use db.serverStatus().storageEngine; to check.
+WiredTiger for many applications, this is faster - document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again. - compression of data and indexes. WiredTiger manages memory. - append only, no in place updates
+MMAP V1 Uses mmap system call undercovers.
 
 			<hr>
 			
 
 			<aside class="copyright" role="note">
   
-  &copy; 2016 Zexi Zhuang &ndash;
+  &copy; 2017 Zexi Zhuang &ndash;
   
   built with
   <a href="https://www.gohugo.io" target="_blank">Hugo</a>

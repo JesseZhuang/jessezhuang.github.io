@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <title>Python - Coding Automaton</title>
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
@@ -266,7 +266,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>2</sup></a>
+                cheatsheet<sup>4</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -274,7 +274,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>9</sup></a>
+                tutorial<sup>8</sup></a>
             
         </span>
         
@@ -285,6 +285,8 @@
         <span class="tags">
             
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/cheatsheet">[cheatsheet]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
@@ -297,6 +299,8 @@
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
               <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mac">[mac]</a>
             
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
@@ -360,14 +364,18 @@
 			</a>
 
 			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause. Introduction Example used: imagine a SQL table of products. name category manufacture price ipad tablet Apple 499 nexus s cellphone Samsung 350 To get number of products from each manufacture with SQL, select manufacture, count(<em>) from products group by manufacture; with mongodb, &gt; use agg &gt; db.products.aggregate([ // array {$group: { _id:&quot;$manufacturer&quot;, // creating new collection num_products:{$sum:1} } // a series of upserts } ]) {&quot;_id&quot; : &quot;Amazon&quot;, &quot;num_products&quot; : 2} {&quot;_id&quot; : &quot;Sony&quot;, &quot;num_products&quot; : 1} To do compound grouping with SQL, select manufacturer, category, count(</em>) from products group by manufacturer, category with mongodb, &gt; db.products.aggregate([ {$group: { // _id can be a complex document, just have to be unique _id:{&quot;manufacturer&quot;:&quot;$manufacturer&quot;,&quot;category&quot;:&quot;category&quot;}, num_products:{$sum:1} } } ]) {&quot;_id&quot; : {&quot;manufacturer&quot;:&quot;Amazon&quot;, &quot;category&quot;:&quot;Tablets&quot;}, &quot;num_products&quot; : 2} SQL to Aggregation Mapping Chart .
+			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause.
+Introduction Example used: imagine a SQL table of products.
+   name category manufacture price     ipad tablet Apple 499   nexus s cellphone Samsung 350    To get number of products from each manufacture with SQL,
+select manufacture, count(*) from products group by manufacture;  with mongodb,
+&gt; use agg &gt; db.
 
 			<hr>
 			
 
 			<aside class="copyright" role="note">
   
-  &copy; 2016 Zexi Zhuang &ndash;
+  &copy; 2017 Zexi Zhuang &ndash;
   
   built with
   <a href="https://www.gohugo.io" target="_blank">Hugo</a>

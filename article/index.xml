@@ -2,12 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Articles on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/article/</link>
+    <link>http://jessezhuang.github.io/article/index.xml</link>
     <description>Recent content in Articles on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Aug 2016 17:12:46 -0700</lastBuildDate>
+    <copyright>Zexi Zhuang</copyright>
+    <lastBuildDate>Sun, 26 Feb 2017 18:56:24 -0800</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mac Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/mac_cheatsheet/</link>
+      <pubDate>Sun, 26 Feb 2017 18:56:24 -0800</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/mac_cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;keboard-shortcuts&#34;&gt;Keboard Shortcuts&lt;/h1&gt;
+
+&lt;p&gt;Switching tabs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right.&lt;/li&gt;
+&lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
+&lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Algorithm Question Substring Search KMP</title>
@@ -415,6 +436,14 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
 
+&lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
+:E # or :Explorer
+R # rename at bottom
+:bp # go back previous buffer
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
 
 &lt;p&gt;In normal mode:&lt;/p&gt;
@@ -535,6 +564,11 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 &lt;td&gt;),}&lt;/td&gt;
 &lt;td&gt;jump forward one sentence/paragraph&lt;/td&gt;
 &lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%&lt;/td&gt;
+&lt;td&gt;jump to matching bracket&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -572,6 +606,18 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
+
+&lt;p&gt;For unicode error during printing to pdf.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&#34;&gt;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tried :set printencoding=utf-8, does not work on mac.
+:TOhtml
+:w print.html&lt;/p&gt;
+
+&lt;p&gt;Open print.html with chrome and print without background graphics.&lt;/p&gt;
 </description>
     </item>
     
@@ -2011,6 +2057,13 @@ Dropbox         238G  116G  123G  49% /media/sf_Dropbox
 
 &lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
 
+&lt;h3 id=&#34;check-system-info&#34;&gt;Check system info&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$lscpu # check cpu info
+$cat /etc/redhat_release # find redhat version
+$unmae -rs # kernel release version and name
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;To check memory usage&lt;/p&gt;
 
 &lt;table&gt;
@@ -2081,6 +2134,33 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h1 id=&#34;shortcuts&#34;&gt;Shortcuts&lt;/h1&gt;
+
+&lt;h2 id=&#34;open-application&#34;&gt;Open Application&lt;/h2&gt;
+
+&lt;p&gt;|Application|key binding|Desktop Env|Key binding|DE|
+|Terminal|shift+ctrl+N|Gnome|ctrl+alt+T|typical|&lt;/p&gt;
+
+&lt;h2 id=&#34;command-line-shortcuts&#34;&gt;Command Line Shortcuts&lt;/h2&gt;
+
+&lt;p&gt;References:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.bigsmoke.us/readline/shortcuts&#34;&gt;Readline shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;meta key: Esc on mac&lt;/p&gt;
+
+&lt;p&gt;|key binding|Action|
+|:-|-|
+|ctrl+e|move cursor to line beginning/end|
+|meta-f/b|move cursor one word forward/backward, right/left|
+|ctrl+u/k|delete from cursor to line beginning/end|
+|ctrl+w, meta-d|delete one word from cursor left/right|
+|meta-t|transpose two words before cursor, or transpose one before one after|
+|ctrl+y|yank/paste previously killed text|
+|ctrl+_|undo last edit|&lt;/p&gt;
 </description>
     </item>
     

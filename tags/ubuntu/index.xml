@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ubuntu on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/ubuntu/</link>
+    <link>http://jessezhuang.github.io/tags/ubuntu/index.xml</link>
     <description>Recent content in Ubuntu on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jul 2016 18:17:10 -0700</lastBuildDate>
+    <copyright>Zexi Zhuang</copyright>
     <atom:link href="http://jessezhuang.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
     <item>

@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/golang/</link>
+    <link>http://jessezhuang.github.io/tags/golang/index.xml</link>
     <description>Recent content in Golang on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jun 2016 01:19:10 -0700</lastBuildDate>
+    <copyright>Zexi Zhuang</copyright>
     <atom:link href="http://jessezhuang.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
     <item>

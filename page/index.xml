@@ -2,10 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/page/</link>
+    <link>http://jessezhuang.github.io/page/index.xml</link>
     <description>Recent content in Pages on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Zexi Zhuang</copyright>
     <lastBuildDate>Sat, 18 Jun 2016 00:11:02 +0100</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/page/index.xml" rel="self" type="application/rss+xml" />
     

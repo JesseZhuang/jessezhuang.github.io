@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <title>Vim Cheatsheet - Coding Automaton</title>
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
@@ -268,7 +268,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>2</sup></a>
+                cheatsheet<sup>4</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -276,7 +276,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>9</sup></a>
+                tutorial<sup>8</sup></a>
             
         </span>
         
@@ -287,6 +287,8 @@
         <span class="tags">
             
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/cheatsheet">[cheatsheet]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
@@ -299,6 +301,8 @@
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
               <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mac">[mac]</a>
             
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
@@ -366,7 +370,7 @@
 				
 				
 				  
-				  Category: <a href="http://jessezhuang.github.io/categories/tutorial">tutorial</a>
+				  Category: <a href="http://jessezhuang.github.io/categories/cheatsheet">cheatsheet</a>
 				  
 				
 				
@@ -390,9 +394,11 @@
         <h2>Table of Contents</h2>
         <nav id="TableOfContents">
 <ul>
+<li><a href="#file-operations">File operations</a></li>
 <li><a href="#copy-pasting">Copy/Pasting</a></li>
 <li><a href="#move-around">Move Around</a></li>
 <li><a href="#editing">Editing</a></li>
+<li><a href="#printing">Printing</a></li>
 </ul>
 </nav>
       </div>
@@ -404,6 +410,14 @@
 <p><strong>Terms:</strong></p>
 
 <p><code>C-x</code> stands for <code>ctrl-x</code>.</p>
+
+<h1 id="file-operations">File operations</h1>
+
+<pre><code class="language-bash"># to rename a file
+:E # or :Explorer
+R # rename at bottom
+:bp # go back previous buffer
+</code></pre>
 
 <h1 id="copy-pasting">Copy/Pasting</h1>
 
@@ -525,6 +539,11 @@
 <td>),}</td>
 <td>jump forward one sentence/paragraph</td>
 </tr>
+
+<tr>
+<td>%</td>
+<td>jump to matching bracket</td>
+</tr>
 </tbody>
 </table>
 
@@ -563,10 +582,22 @@
 </tbody>
 </table>
 
+<h1 id="printing">Printing</h1>
+
+<p>For unicode error during printing to pdf.</p>
+
+<p><a href="http://stackoverflow.com/questions/11954241/unicode-printing-in-vim">http://stackoverflow.com/questions/11954241/unicode-printing-in-vim</a></p>
+
+<p>Tried :set printencoding=utf-8, does not work on mac.
+:TOhtml
+:w print.html</p>
+
+<p>Open print.html with chrome and print without background graphics.</p>
+
 
 			<aside class="copyright" role="note">
   
-  &copy; 2016 Zexi Zhuang &ndash;
+  &copy; 2017 Zexi Zhuang &ndash;
   
   built with
   <a href="https://www.gohugo.io" target="_blank">Hugo</a>

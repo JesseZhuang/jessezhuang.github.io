@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <title>Linux - Coding Automaton</title>
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
@@ -266,7 +266,7 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>2</sup></a>
+                cheatsheet<sup>4</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -274,7 +274,7 @@
             
               <a href="http://jessezhuang.github.io/categories/tutorial"
                 title="tutorial">
-                tutorial<sup>9</sup></a>
+                tutorial<sup>8</sup></a>
             
         </span>
         
@@ -285,6 +285,8 @@
         <span class="tags">
             
               <a href="http://jessezhuang.github.io/tags/blog">[blog]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/cheatsheet">[cheatsheet]</a>
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
@@ -297,6 +299,8 @@
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
               <a href="http://jessezhuang.github.io/tags/linux">[linux]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/mac">[mac]</a>
             
               <a href="http://jessezhuang.github.io/tags/mongodb">[mongodb]</a>
             
@@ -360,7 +364,11 @@
 			</a>
 
 			<br>
-			Basic Snapshotting git-mv - Move or rename a file, a directory, or a symlink git mv [-v] [-f] [-n] [-k] &lt;source&gt; &lt;destination&gt; rename git mv [-v] [-f] [-n] [-k] &lt;source&gt; &hellip; &lt;destination directory&gt; move into existing directory git mv &lt;source&gt; &lt;destination&gt; # rename a directory Branch Related git branch [options] &lt;branchname&gt; git branch # show all branches with current marked with * git branch -vv # show all local and tracked remote branches git checkout dev git branch jesse # creates branch named &quot;jesse&quot; off from &quot;dev&quot; branch git checkout -b jesse # creates and switch to branch &quot;jesse&quot; Merge git merge [options] [&lt;commit&gt;&hellip;] git merge &ndash;abort may not be able to fully recover git merge &ndash;no-ff # no fast forwarding creates merge commit for FF git merge jesse # merge commits on jesse into current branch git merge &ndash;no-ff # no fast forwarding creates merge commit for FF Working with Remotes git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;]] git fetch origin # fetch branches and/or tags from &quot;origin&quot; remote git fetch -a # fetches from all remotes git remote [-v | &ndash;verbose] git remote add [-f] [&ndash;[no-]tags] &lt;name&gt; &lt;url&gt; git remote # show all remote repositories git remote -v # show all remote repositories with urls # add remote repo and name it origin git remote add origin <a href="https://github.com/user/repo.git">https://github.com/user/repo.git</a> # runs git fetch origin immediately after git remote add -f origin <a href="https://github.com/user/repo.git">https://github.com/user/repo.git</a> Merge a Pull Request on Github Step 1: From your project repository, bring in the changes and test.
+			Basic Snapshotting git-mv - Move or rename a file, a directory, or a symlink
+git mv [-v] [-f] [-n] [-k] &lt;source&gt; &lt;destination&gt; rename
+git mv [-v] [-f] [-n] [-k] &lt;source&gt; &hellip; &lt;destination directory&gt; move into existing directory
+git mv &lt;source&gt; &lt;destination&gt; # rename a directory  Branch Related git branch [options] &lt;branchname&gt;
+git branch # show all branches with current marked with * git branch -vv # show all local and tracked remote branches git checkout dev git branch jesse # creates branch named &quot;jesse&quot; off from &quot;dev&quot; branch git checkout -b jesse # creates and switch to branch &quot;jesse&quot;  Merge git merge [options] [&lt;commit&gt;.
 
 			<hr>
 			
@@ -369,7 +377,11 @@
 			</a>
 
 			<br>
-			For Ubuntu tips, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/ubuntu/. How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username. # replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username After that, reboot the VM and you should have write access to the shared folder.
+			For Ubuntu tips, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/ubuntu/.
+How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username.</p>
+
+<h1 id="replace-username-with-your-actual-ubuntu-username-sudo-usermod-a-g-vboxsf-username-after-that-reboot-the-vm-and-you-should-have-write-access-to-the-shared-folder">replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username  After that, reboot the VM and you should have write access to the shared folder.</h1>
+
 
 			<hr>
 			
@@ -378,7 +390,11 @@
 			</a>
 
 			<br>
-			For Ubuntu Linux, Terms: C-x stands for ctrl-x. Copy/Pasting In normal mode: command effect 3y, p copy 3 lines, paste after cursor &ldquo;ayy, &ldquo;ap copy current line to buffer a, paste from buffer a v/V start selecting character, whole line 5ly yanks into default buffer 5 characters from cursor &ldquo;hy yanks into register h, use + register for system clipboard In insert mode: command effect `C-r{register} paste contents of the register C-r&rdquo; to paste from default register C-u to delete everything before the cursor on this line C-w to delete from cursor to the beginning of previous word Move Around In normal mode: command effect 100l go right 100 positions, useful to navigate a long line.
+			For Ubuntu Linux,
+Terms:
+C-x stands for ctrl-x.
+File operations # to rename a file :E # or :Explorer R # rename at bottom :bp # go back previous buffer  Copy/Pasting In normal mode:
+   command effect     3y, p copy 3 lines, paste after cursor   &ldquo;ayy, &ldquo;ap copy current line to buffer a, paste from buffer a   v/V start selecting character, whole line   5ly yanks into default buffer 5 characters from cursor   &ldquo;hy yanks into register h, use + register for system clipboard    In insert mode:
 
 			<hr>
 			
@@ -387,7 +403,8 @@
 			</a>
 
 			<br>
-			Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install. Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.org but they did not come with the dependencies.
+			Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.
+Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.
 
 			<hr>
 			
@@ -396,7 +413,8 @@
 			</a>
 
 			<br>
-			Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/. Performance Monitoring top from command line System Monitor application installed by default. Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.
+			Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see <a href="http://jessezhuang.github.io/">http://jessezhuang.github.io/</a> article/virtualbox-tips/.
+Performance Monitoring  top from command line System Monitor application installed by default.  Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &ldquo;Snipping Tool&rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.
 
 			<hr>
 			
@@ -405,14 +423,14 @@
 			</a>
 
 			<br>
-			Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with . examples effects ls -la list all file/directories including hidden in long list form ls -ld list directory only in list form du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.g., 1K 234M 2G) -s, &ndash;summarize display only a total for each argument -a, &ndash;all write counts for all files, not just directories examples effects du -sch folder/ folder/ size du -sh * sizes of all folders and files in current directory du -ahd1 sizes of all (including hidden) in current directory note pipe to &#124; sort -h[r] for result sorting df - report file system disk space usage SYNOPSIS df [OPTION]&hellip;
+			Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]&hellip; [FILE]&hellip; -a, &ndash;all do not ignore entries starting with .     examples effects     ls -la list all file/directories including hidden in long list form   ls -ld list directory only in list form    du - estimate file space usage SYNOPSIS du [OPTION]&hellip; [FILE]&hellip; -c, &ndash;total produce a grand total -h, &ndash;human-readable print sizes in human readable format (e.
 
 			<hr>
 			
 
 			<aside class="copyright" role="note">
   
-  &copy; 2016 Zexi Zhuang &ndash;
+  &copy; 2017 Zexi Zhuang &ndash;
   
   built with
   <a href="https://www.gohugo.io" target="_blank">Hugo</a>

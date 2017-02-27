@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/vim/</link>
+    <link>http://jessezhuang.github.io/tags/vim/index.xml</link>
     <description>Recent content in Vim on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jun 2016 00:37:56 -0700</lastBuildDate>
+    <copyright>Zexi Zhuang</copyright>
     <atom:link href="http://jessezhuang.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -22,6 +22,14 @@
 &lt;p&gt;&lt;strong&gt;Terms:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
+:E # or :Explorer
+R # rename at bottom
+:bp # go back previous buffer
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
 
@@ -143,6 +151,11 @@
 &lt;td&gt;),}&lt;/td&gt;
 &lt;td&gt;jump forward one sentence/paragraph&lt;/td&gt;
 &lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%&lt;/td&gt;
+&lt;td&gt;jump to matching bracket&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -180,6 +193,18 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
+
+&lt;p&gt;For unicode error during printing to pdf.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&#34;&gt;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tried :set printencoding=utf-8, does not work on mac.
+:TOhtml
+:w print.html&lt;/p&gt;
+
+&lt;p&gt;Open print.html with chrome and print without background graphics.&lt;/p&gt;
 </description>
     </item>
     

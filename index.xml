@@ -2,12 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coding Automaton</title>
-    <link>http://jessezhuang.github.io/</link>
+    <link>http://jessezhuang.github.io/index.xml</link>
     <description>Recent content on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Aug 2016 17:12:46 -0700</lastBuildDate>
+    <copyright>Zexi Zhuang</copyright>
+    <lastBuildDate>Sat, 18 Jun 2016 00:11:02 +0100</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>http://jessezhuang.github.io/page/about-me/</link>
+      <pubDate>Sat, 18 Jun 2016 00:11:02 +0100</pubDate>
+      
+      <guid>http://jessezhuang.github.io/page/about-me/</guid>
+      <description>
+
+&lt;h3 id=&#34;hello-people-my-name-is&#34;&gt;Hello People, My Name is&lt;/h3&gt;
+
+&lt;h2 id=&#34;zexi-jesse-zhuang&#34;&gt;Zexi Jesse Zhuang,&lt;/h2&gt;
+
+&lt;h2 id=&#34;a-developer-and-learner&#34;&gt;a Developer and Learner.&lt;/h2&gt;
+
+&lt;p&gt;I currently live near Seattle, WA. I love web, mobile, and open source software development. I strive to find simple working solutions to complete tasks or goals and explain the algorithms and solutions concisely.&lt;/p&gt;
+
+&lt;p&gt;Outside of coding, I love lifting, hiking, and badminton.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-coding-automaton&#34;&gt;Why Coding Automaton?&lt;/h2&gt;
+
+&lt;p&gt;The first time I learned about Automaton was in &lt;a href=&#34;https://www.cs.princeton.edu/~rs/&#34;&gt;Robert Sedgewick&lt;/a&gt;&amp;rsquo;s Algorithms class. In &lt;a href=&#34;https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&#34;&gt;Knuth Morris Pratt&lt;/a&gt;&amp;rsquo;s&amp;rsquo; substring search algorithm, a crucial step was to build the &lt;a href=&#34;https://en.wikipedia.org/wiki/Deterministic_finite_automaton&#34;&gt;deterministic finite state automaton (DFA)&lt;/a&gt;, which automatically tells about the next skip in substring search as the algorithm walks along the text to search for the pattern. As a programmer, one&amp;rsquo;s primary goal might be to generate automatic tools/products to simplify complicated jobs for other people and himself/herself. In this sense, I would like to get more proficient in coding as I write articles/tutorials and I hope my readers could benefit from the content as well.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-dry-principle&#34;&gt;The DRY Principle&lt;/h2&gt;
+
+&lt;p&gt;In software engineering, &lt;a href=&#34;https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself&#34;&gt;don&amp;rsquo;t repeat yourself (DRY)&lt;/a&gt; is a principle aimed at reducing repetition of information of all kinds. I aim to write original contents here that are not easily found by googling. One other comprehension of the word automaton is to let the machine do the boring repeating tasks and free us humans for challenging and creative accomplishments. Whatever brings you here, I hope this blog can make it easier for you and myself to achieve our goals.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mac Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/mac_cheatsheet/</link>
+      <pubDate>Sun, 26 Feb 2017 18:56:24 -0800</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/mac_cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;keboard-shortcuts&#34;&gt;Keboard Shortcuts&lt;/h1&gt;
+
+&lt;p&gt;Switching tabs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right.&lt;/li&gt;
+&lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
+&lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Algorithm Question Substring Search KMP</title>
@@ -415,6 +464,14 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
 
+&lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
+:E # or :Explorer
+R # rename at bottom
+:bp # go back previous buffer
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
 
 &lt;p&gt;In normal mode:&lt;/p&gt;
@@ -535,6 +592,11 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 &lt;td&gt;),}&lt;/td&gt;
 &lt;td&gt;jump forward one sentence/paragraph&lt;/td&gt;
 &lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%&lt;/td&gt;
+&lt;td&gt;jump to matching bracket&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -572,6 +634,18 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
+
+&lt;p&gt;For unicode error during printing to pdf.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&#34;&gt;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tried :set printencoding=utf-8, does not work on mac.
+:TOhtml
+:w print.html&lt;/p&gt;
+
+&lt;p&gt;Open print.html with chrome and print without background graphics.&lt;/p&gt;
 </description>
     </item>
     
@@ -2011,6 +2085,13 @@ Dropbox         238G  116G  123G  49% /media/sf_Dropbox
 
 &lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
 
+&lt;h3 id=&#34;check-system-info&#34;&gt;Check system info&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$lscpu # check cpu info
+$cat /etc/redhat_release # find redhat version
+$unmae -rs # kernel release version and name
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;To check memory usage&lt;/p&gt;
 
 &lt;table&gt;
@@ -2081,6 +2162,33 @@ SYNOPSIS
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h1 id=&#34;shortcuts&#34;&gt;Shortcuts&lt;/h1&gt;
+
+&lt;h2 id=&#34;open-application&#34;&gt;Open Application&lt;/h2&gt;
+
+&lt;p&gt;|Application|key binding|Desktop Env|Key binding|DE|
+|Terminal|shift+ctrl+N|Gnome|ctrl+alt+T|typical|&lt;/p&gt;
+
+&lt;h2 id=&#34;command-line-shortcuts&#34;&gt;Command Line Shortcuts&lt;/h2&gt;
+
+&lt;p&gt;References:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.bigsmoke.us/readline/shortcuts&#34;&gt;Readline shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;meta key: Esc on mac&lt;/p&gt;
+
+&lt;p&gt;|key binding|Action|
+|:-|-|
+|ctrl+e|move cursor to line beginning/end|
+|meta-f/b|move cursor one word forward/backward, right/left|
+|ctrl+u/k|delete from cursor to line beginning/end|
+|ctrl+w, meta-d|delete one word from cursor left/right|
+|meta-t|transpose two words before cursor, or transpose one before one after|
+|ctrl+y|yank/paste previously killed text|
+|ctrl+_|undo last edit|&lt;/p&gt;
 </description>
     </item>
     
@@ -2451,86 +2559,6 @@ tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&#34;admonition-title&#34;&gt;Note&lt;/p&gt;
 &lt;p&gt;Don&amp;rsquo;t forget to include the package name in the first parameter as the class name. Please note that Class.getMethod() only searches for public methods.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Tutorial for using Hugo and Github Pages as a Blog Site</title>
-      <link>http://jessezhuang.github.io/article/tutorial-hugoblog/</link>
-      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/tutorial-hugoblog/</guid>
-      <description>
-
-&lt;h2 id=&#34;hugo-a-static-site-generator&#34;&gt;Hugo, a Static Site Generator&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.gohugo.io&#34;&gt;Hugo&lt;/a&gt; is one of the static site generators. Currently it is ranked 4th by &lt;a href=&#34;https://www.staticgen.com/&#34;&gt;StaticGen&lt;/a&gt;. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.&lt;/p&gt;
-
-&lt;p&gt;Most of them were written in JavaScript. &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was the good old player in this field, which was used in Obama&amp;rsquo;s campaigns to raise $250M. Healthcare.gov switched to CMS-free style with Jekyll in 2013.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt; uses node.js, which started in 2012. Hugo started in 2013. Both are getting quite popular within a short time. Hugo seems to have a nice growing community and fairly good documentations. It may be missing some features but let&amp;rsquo;s hope it will catch up.&lt;/p&gt;
-
-&lt;h2 id=&#34;deployment-at-github-pages&#34;&gt;Deployment at Github Pages&lt;/h2&gt;
-
-&lt;p&gt;I won&amp;rsquo;t be verbose about the benefits of static pages. Healthcare.gov and my blog here load blazing fast compared to dynamic sites where the server needs to pull data from different sources. The key reason for me is the flexibility of the content/design control. You are not limited by a small set of templates and widgets such as those found at &lt;a href=&#34;http://www.blogger.com&#34;&gt;Blogger&lt;/a&gt;. You don&amp;rsquo;t have the limitations at &lt;a href=&#34;http://www.wordpress.com&#34;&gt;Wordpress.com&lt;/a&gt; in case if you want to put ads on your blog.&lt;/p&gt;
-
-&lt;p&gt;The ability to deploy the site with github pages is special since it connects with your github account and your repositories. The entire site can be version controlled as well as the generated site as a &lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;git submodule&lt;/a&gt;. You are basically making git commits in the meantime that you are updating your site.&lt;/p&gt;
-
-&lt;h2 id=&#34;themes-for-hugo&#34;&gt;Themes for Hugo&lt;/h2&gt;
-
-&lt;p&gt;There are a variety of templates available at Hugo&amp;rsquo;s &lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;official site&lt;/a&gt;, covering different purposes from personal blog, documentation, project information, merchant, designer showcases, to many more. I really liked the &lt;a href=&#34;http://themes.gohugo.io/material-docs/&#34;&gt;material docs&lt;/a&gt; design, which was intended to be used as a project documentation/information site. I customized the template for a blog site.&lt;/p&gt;
-
-&lt;h2 id=&#34;customize-the-hugo-material-docs-themes&#34;&gt;Customize the hugo-material-docs Themes&lt;/h2&gt;
-
-&lt;p&gt;Main changes for the customization are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Changed the index page to list most recent posts/articles.&lt;/li&gt;
-&lt;li&gt;Added sections to list blog categories and tags.&lt;/li&gt;
-&lt;li&gt;Integrate &lt;a href=&#34;http://disqus.com&#34;&gt;Disqus&lt;/a&gt; comments at the bottom of each post.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The customized template is available at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo here&lt;/a&gt;. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.&lt;/p&gt;
-
-&lt;p&gt;To use the template,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
-hugo -t hugo-material-blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or setup the theme in &lt;code&gt;config.yaml&lt;/code&gt; or &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I did notice some weird bugs while I was customizing the template. Sometimes the template engine report errors if you have commented out lines in the template.&lt;/p&gt;
-
-&lt;p&gt;I plan to keep this template updated while writing more articles for the site. You are welcome to comment here or at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo&lt;/a&gt; for any issues or feature requests.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>http://jessezhuang.github.io/page/about-me/</link>
-      <pubDate>Sat, 18 Jun 2016 00:11:02 +0100</pubDate>
-      
-      <guid>http://jessezhuang.github.io/page/about-me/</guid>
-      <description>
-
-&lt;h3 id=&#34;hello-people-my-name-is&#34;&gt;Hello People, My Name is&lt;/h3&gt;
-
-&lt;h2 id=&#34;zexi-jesse-zhuang&#34;&gt;Zexi Jesse Zhuang,&lt;/h2&gt;
-
-&lt;h2 id=&#34;a-developer-and-learner&#34;&gt;a Developer and Learner.&lt;/h2&gt;
-
-&lt;p&gt;I currently live near Seattle, WA. I love web, mobile, and open source software development. I strive to find simple working solutions to complete tasks or goals and explain the algorithms and solutions concisely.&lt;/p&gt;
-
-&lt;p&gt;Outside of coding, I love lifting, hiking, and badminton.&lt;/p&gt;
-
-&lt;h2 id=&#34;why-coding-automaton&#34;&gt;Why Coding Automaton?&lt;/h2&gt;
-
-&lt;p&gt;The first time I learned about Automaton was in &lt;a href=&#34;https://www.cs.princeton.edu/~rs/&#34;&gt;Robert Sedgewick&lt;/a&gt;&amp;rsquo;s Algorithms class. In &lt;a href=&#34;https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&#34;&gt;Knuth Morris Pratt&lt;/a&gt;&amp;rsquo;s&amp;rsquo; substring search algorithm, a crucial step was to build the &lt;a href=&#34;https://en.wikipedia.org/wiki/Deterministic_finite_automaton&#34;&gt;deterministic finite state automaton (DFA)&lt;/a&gt;, which automatically tells about the next skip in substring search as the algorithm walks along the text to search for the pattern. As a programmer, one&amp;rsquo;s primary goal might be to generate automatic tools/products to simplify complicated jobs for other people and himself/herself. In this sense, I would like to get more proficient in coding as I write articles/tutorials and I hope my readers could benefit from the content as well.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-dry-principle&#34;&gt;The DRY Principle&lt;/h2&gt;
-
-&lt;p&gt;In software engineering, &lt;a href=&#34;https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself&#34;&gt;don&amp;rsquo;t repeat yourself (DRY)&lt;/a&gt; is a principle aimed at reducing repetition of information of all kinds. I aim to write original contents here that are not easily found by googling. One other comprehension of the word automaton is to let the machine do the boring repeating tasks and free us humans for challenging and creative accomplishments. Whatever brings you here, I hope this blog can make it easier for you and myself to achieve our goals.&lt;/p&gt;
 </description>
     </item>
     
