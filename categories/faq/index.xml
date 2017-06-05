@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Faq on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/categories/faq/index.xml</link>
+    <description>Recent content in Faq on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Zexi Zhuang</copyright>
+    <atom:link href="http://jessezhuang.github.io/categories/faq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Internet FAQ</title>
+      <link>http://jessezhuang.github.io/article/internet-faq/</link>
+      <pubDate>Sun, 16 Apr 2017 19:09:17 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/internet-faq/</guid>
+      <description>
+
+&lt;h2 id=&#34;internet-protocol-ip&#34;&gt;Internet Protocol (IP)&lt;/h2&gt;
+
+&lt;h3 id=&#34;ipv4-vs-ipv6&#34;&gt;IPV4 vs IPv6&lt;/h3&gt;
+
+&lt;p&gt;IPV4 uses 32 bits, 4 8 bit numbers, 2^32 distinct IP addresses. Example 202.2.1.10.&lt;/p&gt;
+
+&lt;p&gt;IPV6 uses 128 bits, 8 16 bit numbers, 2^128 distinct IP addresses. Actual number is slightly smaller since multiple ranges are reserved for special use or completely excluded from use. Example 3ffe:1900:4545:3:200:f8ff:fe21:67cf.&lt;/p&gt;
+
+&lt;p&gt;Refs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webopedia.com/DidYouKnow/Internet/ipv6_ipv4_difference.html&#34;&gt;webopedia article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/IPv6&#34;&gt;IPV6 wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

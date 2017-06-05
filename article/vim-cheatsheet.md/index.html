@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/Unix/projects/github-blog-hugo/content/article/vim-cheatsheet.md.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="markdown">
+<meta name="settings" content="number_lines,use_css,pre_wrap,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="desert">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #333333; }
+body { font-family: monospace; color: #ffffff; background-color: #333333; }
+* { font-size: 1em; }
+.htmlBold { font-weight: bold; }
+.LineNr { color: #ffff00; }
+.PreProc { color: #cd5c5c; }
+.Title { color: #cd5c5c; font-weight: bold; }
+.Special { color: #ffdead; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+ 
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1);  
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  
+
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="PreProc">---</span>
+<span id="L2" class="LineNr"> 2 </span>categories: [cheatsheet]
+<span id="L3" class="LineNr"> 3 </span>date: 2016-06-30T00:37:56-07:00
+<span id="L4" class="LineNr"> 4 </span>lastmod: 2016-07-07T00:37:56-07:00
+<span id="L5" class="LineNr"> 5 </span>tags: [linux,vim]
+<span id="L6" class="LineNr"> 6 </span><span class="Title">title: Vim Cheatsheet</span>
+<span id="L7" class="LineNr"> 7 </span><span class="PreProc">---</span>
+<span id="L8" class="LineNr"> 8 </span>
+<span id="L9" class="LineNr"> 9 </span>For Ubuntu Linux,
+<span id="L10" class="LineNr">10 </span>
+<span id="L11" class="LineNr">11 </span><span class="htmlBold">**</span><span class="htmlBold">Terms:</span><span class="htmlBold">**</span>
+<span id="L12" class="LineNr">12 </span>
+<span id="L13" class="LineNr">13 </span><span class="Special">`</span>C-x<span class="Special">`</span> stands for <span class="Special">`</span>ctrl-x<span class="Special">`</span>.
+<span id="L14" class="LineNr">14 </span>
+<span id="L15" class="LineNr">15 </span><span class="Special">#</span><span class="Title"> File operations</span>
+<span id="L16" class="LineNr">16 </span>
+<span id="L17" class="LineNr">17 </span><span class="Special">```bash</span>
+<span id="L18" class="LineNr">18 </span># to rename a file
+<span id="L19" class="LineNr">19 </span>:E # or :Explorer
+<span id="L20" class="LineNr">20 </span>R # rename at bottom
+<span id="L21" class="LineNr">21 </span>:bp # go back previous buffer
+<span id="L22" class="LineNr">22 </span><span class="Special">```</span>
+<span id="L23" class="LineNr">23 </span>
+<span id="L24" class="LineNr">24 </span><span class="Special">#</span><span class="Title"> Copy/Pasting</span>
+<span id="L25" class="LineNr">25 </span>
+<span id="L26" class="LineNr">26 </span>In normal mode:
+<span id="L27" class="LineNr">27 </span>
+<span id="L28" class="LineNr">28 </span>|command|effect|
+<span id="L29" class="LineNr">29 </span>|---|---|
+<span id="L30" class="LineNr">30 </span>|3y, p|copy 3 lines, paste after cursor|
+<span id="L31" class="LineNr">31 </span>|&quot;ayy, &quot;ap|copy current line to buffer a, paste from buffer a|
+<span id="L32" class="LineNr">32 </span>|v/V|start selecting character, whole line|
+<span id="L33" class="LineNr">33 </span>|5ly|yanks into default buffer 5 characters from cursor|
+<span id="L34" class="LineNr">34 </span>|&quot;hy|yanks into register h, use + register for system clipboard|
+<span id="L35" class="LineNr">35 </span>
+<span id="L36" class="LineNr">36 </span>In insert mode:
+<span id="L37" class="LineNr">37 </span>
+<span id="L38" class="LineNr">38 </span>|command|effect|
+<span id="L39" class="LineNr">39 </span>|---|---|
+<span id="L40" class="LineNr">40 </span>|<span class="Special">`</span>C-r{register}|paste contents of the register|
+<span id="L41" class="LineNr">41 </span>|C-r&quot;|to paste from default register|
+<span id="L42" class="LineNr">42 </span>|C-u|to delete everything before the cursor on this line|
+<span id="L43" class="LineNr">43 </span>|C-w|to delete from cursor to the beginning of previous word|
+<span id="L44" class="LineNr">44 </span>
+<span id="L45" class="LineNr">45 </span><span class="Special">#</span><span class="Title"> Move Around</span>
+<span id="L46" class="LineNr">46 </span>
+<span id="L47" class="LineNr">47 </span>In normal mode:
+<span id="L48" class="LineNr">48 </span>
+<span id="L49" class="LineNr">49 </span>|command|effect|
+<span id="L50" class="LineNr">50 </span>|---|---|
+<span id="L51" class="LineNr">51 </span>|100l|go right 100 positions, useful to navigate a long line.|
+<span id="L52" class="LineNr">52 </span>|10w/10b/10e|go forward/backward 10 words, e end of word|
+<span id="L53" class="LineNr">53 </span>|fa, ta|move to or just before the next letter a|
+<span id="L54" class="LineNr">54 </span>|/pattern|move to the next word matches, n/N to repeat search|
+<span id="L55" class="LineNr">55 </span>|H,M,L # to go to top/mid/bottom of screen|
+<span id="L56" class="LineNr">56 </span>|1G(1gg), G|go to beginning/end of file|
+<span id="L57" class="LineNr">57 </span>|),}|jump forward one sentence/paragraph|
+<span id="L58" class="LineNr">58 </span>|%|jump to matching bracket|
+<span id="L59" class="LineNr">59 </span>
+<span id="L60" class="LineNr">60 </span>
+<span id="L61" class="LineNr">61 </span><span class="Special">#</span><span class="Title"> Editing</span>
+<span id="L62" class="LineNr">62 </span>
+<span id="L63" class="LineNr">63 </span>In normal mode:
+<span id="L64" class="LineNr">64 </span>
+<span id="L65" class="LineNr">65 </span>|command|effect|
+<span id="L66" class="LineNr">66 </span>|---|---|
+<span id="L67" class="LineNr">67 </span>|dw/W|delete word before/after cursor|
+<span id="L68" class="LineNr">68 </span>|x,r|delete,replace character at cursor|
+<span id="L69" class="LineNr">69 </span>|.,u,ctrl-r|repeat, undo, redo|
+<span id="L70" class="LineNr">70 </span>|q&lt;letter&gt;, @&lt;letter&gt;|record operations and reapply, type q again to quit|
+<span id="L71" class="LineNr">71 </span>
+<span id="L72" class="LineNr">72 </span><span class="Special">#</span><span class="Title"> Printing</span>
+<span id="L73" class="LineNr">73 </span>
+<span id="L74" class="LineNr">74 </span>For unicode error during printing to pdf.
+<span id="L75" class="LineNr">75 </span>
+<span id="L76" class="LineNr">76 </span><a href="http://stackoverflow.com/questions/11954241/unicode-printing-in-vim">http://stackoverflow.com/questions/11954241/unicode-printing-in-vim</a>
+<span id="L77" class="LineNr">77 </span>
+<span id="L78" class="LineNr">78 </span>Tried :set printencoding=utf-8, does not work on mac.
+<span id="L79" class="LineNr">79 </span>:TOhtml
+<span id="L80" class="LineNr">80 </span>:w print.html
+<span id="L81" class="LineNr">81 </span>
+<span id="L82" class="LineNr">82 </span>Open print.html with chrome and print without background graphics.
+</pre>
+</body>
+</html>
+

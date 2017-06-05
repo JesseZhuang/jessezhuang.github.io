@@ -23,12 +23,25 @@
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
 
+&lt;p&gt;Generally, use &lt;code&gt;:help &amp;lt;cmd&amp;gt;&amp;quot; for quick ref, e.g.&lt;/code&gt;:help undo`.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
+
+&lt;p&gt;Configuration file default &lt;code&gt;~/.vimrc&lt;/code&gt;. Can use &lt;code&gt;source &amp;lt;another file&amp;gt;&lt;/code&gt; and put the actual vimrc in cloud like dropbox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to reload an edited vimrc
+:so $MYVIMRC
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
-:E # or :Explorer
+:E or :Explorer
 R # rename at bottom
 :bp # go back previous buffer
+# save the current session including buffers, tabs, and settings
+:mksession ~/vimSessions/session1.vim
+:mks! # to override existing session file
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
@@ -188,11 +201,24 @@ R # rename at bottom
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;q&lt;letter&gt;, @&lt;letter&gt;&lt;/td&gt;
+&lt;td&gt;q &amp;lt; letter &amp;gt;, @&amp;lt; letter &amp;gt;&lt;/td&gt;
 &lt;td&gt;record operations and reapply, type q again to quit&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;to search for word under cursor&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to count number of occurances
+:%s/pattern//gn
+# to count number of lines containing pattern
+:%s/pattern//n
+# change each &#39;foo&#39; to &#39;bar&#39;, i: case insensitive, c: conformation, %: all lines
+:%s/foo/bar/gci
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
 

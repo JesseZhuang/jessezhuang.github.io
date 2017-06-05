@@ -26,6 +26,13 @@
 &lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
 &lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;Editing:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delete to end of line, ctrl+k, same as on command line&lt;/li&gt;
+&lt;li&gt;Delete to beginning of line, cmd+shift+left, then delete&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

@@ -268,7 +268,11 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>4</sup></a>
+                cheatsheet<sup>5</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/faq"
+                title="faq">
+                faq<sup>1</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -292,11 +296,17 @@
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
+              <a href="http://jessezhuang.github.io/tags/devops">[devops]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/docker">[docker]</a>
+            
               <a href="http://jessezhuang.github.io/tags/git">[git]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/internet">[internet]</a>
             
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
@@ -394,6 +404,7 @@
         <h2>Table of Contents</h2>
         <nav id="TableOfContents">
 <ul>
+<li><a href="#configuration">Configuration</a></li>
 <li><a href="#file-operations">File operations</a></li>
 <li><a href="#copy-pasting">Copy/Pasting</a></li>
 <li><a href="#move-around">Move Around</a></li>
@@ -411,12 +422,25 @@
 
 <p><code>C-x</code> stands for <code>ctrl-x</code>.</p>
 
+<p>Generally, use <code>:help &lt;cmd&gt;&quot; for quick ref, e.g.</code>:help undo`.</p>
+
+<h1 id="configuration">Configuration</h1>
+
+<p>Configuration file default <code>~/.vimrc</code>. Can use <code>source &lt;another file&gt;</code> and put the actual vimrc in cloud like dropbox.</p>
+
+<pre><code class="language-bash"># to reload an edited vimrc
+:so $MYVIMRC
+</code></pre>
+
 <h1 id="file-operations">File operations</h1>
 
 <pre><code class="language-bash"># to rename a file
-:E # or :Explorer
+:E or :Explorer
 R # rename at bottom
 :bp # go back previous buffer
+# save the current session including buffers, tabs, and settings
+:mksession ~/vimSessions/session1.vim
+:mks! # to override existing session file
 </code></pre>
 
 <h1 id="copy-pasting">Copy/Pasting</h1>
@@ -576,11 +600,24 @@ R # rename at bottom
 </tr>
 
 <tr>
-<td>q<letter>, @<letter></td>
+<td>q &lt; letter &gt;, @&lt; letter &gt;</td>
 <td>record operations and reapply, type q again to quit</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>to search for word under cursor</td>
 </tr>
 </tbody>
 </table>
+
+<pre><code class="language-bash"># to count number of occurances
+:%s/pattern//gn
+# to count number of lines containing pattern
+:%s/pattern//n
+# change each 'foo' to 'bar', i: case insensitive, c: conformation, %: all lines
+:%s/foo/bar/gci
+</code></pre>
 
 <h1 id="printing">Printing</h1>
 

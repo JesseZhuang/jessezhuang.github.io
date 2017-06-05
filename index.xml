@@ -39,6 +39,68 @@
     </item>
     
     <item>
+      <title>Docker Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/docker-cheatsheet/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/docker-cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;container-vs-image&#34;&gt;Container vs Image&lt;/h1&gt;
+
+&lt;p&gt;Image is immutable, container is a box running starting from an image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker ps -as
+# list all containers with sizes
+
+docker images
+# list all images
+
+docker run [options] &amp;lt;image&amp;gt;
+# best to use image id or image:tag
+# -p hostPort:containerPort expose port, -P publish all exposed ports. 8888 for jupyter notebook
+# -t terminal pseudo-TTY
+# -i Keep STDIN open even if not attached
+# -v /host/dir:/&amp;lt;container-path&amp;gt;
+# --name Assign a name to the container
+
+docker start -ai &amp;lt;container&amp;gt;
+# can user container id or name
+# -a Attach STDOUT/STDERR and forward signals
+# -i Attach container&#39;s STDIN
+
+jupyter notebook --ip 0.0.0.0 --no-browser
+# run server at ip 0.0.0.0 and access in host at localhost(127.0.0.1) at the allowed port
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Internet FAQ</title>
+      <link>http://jessezhuang.github.io/article/internet-faq/</link>
+      <pubDate>Sun, 16 Apr 2017 19:09:17 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/internet-faq/</guid>
+      <description>
+
+&lt;h2 id=&#34;internet-protocol-ip&#34;&gt;Internet Protocol (IP)&lt;/h2&gt;
+
+&lt;h3 id=&#34;ipv4-vs-ipv6&#34;&gt;IPV4 vs IPv6&lt;/h3&gt;
+
+&lt;p&gt;IPV4 uses 32 bits, 4 8 bit numbers, 2^32 distinct IP addresses. Example 202.2.1.10.&lt;/p&gt;
+
+&lt;p&gt;IPV6 uses 128 bits, 8 16 bit numbers, 2^128 distinct IP addresses. Actual number is slightly smaller since multiple ranges are reserved for special use or completely excluded from use. Example 3ffe:1900:4545:3:200:f8ff:fe21:67cf.&lt;/p&gt;
+
+&lt;p&gt;Refs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webopedia.com/DidYouKnow/Internet/ipv6_ipv4_difference.html&#34;&gt;webopedia article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/IPv6&#34;&gt;IPV6 wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Mac Cheatsheet</title>
       <link>http://jessezhuang.github.io/article/mac_cheatsheet/</link>
       <pubDate>Sun, 26 Feb 2017 18:56:24 -0800</pubDate>
@@ -54,6 +116,13 @@
 &lt;li&gt;Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right.&lt;/li&gt;
 &lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
 &lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Editing:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delete to end of line, ctrl+k, same as on command line&lt;/li&gt;
+&lt;li&gt;Delete to beginning of line, cmd+shift+left, then delete&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -464,12 +533,25 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
 
+&lt;p&gt;Generally, use &lt;code&gt;:help &amp;lt;cmd&amp;gt;&amp;quot; for quick ref, e.g.&lt;/code&gt;:help undo`.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
+
+&lt;p&gt;Configuration file default &lt;code&gt;~/.vimrc&lt;/code&gt;. Can use &lt;code&gt;source &amp;lt;another file&amp;gt;&lt;/code&gt; and put the actual vimrc in cloud like dropbox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to reload an edited vimrc
+:so $MYVIMRC
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
-:E # or :Explorer
+:E or :Explorer
 R # rename at bottom
 :bp # go back previous buffer
+# save the current session including buffers, tabs, and settings
+:mksession ~/vimSessions/session1.vim
+:mks! # to override existing session file
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
@@ -629,11 +711,24 @@ R # rename at bottom
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;q&lt;letter&gt;, @&lt;letter&gt;&lt;/td&gt;
+&lt;td&gt;q &amp;lt; letter &amp;gt;, @&amp;lt; letter &amp;gt;&lt;/td&gt;
 &lt;td&gt;record operations and reapply, type q again to quit&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;to search for word under cursor&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to count number of occurances
+:%s/pattern//gn
+# to count number of lines containing pattern
+:%s/pattern//n
+# change each &#39;foo&#39; to &#39;bar&#39;, i: case insensitive, c: conformation, %: all lines
+:%s/foo/bar/gci
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
 
@@ -2180,385 +2275,53 @@ SYNOPSIS
 
 &lt;p&gt;meta key: Esc on mac&lt;/p&gt;
 
-&lt;p&gt;|key binding|Action|
-|:-|-|
-|ctrl+e|move cursor to line beginning/end|
-|meta-f/b|move cursor one word forward/backward, right/left|
-|ctrl+u/k|delete from cursor to line beginning/end|
-|ctrl+w, meta-d|delete one word from cursor left/right|
-|meta-t|transpose two words before cursor, or transpose one before one after|
-|ctrl+y|yank/paste previously killed text|
-|ctrl+_|undo last edit|&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>MongoDB Tutorial 4 - Performance</title>
-      <link>http://jessezhuang.github.io/article/mongodb-performance/</link>
-      <pubDate>Fri, 24 Jun 2016 14:55:57 -0700</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/mongodb-performance/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://blog.technotesdesk.com/wp-content/uploads/2015/01/mongodb_logo.jpg&#34; alt=&#34;MongoDB Database&#34; title=&#34;MongoDB Logo&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;storage-engine&#34;&gt;Storage engine&lt;/h1&gt;
-
-&lt;p&gt;Storage engine sits between mongodb server and the file storage. Use &lt;code&gt;db.serverStatus().storageEngine;&lt;/code&gt; to check.&lt;/p&gt;
-
-&lt;h2 id=&#34;wiredtiger&#34;&gt;WiredTiger&lt;/h2&gt;
-
-&lt;p&gt;for many applications, this is faster
-- document level concurrency, lock free implementation. optimistic concurrency model which assumes two writes not gonna be on same document. if on same, one write unwound and try again.
-- compression of data and indexes. WiredTiger manages memory.
-- append only, no in place updates&lt;/p&gt;
-
-&lt;h2 id=&#34;mmap-v1&#34;&gt;MMAP V1&lt;/h2&gt;
-
-&lt;p&gt;Uses mmap system call undercovers. Allocating memory, or map files or devices into memory. Operation system manages memory/virtual memory.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;collection level locking, multiple reader, single writer lock.&lt;/li&gt;
-&lt;li&gt;
-&lt;a target=&#34;_blank&#34; href=&#34;http://blog.mongodb.org/post/248614779/fast-updates-with-mongodb-update-in-place&#34;&gt;in place update&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
- (database does not have to allocate and write a full new copy of the object).&lt;/li&gt;
-&lt;li&gt;power of 2 sizes when allocating initial storage with a minimum of 32 bytes.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;indexes&#34;&gt;Indexes&lt;/h1&gt;
-
-&lt;p&gt;Built with btree or b+trees. With indexes writes are slower, reads are much faster. Without index, query on 10 million documents will be linear searching, too much disk io.&lt;/p&gt;
-
-&lt;p&gt;(a,b,c) leftmost index order. a, (a,b), (a,b,c) would work, (a,c) partially work, others do not.&lt;/p&gt;
-
-&lt;h2 id=&#34;indexes-size&#34;&gt;Indexes Size&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-index-size.png&#34; alt=&#34;Indexes should fit into memory&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s essential to fit working set (key component: Indexes) into memory. To check indexes sizes in mongo shell:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.collection.stats() //detailed for each index
-db.collection.totalIndexSize() //just the total
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For a 10 million documents students collection, each index is about 300 Mb with &lt;a href=&#34;#mmap-v1&#34;&gt;MMAP V1 storage engine&lt;/a&gt;. Since 3.0, the &lt;a href=&#34;#wired-tiger&#34;&gt;wired tiger storage engine&lt;/a&gt; provides a few types of compression, one of which, i.e., prefix compression allows us to have smaller indexes. The same index is about 100 Mb instead of 300 Mb. The compression comes at the cost of CPU and whether the dataset can take advantage of something like prefix compression.&lt;/p&gt;
-
-&lt;h2 id=&#34;number-of-index-entries-cardinality&#34;&gt;Number of Index Entries (Cardinality)&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Regular: 1:1 proportional to collection size (index point needed even for null)&lt;/li&gt;
-&lt;li&gt;Sparse: &amp;lt;= number of documents&lt;/li&gt;
-&lt;li&gt;Multikey: index point for every array element. Could be (significantly) greater than number of documents.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If a document is updated and needs to be moved, the indexes need to be moved too. That cost only exists in the MMAPv1 storage engine. In the WiredTiger storage engine, index entries don&amp;rsquo;t contain pointers to actual disk locations. Instead, in WiredTiger, the index points to an internal document identifier (the 
-&lt;a target=&#34;_blank&#34; href=&#34;https://docs.mongodb.org/manual/reference/method/cursor.showRecordId/?_ga=1.110860677.1452504667.1464414259#cursor.showRecordId&#34;&gt;Record Id&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
- that is immutable. Therefore, when a document is updated, its index does not need to be updated at all.&lt;/p&gt;
-
-&lt;h2 id=&#34;geospatial-indexes&#34;&gt;Geospatial Indexes&lt;/h2&gt;
-
-&lt;h3 id=&#34;2d-type&#34;&gt;2D Type&lt;/h3&gt;
-
-&lt;p&gt;Allows to find things based on location. Documents have &lt;code&gt;&#39;location&#39;:[x,y]&lt;/code&gt; stored in them representing establishments around a person such as restaurants or coffee shops. &lt;code&gt;createIndex({&#39;location&#39;:&#39;2d&#39;, type:1})&lt;/code&gt; (2d is reserved type for two dimensional geo indexes). Use&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;find({location:{$near:[x0,y0]}}).limit(20)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;to find closest establishments where &lt;code&gt;$near&lt;/code&gt; is a query operator and &lt;code&gt;[x0,y0]&lt;/code&gt; is ther person&amp;rsquo;s standing point.&lt;/p&gt;
-
-&lt;h3 id=&#34;sperical-type&#34;&gt;Sperical Type&lt;/h3&gt;
-
-&lt;p&gt;MongoDB supports a subset of 
-&lt;a target=&#34;_blank&#34; href=&#34;http://geojson.org/geojson-spec.html&#34;&gt;GeoJSON location specification&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
-. A GeoJSON document is used for the value of key &lt;code&gt;location&lt;/code&gt;. Google maps shows &lt;code&gt;@latitude,longitude&lt;/code&gt; as part of the url for a particular location. MongoDB takes an opposite order &lt;code&gt;@longitude,latitude&lt;/code&gt;. Although it&amp;rsquo;s a spherical model, it&amp;rsquo;s only looking at points at the surface of the sphere other than points in the air.&lt;/p&gt;
-
-&lt;p&gt;First, create indexes,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.places.createIndex({&#39;location&#39;:&#39;2dsphere&#39;})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then, to find nearest point to hoover tower, in &lt;code&gt;geonear.js&lt;/code&gt;,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.places.find(
-  location:{
-    $near:{
-      $geometry:{
-        type:&amp;quot;Point&amp;quot;,
-        coordinates:[-122,37]// hoover tower
-      },
-      $maxDistance:2000 // in meters
-    }
-  }).pretty()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;to run the above query,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mongo &amp;lt; geonear.js
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;text-indexes&#34;&gt;Text Indexes&lt;/h2&gt;
-
-&lt;p&gt;aka Full text search index. Typically, when searching strings, the entire string must match. Except that a regex search will search the index (rather than the full collection), and if you anchor it on the left by beginning with ^, you can often do better still. 
-&lt;a target=&#34;_blank&#34; href=&#34;http://docs.mongodb.org/manual/reference/operator/query/regex/?_ga=1.222763675.1452504667.1464414259#index-use&#34;&gt;Here&amp;rsquo;s a link to the documentation&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
-. Alternatively, put every word into an array and use set operators.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.sentences.createIndex({&#39;words&#39;:&#39;text&#39;})
-db.sentences.find({$text:{$search:&#39;dog&#39;}})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A regular search &lt;code&gt;db.sentences.find({&#39;words&#39;:&#39;dog&#39;})&lt;/code&gt; will return nothing.&lt;/p&gt;
-
-&lt;p&gt;We can rank the results by a score,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.sentences.find(
-  {$text:{$search:&#39;dog tree obsidian&#39;}},
-  {$score:{$meta:&#39;textScore&#39;}}
-).sort({$score:{$meta:&#39;textScore&#39;}})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;index-design-i-class-fa-fa-arrow-up-aria-hidden-true-i&#34;&gt;Index Design &lt;a href=&#34;#&#34;&gt;&lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;The goal is efficient read/write operations.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Selectivity - minimize number of records scanned for a given query pattern.&lt;/li&gt;
-&lt;li&gt;Other Ops - how sorts are handled?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example query for 1 million student records:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.students.find(
-    {student_id:{$gt:500000}, class_id:54})
-    .sort({student_id:1}).hint({class_id:1} // specify index shape
-  ).explain(&amp;quot;executionstats&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note without &lt;code&gt;hint()&lt;/code&gt;, &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot; : 850433&lt;/code&gt; &amp;gt;&amp;gt; &lt;code&gt;&amp;quot;nReturned&amp;quot; : 10118&lt;/code&gt;, so index was not very selective. Check &lt;code&gt;queryPlanner&lt;/code&gt;,  &lt;code&gt;winningPlan&lt;/code&gt;, and &lt;code&gt;rejectedPlans&lt;/code&gt; section, the student id query examines half of the collection. A query using &lt;code&gt;class_id&lt;/code&gt; as an index would need a in memory sort (&lt;code&gt;&amp;quot;stage&amp;quot; : &amp;quot;SORT&amp;quot;&lt;/code&gt;) instead of one within the database so was rejected. With &lt;code&gt;hint()&lt;/code&gt; &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot; : 20071&lt;/code&gt;. &lt;code&gt;&amp;quot;executionTimeMillis&amp;quot;&lt;/code&gt; also dropped to 79 ms from 2600 ms.&lt;/p&gt;
-
-&lt;p&gt;With &lt;code&gt;db.students.createIndex({class_id:1, student_id:1})&lt;/code&gt; we will be using the most selective part of the query which is an equality/point query other than the range query on the  &lt;code&gt;student_id&lt;/code&gt;. Generally speaking, order equality queries first when building a compound index.&lt;/p&gt;
-
-&lt;p&gt;With the above compound index and query below,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.students.find(
-    {student_id:{$gt:500000}, class_id:54}).sort({final_grade:1})
-  ).explain(&amp;quot;executionstats&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;quot;totalKeysExamined&amp;quot;&lt;/code&gt; and &lt;code&gt;nReturned&lt;/code&gt; are 10118, &lt;code&gt;executionTimeMillis&lt;/code&gt; 138 ms with in memory sort on &lt;code&gt;final_grade&lt;/code&gt; done. It&amp;rsquo;s good to avoid in memory sort when you can, the trade off is to examine a few more keys. We can create another compound index, &lt;code&gt;db.students.createIndex({class_id:1, final_grade:1, student_id:1})&lt;/code&gt;, &lt;code&gt;final_grade&lt;/code&gt; has to be immediately after &lt;code&gt;class_id&lt;/code&gt; since we want to walk the index keys in order.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;db.students.find(
-    {student_id:{$gt:500000}, class_id:54}).sort({final_grade:-1})
-  ).explain(&amp;quot;executionstats&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now the result show &lt;code&gt;executionTimeMillis : 27&lt;/code&gt; and &lt;code&gt;&amp;quot;totalKeysExamined&amp;quot;: 10204&lt;/code&gt;. The &lt;code&gt;winningPlan&lt;/code&gt; now does not have a sort stage, only a &lt;code&gt;FETCH&lt;/code&gt; stage.&lt;/p&gt;
-
-&lt;p&gt;MongoDB can walk the index backward in order to sort on the final_grade field. While true given that we are sorting on only this field, if we want to sort on multiple fields, the direction of each field on which we want to sort in a query must be the same as the direction of each field specified in the index. So if we want to sort using something like &lt;code&gt;db.collection.find( { a: 75 } ).sort( { a: 1, b: -1 } )&lt;/code&gt;, we must specify the index using the same directions, e.g., &lt;code&gt;db.collection.createIndex( { a: 1, b: -1 } )&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;In general, the rules of thumb is
-* Equality fields before range fields
-* Sort fields before range fields
-* Equality fields before sort fields&lt;/p&gt;
-
-&lt;h2 id=&#34;logging-slow-queries&#34;&gt;Logging Slow queries&lt;/h2&gt;
-
-&lt;p&gt;Slow queries longer than 100 ms are already automatically logged with the default logging facility. It takes about 4 s for &lt;code&gt;db.students.find({student_id:10000})&lt;/code&gt; without an index among 1 million student documents.&lt;/p&gt;
-
-&lt;p&gt;There is a profiler built in &lt;code&gt;mongod&lt;/code&gt;, which is a more sophisticated facility and writes documents entries to system.profile any query taking more than specified time.
-- level 0 off
-- level 1 log slow queries
-- level 2 log all queries, general debugging&lt;/p&gt;
-
-&lt;p&gt;To start the profiler,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mongod -dbpath /usr/local/var/mongodb --profile 1 --slowm 2
-# logs queries above 2 ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Use &lt;code&gt;db.system.profile.find().pretty()&lt;/code&gt; to check for slow queries. For the same above query,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;quot;query&amp;quot;:{
-  &amp;quot;student_id&amp;quot; : 10000
-}
-&amp;quot;ntoreturn&amp;quot; : 0,
-&amp;quot;nscanned&amp;quot; : 10000000,
-...
-&amp;quot;nReturned&amp;quot; : 1
-&amp;quot;millis&amp;quot; : 4231
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a cap (fixed size) collection, recycle after it get used up. Some example usages below,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;gt; db.system.profile.find({ns:/school.students/}).sort(ts:1).pretty()
-// namespace school database, students collection, sort by timestamp.
-&amp;gt; db.system.profile.find({millis:{$gt:1}}).sort(ts:1).pretty()
-// looks for queries longer than 1 ms.
-&amp;gt; db.getProfilingLevel()
-1
-&amp;gt; db.getProfilingStatus()
-{&amp;quot;was&amp;quot; : 1, &amp;quot;slowms&amp;quot; : 2}
-&amp;gt; db.setProfilingLevel(1, 4) // slow queries above 4 ms
-{&amp;quot;was&amp;quot; : 1, &amp;quot;slowms&amp;quot; : 2, &amp;quot;ok&amp;quot; : 1}
-&amp;gt; db.setProfilingLevel(0)
-{&amp;quot;was&amp;quot; : 1, &amp;quot;slowms&amp;quot; : 4, &amp;quot;ok&amp;quot; : 1}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;mongotop-and-mongostat&#34;&gt;&lt;code&gt;mongotop&lt;/code&gt; and &lt;code&gt;mongostat&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;mongotop&lt;/code&gt; is named after &lt;a href=&#34;http://jessezhuang.github.io/
-article/linux-cheatsheet/&#34;&gt;unix &lt;code&gt;top&lt;/code&gt;&lt;/a&gt;, which gives a high level view where mongo spends most of its time. Subsequently, one can follow up for more detailed examining and optimizing.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mongotop 3 # default returns every second, this set to 3 seconds
-ns                    total    read    write    2016-06-25T23:32:52-07:00
-admin.system.roles      0ms     0ms      0ms                             
-admin.system.version    0ms     0ms      0ms                             
-blog.posts              0ms     0ms      0ms                             
-blog.sessions           0ms     0ms      0ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;mongostat&lt;/code&gt; is a performance tuning command, similar to &lt;a href=&#34;http://jessezhuang.github.io/
-article/linux-cheatsheet/which&#34;&gt;unix &lt;code&gt;iostat&lt;/code&gt;&lt;/a&gt; samples the database at 1 second increments and give information such as number of queries, inserts, updates, deletes, .etc. &lt;code&gt;getmore&lt;/code&gt; is getting more from a cursor for a query with a large result. &lt;code&gt;qr|qw ar|aw&lt;/code&gt; are queues and active reads and writes. &lt;code&gt;%dirty %used&lt;/code&gt; refers to percentage of WiredTiger cache. &lt;code&gt;res&lt;/code&gt; resident memory size smaller for WiredTiger. For MMAPv1 engine, &lt;code&gt;faults&lt;/code&gt; number of page faults and for WiredTiger, %used cache can indicate amount of IO being used. Check fields section for 
-&lt;a target=&#34;_blank&#34; href=&#34;https://docs.mongodb.com/manual/reference/program/mongostat/&#34;&gt;mongostat doc&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
-.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mongostat [--port 27017]
-insert query update delete getmore command % dirty % used    res qr|qw ar|aw netIn netOut
-    *0    *0     *0     *0       0     1|0     0.0    0.0  52.0M   0|0   0|0   79b    18k
-    *0    *0     *0     *0       0     1|0     0.0    0.0  52.0M   0|0   0|0   79b    18k
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;sharding-overview&#34;&gt;Sharding Overview&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/mongodb-sharding.png&#34; alt=&#34;mongodb sharding scheme&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Splitting a large collection amongst multiple servers. The details can be transparent to the client. &lt;code&gt;mongos&lt;/code&gt; routes to multiple &lt;code&gt;mongod&lt;/code&gt; shards. Each shard can contain multiple servers as a replica set.&lt;/p&gt;
-
-&lt;p&gt;An insert must contain the shard key, e.g. &lt;code&gt;student_id&lt;/code&gt;. For update, remove, and find, if a shard key is not given, &lt;code&gt;mongos&lt;/code&gt; will have to broadcast the requests to all the shards.&lt;/p&gt;
-
-&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
-
-&lt;ol&gt;
-&lt;li&gt;
-&lt;a target=&#34;_blank&#34; href=&#34;https://university.mongodb.com/courses/M101P/about&#34;&gt;MongoDB University Classes&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;a target=&#34;_blank&#34; href=&#34;https://docs.mongodb.com/&#34;&gt;MongoDB Docs&lt;/a&gt; &lt;i class=&#34;fa fa-external-link&#34;&gt;&lt;/i&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&#34;#&#34;&gt;go to top &lt;i class=&#34;fa fa-arrow-up&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
-tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Using Java&#39;s Reflection for Testing</title>
-      <link>http://jessezhuang.github.io/article/java-reflection-test/</link>
-      <pubDate>Sun, 19 Jun 2016 01:20:46 -0700</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/java-reflection-test/</guid>
-      <description>
-
-&lt;h2 id=&#34;writing-boilerplate-test-code-is-boring&#34;&gt;Writing Boilerplate Test Code is Boring&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/java-reflection.png&#34; alt=&#34;Java Reflection&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (&lt;code&gt;java.lang.reflect&lt;/code&gt; package) to maximize code reuse and help testing.&lt;/p&gt;
-
-&lt;p&gt;Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing.&lt;/p&gt;
-
-&lt;p&gt;The code examples below are available at my &lt;a href=&#34;https://github.com/JesseZhuang/SimpleJavaTools&#34;&gt;github repository&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;get-an-instance-of-class-being-tested&#34;&gt;Get an Instance of Class Being Tested&lt;/h2&gt;
-
-&lt;p&gt;First we will declare a message to print out if all tests passed. Unfortunately you don&amp;rsquo;t usually get to see this message till the end of debugging.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;private final static String SUCCESS = &amp;quot;Congrats! All tests passed.&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next we will make sure the input array and the expected result array have same number of elements with &lt;code&gt;validateLengths&lt;/code&gt; method which is trivial to implement.&lt;/p&gt;
-
-&lt;p&gt;Then we will get a class type &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt; from the &lt;code&gt;className&lt;/code&gt; parameter, get the input class type with the first element of the input array &lt;code&gt;inputs[0]&lt;/code&gt;, and get the method being tested with &lt;code&gt;class.getMethod&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Lastly, we will instantiate an object for the class for the cases where the tested method is an instance method. If the method is a static method, this object will be ignored.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public static &amp;lt;T, R&amp;gt; void assertEqual(String className,
-  String methodName, T[] inputs, R[] expected) {
-  // make sure they have same length
-  validateLengths(inputs, expected);
-
-  try {
-    // use reflection to get type of class indicated by &amp;quot;className&amp;quot;
-    Class&amp;lt;?&amp;gt; c = Class.forName(className);
-    Class&amp;lt;T&amp;gt; inputType = (Class&amp;lt;T&amp;gt;) inputs[0].getClass();
-    Method m = c.getMethod(methodName, inputType);
-
-    // static methods will ignore this instance
-    Object o = c.newInstance();
-    // code continue in next block for actual testing
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;the-actual-testings&#34;&gt;The Actual Testings&lt;/h2&gt;
-
-&lt;p&gt;Next we will use for loops to iterate over the array for all test cases. We write these loops here once and then we can call this method from the class being tested.&lt;/p&gt;
-
-&lt;p&gt;For nested array, we have to test for deep equality. The testing will quit on the first failed test and print out the information about the input, output, and expected result.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;{ //continue from top
-  {
-    for (int i = 0; i &amp;lt; inputs.length; i++) {
-      R e = expected[i];
-      R output = (R) m.invoke(o, inputs[i]);
-
-      // has to test deep equal for array type
-      if (e.getClass().isArray()) {
-        int n = Array.getLength(e);
-        for (int j = 0; j &amp;lt; n; j++) {
-          if (!Array.get(e, j).equals(Array.get(output, j))) {
-            System.out.println(&amp;quot;test failed for &amp;quot;
-              + Arrays.asList(inputs[i]) + &amp;quot; expected &amp;quot;
-              + Arrays.asList(e) + &amp;quot;, output &amp;quot;
-              + Arrays.asList(output));
-            System.exit(-1);
-          }
-        }
-      } else if (!e.equals(output)) {
-        System.out.println(&amp;quot;test:\n &amp;quot; + inputs[i] + &amp;quot;failed, &amp;quot;
-          + &amp;quot; expected &amp;quot; + expected + &amp;quot;, output &amp;quot; + output);
-        System.exit(-1);
-      }
-
-    }
-
-    // all tests passed
-    System.out.println(SUCCESS);
-
-  } catch (ClassNotFoundException | IllegalAccessException
-    | IllegalArgumentException | InvocationTargetException
-    | NoSuchMethodException | SecurityException
-    | InstantiationException e) {
-    //handle your exceptions here
-    e.printStackTrace();
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;invoke-the-method-from-the-class-being-tested&#34;&gt;Invoke the Method from the Class Being Tested&lt;/h2&gt;
-
-&lt;p&gt;To use the test method, call:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;TestClass.assertEqual(&amp;quot;my.pkg.className&amp;quot;,&amp;quot;methodName&amp;quot;,inputArray,
-         expectedResultsArray);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;admonition note&#34;&gt;
-&lt;p class=&#34;admonition-title&#34;&gt;Note&lt;/p&gt;
-&lt;p&gt;Don&amp;rsquo;t forget to include the package name in the first parameter as the class name. Please note that Class.getMethod() only searches for public methods.&lt;/p&gt;
-&lt;/div&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;key binding&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+a/e&lt;/td&gt;
+&lt;td&gt;move cursor to line beginning/end&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;meta-f/b&lt;/td&gt;
+&lt;td&gt;move cursor one word forward/backward, right/left&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+u/k&lt;/td&gt;
+&lt;td&gt;delete from cursor to line beginning/end&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+w, meta-d&lt;/td&gt;
+&lt;td&gt;delete one word from cursor left/right&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;meta-t&lt;/td&gt;
+&lt;td&gt;transpose two words before cursor, or transpose one before one after&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+y&lt;/td&gt;
+&lt;td&gt;yank/paste previously killed text&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+_&lt;/td&gt;
+&lt;td&gt;undo last edit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When connecting from mac terminal via ssh to linux box, it behaves kind of like vim, maybe vi. Esc to change mode, w/b to move forward backward, etc&lt;/p&gt;
 </description>
     </item>
     

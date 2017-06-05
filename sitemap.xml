@@ -7,6 +7,16 @@
   </url>
   
   <url>
+    <loc>http://jessezhuang.github.io/article/docker-cheatsheet/</loc>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/article/internet-faq/</loc>
+    <lastmod>2017-04-16T19:09:17-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jessezhuang.github.io/article/mac_cheatsheet/</loc>
     <lastmod>2017-02-26T18:56:24-08:00</lastmod>
   </url>
@@ -82,6 +92,10 @@
   </url>
   
   <url>
+    <loc>http://jessezhuang.github.io/article/vim-cheatsheet.md/</loc>
+  </url>
+  
+  <url>
     <loc>http://jessezhuang.github.io/categories/algorithm/</loc>
     <lastmod>2016-08-05T17:12:46-07:00</lastmod>
     <priority>0</priority>
@@ -89,7 +103,7 @@
   
   <url>
     <loc>http://jessezhuang.github.io/article/</loc>
-    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -106,13 +120,13 @@
   
   <url>
     <loc>http://jessezhuang.github.io/tags/cheatsheet/</loc>
-    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://jessezhuang.github.io/categories/cheatsheet/</loc>
-    <lastmod>2017-02-26T18:56:24-08:00</lastmod>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -125,6 +139,24 @@
   <url>
     <loc>http://jessezhuang.github.io/tags/database/</loc>
     <lastmod>2016-06-29T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/devops/</loc>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/docker/</loc>
+    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/categories/faq/</loc>
+    <lastmod>2017-04-16T19:09:17-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -143,6 +175,12 @@
   <url>
     <loc>http://jessezhuang.github.io/tags/hugo/</loc>
     <lastmod>2016-06-19T01:19:10-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jessezhuang.github.io/tags/internet/</loc>
+    <lastmod>2017-04-16T19:09:17-07:00</lastmod>
     <priority>0</priority>
   </url>
   

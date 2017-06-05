@@ -7,8 +7,70 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Zexi Zhuang</copyright>
-    <lastBuildDate>Sun, 26 Feb 2017 18:56:24 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 04 Jun 2017 16:03:06 -0700</lastBuildDate>
     <atom:link href="http://jessezhuang.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Docker Cheatsheet</title>
+      <link>http://jessezhuang.github.io/article/docker-cheatsheet/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/docker-cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;container-vs-image&#34;&gt;Container vs Image&lt;/h1&gt;
+
+&lt;p&gt;Image is immutable, container is a box running starting from an image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker ps -as
+# list all containers with sizes
+
+docker images
+# list all images
+
+docker run [options] &amp;lt;image&amp;gt;
+# best to use image id or image:tag
+# -p hostPort:containerPort expose port, -P publish all exposed ports. 8888 for jupyter notebook
+# -t terminal pseudo-TTY
+# -i Keep STDIN open even if not attached
+# -v /host/dir:/&amp;lt;container-path&amp;gt;
+# --name Assign a name to the container
+
+docker start -ai &amp;lt;container&amp;gt;
+# can user container id or name
+# -a Attach STDOUT/STDERR and forward signals
+# -i Attach container&#39;s STDIN
+
+jupyter notebook --ip 0.0.0.0 --no-browser
+# run server at ip 0.0.0.0 and access in host at localhost(127.0.0.1) at the allowed port
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Internet FAQ</title>
+      <link>http://jessezhuang.github.io/article/internet-faq/</link>
+      <pubDate>Sun, 16 Apr 2017 19:09:17 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/article/internet-faq/</guid>
+      <description>
+
+&lt;h2 id=&#34;internet-protocol-ip&#34;&gt;Internet Protocol (IP)&lt;/h2&gt;
+
+&lt;h3 id=&#34;ipv4-vs-ipv6&#34;&gt;IPV4 vs IPv6&lt;/h3&gt;
+
+&lt;p&gt;IPV4 uses 32 bits, 4 8 bit numbers, 2^32 distinct IP addresses. Example 202.2.1.10.&lt;/p&gt;
+
+&lt;p&gt;IPV6 uses 128 bits, 8 16 bit numbers, 2^128 distinct IP addresses. Actual number is slightly smaller since multiple ranges are reserved for special use or completely excluded from use. Example 3ffe:1900:4545:3:200:f8ff:fe21:67cf.&lt;/p&gt;
+
+&lt;p&gt;Refs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webopedia.com/DidYouKnow/Internet/ipv6_ipv4_difference.html&#34;&gt;webopedia article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/IPv6&#34;&gt;IPV6 wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Mac Cheatsheet</title>
@@ -26,6 +88,13 @@
 &lt;li&gt;Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right.&lt;/li&gt;
 &lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
 &lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Editing:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delete to end of line, ctrl+k, same as on command line&lt;/li&gt;
+&lt;li&gt;Delete to beginning of line, cmd+shift+left, then delete&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -436,12 +505,25 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
 
 &lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
 
+&lt;p&gt;Generally, use &lt;code&gt;:help &amp;lt;cmd&amp;gt;&amp;quot; for quick ref, e.g.&lt;/code&gt;:help undo`.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
+
+&lt;p&gt;Configuration file default &lt;code&gt;~/.vimrc&lt;/code&gt;. Can use &lt;code&gt;source &amp;lt;another file&amp;gt;&lt;/code&gt; and put the actual vimrc in cloud like dropbox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to reload an edited vimrc
+:so $MYVIMRC
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
-:E # or :Explorer
+:E or :Explorer
 R # rename at bottom
 :bp # go back previous buffer
+# save the current session including buffers, tabs, and settings
+:mksession ~/vimSessions/session1.vim
+:mks! # to override existing session file
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
@@ -601,11 +683,24 @@ R # rename at bottom
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;q&lt;letter&gt;, @&lt;letter&gt;&lt;/td&gt;
+&lt;td&gt;q &amp;lt; letter &amp;gt;, @&amp;lt; letter &amp;gt;&lt;/td&gt;
 &lt;td&gt;record operations and reapply, type q again to quit&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;to search for word under cursor&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to count number of occurances
+:%s/pattern//gn
+# to count number of lines containing pattern
+:%s/pattern//n
+# change each &#39;foo&#39; to &#39;bar&#39;, i: case insensitive, c: conformation, %: all lines
+:%s/foo/bar/gci
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
 
@@ -2152,15 +2247,53 @@ SYNOPSIS
 
 &lt;p&gt;meta key: Esc on mac&lt;/p&gt;
 
-&lt;p&gt;|key binding|Action|
-|:-|-|
-|ctrl+e|move cursor to line beginning/end|
-|meta-f/b|move cursor one word forward/backward, right/left|
-|ctrl+u/k|delete from cursor to line beginning/end|
-|ctrl+w, meta-d|delete one word from cursor left/right|
-|meta-t|transpose two words before cursor, or transpose one before one after|
-|ctrl+y|yank/paste previously killed text|
-|ctrl+_|undo last edit|&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;key binding&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+a/e&lt;/td&gt;
+&lt;td&gt;move cursor to line beginning/end&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;meta-f/b&lt;/td&gt;
+&lt;td&gt;move cursor one word forward/backward, right/left&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+u/k&lt;/td&gt;
+&lt;td&gt;delete from cursor to line beginning/end&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+w, meta-d&lt;/td&gt;
+&lt;td&gt;delete one word from cursor left/right&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;meta-t&lt;/td&gt;
+&lt;td&gt;transpose two words before cursor, or transpose one before one after&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+y&lt;/td&gt;
+&lt;td&gt;yank/paste previously killed text&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ctrl+_&lt;/td&gt;
+&lt;td&gt;undo last edit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When connecting from mac terminal via ssh to linux box, it behaves kind of like vim, maybe vi. Esc to change mode, w/b to move forward backward, etc&lt;/p&gt;
 </description>
     </item>
     
@@ -2422,167 +2555,6 @@ insert query update delete getmore command % dirty % used    res qr|qw ar|aw net
 
 &lt;p&gt;&lt;a href=&#34;http://jessezhuang.github.io/
 tags/mongodb/&#34;&gt;Link to the MongoDB tutorial series.&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Using Java&#39;s Reflection for Testing</title>
-      <link>http://jessezhuang.github.io/article/java-reflection-test/</link>
-      <pubDate>Sun, 19 Jun 2016 01:20:46 -0700</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/java-reflection-test/</guid>
-      <description>
-
-&lt;h2 id=&#34;writing-boilerplate-test-code-is-boring&#34;&gt;Writing Boilerplate Test Code is Boring&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/java-reflection.png&#34; alt=&#34;Java Reflection&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Repeatedly writing boilerplate for loops for testing is not fun. We can use Java reflection API (&lt;code&gt;java.lang.reflect&lt;/code&gt; package) to maximize code reuse and help testing.&lt;/p&gt;
-
-&lt;p&gt;Frameworks like JUnit uses reflection for testing. I will introduce a single method today on how reflection can be used for testing.&lt;/p&gt;
-
-&lt;p&gt;The code examples below are available at my &lt;a href=&#34;https://github.com/JesseZhuang/SimpleJavaTools&#34;&gt;github repository&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;get-an-instance-of-class-being-tested&#34;&gt;Get an Instance of Class Being Tested&lt;/h2&gt;
-
-&lt;p&gt;First we will declare a message to print out if all tests passed. Unfortunately you don&amp;rsquo;t usually get to see this message till the end of debugging.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;private final static String SUCCESS = &amp;quot;Congrats! All tests passed.&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next we will make sure the input array and the expected result array have same number of elements with &lt;code&gt;validateLengths&lt;/code&gt; method which is trivial to implement.&lt;/p&gt;
-
-&lt;p&gt;Then we will get a class type &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt; from the &lt;code&gt;className&lt;/code&gt; parameter, get the input class type with the first element of the input array &lt;code&gt;inputs[0]&lt;/code&gt;, and get the method being tested with &lt;code&gt;class.getMethod&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Lastly, we will instantiate an object for the class for the cases where the tested method is an instance method. If the method is a static method, this object will be ignored.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public static &amp;lt;T, R&amp;gt; void assertEqual(String className,
-  String methodName, T[] inputs, R[] expected) {
-  // make sure they have same length
-  validateLengths(inputs, expected);
-
-  try {
-    // use reflection to get type of class indicated by &amp;quot;className&amp;quot;
-    Class&amp;lt;?&amp;gt; c = Class.forName(className);
-    Class&amp;lt;T&amp;gt; inputType = (Class&amp;lt;T&amp;gt;) inputs[0].getClass();
-    Method m = c.getMethod(methodName, inputType);
-
-    // static methods will ignore this instance
-    Object o = c.newInstance();
-    // code continue in next block for actual testing
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;the-actual-testings&#34;&gt;The Actual Testings&lt;/h2&gt;
-
-&lt;p&gt;Next we will use for loops to iterate over the array for all test cases. We write these loops here once and then we can call this method from the class being tested.&lt;/p&gt;
-
-&lt;p&gt;For nested array, we have to test for deep equality. The testing will quit on the first failed test and print out the information about the input, output, and expected result.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;{ //continue from top
-  {
-    for (int i = 0; i &amp;lt; inputs.length; i++) {
-      R e = expected[i];
-      R output = (R) m.invoke(o, inputs[i]);
-
-      // has to test deep equal for array type
-      if (e.getClass().isArray()) {
-        int n = Array.getLength(e);
-        for (int j = 0; j &amp;lt; n; j++) {
-          if (!Array.get(e, j).equals(Array.get(output, j))) {
-            System.out.println(&amp;quot;test failed for &amp;quot;
-              + Arrays.asList(inputs[i]) + &amp;quot; expected &amp;quot;
-              + Arrays.asList(e) + &amp;quot;, output &amp;quot;
-              + Arrays.asList(output));
-            System.exit(-1);
-          }
-        }
-      } else if (!e.equals(output)) {
-        System.out.println(&amp;quot;test:\n &amp;quot; + inputs[i] + &amp;quot;failed, &amp;quot;
-          + &amp;quot; expected &amp;quot; + expected + &amp;quot;, output &amp;quot; + output);
-        System.exit(-1);
-      }
-
-    }
-
-    // all tests passed
-    System.out.println(SUCCESS);
-
-  } catch (ClassNotFoundException | IllegalAccessException
-    | IllegalArgumentException | InvocationTargetException
-    | NoSuchMethodException | SecurityException
-    | InstantiationException e) {
-    //handle your exceptions here
-    e.printStackTrace();
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;invoke-the-method-from-the-class-being-tested&#34;&gt;Invoke the Method from the Class Being Tested&lt;/h2&gt;
-
-&lt;p&gt;To use the test method, call:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;TestClass.assertEqual(&amp;quot;my.pkg.className&amp;quot;,&amp;quot;methodName&amp;quot;,inputArray,
-         expectedResultsArray);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;admonition note&#34;&gt;
-&lt;p class=&#34;admonition-title&#34;&gt;Note&lt;/p&gt;
-&lt;p&gt;Don&amp;rsquo;t forget to include the package name in the first parameter as the class name. Please note that Class.getMethod() only searches for public methods.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Tutorial for using Hugo and Github Pages as a Blog Site</title>
-      <link>http://jessezhuang.github.io/article/tutorial-hugoblog/</link>
-      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/tutorial-hugoblog/</guid>
-      <description>
-
-&lt;h2 id=&#34;hugo-a-static-site-generator&#34;&gt;Hugo, a Static Site Generator&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.gohugo.io&#34;&gt;Hugo&lt;/a&gt; is one of the static site generators. Currently it is ranked 4th by &lt;a href=&#34;https://www.staticgen.com/&#34;&gt;StaticGen&lt;/a&gt;. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.&lt;/p&gt;
-
-&lt;p&gt;Most of them were written in JavaScript. &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was the good old player in this field, which was used in Obama&amp;rsquo;s campaigns to raise $250M. Healthcare.gov switched to CMS-free style with Jekyll in 2013.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt; uses node.js, which started in 2012. Hugo started in 2013. Both are getting quite popular within a short time. Hugo seems to have a nice growing community and fairly good documentations. It may be missing some features but let&amp;rsquo;s hope it will catch up.&lt;/p&gt;
-
-&lt;h2 id=&#34;deployment-at-github-pages&#34;&gt;Deployment at Github Pages&lt;/h2&gt;
-
-&lt;p&gt;I won&amp;rsquo;t be verbose about the benefits of static pages. Healthcare.gov and my blog here load blazing fast compared to dynamic sites where the server needs to pull data from different sources. The key reason for me is the flexibility of the content/design control. You are not limited by a small set of templates and widgets such as those found at &lt;a href=&#34;http://www.blogger.com&#34;&gt;Blogger&lt;/a&gt;. You don&amp;rsquo;t have the limitations at &lt;a href=&#34;http://www.wordpress.com&#34;&gt;Wordpress.com&lt;/a&gt; in case if you want to put ads on your blog.&lt;/p&gt;
-
-&lt;p&gt;The ability to deploy the site with github pages is special since it connects with your github account and your repositories. The entire site can be version controlled as well as the generated site as a &lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;git submodule&lt;/a&gt;. You are basically making git commits in the meantime that you are updating your site.&lt;/p&gt;
-
-&lt;h2 id=&#34;themes-for-hugo&#34;&gt;Themes for Hugo&lt;/h2&gt;
-
-&lt;p&gt;There are a variety of templates available at Hugo&amp;rsquo;s &lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;official site&lt;/a&gt;, covering different purposes from personal blog, documentation, project information, merchant, designer showcases, to many more. I really liked the &lt;a href=&#34;http://themes.gohugo.io/material-docs/&#34;&gt;material docs&lt;/a&gt; design, which was intended to be used as a project documentation/information site. I customized the template for a blog site.&lt;/p&gt;
-
-&lt;h2 id=&#34;customize-the-hugo-material-docs-themes&#34;&gt;Customize the hugo-material-docs Themes&lt;/h2&gt;
-
-&lt;p&gt;Main changes for the customization are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Changed the index page to list most recent posts/articles.&lt;/li&gt;
-&lt;li&gt;Added sections to list blog categories and tags.&lt;/li&gt;
-&lt;li&gt;Integrate &lt;a href=&#34;http://disqus.com&#34;&gt;Disqus&lt;/a&gt; comments at the bottom of each post.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The customized template is available at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo here&lt;/a&gt;. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.&lt;/p&gt;
-
-&lt;p&gt;To use the template,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
-hugo -t hugo-material-blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or setup the theme in &lt;code&gt;config.yaml&lt;/code&gt; or &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I did notice some weird bugs while I was customizing the template. Sometimes the template engine report errors if you have commented out lines in the template.&lt;/p&gt;
-
-&lt;p&gt;I plan to keep this template updated while writing more articles for the site. You are welcome to comment here or at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo&lt;/a&gt; for any issues or feature requests.&lt;/p&gt;
 </description>
     </item>
     

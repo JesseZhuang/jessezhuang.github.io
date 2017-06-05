@@ -266,7 +266,11 @@
             
               <a href="http://jessezhuang.github.io/categories/cheatsheet"
                 title="cheatsheet">
-                cheatsheet<sup>4</sup></a>
+                cheatsheet<sup>5</sup></a>
+            
+              <a href="http://jessezhuang.github.io/categories/faq"
+                title="faq">
+                faq<sup>1</sup></a>
             
               <a href="http://jessezhuang.github.io/categories/programming-language"
                 title="programming-language">
@@ -290,11 +294,17 @@
             
               <a href="http://jessezhuang.github.io/tags/database">[database]</a>
             
+              <a href="http://jessezhuang.github.io/tags/devops">[devops]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/docker">[docker]</a>
+            
               <a href="http://jessezhuang.github.io/tags/git">[git]</a>
             
               <a href="http://jessezhuang.github.io/tags/golang">[golang]</a>
             
               <a href="http://jessezhuang.github.io/tags/hugo">[hugo]</a>
+            
+              <a href="http://jessezhuang.github.io/tags/internet">[internet]</a>
             
               <a href="http://jessezhuang.github.io/tags/java">[java]</a>
             
@@ -359,13 +369,36 @@
 			<h1>Pages in Article</h1>
 
 			
+			<a href="http://jessezhuang.github.io/article/docker-cheatsheet/" title="Docker Cheatsheet">
+				<h2>Docker Cheatsheet</h2>
+			</a>
+
+			<br>
+			Container vs Image Image is immutable, container is a box running starting from an image.
+docker ps -as # list all containers with sizes docker images # list all images docker run [options] &lt;image&gt; # best to use image id or image:tag # -p hostPort:containerPort expose port, -P publish all exposed ports. 8888 for jupyter notebook # -t terminal pseudo-TTY # -i Keep STDIN open even if not attached # -v /host/dir:/&lt;container-path&gt; # &ndash;name Assign a name to the container docker start -ai &lt;container&gt; # can user container id or name # -a Attach STDOUT/STDERR and forward signals # -i Attach container&rsquo;s STDIN jupyter notebook &ndash;ip 0.
+
+			<hr>
+			
+			<a href="http://jessezhuang.github.io/article/internet-faq/" title="Internet FAQ">
+				<h2>Internet FAQ</h2>
+			</a>
+
+			<br>
+			Internet Protocol (IP) IPV4 vs IPv6 IPV4 uses 32 bits, 4 8 bit numbers, 2^32 distinct IP addresses. Example 202.2.1.10.
+IPV6 uses 128 bits, 8 16 bit numbers, 2^128 distinct IP addresses. Actual number is slightly smaller since multiple ranges are reserved for special use or completely excluded from use. Example 3ffe:1900:4545:3:200:f8ff:fe21:67cf.
+Refs:
+ webopedia article IPV6 wikipedia
+
+			<hr>
+			
 			<a href="http://jessezhuang.github.io/article/mac_cheatsheet/" title="Mac Cheatsheet">
 				<h2>Mac Cheatsheet</h2>
 			</a>
 
 			<br>
 			Keboard Shortcuts Switching tabs:
- Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right. Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right. macvim, shift+cmd+{/}.
+ Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right. Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right. macvim, shift+cmd+{/}.  Editing:
+ Delete to end of line, ctrl+k, same as on command line Delete to beginning of line, cmd+shift+left, then delete
 
 			<hr>
 			
@@ -428,8 +461,11 @@ How to Get Shared Folder Write Access When used as a virtual machine guest (Ubun
 			For Ubuntu Linux,
 Terms:
 C-x stands for ctrl-x.
-File operations # to rename a file :E # or :Explorer R # rename at bottom :bp # go back previous buffer  Copy/Pasting In normal mode:
-   command effect     3y, p copy 3 lines, paste after cursor   &ldquo;ayy, &ldquo;ap copy current line to buffer a, paste from buffer a   v/V start selecting character, whole line   5ly yanks into default buffer 5 characters from cursor   &ldquo;hy yanks into register h, use + register for system clipboard    In insert mode:
+Generally, use :help &lt;cmd&gt;&quot; for quick ref, e.g.:help undo`.
+Configuration Configuration file default ~/.vimrc. Can use source &lt;another file&gt; and put the actual vimrc in cloud like dropbox.</p>
+
+<h1 id="to-reload-an-edited-vimrc-so-myvimrc-file-operations-to-rename-a-file-e-or-explorer-r-rename-at-bottom-bp-go-back-previous-buffer-save-the-current-session-including-buffers-tabs-and-settings-mksession-vimsessions-session1">to reload an edited vimrc :so $MYVIMRC  File operations # to rename a file :E or :Explorer R # rename at bottom :bp # go back previous buffer # save the current session including buffers, tabs, and settings :mksession ~/vimSessions/session1.</h1>
+
 
 			<hr>
 			
@@ -451,30 +487,6 @@ Install Vim with PPA I have tried to install Vim with debian packages listed on 
 			Durability of Writes Write Concern How to make sure the writes persistent? Assume application talking to a database server in the scheme below.
 The settings of two parameters affect the write concern:
    w(wait for acknowledgement) j(journal) effect comment     1 false fast, small window of vulnerability default setting   1 true slow, no vulnerability can be done inside driver at collection, database, or client level   0 - unacknowledged write do not recommend   2 - wait for 2 nodes in replica set to acknowledge write w can be 0-3 for a set with 3 nodes   majority - wait for majority to acknowledge, avoid rollback on failover -   tag values - set tags on nodes -    If the journal has been written to disk and the server crashes, on recovery the server can look in the journal and recreate all the writes that were not yet persisted to the pages.
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-intro/" title="Mongodb Tutorial 1 - Introduction">
-				<h2>Mongodb Tutorial 1 - Introduction</h2>
-			</a>
-
-			<br>
-			To run mongo commands from the source of a JavaScript file,
-cat source.js | mongo # or mongo &lt; source.js # or just mongo source.js  To import/export data,
-$ mongoimport -d &lt;database&gt; -c &lt;collection&gt; -f &lt;file&gt; $ mongoimport -d &lt;dababase&gt; -c &lt;collection&gt; &lt; file.json $ mongoexport -d &lt;dababase&gt; -c &lt;collection&gt; &ndash;out file.json $ mongorestore -d &lt;database&gt; -c &lt;collection&gt; file.bson # by default writes BSON file to dump/ in current directory $ mongodump -d &lt;database&gt; -c &lt;collection [&ndash;out &lt;path&gt;]  What is MongoDB?
-
-			<hr>
-			
-			<a href="http://jessezhuang.github.io/article/mongodb-aggregation-framework/" title="MongoDB Tutorial 5 - Aggregation Framework">
-				<h2>MongoDB Tutorial 5 - Aggregation Framework</h2>
-			</a>
-
-			<br>
-			The aggregation framework has its roots in SQL&rsquo;s world of groupby clause.
-Introduction Example used: imagine a SQL table of products.
-   name category manufacture price     ipad tablet Apple 499   nexus s cellphone Samsung 350    To get number of products from each manufacture with SQL,
-select manufacture, count(*) from products group by manufacture;  with mongodb,
-&gt; use agg &gt; db.
 
 			<hr>
 			
