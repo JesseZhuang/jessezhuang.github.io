@@ -93,10 +93,6 @@
   </url>
   
   <url>
-    <loc>http://jessezhuang.github.io/article/vim-cheatsheet.md/</loc>
-  </url>
-  
-  <url>
     <loc>http://jessezhuang.github.io/categories/algorithm/</loc>
     <lastmod>2016-08-05T17:12:46-07:00</lastmod>
     <priority>0</priority>
@@ -122,12 +118,6 @@
   
   <url>
     <loc>http://jessezhuang.github.io/categories/cheatsheet/</loc>
-    <lastmod>2017-06-04T16:03:06-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://jessezhuang.github.io/tags/cheatsheet/</loc>
     <lastmod>2017-06-04T16:03:06-07:00</lastmod>
     <priority>0</priority>
   </url>

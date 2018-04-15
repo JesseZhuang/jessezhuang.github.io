@@ -215,14 +215,5 @@ Get an Instance of Class Being Tested First we will declare a message to print o
 Most of them were written in JavaScript. Jekyll was the good old player in this field, which was used in Obama&amp;rsquo;s campaigns to raise $250M.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>http://jessezhuang.github.io/article/vim-cheatsheet.md/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://jessezhuang.github.io/article/vim-cheatsheet.md/</guid>
-      <description>~/Unix/projects/github-blog-hugo/content/article/vim-cheatsheet.md.html    1 --- 2 categories: [cheatsheet] 3 date: 2016-06-30T00:37:56-07:00 4 lastmod: 2016-07-07T00:37:56-07:00 5 tags: [linux,vim] 6 title: Vim Cheatsheet 7 --- 8  9 For Ubuntu Linux, 10  11 **Terms:** 12  13 `C-x` stands for `ctrl-x`. 14  15 #File operations 16  17 ```bash 18 # to rename a file 19 :E # or :Explorer 20 R # rename at bottom 21 :bp # go back previous buffer 22 ``` 23  24 #Copy/Pasting 25  26 In normal mode: 27  28 |command|effect| 29 |---|---| 30 |3y, p|copy 3 lines, paste after cursor| 31 |&amp;quot;ayy, &amp;quot;ap|copy current line to buffer a, paste from buffer a| 32 |v/V|start selecting character, whole line| 33 |5ly|yanks into default buffer 5 characters from cursor| 34 |&amp;quot;hy|yanks into register h, use + register for system clipboard| 35  36 In insert mode: 37  38 |command|effect| 39 |---|---| 40 |`C-r{register}|paste contents of the register| 41 |C-r&amp;quot;|to paste from default register| 42 |C-u|to delete everything before the cursor on this line| 43 |C-w|to delete from cursor to the beginning of previous word| 44  45 #Move Around 46  47 In normal mode: 48  49 |command|effect| 50 |---|---| 51 |100l|go right 100 positions, useful to navigate a long line.</description>
-    </item>
-    
   </channel>
 </rss>
