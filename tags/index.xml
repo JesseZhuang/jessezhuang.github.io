@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/tags/</link>
+    <description>Recent content in Tags on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Jun 2016 01:19:10 -0700</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blog</title>
+      <link>http://jessezhuang.github.io/tags/blog/</link>
+      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cheatsheet</title>
+      <link>http://jessezhuang.github.io/tags/cheatsheet/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/cheatsheet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>http://jessezhuang.github.io/tags/database/</link>
+      <pubDate>Wed, 29 Jun 2016 00:00:00 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Devops</title>
+      <link>http://jessezhuang.github.io/tags/devops/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>http://jessezhuang.github.io/tags/docker/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://jessezhuang.github.io/tags/git/</link>
+      <pubDate>Wed, 06 Jul 2016 16:39:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>http://jessezhuang.github.io/tags/golang/</link>
+      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://jessezhuang.github.io/tags/hugo/</link>
+      <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internet</title>
+      <link>http://jessezhuang.github.io/tags/internet/</link>
+      <pubDate>Sun, 16 Apr 2017 19:09:17 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/internet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://jessezhuang.github.io/tags/java/</link>
+      <pubDate>Fri, 05 Aug 2016 17:12:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://jessezhuang.github.io/tags/linux/</link>
+      <pubDate>Wed, 06 Jul 2016 16:39:13 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>http://jessezhuang.github.io/tags/mac/</link>
+      <pubDate>Sun, 26 Feb 2017 18:56:24 -0800</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mongodb</title>
+      <link>http://jessezhuang.github.io/tags/mongodb/</link>
+      <pubDate>Wed, 29 Jun 2016 00:00:00 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nosql</title>
+      <link>http://jessezhuang.github.io/tags/nosql/</link>
+      <pubDate>Wed, 29 Jun 2016 00:00:00 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/nosql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://jessezhuang.github.io/tags/python/</link>
+      <pubDate>Sun, 26 Jun 2016 14:55:57 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>String</title>
+      <link>http://jessezhuang.github.io/tags/string/</link>
+      <pubDate>Fri, 05 Aug 2016 17:12:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/string/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>http://jessezhuang.github.io/tags/ubuntu/</link>
+      <pubDate>Sat, 02 Jul 2016 18:17:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://jessezhuang.github.io/tags/vim/</link>
+      <pubDate>Thu, 30 Jun 2016 00:37:56 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

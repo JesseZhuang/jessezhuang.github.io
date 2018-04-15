@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/hugo/index.xml</link>
+    <link>http://jessezhuang.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Zexi Zhuang</copyright>
-    <atom:link href="http://jessezhuang.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jun 2016 01:19:10 -0700</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>A Tutorial for using Hugo and Github Pages as a Blog Site</title>
@@ -15,50 +17,8 @@
       <pubDate>Sun, 19 Jun 2016 01:19:10 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/tutorial-hugoblog/</guid>
-      <description>
-
-&lt;h2 id=&#34;hugo-a-static-site-generator&#34;&gt;Hugo, a Static Site Generator&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.gohugo.io&#34;&gt;Hugo&lt;/a&gt; is one of the static site generators. Currently it is ranked 4th by &lt;a href=&#34;https://www.staticgen.com/&#34;&gt;StaticGen&lt;/a&gt;. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.&lt;/p&gt;
-
-&lt;p&gt;Most of them were written in JavaScript. &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was the good old player in this field, which was used in Obama&amp;rsquo;s campaigns to raise $250M. Healthcare.gov switched to CMS-free style with Jekyll in 2013.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt; uses node.js, which started in 2012. Hugo started in 2013. Both are getting quite popular within a short time. Hugo seems to have a nice growing community and fairly good documentations. It may be missing some features but let&amp;rsquo;s hope it will catch up.&lt;/p&gt;
-
-&lt;h2 id=&#34;deployment-at-github-pages&#34;&gt;Deployment at Github Pages&lt;/h2&gt;
-
-&lt;p&gt;I won&amp;rsquo;t be verbose about the benefits of static pages. Healthcare.gov and my blog here load blazing fast compared to dynamic sites where the server needs to pull data from different sources. The key reason for me is the flexibility of the content/design control. You are not limited by a small set of templates and widgets such as those found at &lt;a href=&#34;http://www.blogger.com&#34;&gt;Blogger&lt;/a&gt;. You don&amp;rsquo;t have the limitations at &lt;a href=&#34;http://www.wordpress.com&#34;&gt;Wordpress.com&lt;/a&gt; in case if you want to put ads on your blog.&lt;/p&gt;
-
-&lt;p&gt;The ability to deploy the site with github pages is special since it connects with your github account and your repositories. The entire site can be version controlled as well as the generated site as a &lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;git submodule&lt;/a&gt;. You are basically making git commits in the meantime that you are updating your site.&lt;/p&gt;
-
-&lt;h2 id=&#34;themes-for-hugo&#34;&gt;Themes for Hugo&lt;/h2&gt;
-
-&lt;p&gt;There are a variety of templates available at Hugo&amp;rsquo;s &lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;official site&lt;/a&gt;, covering different purposes from personal blog, documentation, project information, merchant, designer showcases, to many more. I really liked the &lt;a href=&#34;http://themes.gohugo.io/material-docs/&#34;&gt;material docs&lt;/a&gt; design, which was intended to be used as a project documentation/information site. I customized the template for a blog site.&lt;/p&gt;
-
-&lt;h2 id=&#34;customize-the-hugo-material-docs-themes&#34;&gt;Customize the hugo-material-docs Themes&lt;/h2&gt;
-
-&lt;p&gt;Main changes for the customization are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Changed the index page to list most recent posts/articles.&lt;/li&gt;
-&lt;li&gt;Added sections to list blog categories and tags.&lt;/li&gt;
-&lt;li&gt;Integrate &lt;a href=&#34;http://disqus.com&#34;&gt;Disqus&lt;/a&gt; comments at the bottom of each post.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The customized template is available at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo here&lt;/a&gt;. The color pellets can be customized. I chose deep orange as the primary color hoping to warm up the cold coding talks.&lt;/p&gt;
-
-&lt;p&gt;To use the template,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/JesseZhuang/hugo-material-blog.git themes/hugo-material-blog
-hugo -t hugo-material-blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or setup the theme in &lt;code&gt;config.yaml&lt;/code&gt; or &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I did notice some weird bugs while I was customizing the template. Sometimes the template engine report errors if you have commented out lines in the template.&lt;/p&gt;
-
-&lt;p&gt;I plan to keep this template updated while writing more articles for the site. You are welcome to comment here or at my &lt;a href=&#34;https://github.com/JesseZhuang/hugo-material-blog&#34;&gt;github repo&lt;/a&gt; for any issues or feature requests.&lt;/p&gt;
-</description>
+      <description>Hugo, a Static Site Generator Hugo is one of the static site generators. Currently it is ranked 4th by StaticGen. Of the top competitors, Hugo is the only one written in a compiled language (Go), which builds the site much faster. So I decided to give it a spin.
+Most of them were written in JavaScript. Jekyll was the good old player in this field, which was used in Obama&amp;rsquo;s campaigns to raise $250M.</description>
     </item>
     
   </channel>

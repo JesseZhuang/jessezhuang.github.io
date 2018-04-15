@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/linux/index.xml</link>
+    <link>http://jessezhuang.github.io/tags/linux/</link>
     <description>Recent content in Linux on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Zexi Zhuang</copyright>
-    <atom:link href="http://jessezhuang.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2016 16:39:13 -0700</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Git Cheatsheet</title>
@@ -15,96 +17,11 @@
       <pubDate>Wed, 06 Jul 2016 16:39:13 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/git-cheatsheet/</guid>
-      <description>
-
-&lt;h1 id=&#34;basic-snapshotting&#34;&gt;Basic Snapshotting&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;git-mv&lt;/code&gt; - Move or rename a file, a directory, or a symlink&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt;&lt;/code&gt; rename&lt;br /&gt;
-&lt;code&gt;git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; ... &amp;lt;destination directory&amp;gt;&lt;/code&gt; move into existing directory&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git mv &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; # rename a directory
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;branch-related&#34;&gt;Branch Related&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;git branch [options] &amp;lt;branchname&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git branch # show all branches with current marked with *
-git branch -vv # show all local and tracked remote branches
-git checkout dev
-git branch jesse
-# creates branch named &amp;quot;jesse&amp;quot; off from &amp;quot;dev&amp;quot; branch
-git checkout -b jesse
-# creates and switch to branch &amp;quot;jesse&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;merge&#34;&gt;Merge&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;git merge [options] [&amp;lt;commit&amp;gt;...]&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git merge --abort&lt;/code&gt; may not be able to fully recover&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git merge --no-ff
-# no fast forwarding creates merge commit for FF
-git merge jesse
-# merge commits on jesse into current branch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git merge --no-ff 
-# no fast forwarding creates merge commit for FF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;working-with-remotes&#34;&gt;Working with Remotes&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;git fetch [&amp;lt;options&amp;gt;] [&amp;lt;repository&amp;gt; [&amp;lt;refspec&amp;gt;]]&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git fetch origin # fetch branches and/or tags from &amp;quot;origin&amp;quot; remote
-git fetch -a # fetches from all remotes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;git remote [-v | --verbose]&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git remote add [-f] [--[no-]tags] &amp;lt;name&amp;gt; &amp;lt;url&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git remote # show all remote repositories
-git remote -v # show all remote repositories with urls
-
-# add remote repo and name it origin
-git remote add origin https://github.com/user/repo.git
-# runs git fetch origin immediately after
-git remote add -f origin https://github.com/user/repo.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;merge-a-pull-request-on-github&#34;&gt;Merge a Pull Request on Github&lt;/h3&gt;
-
-&lt;p&gt;Step 1: From your project repository, bring in the changes and test.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git fetch origin
-# not necessary if you just pushed local 
-git checkout -b lname origin/rname 
-git merge dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Step 2: Merge the changes and update on GitHub.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git checkout dev
-git merge --no-ff jesse # no fast fowarding, create a merge commit
-git push origin dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;pull-all-remote-branches&#34;&gt;Pull All Remote Branches&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# the first line creates local branch with same name tracking remote branch
-git branch -r | grep -v &#39;\-&amp;gt;&#39; | while read remote; do git branch --track &amp;quot;${remote#origin/}&amp;quot; &amp;quot;$remote&amp;quot;; done
-git fetch --all
-git pull --all
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;delete-a-remote-branch&#34;&gt;Delete a Remote Branch&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git push origin --delete &amp;lt;branchName&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Basic Snapshotting git-mv - Move or rename a file, a directory, or a symlink
+git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; rename
+git mv [-v] [-f] [-n] [-k] &amp;lt;source&amp;gt; ... &amp;lt;destination directory&amp;gt; move into existing directory
+git mv &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; # rename a directory  Branch Related git branch [options] &amp;lt;branchname&amp;gt;
+git branch # show all branches with current marked with * git branch -vv # show all local and tracked remote branches git checkout dev git branch jesse # creates branch named &amp;quot;jesse&amp;quot; off from &amp;quot;dev&amp;quot; branch git checkout -b jesse # creates and switch to branch &amp;quot;jesse&amp;quot;  Merge git merge [options] [&amp;lt;commit&amp;gt;.</description>
     </item>
     
     <item>
@@ -113,46 +30,9 @@ git pull --all
       <pubDate>Sat, 02 Jul 2016 18:17:10 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/virtualbox-tips/</guid>
-      <description>
-
-&lt;p&gt;For Ubuntu tips, see &lt;a href=&#34;http://jessezhuang.github.io/
-article/ubuntu/&#34;&gt;http://jessezhuang.github.io/
-article/ubuntu/&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&#34;how-to-get-shared-folder-write-access&#34;&gt;How to Get Shared Folder Write Access&lt;/h1&gt;
-
-&lt;p&gt;When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace &lt;code&gt;username&lt;/code&gt; with your ubuntu username.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# replace username with your actual ubuntu username
-$ sudo usermod -a -G vboxsf username
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After that, reboot the VM and you should have write access to the shared folder.&lt;/p&gt;
-
-&lt;h1 id=&#34;how-to-create-virtualenv-in-shared-folder&#34;&gt;How to Create Virtualenv in Shared Folder&lt;/h1&gt;
-
-&lt;p&gt;Creating symbolic links in a VirtualBox shared folder is disabled, which will forbid you to create a virtualenv in a shared folder from the host machine. Simple test in terminal: &lt;code&gt;$ ln -s test&lt;/code&gt;, Either you&amp;rsquo;ll get a &lt;code&gt;failed to create symbolic link &#39;./testfile&#39;: Read-only file system&lt;/code&gt; or &lt;code&gt;Protocol error&lt;/code&gt;. Shutdown VM and close Virtualbox Manager in Windows host. Open an admin command prompt,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;C:\WINDOWS\system32&amp;gt;VBoxManage setextradata VM_name 
-  VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you have not added virtualbox commands to your path, either do so or run &lt;code&gt;VBoxManage&lt;/code&gt; from the folder where it is located. Replace &lt;code&gt;VM_name&lt;/code&gt; with the name of the virtual machine,&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://i.stack.imgur.com/NrMzq.jpg&#34; alt=&#34;vmname in virtualbox manager&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;and the name of &lt;code&gt;shared_folder&lt;/code&gt; with the name of the shared folder in the settings of your virtual machine,&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://i.stack.imgur.com/yboaG.jpg&#34; alt=&#34;shared folder name screenshot&#34; /&gt;.&lt;/p&gt;
-
-&lt;p&gt;You can check the settings with the command below and should find one key about your shared folder indicating that it was enabled as in the second line below.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;C:\WINDOWS\system32&amp;gt;vboxmanage getextradata ubuntu14-ppbdmmdd enumerate
-Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note that you still need to run the VirtualBox Manager as an administrator from Windows in order for the creation of virtualenv (symlinks) to work properly.&lt;/p&gt;
-</description>
+      <description>For Ubuntu tips, see http://jessezhuang.github.io/ article/ubuntu/.
+How to Get Shared Folder Write Access When used as a virtual machine guest (Ubuntu 14.04LTS in Windows 10 host with Oracle VirtualBox), to get access to shared folder, run the following command in shell, replace username with your ubuntu username.
+# replace username with your actual ubuntu username $ sudo usermod -a -G vboxsf username  After that, reboot the VM and you should have write access to the shared folder.</description>
     </item>
     
     <item>
@@ -161,223 +41,12 @@ Key: VBoxInternal2/SharedFoldersEnableSymlinksCreate/shared_folder, Value: 1
       <pubDate>Thu, 30 Jun 2016 00:37:56 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/vim-cheatsheet/</guid>
-      <description>
-
-&lt;p&gt;For Ubuntu Linux,&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Terms:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;C-x&lt;/code&gt; stands for &lt;code&gt;ctrl-x&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Generally, use &lt;code&gt;:help &amp;lt;cmd&amp;gt;&amp;quot; for quick ref, e.g.&lt;/code&gt;:help undo`.&lt;/p&gt;
-
-&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
-
-&lt;p&gt;Configuration file default &lt;code&gt;~/.vimrc&lt;/code&gt;. Can use &lt;code&gt;source &amp;lt;another file&amp;gt;&lt;/code&gt; and put the actual vimrc in cloud like dropbox.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to reload an edited vimrc
-:so $MYVIMRC
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;file-operations&#34;&gt;File operations&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to rename a file
-:E or :Explorer
-R # rename at bottom
-:bp # go back previous buffer
-# save the current session including buffers, tabs, and settings
-:mksession ~/vimSessions/session1.vim
-:mks! # to override existing session file
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;copy-pasting&#34;&gt;Copy/Pasting&lt;/h1&gt;
-
-&lt;p&gt;In normal mode:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;command&lt;/th&gt;
-&lt;th&gt;effect&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;3y, p&lt;/td&gt;
-&lt;td&gt;copy 3 lines, paste after cursor&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&amp;ldquo;ayy, &amp;ldquo;ap&lt;/td&gt;
-&lt;td&gt;copy current line to buffer a, paste from buffer a&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;v/V&lt;/td&gt;
-&lt;td&gt;start selecting character, whole line&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;5ly&lt;/td&gt;
-&lt;td&gt;yanks into default buffer 5 characters from cursor&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&amp;ldquo;hy&lt;/td&gt;
-&lt;td&gt;yanks into register h, use + register for system clipboard&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;In insert mode:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;command&lt;/th&gt;
-&lt;th&gt;effect&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;`C-r{register}&lt;/td&gt;
-&lt;td&gt;paste contents of the register&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;C-r&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;to paste from default register&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;C-u&lt;/td&gt;
-&lt;td&gt;to delete everything before the cursor on this line&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;C-w&lt;/td&gt;
-&lt;td&gt;to delete from cursor to the beginning of previous word&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h1 id=&#34;move-around&#34;&gt;Move Around&lt;/h1&gt;
-
-&lt;p&gt;In normal mode:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;command&lt;/th&gt;
-&lt;th&gt;effect&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;100l&lt;/td&gt;
-&lt;td&gt;go right 100 positions, useful to navigate a long line.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;10w/10b/10e&lt;/td&gt;
-&lt;td&gt;go forward/backward 10 words, e end of word&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;fa, ta&lt;/td&gt;
-&lt;td&gt;move to or just before the next letter a&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;/pattern&lt;/td&gt;
-&lt;td&gt;move to the next word matches, n/N to repeat search&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;H,M,L # to go to top/mid/bottom of screen&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;1G(1gg), G&lt;/td&gt;
-&lt;td&gt;go to beginning/end of file&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;),}&lt;/td&gt;
-&lt;td&gt;jump forward one sentence/paragraph&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;%&lt;/td&gt;
-&lt;td&gt;jump to matching bracket&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h1 id=&#34;editing&#34;&gt;Editing&lt;/h1&gt;
-
-&lt;p&gt;In normal mode:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;command&lt;/th&gt;
-&lt;th&gt;effect&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;dw/W&lt;/td&gt;
-&lt;td&gt;delete word before/after cursor&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;x,r&lt;/td&gt;
-&lt;td&gt;delete,replace character at cursor&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;.,u,ctrl-r&lt;/td&gt;
-&lt;td&gt;repeat, undo, redo&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;q &amp;lt; letter &amp;gt;, @&amp;lt; letter &amp;gt;&lt;/td&gt;
-&lt;td&gt;record operations and reapply, type q again to quit&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;*&lt;/td&gt;
-&lt;td&gt;to search for word under cursor&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# to count number of occurances
-:%s/pattern//gn
-# to count number of lines containing pattern
-:%s/pattern//n
-# change each &#39;foo&#39; to &#39;bar&#39;, i: case insensitive, c: conformation, %: all lines
-:%s/foo/bar/gci
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;printing&#34;&gt;Printing&lt;/h1&gt;
-
-&lt;p&gt;For unicode error during printing to pdf.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&#34;&gt;http://stackoverflow.com/questions/11954241/unicode-printing-in-vim&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Tried :set printencoding=utf-8, does not work on mac.
-:TOhtml
-:w print.html&lt;/p&gt;
-
-&lt;p&gt;Open print.html with chrome and print without background graphics.&lt;/p&gt;
-</description>
+      <description>For Ubuntu Linux,
+Terms:
+C-x stands for ctrl-x.
+Generally, use :help &amp;lt;cmd&amp;gt;&amp;quot; for quick ref, e.g.:help undo`.
+Configuration Configuration file default ~/.vimrc. Can use source &amp;lt;another file&amp;gt; and put the actual vimrc in cloud like dropbox.
+# to reload an edited vimrc :so $MYVIMRC  File operations # to rename a file :E or :Explorer :Te or :Texplorer to open explorer in new tab then :bd to close the new tab R # rename at bottom :bp # go back previous buffer # save the current session including buffers, tabs, and settings :mksession ~/vimSessions/session1.</description>
     </item>
     
     <item>
@@ -386,47 +55,8 @@ R # rename at bottom
       <pubDate>Thu, 30 Jun 2016 00:36:25 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/vim-ubuntu-install/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;https://vim.sexy/img/Vimlogo.svg&#34; alt=&#34;Vim Icon svg&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;ubuntu-comes-with-vim-tiny&#34;&gt;Ubuntu comes with Vim-Tiny&lt;/h1&gt;
-
-&lt;p&gt;First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version &lt;code&gt;2:7.4.052-1ubuntu3&lt;/code&gt; which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that &lt;a href=&#34;http://stackoverflow.com/questions/10964681/enabling-markdown-highlighting-in-vim&#34;&gt;starting from 7.4.480&lt;/a&gt; vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.&lt;/p&gt;
-
-&lt;h1 id=&#34;install-vim-with-ppa&#34;&gt;Install Vim with PPA&lt;/h1&gt;
-
-&lt;p&gt;I have tried to install Vim with debian packages listed on &lt;a href=&#34;http://www.vim.org&#34;&gt;Vim.org&lt;/a&gt; but they did not come with the dependencies. So PPA was an easier way to go. &lt;a href=&#34;https://launchpad.net/~pkg-vim/+archive/ubuntu/vim-daily&#34;&gt;ppa:pkg-vim/vim-daily&lt;/a&gt; has version 7.4.826 which is good enough.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo add-apt-repository ppa:pkg-vim/vim-daily
-sudo apt-get update
-sudo apt-get install vim
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can use &lt;code&gt;apt-cache policy vim&lt;/code&gt; to check the version of the vim in your repositories.&lt;/p&gt;
-
-&lt;h1 id=&#34;install-from-source&#34;&gt;Install From Source&lt;/h1&gt;
-
-&lt;p&gt;Vim.org has detailed instructions on how to &lt;code&gt;git clone&lt;/code&gt; and install from source for the latest version of Vim and you can custom configure. One suggestion would be to use &lt;a href=&#34;http://asic-linux.com.mx/~izto/checkinstall/index.php&#34;&gt;&lt;code&gt;checkinstall&lt;/code&gt;&lt;/a&gt; just in case you ever want to cleanly remove the installation.&lt;/p&gt;
-
-&lt;p&gt;The Vim 7.4.826 version from the PPA does not have system clipboard support by default. Use &lt;code&gt;vim --version | grep &#39;clipboard&#39;&lt;/code&gt; at shell to check. If you have &lt;code&gt;+clipboard&lt;/code&gt; and/or &lt;code&gt;+xterm_clipboard&lt;/code&gt; then you are good to go. Otherwise you can either install from source or &lt;code&gt;sudo apt-get install vim-gnome&lt;/code&gt; which already has the clipboard support.&lt;/p&gt;
-
-&lt;h1 id=&#34;basic-configuration-to-enable-markdown-highlighting&#34;&gt;Basic Configuration to Enable Markdown Highlighting&lt;/h1&gt;
-
-&lt;p&gt;This ppa version of Vim does not automatically generate ~/.vimrc file but you can create the file yourself and put the following content in the file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;syntax on
-colorscheme industry
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then you are good to go. I am happy to find that mouse/touchpad scrolling also works to go up and down the lines instead of using j and k commands.&lt;/p&gt;
-
-&lt;h1 id=&#34;why-vim&#34;&gt;Why Vim?&lt;/h1&gt;
-
-&lt;p&gt;A lot of people like Vim/Emacs. For me, Vim seems to be a very lightweight text editor which is very similar to Vi that comes with most server command line interfaces. It&amp;rsquo;s good to get familiar with at least the basic usage of Vim. I have been using atom in my Ubuntu but atom has a &lt;a href=&#34;https://github.com/atom/atom/issues/7883&#34;&gt;memory leak issue&lt;/a&gt; which sometimes causes Ubuntu to hang or even restart as an guest OS with Oracle VirtualBox in Windows 10 host. Going to light weight and more basic is also a good way to practice your programming language knowledges when you lose all the autocompletion, not that Vim cannot do autocompletion but you can pretend as if.&lt;/p&gt;
-
-&lt;p&gt;Example memory usage: Vim with a few buffers open switching between editing those files uses &amp;lt; 5 Mb and atom typically uses over 200 Mb memory with similar number of files open.&lt;/p&gt;
-</description>
+      <description>Ubuntu comes with Vim-Tiny First of all, Ubuntu 14.04 LTS comes with Vim.Tiny with the version 2:7.4.052-1ubuntu3 which is Vim 7.4.052, already fairly new. Unfortunately I was looking specifically for markdown editing and syntax highlighting and I found that starting from 7.4.480 vim can pick up *.md files as markdown files by default. So I wanted to find a newer version of Vim to install.
+Install Vim with PPA I have tried to install Vim with debian packages listed on Vim.</description>
     </item>
     
     <item>
@@ -435,35 +65,8 @@ colorscheme industry
       <pubDate>Fri, 24 Jun 2016 23:37:47 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/ubuntu/</guid>
-      <description>
-
-&lt;p&gt;Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see &lt;a href=&#34;http://jessezhuang.github.io/
-article/virtualbox-tips/&#34;&gt;http://jessezhuang.github.io/
-article/virtualbox-tips/&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;performance-monitoring&#34;&gt;Performance Monitoring&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;top&lt;/code&gt; from command line&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;System Monitor&lt;/code&gt; application installed by default.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;screen-capture&#34;&gt;Screen Capture&lt;/h2&gt;
-
-&lt;p&gt;Application &lt;code&gt;Screenshot&lt;/code&gt; installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &amp;ldquo;Snipping Tool&amp;rdquo; in Windows. To run this tool from the shell, use &lt;code&gt;gnome-screeshot -i&lt;/code&gt; for interactive window specified with mouse, &lt;code&gt;gnome-screenshot -help&lt;/code&gt; for other options.&lt;/p&gt;
-
-&lt;h2 id=&#34;lxde-desktop-environment&#34;&gt;LXDE Desktop Environment&lt;/h2&gt;
-
-&lt;p&gt;LXDE is a much lighter desktop environment (DE) and uses much less memory versus unityand is the standard DE in Lubuntu.&lt;/p&gt;
-
-&lt;h3 id=&#34;fix-lxde-pcmanfm-open-current-folder-in-terminal&#34;&gt;Fix LXDE PCMANFM Open Current Folder in Terminal&lt;/h3&gt;
-
-&lt;p&gt;PCMANFM 1.2.0 is the default file manager used in LXDE which has a built in functionality to open a terminal window at the directory that you are currently browsing with a convenient shortcut of F4. It uses gnome terminal. The problem is the opened terminal window is totally black. The problem is the default profile is using black text on black background.&lt;/p&gt;
-
-&lt;p&gt;In the opened gnome terminal, select from menu bar Edit - Profile Preferences, Colors tab, uncheck &amp;ldquo;use colors from system theme&amp;rdquo;, select a built-in theme or your customized theme. I used white on black built-in theme.&lt;/p&gt;
-
-&lt;p&gt;With LXDE, the ubuntu 14.04LTS system is using about 240 Mb of ram at start up with pacmanfm using a little over 10 Mb. Comparing to unity, about 800 Mb of ram at start up with about 200 Mb for compiz. A lot of times compiz can ramp up to 500 Mb of ram. There is another option Openbox DE, the default is just a blank screen where you would have to right click to pop up the menu.The ram usage is a little less but you would have to customize the menu for it to be really user friendly.&lt;/p&gt;
-</description>
+      <description>Ubuntu version is 14.04 LTS running as a guest OS in Oracle VirtualBox 5. For VirtualBox related issues, see http://jessezhuang.github.io/ article/virtualbox-tips/.
+Performance Monitoring  top from command line System Monitor application installed by default.  Screen Capture Application Screenshot installed by default. Can take screenshot of whole screen, current window, or selected area. Similar to &amp;ldquo;Snipping Tool&amp;rdquo; in Windows. To run this tool from the shell, use gnome-screeshot -i for interactive window specified with mouse, gnome-screenshot -help for other options.</description>
     </item>
     
     <item>
@@ -472,268 +75,7 @@ article/virtualbox-tips/&lt;/a&gt;.&lt;/p&gt;
       <pubDate>Fri, 24 Jun 2016 14:56:13 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/linux-cheatsheet/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://jessezhuang.github.io/img/linus-penguin.jpg&#34; alt=&#34;Linus Penguin Quote&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;linux-commands-cheatsheet&#34;&gt;Linux Commands Cheatsheet&lt;/h1&gt;
-
-&lt;h2 id=&#34;files-related&#34;&gt;Files Related&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ls - list directory contents
-
-SYNOPSIS
-       ls [OPTION]... [FILE]...
-       -a, --all
-              do not ignore entries starting with .    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;examples&lt;/th&gt;
-&lt;th&gt;effects&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;ls -la&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;list all file/directories including hidden in long list form&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;ls -ld&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;list directory only in list form&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;du - estimate file space usage
-SYNOPSIS
-  du [OPTION]...  [FILE]...
-  -c, --total
-              produce a grand total
-  -h, --human-readable
-              print sizes in human readable format (e.g., 1K 234M 2G)
-  -s, --summarize
-              display only a total for each argument
-  -a, --all
-                write counts for all files, not just directories
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;examples&lt;/th&gt;
-&lt;th&gt;effects&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;du -sch  folder/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;folder/&lt;/code&gt; size&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;du -sh *&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;sizes of all folders and files in current directory&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;du -ahd1&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;sizes of all (including hidden) in current directory&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;em&gt;note&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;pipe to &lt;code&gt;&amp;#124; sort -h[r]&lt;/code&gt; for result sorting&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;df - report file system disk space usage
-
-SYNOPSIS
-       df [OPTION]... [FILE]...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;examples&lt;/th&gt;
-&lt;th&gt;effects&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;df -h&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;disk usage in human readable form&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;example output&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
-udev            990M  8.0K  990M   1% /dev
-tmpfs           201M  944K  200M   1% /run
-/dev/sda1        17G  6.3G  9.8G  40% /
-none            4.0K     0  4.0K   0% /sys/fs/cgroup
-none            5.0M     0  5.0M   0% /run/lock
-none           1001M   23M  978M   3% /run/shm
-none            100M   44K  100M   1% /run/user
-Dropbox         238G  116G  123G  49% /media/sf_Dropbox
-/dev/sr0         57M   57M     0 100% /media/user/VBOXADDITIONS_5.0.14_105127
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;system-related&#34;&gt;System Related&lt;/h2&gt;
-
-&lt;h3 id=&#34;check-system-info&#34;&gt;Check system info&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$lscpu # check cpu info
-$cat /etc/redhat_release # find redhat version
-$unmae -rs # kernel release version and name
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To check memory usage&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;commands&lt;/th&gt;
-&lt;th&gt;effects&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;free -h&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;short summary&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;cat /proc/meminfo&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;show &lt;code&gt;meminfo&lt;/code&gt; file&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;top&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;show ram cpu usage per process, press e to scale units&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;To put a process (e.g., mongod) to background,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ^Z # ctrl + z to stop mongod
-[1]+  Stopped mongod
-$ bg
-[1]+ mongod &amp;amp;
-$ mongo
-&amp;gt; ^C # can successfully connect
-$ fg
-mongod
-^C
-$ # back to bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod - change file mode bits
-
-SYNOPSIS
-       chmod [OPTION]... MODE[,MODE]... FILE...
-       chmod [OPTION]... OCTAL-MODE FILE...
-       chmod [OPTION]... --reference=RFILE FILE...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;examples&lt;/th&gt;
-&lt;th&gt;effects&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;chmod +x file&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;permit the file as executable&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;chmod 777 file&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;make the file globally readable, writable, executable by all users, groups, owner&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h1 id=&#34;shortcuts&#34;&gt;Shortcuts&lt;/h1&gt;
-
-&lt;h2 id=&#34;open-application&#34;&gt;Open Application&lt;/h2&gt;
-
-&lt;p&gt;|Application|key binding|Desktop Env|Key binding|DE|
-|Terminal|shift+ctrl+N|Gnome|ctrl+alt+T|typical|&lt;/p&gt;
-
-&lt;h2 id=&#34;command-line-shortcuts&#34;&gt;Command Line Shortcuts&lt;/h2&gt;
-
-&lt;p&gt;References:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.bigsmoke.us/readline/shortcuts&#34;&gt;Readline shortcuts&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;meta key: Esc on mac&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;key binding&lt;/th&gt;
-&lt;th&gt;Action&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ctrl+a/e&lt;/td&gt;
-&lt;td&gt;move cursor to line beginning/end&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;meta-f/b&lt;/td&gt;
-&lt;td&gt;move cursor one word forward/backward, right/left&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ctrl+u/k&lt;/td&gt;
-&lt;td&gt;delete from cursor to line beginning/end&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ctrl+w, meta-d&lt;/td&gt;
-&lt;td&gt;delete one word from cursor left/right&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;meta-t&lt;/td&gt;
-&lt;td&gt;transpose two words before cursor, or transpose one before one after&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ctrl+y&lt;/td&gt;
-&lt;td&gt;yank/paste previously killed text&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ctrl+_&lt;/td&gt;
-&lt;td&gt;undo last edit&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;When connecting from mac terminal via ssh to linux box, it behaves kind of like vim, maybe vi. Esc to change mode, w/b to move forward backward, etc&lt;/p&gt;
-</description>
+      <description>Linux Commands Cheatsheet Files Related ls - list directory contents SYNOPSIS ls [OPTION]... [FILE]... -a, --all do not ignore entries starting with .     examples effects     ls -la list all file/directories including hidden in long list form   ls -ld list directory only in list form    du - estimate file space usage SYNOPSIS du [OPTION]... [FILE]... -c, --total produce a grand total -h, --human-readable print sizes in human readable format (e.</description>
     </item>
     
   </channel>

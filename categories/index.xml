@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Coding Automaton</title>
+    <link>http://jessezhuang.github.io/categories/</link>
+    <description>Recent content in Categories on Coding Automaton</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Aug 2016 17:12:46 -0700</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithm</title>
+      <link>http://jessezhuang.github.io/categories/algorithm/</link>
+      <pubDate>Fri, 05 Aug 2016 17:12:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/categories/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cheatsheet</title>
+      <link>http://jessezhuang.github.io/categories/cheatsheet/</link>
+      <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/categories/cheatsheet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Faq</title>
+      <link>http://jessezhuang.github.io/categories/faq/</link>
+      <pubDate>Sun, 16 Apr 2017 19:09:17 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/categories/faq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming Language</title>
+      <link>http://jessezhuang.github.io/categories/programming-language/</link>
+      <pubDate>Sun, 19 Jun 2016 01:20:46 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/categories/programming-language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>http://jessezhuang.github.io/categories/tutorial/</link>
+      <pubDate>Sat, 02 Jul 2016 18:17:10 -0700</pubDate>
+      
+      <guid>http://jessezhuang.github.io/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

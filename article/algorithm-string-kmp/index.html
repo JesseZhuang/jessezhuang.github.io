@@ -8,18 +8,18 @@
   <head lang="en-us">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-    <title>Internet FAQ - Coding Automaton</title>
+    <title>Algorithm Question Substring Search KMP - Coding Automaton</title>
     <meta name="generator" content="Hugo 0.38.2" />
 
     
     <meta name="description" content="Coding made simple and automatic.">
     
-    <link rel="canonical" href="http://jessezhuang.github.io/article/internet-faq/">
+    <link rel="canonical" href="http://jessezhuang.github.io/article/algorithm-string-kmp/">
     
     <meta name="author" content="Jesse Zhuang">
     
 
-    <meta property="og:url" content="http://jessezhuang.github.io/article/internet-faq/">
+    <meta property="og:url" content="http://jessezhuang.github.io/article/algorithm-string-kmp/">
     <meta property="og:title" content="Coding Automaton">
     <meta property="og:image" content="http://jessezhuang.github.io/images/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Coding Automaton">
@@ -106,7 +106,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Internet FAQ
+        Algorithm Question Substring Search KMP
       </div>
     </div>
 
@@ -368,17 +368,17 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Internet FAQ </h1>
+			<h1>Algorithm Question Substring Search KMP </h1>
 			
 			<div>
-				Sun, Apr 16, 2017
+				Fri, Aug 5, 2016
 				
 				<br>
 				
 				
 				
 				  
-				  Category: <a href="http://jessezhuang.github.io/categories/faq">faq</a>
+				  Category: <a href="http://jessezhuang.github.io/categories/algorithm">algorithm</a>
 				  
 				
 				
@@ -387,7 +387,9 @@
 				
 					Tags:
 					
-					  <a href="http://jessezhuang.github.io/tags/internet">[internet]</a>
+					  <a href="http://jessezhuang.github.io/tags/java">[java]</a>
+				  
+					  <a href="http://jessezhuang.github.io/tags/string">[string]</a>
 				  
 				
 				
@@ -400,12 +402,10 @@
         <h2>Table of Contents</h2>
         <nav id="TableOfContents">
 <ul>
-<li>
+<li><a href="#question">Question</a>
 <ul>
-<li><a href="#internet-protocol-ip">Internet Protocol (IP)</a>
-<ul>
-<li><a href="#ipv4-vs-ipv6">IPV4 vs IPv6</a></li>
-</ul></li>
+<li><a href="#method-1-2d-dfa">Method 1 2D DFA</a></li>
+<li><a href="#method-2-1d-restart-table-array">Method 2: 1D Restart Table Array</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -413,20 +413,105 @@
 
 			
 
-<h2 id="internet-protocol-ip">Internet Protocol (IP)</h2>
+<h1 id="question">Question</h1>
 
-<h3 id="ipv4-vs-ipv6">IPV4 vs IPv6</h3>
+<p>LeetCode has this question Implement strStr().</p>
 
-<p>IPV4 uses 32 bits, 4 8 bit numbers, 2^32 distinct IP addresses. Example 202.2.1.10.</p>
+<p>Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
 
-<p>IPV6 uses 128 bits, 8 16 bit numbers, 2^128 distinct IP addresses. Actual number is slightly smaller since multiple ranges are reserved for special use or completely excluded from use. Example 3ffe:1900:4545:3:200:f8ff:fe21:67cf.</p>
+<p>Tags: Two Pointers, String.</p>
 
-<p>Refs:</p>
+<p>Let&rsquo;s denote haystack length <code>N</code>, needle length <code>M</code>, character table size <code>R</code> (256 for extended ASCII).</p>
 
-<ul>
-<li><a href="http://www.webopedia.com/DidYouKnow/Internet/ipv6_ipv4_difference.html">webopedia article</a></li>
-<li><a href="https://en.wikipedia.org/wiki/IPv6">IPV6 wikipedia</a></li>
-</ul>
+<p>Java&rsquo;s <code>String</code> class method <code>indexOf()</code> uses brute force algorithm O(MN).</p>
+
+<p>Examples:</p>
+
+<pre><code class="language-bash">haystacsflksdjflkshhaystackneeneeneedle
+         needle
+naslkfjskjlhhhh
+needle
+</code></pre>
+
+<h2 id="method-1-2d-dfa">Method 1 2D DFA</h2>
+
+<p>KMP Knuth Morris Pratt O(N) time complexity.</p>
+
+<p>2D array DFA[256][M] gives the next character index to match against i.</p>
+
+<p>Example: needle &ldquo;ABABAC&rdquo;. DFA[r][j] where r &lt; R, j &lt; M.</p>
+
+<pre><code class="language-bash">j    :  0 1 2 3 4 5 6
+state:  0 0 1 2 3 0
+r       A B A B A C
+A       1 1 3 1 5 1 
+B       0 2 0 4 0 4
+C       0 0 0 0 0 6
+D       0 0 0 0 0 0
+</code></pre>
+
+<p>Steps to build DFA:</p>
+
+<ol>
+<li>copy mismatched cases (first column all 0).</li>
+<li>set matched character to go to next state (first column DFA[needle.charAt(0)][0] = 1).</li>
+<li>start state 0, update state for j in [1, M-1].</li>
+</ol>
+
+<pre><code class="language-java">DFA[needle.charAt(0)][0] = 1;
+int state = 0;
+for (int j = 1; j &lt; M; j++) {
+  for (int r = 0; r &lt; 256; r++) DFA[r][j] = DFA[r][state];
+  DFA[needle.charAt(j)][j] = j + 1;    
+  state = DFA[needle.charAt(j)][state];
+}
+</code></pre>
+
+<p>Note DFA[&rsquo;D&rsquo;][5] = 0 but DFA[&lsquo;B&rsquo;][5] = 4.</p>
+
+<pre><code class="language-java">for (int i = 0, j = 0; i &lt; N &amp;&amp; j &lt; M; i++) {
+  //no backup, so can increment i
+  j = DFA[haystack.charAt(i)][j];
+}
+if (j == M) return i - M;
+else return -1;
+</code></pre>
+
+<h2 id="method-2-1d-restart-table-array">Method 2: 1D Restart Table Array</h2>
+
+<p>restart[M]
+restart[j - 1] gives which character in needle to match against index i in haystack when a mismatch happens at index j of needle.</p>
+
+<pre><code class="language-sh">          A B A B A C
+restart:  0 0 1 2 3 0
+</code></pre>
+
+<p>Compare suffix needle[j, M-1] with needle, longest common prefix&rsquo;s length.</p>
+
+<pre><code class="language-java">int state = 0;
+for (int j = 1; j &lt; M;) {
+  if (needle.charAt(j) == needle.charAt(state)) {
+    restart[j++] = ++state;
+  } else if (state == 0) j++;
+  else state = restart[state - 1];
+}
+</code></pre>
+
+<p>To compare, now has to back up, cannot operate on stream like standard input without buffering.</p>
+
+<pre><code class="language-java">for (int i = 0, j = 0; i &lt; N - M &amp;&amp; j &lt; M;) {
+  if (needle.charAt(j) == haystack.charAt(i)) {
+    j++;
+    i++;
+  }
+  else if (j == 0) i++;
+  else j = restart[j - 1]; 
+}
+if (j == M) return i - j;
+else return -1;
+</code></pre>
+
+<p>Question: worst case operations 2N, practical 1.1 N. Why 2N?</p>
 
 
 			<aside class="copyright" role="note">
@@ -469,7 +554,7 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="http://jessezhuang.github.io/article/docker-cheatsheet/" title="Docker Cheatsheet">
+      <a href="http://jessezhuang.github.io/article/mac_cheatsheet/" title="Mac Cheatsheet">
         <span class="direction">
           Previous
         </span>
@@ -479,7 +564,7 @@
           </div>
           <div class="stretch">
             <div class="title">
-              Docker Cheatsheet
+              Mac Cheatsheet
             </div>
           </div>
         </div>
@@ -489,14 +574,14 @@
 
   <div class="next">
   
-      <a href="http://jessezhuang.github.io/article/mac_cheatsheet/" title="Mac Cheatsheet">
+      <a href="http://jessezhuang.github.io/article/algorithm-sorting-summary/" title="Sorting Algorithm Summary">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Mac Cheatsheet
+              Sorting Algorithm Summary
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/docker/index.xml</link>
+    <link>http://jessezhuang.github.io/tags/docker/</link>
     <description>Recent content in Docker on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Zexi Zhuang</copyright>
-    <atom:link href="http://jessezhuang.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Jun 2017 16:03:06 -0700</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Docker Cheatsheet</title>
@@ -15,35 +17,8 @@
       <pubDate>Sun, 04 Jun 2017 16:03:06 -0700</pubDate>
       
       <guid>http://jessezhuang.github.io/article/docker-cheatsheet/</guid>
-      <description>
-
-&lt;h1 id=&#34;container-vs-image&#34;&gt;Container vs Image&lt;/h1&gt;
-
-&lt;p&gt;Image is immutable, container is a box running starting from an image.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker ps -as
-# list all containers with sizes
-
-docker images
-# list all images
-
-docker run [options] &amp;lt;image&amp;gt;
-# best to use image id or image:tag
-# -p hostPort:containerPort expose port, -P publish all exposed ports. 8888 for jupyter notebook
-# -t terminal pseudo-TTY
-# -i Keep STDIN open even if not attached
-# -v /host/dir:/&amp;lt;container-path&amp;gt;
-# --name Assign a name to the container
-
-docker start -ai &amp;lt;container&amp;gt;
-# can user container id or name
-# -a Attach STDOUT/STDERR and forward signals
-# -i Attach container&#39;s STDIN
-
-jupyter notebook --ip 0.0.0.0 --no-browser
-# run server at ip 0.0.0.0 and access in host at localhost(127.0.0.1) at the allowed port
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Container vs Image Image is immutable, container is a box running starting from an image.
+docker ps -as # list all containers with sizes docker images # list all images docker run [options] &amp;lt;image&amp;gt; # best to use image id or image:tag # -p hostPort:containerPort expose port, -P publish all exposed ports. 8888 for jupyter notebook # -t terminal pseudo-TTY # -i Keep STDIN open even if not attached # -v /host/dir:/&amp;lt;container-path&amp;gt; # --name Assign a name to the container docker start -ai &amp;lt;container&amp;gt; # can user container id or name # -a Attach STDOUT/STDERR and forward signals # -i Attach container&#39;s STDIN jupyter notebook --ip 0.</description>
     </item>
     
   </channel>

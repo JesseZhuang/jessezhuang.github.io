@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mac on Coding Automaton</title>
-    <link>http://jessezhuang.github.io/tags/mac/index.xml</link>
+    <link>http://jessezhuang.github.io/tags/mac/</link>
     <description>Recent content in Mac on Coding Automaton</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Zexi Zhuang</copyright>
-    <atom:link href="http://jessezhuang.github.io/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Feb 2017 18:56:24 -0800</lastBuildDate>
+    
+	<atom:link href="http://jessezhuang.github.io/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Mac Cheatsheet</title>
@@ -15,25 +17,9 @@
       <pubDate>Sun, 26 Feb 2017 18:56:24 -0800</pubDate>
       
       <guid>http://jessezhuang.github.io/article/mac_cheatsheet/</guid>
-      <description>
-
-&lt;h1 id=&#34;keboard-shortcuts&#34;&gt;Keboard Shortcuts&lt;/h1&gt;
-
-&lt;p&gt;Switching tabs:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right.&lt;/li&gt;
-&lt;li&gt;Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right.&lt;/li&gt;
-&lt;li&gt;macvim, shift+cmd+{/}.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Editing:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Delete to end of line, ctrl+k, same as on command line&lt;/li&gt;
-&lt;li&gt;Delete to beginning of line, cmd+shift+left, then delete&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description> Keboard Shortcuts Switching tabs:
+ Safari, [shift]+ctrl+tab, cmd+number, shift+cmd+left/right. Chrome, [shift]+ctrl+tab, cmd+number, alt+cmd+left/right. macvim, shift+cmd+{/}.  Editing:
+ Delete to end of line, ctrl+k, same as on command line Delete to beginning of line, cmd+shift+left, then delete  </description>
     </item>
     
   </channel>
